@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0b1117">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Alpha Engine Pro Max · V4</title>
+<script>
+(async()=>{
+  try{
+    if('serviceWorker' in navigator){
+      const regs=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r=>r.unregister()));
+    }
+    if('caches' in window){
+      const keys=await caches.keys();
+      await Promise.all(keys.map(k=>caches.delete(k)));
+    }
+  }catch(e){}
+})();
+</script>
+<style>
+:root{--bg:#0b1117;--card:#141c25;--card2:#18222d;--line:#263442;--txt:#eef3f7;--mut:#93a5b5;--g:#35c37d;--a:#f0ad4e;--r:#ef6351;--b:#5aa6ff;--vio:#a78bfa;--safe:max(12px,env(safe-area-inset-bottom))}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+main{max-width:940px;margin:auto;padding:calc(12px + env(safe-area-inset-top)) 14px calc(102px + var(--safe))}
+.top,.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.top h1{margin:0;font-size:22px}.mut{color:var(--mut);font-size:12px}
+.pill{border:1px solid var(--line);border-radius:999px;padding:8px 10px;font-size:11px;background:rgba(20,28,37,.9)}
+.mode{display:flex;gap:8px;margin-top:12px}.mode .btn{flex:1}.activeMode{background:var(--b)!important;color:#08131d!important}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:14px}
+.card{grid-column:span 12;background:linear-gradient(180deg,var(--card),#111820);border:1px solid var(--line);border-radius:18px;padding:16px}
+.third{grid-column:span 4}.lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+.big{font-size:32px;font-weight:850;letter-spacing:-.04em}
+.btn{background:#1b2631;color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-weight:750}
+.primary{background:var(--b);color:#08131d;border-color:transparent}
+.sig{padding:14px;border:1px solid var(--line);background:var(--card2);border-radius:16px;margin-top:11px}
+.ticker{font-size:21px;font-weight:850}.long{color:var(--g)}.short{color:var(--r)}.score{font-size:25px;font-weight:850}
+.risk{display:inline-block;margin-top:3px;font-size:10px;font-weight:850;padding:5px 7px;border-radius:999px;background:#101820}
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.planbox{background:#101820;border:1px solid var(--line);border-radius:12px;padding:10px}.planbox b{display:block;margin-top:4px}
+.reason{margin-top:10px;padding:10px 12px;border-left:3px solid var(--b);background:#101820;border-radius:10px;font-size:12px;line-height:1.5}
+.deriv{margin-top:10px;padding:12px;border:1px solid rgba(167,139,250,.35);background:rgba(167,139,250,.08);border-radius:14px}
+.deriv h3{margin:0 0 8px;font-size:15px}.tag{display:inline-block;padding:5px 7px;margin:3px 4px 0 0;border:1px solid var(--line);border-radius:999px;font-size:10px}
+input{width:100%;background:#101820;color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:16px}
+.calc{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.out{margin-top:12px;line-height:1.5;font-size:13px}
+.danger{color:#ff897c}.good{color:#65dda0}.warn{color:#ffc46b}
+table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:10px 4px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--mut)}
+.bottom{position:fixed;bottom:0;left:0;right:0;padding:8px 12px var(--safe);display:grid;grid-template-columns:repeat(4,1fr);background:rgba(11,17,23,.92);backdrop-filter:blur(18px);border-top:1px solid var(--line);z-index:20}
+.bottom button{background:transparent;border:0;color:var(--mut);padding:10px;font-weight:700}
+@media(max-width:650px){.third{grid-column:span 12}.plan{grid-template-columns:1fr}.calc{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><div><h1>Alpha Engine Pro Max <span style="font-size:10px;color:#5aa6ff;vertical-align:middle">V4</span></h1><div class="mut">Segnale → piano → strumento → rischio → costo/beneficio</div></div><div id="updated" class="pill">Caricamento…</div></div>
+<div class="mode"><button id="sbtn" class="btn activeMode" onclick="setMode('simple')">Semplice</button><button id="ebtn" class="btn" onclick="setMode('expert')">Esperto</button></div>
+<div id="modeBanner" class="reason" style="margin-top:10px"></div>
+
+<div class="grid">
+<section class="card"><div class="row"><div><div class="lbl">Cosa fare adesso</div><div id="headline" class="big">—</div></div><button class="btn primary" onclick="load()">Aggiorna</button></div><div id="signals"></div></section>
+
+<section class="card third"><div class="lbl">Hit-rate verificato</div><div id="hit" class="big">—</div><div id="resolved" class="mut"></div></section>
+<section class="card third"><div class="lbl">VIX</div><div id="vix" class="big">—</div><div class="mut">stress mercato</div></section>
+<section class="card third"><div class="lbl">S&P 500 · 20g</div><div id="spy" class="big">—</div><div class="mut">direzione mercato</div></section>
+
+<section class="card" id="calc">
+  <div class="lbl">Calcolatore operativo</div>
+  <div class="mut" style="margin:7px 0 12px">Tocca un segnale. Poi indica capitale, perdita massima e spread stimato.</div>
+  <div class="calc">
+    <input id="capital" value="100" inputmode="decimal" placeholder="Capitale €">
+    <input id="loss" value="5" inputmode="decimal" placeholder="Perdita max €">
+    <input id="spread" value="0.9" inputmode="decimal" placeholder="Spread %">
+  </div>
+  <div id="calcOut" class="out mut">Nessun segnale selezionato.</div>
+</section>
+
+<section class="card" id="watch"><div class="lbl">Watchlist</div><div id="watchTable"></div></section>
+
+<section class="card"><div class="mut">Score 84/100 ≠ 84% garantito. L'hit-rate reale viene mostrato separatamente quando esiste uno storico sufficiente.</div></section>
+</div>
+</main>
+
+<nav class="bottom"><button onclick="window.scrollTo({top:0,behavior:'smooth'})">Segnali</button><button onclick="document.getElementById('calc').scrollIntoView({behavior:'smooth'})">Rischio €</button><button onclick="document.getElementById('watch').scrollIntoView({behavior:'smooth'})">Watchlist</button><button onclick="navigator.share&&navigator.share({title:'Alpha Engine Pro Max',url:location.href})">Condividi</button></nav>
+
+<script>
+let D=null, mode=localStorage.getItem('alpha_mode')||'simple', sel=null;
+const safeNum=(v,fallback=null)=>{const n=Number(v);return Number.isFinite(n)?n:fallback};
+const euro=v=>{const n=safeNum(v);return n==null?'—':n.toLocaleString('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:2})};
+const n=(v,d=1)=>{const x=safeNum(v);return x==null?'—':x.toFixed(d)};
+
+function normalizeSignal(x){
+  const price=safeNum(x.entry_price, safeNum(x.price, null));
+  const score=safeNum(x.score, safeNum(x.confidence,null)!=null?safeNum(x.confidence)*100:null);
+  const vol=safeNum(x.volatility_pct, 30);
+  const dailyPct=Math.max(1.8, Math.min(8.0, vol/Math.sqrt(252)*1.35));
+  const stopPct=safeNum(x.risk_pct, dailyPct);
+  let stop=safeNum(x.stop_price), t1=safeNum(x.target1_price), t2=safeNum(x.target2_price);
+  if(price!=null){
+    if(stop==null) stop=x.direction==='SHORT'?price*(1+stopPct/100):price*(1-stopPct/100);
+    if(t1==null) t1=x.direction==='SHORT'?price*(1-1.4*stopPct/100):price*(1+1.4*stopPct/100);
+    if(t2==null) t2=x.direction==='SHORT'?price*(1-2.2*stopPct/100):price*(1+2.2*stopPct/100);
+  }
+
+  let risk=x.risk_level;
+  if(!risk){
+    risk=vol>50?'MOLTO ALTO':vol>28?'ALTO':'MEDIO';
+  }
+
+  let reasons=Array.isArray(x.reasons)?x.reasons:[];
+  if(!reasons.length){
+    const ret20=safeNum(x.ret20_pct,0), rel=safeNum(x.rel20_pct,0), rsi=safeNum(x.rsi,50);
+    if(x.direction==='LONG'){
+      if(ret20>8) reasons.push('trend di breve periodo forte');
+      if(rel>4) reasons.push('sta facendo meglio del mercato');
+      if(rsi>=55 && rsi<=75) reasons.push('momentum ancora favorevole');
+    } else {
+      if(ret20<-8) reasons.push('trend di breve periodo debole');
+      if(rel<-4) reasons.push('sta facendo peggio del mercato');
+      if(rsi>=25 && rsi<=45) reasons.push('momentum ribassista ancora attivo');
+    }
+    if(!reasons.length) reasons.push('più indicatori puntano nella stessa direzione');
+  }
+
+  let dp=x.derivative_plan;
+  if(!dp){
+    let instrument='AZIONE / ETF', why='Segnale rialzista senza necessità di leva.';
+    let lev=1, ko='—';
+    if(x.direction==='SHORT'){
+      instrument=risk==='MOLTO ALTO'?'NO TRADE / SHORT SOLO ESPERTO':'KNOCK-OUT SHORT';
+      why=risk==='MOLTO ALTO'?'Volatilità troppo elevata per un KO aggressivo.':'Strumento coerente con una previsione ribassista di breve periodo.';
+      lev=risk==='MOLTO ALTO'?1:2;
+      ko=risk==='MOLTO ALTO'?'—':Math.max(stopPct*1.8,8).toFixed(1);
+    } else if(score!=null && score>=82 && risk!=='MOLTO ALTO'){
+      instrument='KNOCK-OUT LONG'; why='Segnale forte e orizzonte breve: possibile leva moderata.'; lev=2; ko=Math.max(stopPct*1.8,8).toFixed(1);
+    }
+    dp={instrument,preferred_leverage:lev,ko_distance_min_pct:ko,holding_days_max:5,why};
+  }
+
+  return {
+    ...x,
+    entry_price:price,
+    stop_price:stop,
+    target1_price:t1,
+    target2_price:t2,
+    risk_pct:stopPct,
+    reward1_pct:safeNum(x.reward1_pct,stopPct*1.4),
+    reward2_pct:safeNum(x.reward2_pct,stopPct*2.2),
+    risk_reward_1:safeNum(x.risk_reward_1,1.4),
+    risk_reward_2:safeNum(x.risk_reward_2,2.2),
+    score:score,
+    score_label:x.score_label || (score!=null?Math.round(score)+'/100':'—'),
+    risk_level:risk,
+    reasons,
+    derivative_plan:dp
+  };
+}
+
+function setMode(m){
+  mode=m;
+  localStorage.setItem('alpha_mode',m);
+  document.body.dataset.mode=m;
+  draw();
+}
+async function load(){
+  try{
+    const r=await fetch('./data/latest.json?build=v4&t='+Date.now(),{cache:'no-store'});
+    D=await r.json();
+    D.signals=(D.signals||[]).map(normalizeSignal);
+    D.watchlist=(D.watchlist||[]).map(normalizeSignal);
+    draw();
+  }catch(e){
+    document.getElementById('updated').textContent='Dati non disponibili';
+  }
+}
+
+function draw(){
+  if(!D)return;
+  sbtn.classList.toggle('activeMode',mode==='simple');
+  ebtn.classList.toggle('activeMode',mode==='expert');
+  document.body.dataset.mode=mode;
+  modeBanner.innerHTML = mode==='simple'
+    ? '<b>MODALITÀ SEMPLICE</b><br>Solo decisione, entrata, stop, obiettivo e rischio in euro.'
+    : '<b>MODALITÀ ESPERTO</b><br>Indicatori, R/R, volatilità, momentum, derivato, leva, KO e costi.';
+
+  updated.textContent=D.updated_at?'Agg. '+new Date(D.updated_at).toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'Mai aggiornato';
+  vix.textContent=n(D.market?.vix);
+  const sp=safeNum(D.market?.spy_20d_pct);
+  spy.textContent=sp==null?'—':(sp>0?'+':'')+n(sp)+'%';
+
+  const m=D.memory||{};
+  hit.textContent=safeNum(m.hit_rate)==null?'—':(m.hit_rate*100).toFixed(1)+'%';
+  resolved.textContent=(m.resolved||0)+' concluse';
+
+  const s=D.signals||[];
+  headline.textContent=s.length?(s[0].direction==='LONG'?'POSSIBILE ACQUISTO':'PREVISIONE DI DISCESA')+' · '+s[0].ticker:'NESSUNA OPERAZIONE';
+  document.querySelector('#calc .mut').textContent = mode==='simple'
+    ? 'Tocca un segnale e indica quanti euro sei disposto a perdere al massimo.'
+    : 'Tocca un segnale. Inserisci capitale, perdita massima e spread stimato del prodotto.';
+  signals.innerHTML=s.length?s.map(card).join(''):'<div class="mut" style="margin-top:12px">Nessun segnale sopra soglia.</div>';
+  renderWatch(D.watchlist||[]);
+}
+
+function card(x){
+  const action=x.direction==='LONG'?'POSSIBILE ACQUISTO':'PREVISIONE DI DISCESA';
+  const d=x.derivative_plan||{};
+  if(mode==='simple'){
+    return `<div class="sig" onclick='pick(${JSON.stringify(x)})'>
+      <div class="row">
+        <div>
+          <div class="ticker ${x.direction==='LONG'?'long':'short'}">${action} · ${x.ticker}</div>
+          <div class="mut">${x.sector||'—'} · massimo ${x.horizon||5} giorni</div>
+        </div>
+        <div>
+          <div class="score">${x.score_label}</div>
+          <div class="risk">${x.risk_level}</div>
+        </div>
+      </div>
+      <div class="plan">
+        <div class="planbox"><div class="lbl">Compra / entra circa a</div><b>${euro(x.entry_price)}</b></div>
+        <div class="planbox"><div class="lbl">Esci se va contro</div><b>${euro(x.stop_price)}</b></div>
+        <div class="planbox"><div class="lbl">Primo obiettivo</div><b>${euro(x.target1_price)}</b></div>
+      </div>
+      <div class="reason"><b>In parole semplici</b><br>${x.reasons.slice(0,2).map(r=>'• '+r).join('<br>')}</div>
+      <div class="reason" style="border-color:${x.direction==='LONG'?'var(--g)':'var(--r)'}">
+        <b>${x.direction==='LONG'?'Come agire':'Se vuoi puntare sulla discesa'}</b><br>
+        ${x.direction==='LONG'
+          ? 'Usa preferibilmente azione/ETF se vuoi mantenere il rischio più comprensibile. Tocca la scheda per calcolare quanto investire.'
+          : 'Serve uno strumento SHORT. Se non conosci bene i derivati, considera questo un segnale da osservare e non un ordine da eseguire.'}
+      </div>
+    </div>`;
+  }
+
+  return `<div class="sig" onclick='pick(${JSON.stringify(x)})'>
+    <div style="margin-bottom:10px;padding:8px 10px;border-radius:10px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);font-size:11px"><b>DESK ESPERTO</b> · analisi tecnica + derivati</div>
+    <div class="row">
+      <div><div class="ticker ${x.direction==='LONG'?'long':'short'}">${action} · ${x.ticker}</div><div class="mut">${x.sector||'—'} · horizon ${x.horizon||5}d</div></div>
+      <div><div class="score">${x.score_label}</div><div class="risk">${x.risk_level}</div></div>
+    </div>
+
+    <div class="plan">
+      <div class="planbox"><div class="lbl">Entry</div><b>${euro(x.entry_price)}</b></div>
+      <div class="planbox"><div class="lbl">Stop</div><b>${euro(x.stop_price)}</b></div>
+      <div class="planbox"><div class="lbl">Target 1 / 2</div><b>${euro(x.target1_price)} / ${euro(x.target2_price)}</b></div>
+    </div>
+
+    <div class="reason">
+      <b>Setup tecnico</b><br>
+      RSI ${n(x.rsi)} · Volatilità ${n(x.volatility_pct)}% · 5g ${n(x.ret5_pct,2)}% · 20g ${n(x.ret20_pct,2)}% · Relativo ${n(x.rel20_pct,2)}% · Volume Z ${n(x.volume_z,2)}
+    </div>
+
+    <div class="reason">
+      <b>Rischio / rendimento</b><br>
+      Stop ${n(x.risk_pct,2)}% · Target 1 ${n(x.reward1_pct,2)}% · Target 2 ${n(x.reward2_pct,2)}% · R/R 1:${n(x.risk_reward_1,1)} / 1:${n(x.risk_reward_2,1)}
+    </div>
+
+    <div class="deriv">
+      <h3>Derivato / strumento: ${d.instrument||'—'}</h3>
+      <div class="mut">${d.why||''}</div>
+      <div style="margin-top:8px">
+        <span class="tag">Leva ${d.preferred_leverage||1}×</span>
+        <span class="tag">KO ≥ ${d.ko_distance_min_pct||'—'}${d.ko_distance_min_pct&&d.ko_distance_min_pct!=='—'?'%':''}</span>
+        <span class="tag">Max ${d.holding_days_max||5} giorni</span>
+      </div>
+    </div>
+
+    <div class="reason"><b>Driver del segnale</b><br>${x.reasons.map(r=>'• '+r).join('<br>')}</div>
+  </div>`;
+}
+
+function renderWatch(w){
+  watchTable.innerHTML=w.length?'<table><thead><tr><th>Asset</th><th>Dir.</th><th>Score</th><th>Strumento</th></tr></thead><tbody>'+
+    w.slice(0,12).map(x=>`<tr onclick='pick(${JSON.stringify(x)})'><td>${x.ticker}<div class="mut">${x.sector||'—'}</div></td><td class="${x.direction==='LONG'?'long':'short'}">${x.direction}</td><td>${x.score_label}</td><td>${x.derivative_plan?.instrument||'—'}</td></tr>`).join('')+'</tbody></table>':'<div class="mut">Nessun dato.</div>';
+}
+
+function pick(x){sel=x;calcNow();document.getElementById('calc').scrollIntoView({behavior:'smooth',block:'center'})}
+
+function calcNow(){
+  if(!sel)return;
+  const cap=safeNum(capital.value,0), maxLoss=safeNum(loss.value,0), spreadPct=safeNum(spread.value,0);
+  const d=sel.derivative_plan||{};
+  const lev=(d.instrument||'').includes('KNOCK')?safeNum(d.preferred_leverage,1):1;
+  const baseRisk=Math.max(.001,safeNum(sel.risk_pct,2)/100);
+  const effectiveRisk=Math.min(.95,baseRisk*lev);
+  const invest=Math.min(cap,maxLoss/effectiveRisk);
+  const fees=2;
+  const spreadCost=invest*(spreadPct/100);
+  const reward1=Math.max(.001,safeNum(sel.reward1_pct,baseRisk*140)/100);
+  const gross=invest*reward1*lev;
+  const net=gross-fees-spreadCost;
+  const costRatio=gross>0?(fees+spreadCost)/gross:1;
+  let verdict='CONVIENE SOLO SE IL PRODOTTO È LIQUIDO',cls='warn';
+  if(net<=0||costRatio>.45){verdict='NON CONVIENE: COSTI TROPPO PESANTI';cls='danger'}
+  else if(costRatio<.20 && safeNum(sel.score,0)>=82){verdict='RAPPORTO COSTO/BENEFICIO BUONO';cls='good'}
+  calcOut.innerHTML=`<b>${sel.ticker} · ${sel.direction} · ${d.instrument||'—'}</b><br>
+    Importo indicativo max: <b>${euro(invest)}</b> · leva ${lev}×<br>
+    Stop: ${euro(sel.stop_price)} · Target 1: ${euro(sel.target1_price)} · Target 2: ${euro(sel.target2_price)}<br>
+    Distanza KO minima suggerita: <b>${d.ko_distance_min_pct||'—'}${d.ko_distance_min_pct&&d.ko_distance_min_pct!=='—'?'%':''}</b><br>
+    Costi stimati: ${euro(fees+spreadCost)} · profitto lordo target 1: ${euro(gross)} · netto stimato: ${euro(net)}<br>
+    <b class="${cls}">${verdict}</b>`;
+}
+
+capital.oninput=calcNow; loss.oninput=calcNow; spread.oninput=calcNow;
+setMode(mode);load();setInterval(load,900000);
+</script>
+</body>
+</html>
