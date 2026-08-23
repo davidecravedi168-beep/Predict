@@ -1,0 +1,99 @@
+{
+  "predictions": [
+    {
+      "id": "2026-08-23|SRE|SHORT|5",
+      "date": "2026-08-23",
+      "ticker": "SRE",
+      "sector": "UTILITIES",
+      "direction": "SHORT",
+      "horizon": 5,
+      "probability": 0.8403,
+      "entry": 82.89,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-23|VLO|LONG|5",
+      "date": "2026-08-23",
+      "ticker": "VLO",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "probability": 0.839,
+      "entry": 348.86,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-23|COP|LONG|5",
+      "date": "2026-08-23",
+      "ticker": "COP",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "probability": 0.8315,
+      "entry": 134.87,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-23|MPC|LONG|5",
+      "date": "2026-08-23",
+      "ticker": "MPC",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "probability": 0.828,
+      "entry": 360.72,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-23|AEP|SHORT|5",
+      "date": "2026-08-23",
+      "ticker": "AEP",
+      "sector": "UTILITIES",
+      "direction": "SHORT",
+      "horizon": 5,
+      "probability": 0.8127,
+      "entry": 120.94,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-23|XOP|LONG|5",
+      "date": "2026-08-23",
+      "ticker": "XOP",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "probability": 0.8072,
+      "entry": 189.54,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-23|XYL|SHORT|5",
+      "date": "2026-08-23",
+      "ticker": "XYL",
+      "sector": "WATER",
+      "direction": "SHORT",
+      "horizon": 5,
+      "probability": 0.7903,
+      "entry": 113.42,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-23|DUK|SHORT|5",
+      "date": "2026-08-23",
+      "ticker": "DUK",
+      "sector": "UTILITIES",
+      "direction": "SHORT",
+      "horizon": 5,
+      "probability": 0.7879,
+      "entry": 119.85,
+      "outcome": "PENDING"
+    }
+  ],
+  "stats": {
+    "total": 0,
+    "resolved": 0,
+    "hits": 0,
+    "misses": 0,
+    "hit_rate": null
+  }
+}
