@@ -1,0 +1,16 @@
+{
+  "updated_at": null,
+  "market": {
+    "vix": null,
+    "spy_20d_pct": null
+  },
+  "memory": {
+    "total": 0,
+    "resolved": 0,
+    "hits": 0,
+    "misses": 0,
+    "hit_rate": null
+  },
+  "signals": [],
+  "watchlist": []
+}
