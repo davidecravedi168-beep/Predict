@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0b1117">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Alpha Engine">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Alpha Engine</title>
+<style>
+:root{
+  --bg:#0b1117;--card:#141c25;--card2:#18222d;--line:#263442;
+  --txt:#eef3f7;--mut:#93a5b5;--g:#35c37d;--a:#f0ad4e;--r:#ef6351;
+  --b:#5aa6ff;--vio:#a78bfa;--safe-bottom:max(12px,env(safe-area-inset-bottom));
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg);overscroll-behavior:none}
+body{
+  margin:0;background:var(--bg);color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+  min-height:100vh;overscroll-behavior-y:none;
+}
+button{font:inherit}
+main{
+  max-width:900px;margin:auto;
+  padding:calc(12px + env(safe-area-inset-top)) 14px calc(92px + var(--safe-bottom));
+}
+.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.top h1{margin:0;font-size:22px;letter-spacing:-.02em}
+.mut{color:var(--mut);font-size:12px}
+.pill{
+  border:1px solid var(--line);border-radius:999px;padding:8px 10px;
+  font-size:11px;background:rgba(20,28,37,.86);white-space:nowrap
+}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:14px}
+.card{
+  grid-column:span 12;background:linear-gradient(180deg,var(--card),#111820);
+  border:1px solid var(--line);border-radius:18px;padding:16px;
+  box-shadow:0 14px 32px rgba(0,0,0,.18)
+}
+.third{grid-column:span 4}
+.lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+.big{font-size:34px;font-weight:850;margin-top:5px;letter-spacing:-.04em}
+.sig{padding:13px;border:1px solid var(--line);background:var(--card2);border-radius:14px;margin-top:10px}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.ticker{font-size:20px;font-weight:850}.conf{font-size:24px;font-weight:850}
+.long{color:var(--g)}.short{color:var(--r)}
+.bar{height:7px;background:#0d141b;border-radius:99px;margin-top:9px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,var(--b),var(--vio))}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{
+  background:#1b2631;color:var(--txt);border:1px solid var(--line);
+  border-radius:12px;padding:10px 12px;font-weight:750;min-height:42px
+}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--b);color:#07121e;border-color:transparent}
+table{width:100%;border-collapse:collapse;font-size:12px}
+td,th{padding:10px 4px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--mut)}tr.tap{cursor:pointer}
+.star{font-size:18px;color:var(--a)}
+.hidden{display:none!important}
+.offline{
+  margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(240,173,78,.12);
+  color:#ffc46b;font-size:12px;border:1px solid rgba(240,173,78,.22)
+}
+.bottomnav{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(900px,100%);
+  padding:8px 12px var(--safe-bottom);display:grid;grid-template-columns:repeat(4,1fr);
+  gap:8px;background:rgba(11,17,23,.90);backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line);z-index:20
+}
+.navbtn{
+  border:0;background:transparent;color:var(--mut);padding:8px 4px;border-radius:12px;
+  font-size:11px;font-weight:700
+}
+.navbtn.active{color:var(--txt);background:#18222d}
+.sheet{
+  position:fixed;inset:0;background:rgba(0,0,0,.50);display:flex;align-items:flex-end;
+  z-index:40;padding:12px
+}
+.sheetbox{
+  width:min(600px,100%);margin:0 auto;background:#151e27;border:1px solid var(--line);
+  border-radius:22px;padding:18px 16px calc(18px + var(--safe-bottom))
+}
+.sheetbox h2{margin:0 0 10px;font-size:20px}
+.sheetbox p{color:var(--mut);font-size:13px;line-height:1.5}
+.installsteps{display:grid;gap:9px;margin:12px 0}
+.installstep{background:#1b2631;border:1px solid var(--line);border-radius:12px;padding:11px;font-size:13px}
+.refreshing{animation:pulse 1s infinite alternate}
+@keyframes pulse{from{opacity:.55}to{opacity:1}}
+@media(max-width:650px){.third{grid-column:span 12}.big{font-size:32px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <div><h1>Speculative Alpha Engine</h1><div class="mut">iOS Web App · short-term research</div></div>
+    <div id="updated" class="pill">Caricamento…</div>
+  </div>
+
+  <div id="offline" class="offline hidden">Offline: mostro l'ultimo dato disponibile.</div>
+
+  <div class="grid">
+    <section class="card" id="home">
+      <div class="row">
+        <div><div class="lbl">Segnale principale</div><div class="big" id="headline">—</div></div>
+        <div class="actions"><button class="btn" onclick="shareApp()">Condividi</button><button class="btn primary" onclick="load(true)">Aggiorna</button></div>
+      </div>
+      <div id="signals"></div>
+    </section>
+
+    <section class="card third">
+      <div class="lbl">Hit-rate memoria</div><div class="big" id="hit">—</div><div class="mut" id="resolved"></div>
+    </section>
+    <section class="card third">
+      <div class="lbl">VIX</div><div class="big" id="vix">—</div><div class="mut">volatilità mercato</div>
+    </section>
+    <section class="card third">
+      <div class="lbl">S&P 500 · 20 giorni</div><div class="big" id="spy">—</div><div class="mut">regime mercato</div>
+    </section>
+
+    <section class="card" id="watchSection">
+      <div class="row"><div class="lbl">Watchlist</div><button class="btn" onclick="toggleFavOnly()" id="favBtn">☆ Preferiti</button></div>
+      <div id="watch"></div>
+    </section>
+
+    <section class="card" id="memorySection">
+      <div class="lbl">Stato modello</div>
+      <div class="mut" style="margin-top:10px;line-height:1.55">
+        La confidenza è una stima del motore. L'hit-rate memoria usa invece previsioni già concluse.
+        La web app salva i preferiti solo su questo iPhone.
+      </div>
+    </section>
+  </div>
+</main>
+
+<nav class="bottomnav">
+  <button class="navbtn active" onclick="go('home',this)">Segnali</button>
+  <button class="navbtn" onclick="go('watchSection',this)">Watchlist</button>
+  <button class="navbtn" onclick="go('memorySection',this)">Modello</button>
+  <button class="navbtn" onclick="showInstall()">Installa</button>
+</nav>
+
+<div id="installSheet" class="sheet hidden" onclick="if(event.target===this)hideInstall()">
+  <div class="sheetbox">
+    <h2>Installa su iPhone</h2>
+    <p>Apri questa pagina in Safari e aggiungila alla Home: partirà come una vera web app, senza barra del browser.</p>
+    <div class="installsteps">
+      <div class="installstep">1. Tocca <b>Condividi</b> in Safari.</div>
+      <div class="installstep">2. Scegli <b>Aggiungi alla schermata Home</b>.</div>
+      <div class="installstep">3. Conferma <b>Aggiungi</b>.</div>
+    </div>
+    <button class="btn primary" style="width:100%" onclick="hideInstall()">Ho capito</button>
+  </div>
+</div>
+
+<script>
+let DATA=null, favOnly=false;
+const pc=x=>x==null?'—':(Number(x)*100).toFixed(1)+'%';
+const n=(x,d=1)=>x==null?'—':Number(x).toFixed(d);
+const favs=()=>new Set(JSON.parse(localStorage.getItem('alpha_favs')||'[]'));
+const saveFavs=s=>localStorage.setItem('alpha_favs',JSON.stringify([...s]));
+
+async function load(manual=false){
+  const upd=document.getElementById('updated');
+  if(manual) upd.classList.add('refreshing');
+  try{
+    const r=await fetch('data/latest.json?v='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    DATA=await r.json();
+    localStorage.setItem('alpha_last_data',JSON.stringify(DATA));
+    render(DATA);
+    document.getElementById('offline').classList.add('hidden');
+  }catch(e){
+    const cached=localStorage.getItem('alpha_last_data');
+    if(cached){
+      DATA=JSON.parse(cached); render(DATA);
+      document.getElementById('offline').classList.remove('hidden');
+    }else upd.textContent='Dati non disponibili';
+  }finally{upd.classList.remove('refreshing')}
+}
+function render(d){
+  document.getElementById('updated').textContent=d.updated_at?'Agg. '+new Date(d.updated_at).toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'Mai aggiornato';
+  document.getElementById('vix').textContent=n(d.market?.vix,1);
+  const spy=d.market?.spy_20d_pct;
+  document.getElementById('spy').textContent=spy==null?'—':(spy>0?'+':'')+n(spy,1)+'%';
+  const m=d.memory||{};
+  document.getElementById('hit').textContent=m.hit_rate==null?'—':pc(m.hit_rate);
+  document.getElementById('resolved').textContent=(m.resolved||0)+' previsioni risolte';
+
+  const s=d.signals||[];
+  document.getElementById('headline').textContent=s.length?s[0].direction+' '+s[0].ticker:'NO TRADE';
+  document.getElementById('signals').innerHTML=s.length?s.map(x=>`
+    <div class="sig">
+      <div class="row">
+        <div onclick="copyTicker('${x.ticker}')">
+          <div class="ticker ${x.direction==='LONG'?'long':'short'}">${x.direction} ${x.ticker}</div>
+          <div class="mut">${x.sector} · ${x.horizon} giorni · RSI ${x.rsi}</div>
+        </div>
+        <div class="conf">${pc(x.confidence)}</div>
+      </div>
+      <div class="bar"><div class="fill" style="width:${Math.min(100,x.confidence*100)}%"></div></div>
+      <div class="mut">Score ${x.score} · 5g ${x.ret5_pct}% · 20g ${x.ret20_pct}% · relativo ${x.rel20_pct}%</div>
+    </div>`).join(''):'<div class="mut" style="margin-top:12px">Nessun segnale sopra soglia.</div>';
+  renderWatch();
+}
+function renderWatch(){
+  if(!DATA)return;
+  const fs=favs();
+  let w=DATA.watchlist||[];
+  if(favOnly) w=w.filter(x=>fs.has(x.ticker));
+  document.getElementById('watch').innerHTML=w.length?'<table><thead><tr><th></th><th>Asset</th><th>Dir.</th><th>Conf.</th><th>Score</th></tr></thead><tbody>'+
+    w.slice(0,15).map(x=>`<tr class="tap" onclick="copyTicker('${x.ticker}')">
+      <td onclick="event.stopPropagation();toggleFav('${x.ticker}')"><span class="star">${fs.has(x.ticker)?'★':'☆'}</span></td>
+      <td>${x.ticker}<div class="mut">${x.sector}</div></td>
+      <td class="${x.direction==='LONG'?'long':'short'}">${x.direction}</td>
+      <td>${pc(x.confidence)}</td><td>${x.score}</td></tr>`).join('')+'</tbody></table>':
+    '<div class="mut" style="margin-top:12px">Nessun preferito.</div>';
+}
+function toggleFav(t){
+  const s=favs(); s.has(t)?s.delete(t):s.add(t); saveFavs(s); renderWatch();
+}
+function toggleFavOnly(){favOnly=!favOnly;document.getElementById('favBtn').textContent=favOnly?'★ Tutti':'☆ Preferiti';renderWatch()}
+async function copyTicker(t){
+  try{await navigator.clipboard.writeText(t); document.getElementById('updated').textContent=t+' copiato'; setTimeout(()=>DATA&&render(DATA),900)}catch(e){}
+}
+async function shareApp(){
+  if(navigator.share){try{await navigator.share({title:'Alpha Engine',text:'Speculative Alpha Engine',url:location.href})}catch(e){}}
+  else{try{await navigator.clipboard.writeText(location.href)}catch(e){}}
+}
+function showInstall(){document.getElementById('installSheet').classList.remove('hidden')}
+function hideInstall(){document.getElementById('installSheet').classList.add('hidden')}
+function go(id,btn){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
+window.addEventListener('online',()=>{document.getElementById('offline').classList.add('hidden');load()});
+window.addEventListener('offline',()=>document.getElementById('offline').classList.remove('hidden'));
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+load();
+setInterval(()=>load(false),15*60*1000);
+</script>
+</body>
+</html>
