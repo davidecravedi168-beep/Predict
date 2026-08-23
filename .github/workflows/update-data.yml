@@ -1,11 +1,11 @@
-
+name: Update Alpha Engine Data
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 7 * * 1-5"
-    - cron: "15 13 * * 1-5"
-    - cron: "15 19 * * 1-5"
+    - cron: "15 6 * * 1-5"
+    - cron: "15 12 * * 1-5"
+    - cron: "15 18 * * 1-5"
 
 permissions:
   contents: write
@@ -17,7 +17,6 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -25,19 +24,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Python
+      - name: Setup Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: "pip"
 
-      - name: Dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run engine
-        run: python engine.py
+      - name: Run Alpha Engine
+        run: |
+          python engine.py
 
       - name: Save data
         run: |
@@ -46,10 +46,36 @@ jobs:
 
           git add data/latest.json data/memory.json
 
-          if ! git diff --cached --quiet; then
-            git commit -m "bot: update market data"
-            git pull --rebase origin "${GITHUB_REF_NAME}"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          else
+          if git diff --cached --quiet; then
             echo "Nessun nuovo dato da salvare"
+            exit 0
           fi
+
+          git commit -m "bot: update alpha data"
+
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              echo "Dati salvati correttamente"
+              exit 0
+            fi
+
+            echo "Push non riuscito. Tentativo ${attempt}/3"
+
+            git fetch origin "${GITHUB_REF_NAME}"
+
+            git checkout "origin/${GITHUB_REF_NAME}" -- data/latest.json data/memory.json
+
+            python engine.py
+
+            git add data/latest.json data/memory.json
+
+            if git diff --cached --quiet; then
+              echo "Nessun nuovo dato dopo sincronizzazione"
+              exit 0
+            fi
+
+            git commit --amend --no-edit
+          done
+
+          echo "Impossibile salvare i dati dopo 3 tentativi"
+          exit 1
