@@ -175,10 +175,32 @@
       "entry": 119.85,
       "score": 78.79,
       "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|AR|LONG|5",
+      "date": "2026-08-24",
+      "ticker": "AR",
+      "sector": "NATURAL_GAS",
+      "direction": "LONG",
+      "horizon": 5,
+      "entry": 38.385,
+      "score": 79.73,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|RRC|LONG|5",
+      "date": "2026-08-24",
+      "ticker": "RRC",
+      "sector": "NATURAL_GAS",
+      "direction": "LONG",
+      "horizon": 5,
+      "entry": 41.41,
+      "score": 77.27,
+      "outcome": "PENDING"
     }
   ],
   "stats": {
-    "total": 8,
+    "total": 16,
     "resolved": 0,
     "hits": 0,
     "misses": 0,
