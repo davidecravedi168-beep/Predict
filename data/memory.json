@@ -197,6 +197,17 @@
       "entry": 41.41,
       "score": 77.27,
       "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|SO|SHORT|5",
+      "date": "2026-08-24",
+      "ticker": "SO",
+      "sector": "UTILITIES",
+      "direction": "SHORT",
+      "horizon": 5,
+      "entry": 90.1,
+      "score": 77.25,
+      "outcome": "PENDING"
     }
   ],
   "stats": {
