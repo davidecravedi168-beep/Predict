@@ -87,13 +87,102 @@
       "probability": 0.7879,
       "entry": 119.85,
       "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|SRE|SHORT|5",
+      "date": "2026-08-24",
+      "ticker": "SRE",
+      "sector": "UTILITIES",
+      "direction": "SHORT",
+      "horizon": 5,
+      "entry": 82.89,
+      "score": 84.03,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|VLO|LONG|5",
+      "date": "2026-08-24",
+      "ticker": "VLO",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "entry": 348.86,
+      "score": 83.9,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|COP|LONG|5",
+      "date": "2026-08-24",
+      "ticker": "COP",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "entry": 134.87,
+      "score": 83.15,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|MPC|LONG|5",
+      "date": "2026-08-24",
+      "ticker": "MPC",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "entry": 360.72,
+      "score": 82.8,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|AEP|SHORT|5",
+      "date": "2026-08-24",
+      "ticker": "AEP",
+      "sector": "UTILITIES",
+      "direction": "SHORT",
+      "horizon": 5,
+      "entry": 120.94,
+      "score": 81.27,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|XOP|LONG|5",
+      "date": "2026-08-24",
+      "ticker": "XOP",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "entry": 189.54,
+      "score": 80.72,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|XYL|SHORT|5",
+      "date": "2026-08-24",
+      "ticker": "XYL",
+      "sector": "WATER",
+      "direction": "SHORT",
+      "horizon": 5,
+      "entry": 113.42,
+      "score": 79.03,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-24|DUK|SHORT|5",
+      "date": "2026-08-24",
+      "ticker": "DUK",
+      "sector": "UTILITIES",
+      "direction": "SHORT",
+      "horizon": 5,
+      "entry": 119.85,
+      "score": 78.79,
+      "outcome": "PENDING"
     }
   ],
   "stats": {
-    "total": 0,
+    "total": 8,
     "resolved": 0,
     "hits": 0,
     "misses": 0,
-    "hit_rate": null
+    "hit_rate": null,
+    "sample_quality": "LOW"
   }
 }
