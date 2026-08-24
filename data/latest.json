@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-08-24T22:31:54+00:00",
-  "engine_updated_at": "2026-08-24T22:31:54+00:00",
-  "market_data_at": "2026-08-24T22:15:00+00:00",
+  "updated_at": "2026-08-24T22:48:45+00:00",
+  "engine_updated_at": "2026-08-24T22:48:45+00:00",
+  "market_data_at": "2026-08-24T22:30:00+00:00",
   "data_quality": {
     "daily_model": true,
     "quote_overlay_15m": true,
-    "quote_count": 27,
-    "universe_count": 27
+    "quote_count": 26,
+    "universe_count": 26
   },
   "market": {
     "vix": 15.85,
@@ -447,32 +447,6 @@
       "entry_price": 41.37
     },
     {
-      "ticker": "XOM",
-      "display_ticker": "XOM",
-      "sector": "ENERGY",
-      "direction": "LONG",
-      "score": 68.55,
-      "confidence": 0.6855,
-      "raw_confidence": 0.6855,
-      "historical_edge": 51.0,
-      "historical_edge_reasons": [
-        "LONG stronger than SHORT in first 5y backtest",
-        "VIX<20 slightly weak overall",
-        "ENERGY historically weaker"
-      ],
-      "horizon": 5,
-      "price": 164.05,
-      "model_price": 164.05,
-      "ret5_pct": 1.6,
-      "ret20_pct": 6.68,
-      "rel20_pct": 3.38,
-      "rsi": 70.2,
-      "volatility_pct": 24.0,
-      "volume_z": -0.98,
-      "quote_price": 164.07,
-      "entry_price": 164.07
-    },
-    {
       "ticker": "AEP",
       "display_ticker": "AEP",
       "sector": "UTILITIES",
@@ -575,6 +549,32 @@
       "volume_z": -0.08,
       "quote_price": 84.59,
       "entry_price": 84.59
+    },
+    {
+      "ticker": "SLB",
+      "display_ticker": "SLB",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "score": 65.68,
+      "confidence": 0.6568,
+      "raw_confidence": 0.6568,
+      "historical_edge": 51.0,
+      "historical_edge_reasons": [
+        "LONG stronger than SHORT in first 5y backtest",
+        "VIX<20 slightly weak overall",
+        "ENERGY historically weaker"
+      ],
+      "horizon": 5,
+      "price": 54.0,
+      "model_price": 54.0,
+      "ret5_pct": 0.26,
+      "ret20_pct": 4.79,
+      "rel20_pct": 1.49,
+      "rsi": 63.8,
+      "volatility_pct": 33.3,
+      "volume_z": 0.06,
+      "quote_price": 54.005,
+      "entry_price": 54.005
     }
   ],
   "note": "Paper trading / research only. Confidence is model-calibrated heuristic, not a guarantee."
