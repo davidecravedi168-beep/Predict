@@ -1112,10 +1112,83 @@
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-25|GBPUSD=X|LONG|10|8.4.0-adaptive-horizon-governed",
+      "model_version": "8.4.0-adaptive-horizon-governed",
+      "learning_lineage": "ALPHA_V84_ADAPTIVE_HORIZON_1",
+      "date": "2026-08-25",
+      "ticker": "GBPUSD=X",
+      "sector": "FX",
+      "asset_class": "FX",
+      "cluster": "FX",
+      "role": "SATELLITE",
+      "direction": "LONG",
+      "horizon": 10,
+      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "confidence_pct": 76.06,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "entry": 1.36461,
+      "entry_source": "YFINANCE_15M_OBSERVED",
+      "risk_pct": 0.649,
+      "stop": 1.355748,
+      "target1": 1.377017,
+      "target2": 1.384107,
+      "data_quality_score": 100,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "LONG",
+          "score": 79.76,
+          "conviction": 59.53,
+          "weight": 1.0,
+          "as_of": "2026-08-25",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "LONG",
+          "score": 89.72,
+          "conviction": 79.45,
+          "weight": 1.0,
+          "as_of": "2026-08-25",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "LONG",
+          "score": 98.47,
+          "conviction": 96.94,
+          "weight": 1.0,
+          "as_of": "2026-08-25",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "SHORT",
+          "score": 27.5,
+          "conviction": 45.01,
+          "weight": 1.0,
+          "as_of": "2026-08-25",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "learning_adjustment": 0.0,
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "outcome": "PENDING"
     }
   ],
   "stats": {
-    "total": 35,
+    "total": 36,
     "resolved": 0,
     "hits": 0,
     "misses": 0,
