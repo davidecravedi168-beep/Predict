@@ -1,0 +1,143 @@
+name: Update Alpha Engine Data
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Ogni 30 minuti, 24h nei feriali: necessario per ES/NQ e controllo continuo.
+    - cron: "*/30 * * * 1-5"
+    # Riapertura futures USA la domenica sera (UTC).
+    - cron: "*/30 22-23 * * 0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: alpha-engine-data
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Sync before calculation
+        shell: bash
+        run: |
+          set -e
+          git fetch origin main
+          git reset --hard origin/main
+
+      - name: Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run engine with retry
+        shell: bash
+        run: |
+          set -e
+          for attempt in 1 2 3; do
+            echo "Alpha Engine attempt $attempt/3"
+            if python engine.py; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "Retry in 25 seconds..."
+              sleep 25
+            fi
+          done
+          echo "Engine failed after 3 attempts."
+          exit 1
+
+      - name: Validate generated data
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          p = Path("data/latest.json")
+          if not p.exists():
+              raise SystemExit("data/latest.json missing")
+
+          d = json.loads(p.read_text(encoding="utf-8"))
+
+          engine_ts = d.get("engine_updated_at") or d.get("updated_at")
+          if not engine_ts:
+              raise SystemExit("engine_updated_at/updated_at missing")
+          if "signals" not in d:
+              raise SystemExit("signals missing")
+          if "watchlist" not in d:
+              raise SystemExit("watchlist missing")
+
+          ts = datetime.fromisoformat(engine_ts.replace("Z","+00:00"))
+          age = (datetime.now(timezone.utc) - ts).total_seconds()
+
+          if age > 600:
+              raise SystemExit(f"latest.json too old: {age:.0f}s")
+
+          print("Health check OK")
+          print("engine_updated_at:", engine_ts)
+          print("market_data_at:", d.get("market_data_at"))
+          print("data_quality:", d.get("data_quality", {}))
+          print("signals:", len(d.get("signals", [])))
+          print("watchlist:", len(d.get("watchlist", [])))
+          PY
+
+      - name: Save generated snapshot
+        shell: bash
+        run: |
+          set -e
+
+          git config user.name "alpha-engine-bot"
+          git config user.email "alpha-engine-bot@users.noreply.github.com"
+
+          # Salviamo temporaneamente SOLO i file prodotti dal motore.
+          cp data/latest.json /tmp/alpha-latest.json
+          cp data/memory.json /tmp/alpha-memory.json
+
+          for attempt in 1 2 3; do
+            echo "Push attempt $attempt/3"
+
+            # Ripartiamo sempre dall'ultima versione remota:
+            # niente rebase e quindi niente conflitti add/add.
+            git fetch origin main
+            git reset --hard origin/main
+
+            cp /tmp/alpha-latest.json data/latest.json
+            cp /tmp/alpha-memory.json data/memory.json
+
+            git add data/latest.json data/memory.json
+
+            if git diff --cached --quiet; then
+              echo "No data changes to commit."
+              exit 0
+            fi
+
+            git commit -m "bot: refresh Alpha Engine data"
+
+            if git push origin HEAD:main; then
+              echo "Market data saved successfully."
+              exit 0
+            fi
+
+            echo "Repository changed during push. Retrying safely..."
+            sleep 5
+          done
+
+          echo "Unable to save market data after 3 attempts."
+          exit 1
