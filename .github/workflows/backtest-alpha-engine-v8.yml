@@ -1,0 +1,80 @@
+name: Alpha Engine V8.4 Adaptive-Horizon Walk-Forward Backtest
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Weekly research audit; off-peak UTC minute reduces scheduler contention.
+    - cron: "17 4 * * 0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: alpha-engine-v8-backtest
+  cancel-in-progress: true
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Engine governance self-test
+        run: python engine.py --self-test
+
+      - name: Walk-forward V8
+        run: python engine.py --backtest
+
+      - name: Validate research artifact
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data/backtest-v8.json')
+          if not p.exists(): raise SystemExit('backtest-v8.json missing')
+          d=json.loads(p.read_text())
+          if not str(d.get('model_version','')).startswith('8.4.'): raise SystemExit('wrong V8.4 model version')
+          if d.get('lookahead') is not False: raise SystemExit('lookahead guard failed')
+          if d.get('optimization_on_test') is not False: raise SystemExit('test optimization guard failed')
+          if d.get('method') != 'WALK_FORWARD_PREQUENTIAL_ADAPTIVE_HORIZON': raise SystemExit('backtest method mismatch')
+          if not d.get('summary',{}).get('signals'): raise SystemExit('no backtest signals')
+          print('V8.4 adaptive-horizon walk-forward OK:', d['summary'])
+          PY
+
+      - name: Save backtest artifact
+        run: |
+          set -e
+          git config user.name "alpha-engine-bot"
+          git config user.email "alpha-engine-bot@users.noreply.github.com"
+          cp data/backtest-v8.json /tmp/backtest-v8.json
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            mkdir -p data
+            cp /tmp/backtest-v8.json data/backtest-v8.json
+            git add data/backtest-v8.json
+            if git diff --cached --quiet; then
+              echo "No backtest changes."
+              exit 0
+            fi
+            git commit -m "bot: V8 walk-forward backtest"
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 5
+          done
+          exit 1
