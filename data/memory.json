@@ -208,6 +208,72 @@
       "entry": 90.1,
       "score": 77.25,
       "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-25|AR|LONG|5",
+      "date": "2026-08-25",
+      "ticker": "AR",
+      "sector": "NATURAL_GAS",
+      "direction": "LONG",
+      "horizon": 5,
+      "probability": 0.8276,
+      "entry": 37.9,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-25|MPC|LONG|5",
+      "date": "2026-08-25",
+      "ticker": "MPC",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "probability": 0.8268,
+      "entry": 362.52,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-25|VLO|LONG|5",
+      "date": "2026-08-25",
+      "ticker": "VLO",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "probability": 0.8098,
+      "entry": 346.0,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-25|COP|LONG|5",
+      "date": "2026-08-25",
+      "ticker": "COP",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "probability": 0.8075,
+      "entry": 133.35,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-25|XOP|LONG|5",
+      "date": "2026-08-25",
+      "ticker": "XOP",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "horizon": 5,
+      "probability": 0.8002,
+      "entry": 186.24,
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-25|RRC|LONG|5",
+      "date": "2026-08-25",
+      "ticker": "RRC",
+      "sector": "NATURAL_GAS",
+      "direction": "LONG",
+      "horizon": 5,
+      "probability": 0.788,
+      "entry": 41.25,
+      "outcome": "PENDING"
     }
   ],
   "stats": {

@@ -1,15 +1,15 @@
 {
-  "updated_at": "2026-08-24T22:48:45+00:00",
-  "engine_updated_at": "2026-08-24T22:48:45+00:00",
-  "market_data_at": "2026-08-24T22:30:00+00:00",
+  "updated_at": "2026-08-25T07:47:29+00:00",
+  "engine_updated_at": "2026-08-25T07:47:29+00:00",
+  "market_data_at": "2026-08-25T07:30:00+00:00",
   "data_quality": {
     "daily_model": true,
     "quote_overlay_15m": true,
-    "quote_count": 26,
-    "universe_count": 26
+    "quote_count": 27,
+    "universe_count": 27
   },
   "market": {
-    "vix": 15.85,
+    "vix": 15.74,
     "spy_20d_pct": 3.3
   },
   "memory": {
@@ -44,16 +44,16 @@
       "volume_z": -0.95,
       "quote_price": 37.88,
       "entry_price": 37.88,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     },
     {
       "ticker": "MPC",
       "display_ticker": "MPC",
       "sector": "ENERGY",
       "direction": "LONG",
-      "score": 82.58,
-      "confidence": 0.8258,
-      "raw_confidence": 0.8258,
+      "score": 82.68,
+      "confidence": 0.8268,
+      "raw_confidence": 0.8268,
       "historical_edge": 51.0,
       "historical_edge_reasons": [
         "LONG stronger than SHORT in first 5y backtest",
@@ -68,19 +68,19 @@
       "rel20_pct": 13.08,
       "rsi": 75.8,
       "volatility_pct": 41.6,
-      "volume_z": -0.29,
+      "volume_z": -0.24,
       "quote_price": 362.72,
       "entry_price": 362.72,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     },
     {
       "ticker": "VLO",
       "display_ticker": "VLO",
       "sector": "ENERGY",
       "direction": "LONG",
-      "score": 80.91,
-      "confidence": 0.8091,
-      "raw_confidence": 0.8091,
+      "score": 80.98,
+      "confidence": 0.8098,
+      "raw_confidence": 0.8098,
       "historical_edge": 51.0,
       "historical_edge_reasons": [
         "LONG stronger than SHORT in first 5y backtest",
@@ -95,19 +95,19 @@
       "rel20_pct": 10.61,
       "rsi": 72.0,
       "volatility_pct": 33.2,
-      "volume_z": -0.86,
+      "volume_z": -0.82,
       "quote_price": 346.05,
       "entry_price": 346.05,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     },
     {
       "ticker": "COP",
       "display_ticker": "COP",
       "sector": "ENERGY",
       "direction": "LONG",
-      "score": 80.74,
-      "confidence": 0.8074,
-      "raw_confidence": 0.8074,
+      "score": 80.75,
+      "confidence": 0.8075,
+      "raw_confidence": 0.8075,
       "historical_edge": 51.0,
       "historical_edge_reasons": [
         "LONG stronger than SHORT in first 5y backtest",
@@ -122,10 +122,10 @@
       "rel20_pct": 12.85,
       "rsi": 76.5,
       "volatility_pct": 29.3,
-      "volume_z": -0.44,
+      "volume_z": -0.43,
       "quote_price": 133.35,
       "entry_price": 133.35,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     },
     {
       "ticker": "XOP",
@@ -152,7 +152,7 @@
       "volume_z": -0.37,
       "quote_price": 186.215,
       "entry_price": 186.215,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     },
     {
       "ticker": "RRC",
@@ -178,7 +178,7 @@
       "volume_z": -0.69,
       "quote_price": 41.26,
       "entry_price": 41.26,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     }
   ],
   "watchlist": [
@@ -206,16 +206,16 @@
       "volume_z": -0.95,
       "quote_price": 37.88,
       "entry_price": 37.88,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     },
     {
       "ticker": "MPC",
       "display_ticker": "MPC",
       "sector": "ENERGY",
       "direction": "LONG",
-      "score": 82.58,
-      "confidence": 0.8258,
-      "raw_confidence": 0.8258,
+      "score": 82.68,
+      "confidence": 0.8268,
+      "raw_confidence": 0.8268,
       "historical_edge": 51.0,
       "historical_edge_reasons": [
         "LONG stronger than SHORT in first 5y backtest",
@@ -230,19 +230,19 @@
       "rel20_pct": 13.08,
       "rsi": 75.8,
       "volatility_pct": 41.6,
-      "volume_z": -0.29,
+      "volume_z": -0.24,
       "quote_price": 362.72,
       "entry_price": 362.72,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     },
     {
       "ticker": "VLO",
       "display_ticker": "VLO",
       "sector": "ENERGY",
       "direction": "LONG",
-      "score": 80.91,
-      "confidence": 0.8091,
-      "raw_confidence": 0.8091,
+      "score": 80.98,
+      "confidence": 0.8098,
+      "raw_confidence": 0.8098,
       "historical_edge": 51.0,
       "historical_edge_reasons": [
         "LONG stronger than SHORT in first 5y backtest",
@@ -257,19 +257,19 @@
       "rel20_pct": 10.61,
       "rsi": 72.0,
       "volatility_pct": 33.2,
-      "volume_z": -0.86,
+      "volume_z": -0.82,
       "quote_price": 346.05,
       "entry_price": 346.05,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     },
     {
       "ticker": "COP",
       "display_ticker": "COP",
       "sector": "ENERGY",
       "direction": "LONG",
-      "score": 80.74,
-      "confidence": 0.8074,
-      "raw_confidence": 0.8074,
+      "score": 80.75,
+      "confidence": 0.8075,
+      "raw_confidence": 0.8075,
       "historical_edge": 51.0,
       "historical_edge_reasons": [
         "LONG stronger than SHORT in first 5y backtest",
@@ -284,10 +284,10 @@
       "rel20_pct": 12.85,
       "rsi": 76.5,
       "volatility_pct": 29.3,
-      "volume_z": -0.44,
+      "volume_z": -0.43,
       "quote_price": 133.35,
       "entry_price": 133.35,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     },
     {
       "ticker": "XOP",
@@ -314,7 +314,7 @@
       "volume_z": -0.37,
       "quote_price": 186.215,
       "entry_price": 186.215,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
     },
     {
       "ticker": "RRC",
@@ -340,7 +340,33 @@
       "volume_z": -0.69,
       "quote_price": 41.26,
       "entry_price": 41.26,
-      "date": "2026-08-24"
+      "date": "2026-08-25"
+    },
+    {
+      "ticker": "XLE",
+      "display_ticker": "XLE",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "score": 71.8,
+      "confidence": 0.718,
+      "raw_confidence": 0.718,
+      "historical_edge": 51.0,
+      "historical_edge_reasons": [
+        "LONG stronger than SHORT in first 5y backtest",
+        "VIX<20 slightly weak overall",
+        "ENERGY historically weaker"
+      ],
+      "horizon": 5,
+      "price": 63.11,
+      "model_price": 63.11,
+      "ret5_pct": 0.85,
+      "ret20_pct": 8.14,
+      "rel20_pct": 4.84,
+      "rsi": 73.4,
+      "volatility_pct": 23.4,
+      "volume_z": -1.0,
+      "quote_price": 63.13,
+      "entry_price": 63.13
     },
     {
       "ticker": "XYL",
@@ -369,39 +395,13 @@
       "entry_price": 114.18
     },
     {
-      "ticker": "XLE",
-      "display_ticker": "XLE",
-      "sector": "ENERGY",
-      "direction": "LONG",
-      "score": 71.5,
-      "confidence": 0.715,
-      "raw_confidence": 0.715,
-      "historical_edge": 51.0,
-      "historical_edge_reasons": [
-        "LONG stronger than SHORT in first 5y backtest",
-        "VIX<20 slightly weak overall",
-        "ENERGY historically weaker"
-      ],
-      "horizon": 5,
-      "price": 63.11,
-      "model_price": 63.11,
-      "ret5_pct": 0.85,
-      "ret20_pct": 8.14,
-      "rel20_pct": 4.84,
-      "rsi": 73.4,
-      "volatility_pct": 23.4,
-      "volume_z": -1.15,
-      "quote_price": 63.13,
-      "entry_price": 63.13
-    },
-    {
       "ticker": "CVX",
       "display_ticker": "CVX",
       "sector": "ENERGY",
       "direction": "LONG",
-      "score": 71.19,
-      "confidence": 0.7119,
-      "raw_confidence": 0.7119,
+      "score": 71.39,
+      "confidence": 0.7139,
+      "raw_confidence": 0.7139,
       "historical_edge": 51.0,
       "historical_edge_reasons": [
         "LONG stronger than SHORT in first 5y backtest",
@@ -416,7 +416,7 @@
       "rel20_pct": 4.52,
       "rsi": 71.7,
       "volatility_pct": 25.6,
-      "volume_z": -1.1,
+      "volume_z": -0.99,
       "quote_price": 203.07,
       "entry_price": 203.07
     },
@@ -447,13 +447,39 @@
       "entry_price": 41.37
     },
     {
+      "ticker": "XOM",
+      "display_ticker": "XOM",
+      "sector": "ENERGY",
+      "direction": "LONG",
+      "score": 68.72,
+      "confidence": 0.6872,
+      "raw_confidence": 0.6872,
+      "historical_edge": 51.0,
+      "historical_edge_reasons": [
+        "LONG stronger than SHORT in first 5y backtest",
+        "VIX<20 slightly weak overall",
+        "ENERGY historically weaker"
+      ],
+      "horizon": 5,
+      "price": 164.05,
+      "model_price": 164.05,
+      "ret5_pct": 1.6,
+      "ret20_pct": 6.68,
+      "rel20_pct": 3.38,
+      "rsi": 70.2,
+      "volatility_pct": 24.0,
+      "volume_z": -0.89,
+      "quote_price": 164.07,
+      "entry_price": 164.07
+    },
+    {
       "ticker": "AEP",
       "display_ticker": "AEP",
       "sector": "UTILITIES",
       "direction": "SHORT",
-      "score": 77.74,
-      "confidence": 0.6774,
-      "raw_confidence": 0.7774,
+      "score": 77.75,
+      "confidence": 0.6775,
+      "raw_confidence": 0.7775,
       "historical_edge": 30.0,
       "historical_edge_reasons": [
         "SHORT weaker in first 5y backtest",
@@ -468,7 +494,7 @@
       "rel20_pct": -11.29,
       "rsi": 32.9,
       "volatility_pct": 19.1,
-      "volume_z": -0.46,
+      "volume_z": -0.45,
       "quote_price": 121.98,
       "entry_price": 121.98
     },
@@ -549,32 +575,6 @@
       "volume_z": -0.08,
       "quote_price": 84.59,
       "entry_price": 84.59
-    },
-    {
-      "ticker": "SLB",
-      "display_ticker": "SLB",
-      "sector": "ENERGY",
-      "direction": "LONG",
-      "score": 65.68,
-      "confidence": 0.6568,
-      "raw_confidence": 0.6568,
-      "historical_edge": 51.0,
-      "historical_edge_reasons": [
-        "LONG stronger than SHORT in first 5y backtest",
-        "VIX<20 slightly weak overall",
-        "ENERGY historically weaker"
-      ],
-      "horizon": 5,
-      "price": 54.0,
-      "model_price": 54.0,
-      "ret5_pct": 0.26,
-      "ret20_pct": 4.79,
-      "rel20_pct": 1.49,
-      "rsi": 63.8,
-      "volatility_pct": 33.3,
-      "volume_z": 0.06,
-      "quote_price": 54.005,
-      "entry_price": 54.005
     }
   ],
   "note": "Paper trading / research only. Confidence is model-calibrated heuristic, not a guarantee."
