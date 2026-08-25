@@ -1595,10 +1595,92 @@
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-25|BTP10.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
+      "model_version": "8.4.0-adaptive-horizon-governed",
+      "learning_lineage": "ALPHA_V84_ADAPTIVE_HORIZON_1",
+      "date": "2026-08-25",
+      "ticker": "BTP10.MI",
+      "sector": "ITALY_GOVT_BOND_ETF",
+      "asset_class": "BTP",
+      "cluster": "ITALY_RATES",
+      "role": "DIVERSIFIER",
+      "direction": "SHORT",
+      "horizon": 10,
+      "horizon_state": "RULE_BASED_FALLBACK_NO_STABLE_EDGE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "confidence_pct": 72.22,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "entry": 152.419998,
+      "entry_source": "YFINANCE_15M_OBSERVED",
+      "risk_pct": 0.673,
+      "stop": 153.441069,
+      "target1": 150.990499,
+      "target2": 150.173642,
+      "data_quality_score": 100,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "SHORT",
+          "score": 33.8,
+          "conviction": 32.4,
+          "weight": 1.0,
+          "as_of": "2026-08-24",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RELATIVE_Z",
+          "direction": "SHORT",
+          "score": 29.37,
+          "conviction": 41.26,
+          "weight": 1.0,
+          "as_of": "2026-08-24",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "SHORT",
+          "score": 21.09,
+          "conviction": 57.81,
+          "weight": 1.0,
+          "as_of": "2026-08-24",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "SHORT",
+          "score": 4.71,
+          "conviction": 90.57,
+          "weight": 1.0,
+          "as_of": "2026-08-24",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "LONG",
+          "score": 65.95,
+          "conviction": 31.9,
+          "weight": 1.0,
+          "as_of": "2026-08-24",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "learning_adjustment": 0.0,
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "outcome": "PENDING"
     }
   ],
   "stats": {
-    "total": 41,
+    "total": 42,
     "resolved": 0,
     "hits": 0,
     "misses": 0,
