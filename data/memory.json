@@ -1185,10 +1185,174 @@
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-25|IITA.MI|SHORT|20|8.4.0-adaptive-horizon-governed",
+      "model_version": "8.4.0-adaptive-horizon-governed",
+      "learning_lineage": "ALPHA_V84_ADAPTIVE_HORIZON_1",
+      "date": "2026-08-25",
+      "ticker": "IITA.MI",
+      "sector": "ITALY_GOVT_BOND_ETF",
+      "asset_class": "BTP",
+      "cluster": "ITALY_RATES",
+      "role": "DIVERSIFIER",
+      "direction": "SHORT",
+      "horizon": 20,
+      "horizon_state": "RULE_BASED_FALLBACK_NO_STABLE_EDGE",
+      "horizon_setup_family": "RELATIVE",
+      "horizon_policy_version": "AH-1.0",
+      "confidence_pct": 77.14,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "entry": 5.694,
+      "entry_source": "YFINANCE_15M_OBSERVED",
+      "risk_pct": 0.429,
+      "stop": 5.718428,
+      "target1": 5.659801,
+      "target2": 5.640258,
+      "data_quality_score": 100,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "SHORT",
+          "score": 33.86,
+          "conviction": 32.28,
+          "weight": 1.0,
+          "as_of": "2026-08-25",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RELATIVE_Z",
+          "direction": "SHORT",
+          "score": 4.82,
+          "conviction": 90.36,
+          "weight": 1.0,
+          "as_of": "2026-08-25",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "SHORT",
+          "score": 21.85,
+          "conviction": 56.3,
+          "weight": 1.0,
+          "as_of": "2026-08-25",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "SHORT",
+          "score": 6.11,
+          "conviction": 87.79,
+          "weight": 1.0,
+          "as_of": "2026-08-25",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "LONG",
+          "score": 65.94,
+          "conviction": 31.88,
+          "weight": 1.0,
+          "as_of": "2026-08-25",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "learning_adjustment": 0.0,
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-25|SHY|LONG|20|8.4.0-adaptive-horizon-governed",
+      "model_version": "8.4.0-adaptive-horizon-governed",
+      "learning_lineage": "ALPHA_V84_ADAPTIVE_HORIZON_1",
+      "date": "2026-08-25",
+      "ticker": "SHY",
+      "sector": "US_TREASURY",
+      "asset_class": "ETF_BOND_GOV",
+      "cluster": "US_RATES",
+      "role": "DIVERSIFIER",
+      "direction": "LONG",
+      "horizon": 20,
+      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "confidence_pct": 71.57,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "entry": 81.995003,
+      "entry_source": "YFINANCE_15M_OBSERVED",
+      "risk_pct": 0.136,
+      "stop": 81.883574,
+      "target1": 82.151003,
+      "target2": 82.240147,
+      "data_quality_score": 100,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "LONG",
+          "score": 57.42,
+          "conviction": 14.83,
+          "weight": 1.0,
+          "as_of": "2026-08-24",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RELATIVE_Z",
+          "direction": "LONG",
+          "score": 59.8,
+          "conviction": 19.61,
+          "weight": 1.0,
+          "as_of": "2026-08-24",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "LONG",
+          "score": 62.9,
+          "conviction": 25.79,
+          "weight": 1.0,
+          "as_of": "2026-08-24",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "LONG",
+          "score": 91.27,
+          "conviction": 82.54,
+          "weight": 1.0,
+          "as_of": "2026-08-24",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "SHORT",
+          "score": 47.72,
+          "conviction": 4.55,
+          "weight": 1.0,
+          "as_of": "2026-08-24",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "learning_adjustment": 0.0,
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "outcome": "PENDING"
     }
   ],
   "stats": {
-    "total": 36,
+    "total": 38,
     "resolved": 0,
     "hits": 0,
     "misses": 0,
