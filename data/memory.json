@@ -2761,10 +2761,101 @@
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING"
+    },
+    {
+      "id": "2026-08-26|SIE.DE|LONG|3|8.4.0-adaptive-horizon-governed",
+      "model_version": "8.4.0-adaptive-horizon-governed",
+      "learning_lineage": "ALPHA_V84_ADAPTIVE_HORIZON_1",
+      "date": "2026-08-26",
+      "ticker": "SIE.DE",
+      "sector": "EUROPE_EQUITY",
+      "asset_class": "EQUITY",
+      "cluster": "EUROPE_EQUITY",
+      "role": "CORE",
+      "direction": "LONG",
+      "horizon": 3,
+      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "confidence_pct": 75.15,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "entry": 288.149994,
+      "entry_source": "YFINANCE_15M_OBSERVED",
+      "risk_pct": 2.584,
+      "stop": 280.703565,
+      "target1": 298.574994,
+      "target2": 304.532138,
+      "data_quality_score": 100,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "LONG",
+          "score": 65.87,
+          "conviction": 31.75,
+          "weight": 1.0,
+          "as_of": "2026-08-26",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RELATIVE_Z",
+          "direction": "LONG",
+          "score": 50.52,
+          "conviction": 1.03,
+          "weight": 1.0,
+          "as_of": "2026-08-26",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "LONG",
+          "score": 74.34,
+          "conviction": 48.67,
+          "weight": 1.0,
+          "as_of": "2026-08-26",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "LONG",
+          "score": 100.0,
+          "conviction": 100.0,
+          "weight": 1.0,
+          "as_of": "2026-08-26",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "SHORT",
+          "score": 43.18,
+          "conviction": 13.65,
+          "weight": 1.0,
+          "as_of": "2026-08-26",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "VOLUME_CONFIRM",
+          "direction": "LONG",
+          "score": 70.66,
+          "conviction": 41.32,
+          "weight": 1.0,
+          "as_of": "2026-08-26",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "learning_adjustment": 0.0,
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "outcome": "PENDING"
     }
   ],
   "stats": {
-    "total": 55,
+    "total": 56,
     "resolved": 0,
     "hits": 0,
     "misses": 0,
