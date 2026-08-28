@@ -176,10 +176,35 @@ jobs:
           cp data/automation-health.json /tmp/alpha-automation-health.json
           cp data/market-series.json /tmp/alpha-market-series.json
 
-          for attempt in 1 2 3; do
-            echo "Push attempt $attempt/3"
+          for attempt in 1 2 3 4 5 6 7 8; do
+            echo "Race-safe publish attempt $attempt/8"
             git fetch origin main
             git reset --hard origin/main
+
+            if python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          def stamp(path):
+              try:
+                  d=json.loads(Path(path).read_text(encoding='utf-8'))
+                  raw=d.get('engine_updated_at') or d.get('updated_at') or (d.get('meta') or {}).get('updated_at')
+                  if not raw:
+                      return datetime.min.replace(tzinfo=timezone.utc)
+                  return datetime.fromisoformat(raw.replace('Z','+00:00'))
+              except Exception:
+                  return datetime.min.replace(tzinfo=timezone.utc)
+
+          remote=stamp('data/latest.json')
+          candidate=stamp('/tmp/alpha-latest.json')
+          print(f'Remote latest={remote.isoformat()} candidate={candidate.isoformat()}')
+          raise SystemExit(0 if remote >= candidate else 1)
+          PY
+            then
+              echo "Remote Alpha snapshot is already as fresh or fresher; refusing to overwrite it."
+              exit 0
+            fi
 
             cp /tmp/alpha-engine.py engine.py
             cp /tmp/alpha-index.html index.html
@@ -198,13 +223,15 @@ jobs:
               exit 0
             fi
 
-            git commit -m "bot: publish Alpha v8.6 episode ledger + refreshed data"
+            git commit -m "bot: publish Alpha v8.6 refreshed verified data"
             if git push origin HEAD:main; then
-              echo "Alpha v8.6 source, snapshot, chart feed and mobile UX saved successfully."
+              echo "Alpha v8.6 verified snapshot saved successfully."
               exit 0
             fi
-            sleep 5
+
+            echo "Main advanced during publish; preserving candidate and retrying on the new tip."
+            sleep $((attempt * 3))
           done
 
-          echo "Unable to save Alpha v8.6 after 3 attempts."
+          echo "Unable to save Alpha v8.6 after 8 race-safe attempts."
           exit 1
