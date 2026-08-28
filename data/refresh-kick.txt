@@ -1,0 +1,2 @@
+Alpha Engine refresh recovery hook.
+This file is touched only by the external recovery watchdog when native scheduled refreshes are stale.
