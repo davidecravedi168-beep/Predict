@@ -2,6 +2,9 @@ name: Alpha Engine — Refresh & Publish
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/alpha-engine-refresh-publish.yml'
 
 permissions:
   actions: write
