@@ -1,0 +1,99 @@
+name: Alpha Engine Refresh Pulse
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/alpha-refresh-pulse.yml'
+  schedule:
+    # Off-minute cadence avoids the busiest :00/:30 scheduler slots.
+    - cron: '17,47 * * * 1-5'
+    # Futures reopen Sunday evening UTC.
+    - cron: '17,47 22-23 * * 0'
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: alpha-refresh-pulse
+  cancel-in-progress: true
+
+jobs:
+  recover-if-stale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Check freshness and run updater when needed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          stale="$(python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          d = json.loads(Path('data/latest.json').read_text(encoding='utf-8'))
+          raw = d.get('engine_updated_at') or d.get('updated_at')
+          if not raw:
+              print('1')
+              raise SystemExit
+          ts = datetime.fromisoformat(raw.replace('Z', '+00:00'))
+          age = (datetime.now(timezone.utc) - ts).total_seconds() / 60
+          print('1' if age > 25 else '0')
+          PY
+          )"
+
+          if [ "$stale" = "0" ]; then
+            echo "Alpha snapshot is fresh; no recovery needed."
+            exit 0
+          fi
+
+          before="$(gh run list --workflow update-data.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
+          echo "Snapshot stale; dispatching update-data.yml (previous run: $before)."
+          gh workflow run update-data.yml --ref main
+
+          run_id=""
+          for _ in $(seq 1 24); do
+            sleep 5
+            candidate="$(gh run list --workflow update-data.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
+            if [ "$candidate" != "0" ] && [ "$candidate" != "$before" ]; then
+              run_id="$candidate"
+              break
+            fi
+          done
+
+          if [ -z "$run_id" ]; then
+            echo "Updater dispatch did not create a visible run within 120 seconds."
+            exit 1
+          fi
+
+          echo "Watching updater run $run_id until completion."
+          gh run watch "$run_id" --exit-status
+
+      - name: Verify a new V8.5 snapshot exists
+        shell: bash
+        run: |
+          git fetch origin main
+          git show origin/main:data/latest.json > /tmp/latest.json
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+
+          d = json.load(open('/tmp/latest.json', encoding='utf-8'))
+          if d.get('schema_version') != '8.5':
+              raise SystemExit(f"Expected schema 8.5, got {d.get('schema_version')}")
+          raw = d.get('engine_updated_at') or d.get('updated_at')
+          ts = datetime.fromisoformat(raw.replace('Z', '+00:00'))
+          age = (datetime.now(timezone.utc) - ts).total_seconds() / 60
+          if age > 15:
+              raise SystemExit(f'V8.5 snapshot is still stale: {age:.1f}m')
+          print(f'Alpha V8.5 freshness verified: {age:.1f}m old')
