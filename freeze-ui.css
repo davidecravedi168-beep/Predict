@@ -1,0 +1,58 @@
+/* Alpha Engine V9 · Freeze UI R1
+   Final UX guard: chart value never covers the plotted series. */
+.mark{
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  background:#0b0e12 url('icon-180.png') center/cover no-repeat;
+  color:transparent;
+  font-size:0;
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 6px 18px rgba(0,0,0,.28),0 0 0 1px rgba(244,183,74,.04) inset;
+  overflow:hidden;
+}
+
+/* Reserve a dedicated readout strip below the plot. Inline pointer coordinates
+   are intentionally overridden so the price/date pill never masks the chart. */
+.chartShell{
+  margin-bottom:36px;
+}
+.chartTip{
+  left:auto !important;
+  right:4px !important;
+  top:auto !important;
+  bottom:-31px !important;
+  transform:none !important;
+  min-height:25px;
+  display:none;
+  align-items:center;
+  background:rgba(20,24,29,.96);
+  border:1px solid #303740;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.01em;
+  box-shadow:0 8px 22px rgba(0,0,0,.28);
+  backdrop-filter:blur(14px);
+  z-index:8;
+}
+.chartTip[style*="display: block"]{display:flex !important}
+.chartShell::after{
+  content:'TRASCINA · DATA / PREZZO';
+  position:absolute;
+  left:4px;
+  bottom:-27px;
+  color:#59636d;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.08em;
+  pointer-events:none;
+}
+
+@media(max-width:430px){
+  .mark{width:34px;height:34px;border-radius:11px}
+  .chartShell{margin-bottom:38px}
+  .chartTip{right:2px !important;bottom:-31px !important;max-width:72%;overflow:hidden;text-overflow:ellipsis}
+  .chartShell::after{font-size:6.5px;bottom:-26px}
+}
