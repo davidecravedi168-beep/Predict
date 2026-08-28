@@ -1,15 +1,17 @@
 from pathlib import Path
+import re
 
 p=Path('finance-cockpit.js')
 s=p.read_text(encoding='utf-8')
 orig=s
 
-old_status="function renderStatus(){const ts=state.data?.engine_updated_at||state.data?.updated_at;const mins=(Date.now()-new Date(ts).getTime())/60000;const dot=$('liveDot');dot.className=`dot ${mins>90?'bad':mins>35?'warn':''}`;$('liveText').textContent=`LIVE · ${age(ts)}`;$('updatedLabel').textContent=`Engine ${age(ts)} · market ${age(state.data?.market_data_at)}`}`"
 new_status="function renderStatus(){const ts=state.data?.engine_updated_at||state.data?.updated_at,marketTs=state.data?.market_data_at;const mins=ts?(Date.now()-new Date(ts).getTime())/60000:Infinity;const healthTs=state.health?.checked_at||state.health?.updated_at||null;const healthMins=healthTs?(Date.now()-new Date(healthTs).getTime())/60000:Infinity;const dot=$('liveDot');let label='LIVE',cls='';if(navigator.onLine===false){label='OFFLINE';cls='bad'}else if(!Number.isFinite(mins)||mins>90||healthMins>90){label='STALE';cls='bad'}else if(mins>35||healthMins>35){label='DELAYED';cls='warn'}dot.className=`dot ${cls}`;$('liveText').textContent=`${label} · ${age(ts)}`;$('updatedLabel').textContent=`Engine ${age(ts)} · market ${age(marketTs)} · pipeline ${age(healthTs)}`}`"
-if old_status in s:
-    s=s.replace(old_status,new_status,1)
-elif "label='STALE'" not in s:
-    raise SystemExit('renderStatus anchor changed')
+if "label='STALE'" not in s:
+    pattern=r"function renderStatus\(\)\{.*?\}\nfunction renderAll"
+    matches=list(re.finditer(pattern,s,flags=re.S))
+    if len(matches)!=1:
+        raise SystemExit(f'renderStatus contract changed: expected 1 block, found {len(matches)}')
+    s=re.sub(pattern,new_status+'\nfunction renderAll',s,count=1,flags=re.S)
 
 for old,new in [
     ("fetch('data/latest.json',{cache:'no-store'})","fetch('data/latest.json?v='+Date.now(),{cache:'no-store'})"),
