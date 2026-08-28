@@ -13,7 +13,11 @@ class StaticContractTest(unittest.TestCase):
     def test_ui_is_finance_specific_and_has_ledger(self):
         html=(ROOT/'index.html').read_text(encoding='utf-8')
         js=(ROOT/'finance-cockpit.js').read_text(encoding='utf-8')
-        for label in ('QUANT BROKER COCKPIT','Signal desk','Macro cockpit','Quant lab','Decision ledger'):
+        # Assert the current finance-specific product contract.  This must not
+        # pin the data pipeline to a retired marketing subtitle: a harmless
+        # copy change previously made every refresh fail *after* fresh market
+        # data had already been calculated, so the snapshot was never saved.
+        for label in ('PREDICTIVE QUANT COCKPIT','Signal desk','Macro cockpit','Quant lab','Decision ledger'):
             self.assertIn(label,html)
         self.assertIn('Content-Security-Policy',html)
         self.assertIn("serviceWorker.register('./sw.js'",js)
