@@ -1,0 +1,86 @@
+name: Alpha Engine — Refresh & Publish
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: alpha-engine-refresh-publish
+  cancel-in-progress: true
+
+jobs:
+  refresh-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Refresh Alpha data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          repo="$GITHUB_REPOSITORY"
+          before="$(gh run list --repo "$repo" --workflow update-data.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
+          gh workflow run update-data.yml --repo "$repo" --ref main
+
+          run_id=""
+          for _ in $(seq 1 30); do
+            sleep 5
+            candidate="$(gh run list --repo "$repo" --workflow update-data.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
+            if [ "$candidate" != "0" ] && [ "$candidate" != "$before" ]; then
+              run_id="$candidate"
+              break
+            fi
+          done
+
+          test -n "$run_id" || { echo 'Alpha updater did not start'; exit 1; }
+          gh run watch "$run_id" --repo "$repo" --exit-status
+
+      - name: Verify Alpha V8.5 snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/contents/data/latest.json?ref=main" --jq .content | tr -d '\n' | base64 -d > /tmp/latest.json
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          d=json.load(open('/tmp/latest.json', encoding='utf-8'))
+          assert d.get('schema_version') == '8.5', d.get('schema_version')
+          assert str(d.get('model_version','')).startswith('8.5.'), d.get('model_version')
+          assert (d.get('edge_core') or {}).get('domain_profile') == 'FINANCE'
+          raw=d.get('engine_updated_at') or d.get('updated_at')
+          ts=datetime.fromisoformat(raw.replace('Z','+00:00'))
+          age=(datetime.now(timezone.utc)-ts).total_seconds()/60
+          if age > 30:
+              raise SystemExit(f'Alpha snapshot stale after refresh: {age:.1f}m')
+          print(f'Alpha V8.5 verified: {age:.1f}m old')
+          PY
+
+      - name: Publish Alpha to Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          repo="$GITHUB_REPOSITORY"
+          before="$(gh run list --repo "$repo" --workflow deploy-pages-V6.1-AUTO.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
+          gh workflow run deploy-pages-V6.1-AUTO.yml --repo "$repo" --ref main
+
+          run_id=""
+          for _ in $(seq 1 30); do
+            sleep 5
+            candidate="$(gh run list --repo "$repo" --workflow deploy-pages-V6.1-AUTO.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
+            if [ "$candidate" != "0" ] && [ "$candidate" != "$before" ]; then
+              run_id="$candidate"
+              break
+            fi
+          done
+
+          test -n "$run_id" || { echo 'Alpha Pages deploy did not start'; exit 1; }
+          gh run watch "$run_id" --repo "$repo" --exit-status
+          echo 'Alpha Engine refresh + validation + publication complete.'
