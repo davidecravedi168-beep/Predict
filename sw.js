@@ -1,4 +1,4 @@
-const CACHE = "alpha-engine-v9-finance-cockpit-r1";
+const CACHE = "alpha-engine-v9-finance-cockpit-r2";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -23,7 +23,7 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   const url = new URL(e.request.url);
-  const isLiveData = /\/data\/(latest|automation-health|backtest-v8)\.json$/.test(url.pathname);
+  const isLiveData = /\/data\/(latest|market-series|automation-health|backtest-v8)\.json$/.test(url.pathname);
   const isNavigation = e.request.mode === "navigate";
   if (isLiveData || isNavigation) {
     e.respondWith(
