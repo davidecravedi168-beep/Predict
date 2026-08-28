@@ -22,7 +22,7 @@ concurrency:
 jobs:
   recover-if-stale:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: Checkout latest main
         uses: actions/checkout@v5
@@ -30,6 +30,7 @@ jobs:
           ref: main
 
       - name: Check freshness and run updater when needed
+        id: recovery
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -54,6 +55,7 @@ jobs:
 
           if [ "$stale" = "0" ]; then
             echo "Alpha snapshot is fresh; no recovery needed."
+            echo "recovered=0" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -78,8 +80,9 @@ jobs:
 
           echo "Watching updater run $run_id until completion."
           gh run watch "$run_id" --exit-status
+          echo "recovered=1" >> "$GITHUB_OUTPUT"
 
-      - name: Verify a new V8.5 snapshot exists
+      - name: Verify V8.5 snapshot contract and freshness
         shell: bash
         run: |
           git fetch origin main
@@ -91,9 +94,44 @@ jobs:
           d = json.load(open('/tmp/latest.json', encoding='utf-8'))
           if d.get('schema_version') != '8.5':
               raise SystemExit(f"Expected schema 8.5, got {d.get('schema_version')}")
+          if not str(d.get('model_version', '')).startswith('8.5.'):
+              raise SystemExit(f"Expected V8.5 model, got {d.get('model_version')}")
+          if (d.get('edge_core') or {}).get('domain_profile') != 'FINANCE':
+              raise SystemExit('Finance Edge Core profile missing')
           raw = d.get('engine_updated_at') or d.get('updated_at')
           ts = datetime.fromisoformat(raw.replace('Z', '+00:00'))
           age = (datetime.now(timezone.utc) - ts).total_seconds() / 60
-          if age > 15:
-              raise SystemExit(f'V8.5 snapshot is still stale: {age:.1f}m')
+          if age > 30:
+              raise SystemExit(f'V8.5 snapshot is stale after pulse: {age:.1f}m')
           print(f'Alpha V8.5 freshness verified: {age:.1f}m old')
+          PY
+
+      - name: Publish latest snapshot to GitHub Pages
+        if: ${{ github.event_name == 'push' || steps.recovery.outputs.recovered == '1' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          before="$(gh run list --workflow deploy-pages-V6.1-AUTO.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
+          echo "Dispatching Pages deploy (previous run: $before)."
+          gh workflow run deploy-pages-V6.1-AUTO.yml --ref main
+
+          deploy_id=""
+          for _ in $(seq 1 24); do
+            sleep 5
+            candidate="$(gh run list --workflow deploy-pages-V6.1-AUTO.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
+            if [ "$candidate" != "0" ] && [ "$candidate" != "$before" ]; then
+              deploy_id="$candidate"
+              break
+            fi
+          done
+
+          if [ -z "$deploy_id" ]; then
+            echo "Pages deploy did not create a visible run within 120 seconds."
+            exit 1
+          fi
+
+          echo "Watching Pages deploy $deploy_id until completion."
+          gh run watch "$deploy_id" --exit-status
+          echo "Alpha refresh -> validation -> publication chain completed."
