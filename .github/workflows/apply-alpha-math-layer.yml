@@ -1,0 +1,95 @@
+name: Apply Alpha Math Layer
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/apply_alpha_math_layer.py'
+      - '.github/workflows/apply-alpha-math-layer.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: alpha-math-layer
+  cancel-in-progress: false
+
+jobs:
+  apply-test-refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Apply mathematical risk layer
+        run: python scripts/apply_alpha_math_layer.py
+
+      - name: Static verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile engine.py scripts/apply_alpha_math_layer.py
+          grep -q '8.6.1-math-risk-layer' engine.py
+          grep -q 'ALPHA_MATH_LAYER_V1' engine.py
+          grep -q 'math_confidence_adjustment' engine.py
+          grep -q 'break_even_probability_t1' engine.py
+          grep -q 'terminal_target1_probability_proxy' engine.py
+          git diff --check
+
+      - name: Engine governance self-test
+        run: python engine.py --self-test
+
+      - name: Idempotence test
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha_before="$(sha256sum engine.py | cut -d' ' -f1)"
+          python scripts/apply_alpha_math_layer.py
+          sha_after="$(sha256sum engine.py | cut -d' ' -f1)"
+          test "$sha_before" = "$sha_after" || { echo 'Math patch is not idempotent'; exit 1; }
+
+      - name: Publish verified engine source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'alpha-engine-bot'
+          git config user.email 'alpha-engine-bot@users.noreply.github.com'
+          git add engine.py scripts/apply_alpha_math_layer.py
+          if git diff --cached --quiet; then
+            echo 'Math layer already applied.'
+          else
+            git commit -m 'feat: activate Alpha v8.6.1 mathematical risk layer'
+            for attempt in 1 2 3 4; do
+              if git push origin HEAD:main; then exit 0; fi
+              git fetch origin main
+              git rebase origin/main
+              sleep $((attempt * 2))
+            done
+            exit 1
+          fi
+
+      - name: Refresh live Alpha data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh workflow run update-data.yml --repo "$GITHUB_REPOSITORY" --ref main
+          echo 'Alpha data refresh dispatched after verified math-layer activation.'
