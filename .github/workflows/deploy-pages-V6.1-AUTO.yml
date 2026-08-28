@@ -48,6 +48,7 @@ jobs:
           mkdir -p _site/data
           cp index.html manifest.webmanifest sw.js icon-180.png icon-192.png icon-512.png _site/
           cp data/latest.json data/backtest-v8.json _site/data/
+          if [ -f data/market-series.json ]; then cp data/market-series.json _site/data/; fi
           if [ -f data/automation-health.json ]; then cp data/automation-health.json _site/data/; fi
           if find _site -type f \( -name '*.py' -o -name '*.yml' -o -name '*memory*' \) | grep -q .; then
             echo 'Private implementation file leaked into public artifact'
