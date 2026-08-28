@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
-      - name: Refresh Alpha data
+      - name: Refresh Alpha data + charts
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -64,6 +64,29 @@ jobs:
           print(f'Alpha V8.5 verified: {age:.1f}m old')
           PY
 
+      - name: Verify V9 observed chart feed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/contents/data/market-series.json?ref=main" --jq .content | tr -d '\n' | base64 -d > /tmp/market-series.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/market-series.json', encoding='utf-8'))
+          if d.get('strict_no_fabrication') is not True:
+              raise SystemExit('market-series strict_no_fabrication missing')
+          if d.get('status') not in ('OK','DEGRADED'):
+              raise SystemExit(f"market-series unavailable: {d.get('status')}")
+          symbols=d.get('symbols') or {}
+          if len(symbols) < 4:
+              raise SystemExit(f'insufficient chart symbols: {len(symbols)}')
+          observed=sum(1 for x in symbols.values() if len(x.get('daily') or []) >= 20 or len(x.get('intraday') or []) >= 8)
+          if observed < 4:
+              raise SystemExit(f'insufficient observed chart histories: {observed}')
+          print(f'V9 chart feed verified: {observed}/{len(symbols)} usable symbols')
+          PY
+
       - name: Publish Alpha to Pages
         env:
           GH_TOKEN: ${{ github.token }}
@@ -86,4 +109,4 @@ jobs:
 
           test -n "$run_id" || { echo 'Alpha Pages deploy did not start'; exit 1; }
           gh run watch "$run_id" --repo "$repo" --exit-status
-          echo 'Alpha Engine refresh + validation + publication complete.'
+          echo 'Alpha Engine refresh + observed charts + validation + publication complete.'
