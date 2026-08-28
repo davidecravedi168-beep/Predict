@@ -1,2 +1,3 @@
 Alpha Engine refresh recovery hook.
 This file is touched only by the external recovery watchdog when native scheduled refreshes are stale.
+Recovery heartbeat: 2026-08-28T16:05:01Z — weekday market-data pipeline stale; trigger existing Update Alpha Engine Data workflow only.
