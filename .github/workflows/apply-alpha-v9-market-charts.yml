@@ -1,0 +1,51 @@
+name: Apply Alpha V9 Real Market Charts
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/apply-alpha-v9-market-charts.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: alpha-v9-chart-patch
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply deterministic V9 chart patch
+        run: python scripts/patch_v9_market_charts.py
+
+      - name: Verify V9 markers
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'data/market-series.json' index.html
+          grep -q 'data-chart="1d"' index.html
+          grep -q 'data-chart="3m"' index.html
+          grep -q 'data-chart="1y"' index.html
+          grep -q 'market-series' sw.js
+          grep -q 'alpha-engine-v9-finance-cockpit-r2' sw.js
+
+      - name: Commit V9 chart integration
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "alpha-v9-ui-bot"
+          git config user.email "alpha-v9-ui-bot@users.noreply.github.com"
+          git add index.html sw.js
+          if git diff --cached --quiet; then
+            echo 'Patch already applied.'
+            exit 0
+          fi
+          git commit -m 'feat: wire Alpha V9 to real market chart feed'
+          git push origin HEAD:main
