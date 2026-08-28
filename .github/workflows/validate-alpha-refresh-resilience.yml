@@ -1,0 +1,41 @@
+name: Validate Alpha Refresh Resilience
+
+on:
+  push:
+    branches: [dev-alpha-refresh-resilience]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-alpha-refresh-resilience
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: dev-alpha-refresh-resilience
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Apply patch in disposable workspace
+        run: python scripts/apply_alpha_refresh_resilience.py
+      - name: Syntax and static contract
+        run: |
+          python -m py_compile scripts/apply_alpha_refresh_resilience.py scripts/test_alpha_v86_external_cockpit.py scripts/validate_v86_snapshot.py
+          node --check finance-cockpit.js
+          grep -q "ALPHA REFRESH RESILIENCE R1" finance-cockpit.js
+          grep -q "label='STALE'" finance-cockpit.js
+          grep -q "data/latest.json?v=" finance-cockpit.js
+          grep -q "ALPHA_REFRESH_MS=5\*60\*1000" finance-cockpit.js
+          grep -q "data/refresh-kick.txt" .github/workflows/update-data.yml
+          grep -q "cancel-in-progress: false" .github/workflows/update-data.yml
+          git diff --check
+      - name: Regression pass 1
+        run: python scripts/test_alpha_v86_external_cockpit.py
+      - name: Regression pass 2
+        run: python scripts/test_alpha_v86_external_cockpit.py
