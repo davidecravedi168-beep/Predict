@@ -49,10 +49,11 @@ jobs:
           p=Path('data/backtest-v8.json')
           if not p.exists(): raise SystemExit('backtest-v8.json missing')
           d=json.loads(p.read_text())
-          if not str(d.get('model_version','')).startswith('8.4.'): raise SystemExit('wrong V8.4 model version')
+          if not str(d.get('model_version','')).startswith('8.5.'): raise SystemExit('wrong V8.5 model version')
           if d.get('lookahead') is not False: raise SystemExit('lookahead guard failed')
           if d.get('optimization_on_test') is not False: raise SystemExit('test optimization guard failed')
           if d.get('method') != 'WALK_FORWARD_PREQUENTIAL_ADAPTIVE_HORIZON': raise SystemExit('backtest method mismatch')
+          if d.get('transaction_costs_included') is not True: raise SystemExit('cost-aware backtest gate missing')
           if not d.get('summary',{}).get('signals'): raise SystemExit('no backtest signals')
           print('V8.4 adaptive-horizon walk-forward OK:', d['summary'])
           PY

@@ -77,8 +77,8 @@ jobs:
           if not p.exists(): raise SystemExit("data/latest.json missing")
           d = json.loads(p.read_text(encoding="utf-8"))
 
-          if d.get("schema_version") != "8.4": raise SystemExit(f"unexpected schema_version: {d.get('schema_version')}")
-          if not str(d.get("model_version","")).startswith("8.4."): raise SystemExit("V8.4 model_version missing")
+          if d.get("schema_version") != "8.5": raise SystemExit(f"unexpected schema_version: {d.get('schema_version')}")
+          if not str(d.get("model_version","")).startswith("8.5."): raise SystemExit("V8.5 model_version missing")
           if d.get("data_quality",{}).get("strict_no_fabrication") is not True: raise SystemExit("strict_no_fabrication gate missing")
 
           engine_ts = d.get("engine_updated_at") or d.get("updated_at")
@@ -135,7 +135,7 @@ jobs:
           if signals and not isinstance(div.get("by_asset_class"),dict): raise SystemExit("diversification metadata missing")
           learning=d.get("model_learning",{})
           if learning.get("no_lookahead") is not True: raise SystemExit("learning no-lookahead guard missing")
-          if learning.get("learning_lineage") != "ALPHA_V84_ADAPTIVE_HORIZON_1": raise SystemExit("learning lineage mismatch")
+          if learning.get("learning_lineage") != "ALPHA_V85_COST_AWARE_1": raise SystemExit("learning lineage mismatch")
           if float(learning.get("max_positive_adjustment_points",99)) > 1.0: raise SystemExit("positive learning cap too high")
           if float(learning.get("max_negative_adjustment_points",0)) > -4.0: raise SystemExit("negative learning guard too weak")
           gov=d.get("model_governance",{})
@@ -156,13 +156,26 @@ jobs:
           if any(v>2 for v in kc.values()): raise SystemExit(f"cluster concentration cap breached: {dict(kc)}")
           if sum(x.get("role")=="SATELLITE" for x in signals)>1: raise SystemExit("satellite concentration cap breached")
 
-          print("V8.4 adaptive-horizon health check OK")
+          if d.get("edge_core",{}).get("version") != "1.0.0": raise SystemExit("Edge Core metadata missing")
+          if d.get("execution_assumptions",{}).get("cost_model") != "CONSERVATIVE_ASSET_CLASS_ROUND_TRIP_BPS": raise SystemExit("cost model missing")
+          print("V8.5 cost-aware Edge Core health check OK")
           print("engine_updated_at:", engine_ts)
           print("market_data_at:", d.get("market_data_at"))
           print("asset_classes:", d.get("data_quality",{}).get("by_asset_class",{}))
           print("signals:", len(signals), "watchlist:", len(watch))
           print("diversification:", div)
           PY
+
+      - name: QA pass 1
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: QA pass 2
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Write automation health receipt
+        env:
+          GITHUB_EVENT_SCHEDULE: ${{ github.event.schedule }}
+        run: python scripts/write_automation_health.py
 
       - name: Save generated snapshot
         shell: bash
@@ -175,6 +188,7 @@ jobs:
           # Salviamo temporaneamente SOLO i file prodotti dal motore.
           cp data/latest.json /tmp/alpha-latest.json
           cp data/memory.json /tmp/alpha-memory.json
+          cp data/automation-health.json /tmp/alpha-automation-health.json
 
           for attempt in 1 2 3; do
             echo "Push attempt $attempt/3"
@@ -186,8 +200,9 @@ jobs:
 
             cp /tmp/alpha-latest.json data/latest.json
             cp /tmp/alpha-memory.json data/memory.json
+            cp /tmp/alpha-automation-health.json data/automation-health.json
 
-            git add data/latest.json data/memory.json
+            git add data/latest.json data/memory.json data/automation-health.json
 
             if git diff --cached --quiet; then
               echo "No data changes to commit."

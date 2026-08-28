@@ -1,11 +1,11 @@
-const CACHE = "alpha-engine-v1";
+const CACHE = "alpha-engine-v8-5-edge-core";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
-  "./assets/icon-180.png",
-  "./assets/icon-192.png",
-  "./assets/icon-512.png"
+  "./icon-180.png",
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
 self.addEventListener("install", e => {
@@ -23,7 +23,7 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   const url = new URL(e.request.url);
 
-  if (url.pathname.endsWith("/data/latest.json")) {
+  if (/\/data\/(latest|automation-health|backtest-v8)\.json$/.test(url.pathname)) {
     e.respondWith(
       fetch(e.request).then(r => {
         const copy = r.clone();

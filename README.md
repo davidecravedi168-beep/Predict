@@ -1,4 +1,6 @@
-# Alpha Engine Web App — iOS Edition
+# Alpha Engine 8.5 · Cost-Aware Edge Core
+
+Motore cross-asset nettamente finanziario con orizzonti adattivi, Signal Lock forward, provenienza evidence-only, costi prudenziali per asset class, watchdog/recovery, doppio QA e pubblicazione Pages tramite allowlist.
 
 Include:
 - Web app ottimizzata per iPhone e safe-area.
@@ -11,7 +13,8 @@ Include:
 - Copia ticker con tap.
 - Navigazione inferiore stile app.
 - Aggiornamento automatico ogni 15 minuti lato interfaccia.
-- Motore GitHub Actions 3 volte al giorno nei feriali.
+- Motore GitHub Actions ogni 30 minuti nei feriali, con watchdog indipendente e ricevuta pubblica di automazione.
+- Backtest walk-forward con rendimenti al netto di una stima prudenziale dei costi round-trip; tasse e market impact restano limiti dichiarati.
 
 ## Pubblicazione
 1. Carica tutti i file nel repository.

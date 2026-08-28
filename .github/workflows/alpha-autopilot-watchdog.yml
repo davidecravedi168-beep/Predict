@@ -1,0 +1,43 @@
+name: Alpha Engine Autopilot Watchdog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '11 * * * *'
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: alpha-autopilot-watchdog
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Verify market-hours freshness and recover
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if python - <<'PY'
+          import json
+          from datetime import datetime,timezone
+          from pathlib import Path
+          now=datetime.now(timezone.utc)
+          # Saturday and pre-open Sunday are intentionally quiet.
+          if now.weekday()==5 or (now.weekday()==6 and now.hour<22): raise SystemExit(0)
+          d=json.loads(Path('data/latest.json').read_text())
+          ts=datetime.fromisoformat((d.get('engine_updated_at') or d.get('updated_at') or '').replace('Z','+00:00'))
+          age=(now-ts).total_seconds()/60
+          print(f'Alpha snapshot age: {age:.1f}m')
+          raise SystemExit(0 if age<=90 else 1)
+          PY
+          then
+            exit 0
+          fi
+          gh workflow run update-data.yml

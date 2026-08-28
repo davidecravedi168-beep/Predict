@@ -19,9 +19,10 @@ from datetime import datetime, timezone
 import numpy as np
 import pandas as pd
 import yfinance as yf
+from edge_core import EDGE_CORE_VERSION, assert_public_snapshot, cost_adjusted_return_pct, estimated_round_trip_cost_bps
 
-MODEL_VERSION = "8.4.0-adaptive-horizon-governed"
-LEARNING_LINEAGE = "ALPHA_V84_ADAPTIVE_HORIZON_1"
+MODEL_VERSION = "8.5.0-cost-aware-edge-core"
+LEARNING_LINEAGE = "ALPHA_V85_COST_AWARE_1"
 OUT = Path("data/latest.json")
 MEM = Path("data/memory.json")
 EXTERNAL_MODELS = Path("data/external_models.json")
@@ -443,8 +444,12 @@ def resolve_memory(mem, data):
         raw = exit_price / entry - 1
         direction = p.get("direction")
         pnl = raw if direction == "LONG" else -raw
-        p["outcome"] = "HIT" if pnl > 0 else "MISS"
-        p["return_pct"] = round(pnl * 100, 4)
+        gross_pct = round(pnl * 100, 4)
+        net_pct, cost_bps = cost_adjusted_return_pct(gross_pct, p.get("asset_class"))
+        p["outcome"] = "HIT" if net_pct > 0 else "MISS"
+        p["gross_return_pct"] = gross_pct
+        p["estimated_round_trip_cost_bps"] = cost_bps
+        p["return_pct"] = net_pct
         p["underlying_return_pct"] = round(raw * 100, 4)
         p["exit"] = round(exit_price, 6)
         p["resolved"] = str(future_close.index[h - 1].date())
@@ -508,8 +513,12 @@ def resolve_memory(mem, data):
         exit_price = float(future.iloc[h - 1])
         raw = exit_price / entry - 1
         pnl = raw if p.get("direction") == "LONG" else -raw
-        p["outcome"] = "HIT" if pnl > 0 else "MISS"
-        p["return_pct"] = round(pnl * 100, 4)
+        gross_pct = round(pnl * 100, 4)
+        net_pct, cost_bps = cost_adjusted_return_pct(gross_pct, p.get("asset_class"))
+        p["outcome"] = "HIT" if net_pct > 0 else "MISS"
+        p["gross_return_pct"] = gross_pct
+        p["estimated_round_trip_cost_bps"] = cost_bps
+        p["return_pct"] = net_pct
         p["exit"] = round(exit_price, 6)
         p["resolved"] = str(future.index[h - 1].date())
 
@@ -1493,7 +1502,9 @@ def run_backtest():
             exit_price = float(future.iloc[h - 1])
             raw = exit_price / entry - 1
             pnl = raw if sig["direction"] == "LONG" else -raw
-            y = 1 if pnl > 0 else 0
+            gross_pct = round(pnl * 100, 4)
+            net_pct, cost_bps = cost_adjusted_return_pct(gross_pct, sig.get("asset_class"))
+            y = 1 if net_pct > 0 else 0
             p = safe_num(sig.get("forecast_probability"))
             vote_results = []
             for v in sig.get("model_votes", []):
@@ -1506,12 +1517,14 @@ def run_backtest():
                 "horizon": h, "horizon_state": sig.get("horizon_state"),
                 "horizon_setup_family": sig.get("horizon_setup_family"),
                 "forecast_probability": p, "entry": round(entry, 6), "exit": round(exit_price, 6),
-                "return_pct": round(pnl * 100, 4), "hit": bool(y), "model_votes": vote_results,
+                "gross_return_pct": gross_pct, "estimated_round_trip_cost_bps": cost_bps,
+                "return_pct": net_pct, "hit": bool(y), "model_votes": vote_results,
             })
 
     if not records:
         raise RuntimeError("Backtest produced no resolved signals")
     returns = np.array([r["return_pct"] for r in records], dtype=float)
+    gross_returns = np.array([r["gross_return_pct"] for r in records], dtype=float)
     hits = np.array([1 if r["hit"] else 0 for r in records], dtype=float)
     probs = [(r["forecast_probability"], 1 if r["hit"] else 0) for r in records if r.get("forecast_probability") is not None]
     by_class = {}
@@ -1548,11 +1561,13 @@ def run_backtest():
         "sampling": "APPROX_MONTHLY_20_TRADING_SESSIONS",
         "lookahead": False,
         "optimization_on_test": False,
-        "transaction_costs_included": False,
+        "transaction_costs_included": True,
+        "transaction_cost_model": "EDGE_CORE_ASSET_CLASS_CONSERVATIVE_ROUND_TRIP_BPS",
         "summary": {
             "signals": len(records),
             "test_dates": len(set(r["date"] for r in records)),
             "hit_rate": round(float(hits.mean()), 4),
+            "gross_avg_return_pct": round(float(gross_returns.mean()), 4),
             "avg_return_pct": round(float(returns.mean()), 4),
             "median_return_pct": round(float(np.median(returns)), 4),
             "brier": round(float(np.mean([(p - y) ** 2 for p, y in probs])), 5) if len(probs) >= 20 else None,
@@ -1564,7 +1579,7 @@ def run_backtest():
         "limitations": [
             "Current-universe / survivorship bias is not removed.",
             "Yahoo/yfinance adjusted market data are used; no institutional tick history is claimed.",
-            "Transaction costs, taxes and market impact are excluded.",
+            "A conservative asset-class round-trip cost estimate is included; user-specific broker fees, taxes and market impact remain excluded.",
             "BTP exposure is represented by verified exchange-traded Italy government-bond ETFs, not individual MOT/ISIN bonds.",
             "Adaptive memory and horizon selection at each test date use only information already observable by that date.",
             "Horizon candidates are fixed ex ante by asset class; the selector cannot introduce new horizons from test outcomes.",
@@ -1624,6 +1639,9 @@ def validate_result(result):
         raise ValueError(f"cluster concentration cap breached: {dict(kc)}")
     if sum(r.get("role") == "SATELLITE" for r in sigs) > 1:
         raise ValueError("satellite concentration cap breached")
+    if result.get("edge_core", {}).get("version") != EDGE_CORE_VERSION:
+        raise ValueError("edge core metadata missing")
+    assert_public_snapshot(result)
     return True
 
 
@@ -1754,8 +1772,16 @@ def main():
     btp_available = [t for t in ("IITB.MI", "IITA.MI", "BTP10.MI", "BT27.MI") if t not in unavailable]
 
     result = {
-        "schema_version": "8.4",
+        "schema_version": "8.5",
         "model_version": MODEL_VERSION,
+        "edge_core": {
+            "version": EDGE_CORE_VERSION,
+            "domain_profile": "FINANCE",
+            "signal_lock": "IMMUTABLE_MODEL_VERSION_DATE_TICKER_DIRECTION_HORIZON",
+            "fail_closed": True,
+            "secrets_server_side": True,
+            "watchdog_recovery": True,
+        },
         "updated_at": engine_updated_at,
         "engine_updated_at": engine_updated_at,
         "market_data_at": market_data_at,
@@ -1765,6 +1791,13 @@ def main():
             "institutional_feed": False,
             "official_bond_terms_feed": False,
             "warning": "Availability and delays depend on the upstream source; missing values are never imputed as observed facts.",
+        },
+        "execution_assumptions": {
+            "cost_model": "CONSERVATIVE_ASSET_CLASS_ROUND_TRIP_BPS",
+            "cost_bps_by_asset_class": {k: estimated_round_trip_cost_bps(k) for k in sorted({m['asset_class'] for m in ASSET_META.values()})},
+            "taxes_included": False,
+            "market_impact_included": False,
+            "rule": "A signal is resolved HIT only when its directional return remains positive after the estimated round-trip cost.",
         },
         "data_quality": {
             "daily_model": True,

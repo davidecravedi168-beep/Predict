@@ -8,21 +8,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="Alpha Engine Pro Max · quantitative decision support">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <title>Alpha Engine Pro Max · V8.5 PREMIUM EXPERIENCE</title>
-<script>
-(async()=>{
-  try{
-    if('serviceWorker' in navigator){
-      const regs=await navigator.serviceWorker.getRegistrations();
-      await Promise.all(regs.map(r=>r.unregister()));
-    }
-    if('caches' in window){
-      const keys=await caches.keys();
-      await Promise.all(keys.map(k=>caches.delete(k)));
-    }
-  }catch(e){}
-})();
-</script>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
 <style>
 :root{--bg:#0b1117;--card:#141c25;--card2:#18222d;--line:#263442;--txt:#eef3f7;--mut:#93a5b5;--g:#35c37d;--a:#f0ad4e;--r:#ef6351;--b:#5aa6ff;--vio:#a78bfa;--safe:max(12px,env(safe-area-inset-bottom))}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -513,6 +503,7 @@ section[id]{scroll-margin-top:18px;scroll-margin-bottom:calc(var(--nav-h) + 28px
     <div class="healthbox"><div class="lbl">Data Quality</div><b id="hQuality">—</b></div>
     <div class="healthbox"><div class="lbl">Asset coverage</div><b id="hAssets">—</b></div>
     <div class="healthbox"><div class="lbl">Provenance</div><b id="hProv">—</b></div>
+    <div class="healthbox"><div class="lbl">Autopilot</div><b id="hAutopilot">—</b></div>
   </div>
   <div id="diagText" class="auditnote">Il test non altera dati, score o decisioni.</div>
 
@@ -556,7 +547,7 @@ section[id]{scroll-margin-top:18px;scroll-margin-bottom:calc(var(--nav-h) + 28px
 </nav>
 
 <script>
-let D=null, mode=localStorage.getItem('alpha_mode')||'simple', sel=null, signalFilter='ALL', assetFilter='ALL', favOnly=false;
+let D=null, H=null, mode=localStorage.getItem('alpha_mode')||'simple', sel=null, signalFilter='ALL', assetFilter='ALL', favOnly=false;
 let SIGNAL_POOL=[], WATCH_POOL=[];
 const safeNum=(v,fallback=null)=>{const z=Number(v);return Number.isFinite(z)?z:fallback};
 const clamp=(v,a=0,b=100)=>Math.max(a,Math.min(b,v));
@@ -840,10 +831,11 @@ async function load(manual=false){
   const upd=document.getElementById('updated');
   if(manual) upd.textContent='Aggiornamento…';
   try{
-    const r=await fetch('./data/latest.json?build=v83governed&t='+Date.now(),{cache:'no-store'});
+    const r=await fetch('./data/latest.json?build=v85edgecore&t='+Date.now(),{cache:'no-store'});
     if(!r.ok) throw new Error('HTTP '+r.status);
     const raw=await r.json();
-    localStorage.setItem('alpha_last_data_v83',JSON.stringify(raw));
+    try{const hr=await fetch('./data/automation-health.json?t='+Date.now(),{cache:'no-store'});H=hr.ok?await hr.json():null}catch(_){H=null}
+    localStorage.setItem('alpha_last_data_v85',JSON.stringify(raw));
     D=raw;
     D.signals=applyPortfolioIntelligence((D.signals||[]).map(normalizeSignal));
     D.watchlist=(D.watchlist||[]).map(normalizeSignal).map(x=>({...x,cluster:inferCluster(x)}));
@@ -853,7 +845,7 @@ async function load(manual=false){
     runDiagnostics();
   }catch(e){
     try{
-      const cached=JSON.parse(localStorage.getItem('alpha_last_data_v83')||'null');
+      const cached=JSON.parse(localStorage.getItem('alpha_last_data_v85')||'null');
       if(cached){
         D=cached;
         D.signals=applyPortfolioIntelligence((D.signals||[]).map(normalizeSignal));
@@ -983,6 +975,7 @@ function runDiagnostics(forceOffline=false){
   if(document.getElementById('hGate')) hGate.textContent=top?executionGate(top).label:'NO TRADE';
   if(document.getElementById('hCluster')) hCluster.textContent=dom?(dom.name+' '+(share*100).toFixed(0)+'%'):'—';
   if(document.getElementById('hQuality')) hQuality.textContent=qavg==null?'—':qavg.toFixed(0)+'/100';
+  if(document.getElementById('hAutopilot')) hAutopilot.textContent=H?.ok===true?(H.freshness?.state||'VERIFIED'):'DA VERIFICARE';
   const issues=[];
   if(forceOffline) issues.push('feed live non raggiungibile');
   if(age.stale) issues.push('dati oltre la soglia di freschezza');
@@ -990,6 +983,7 @@ function runDiagnostics(forceOffline=false){
   if(share>=.5 && dom.total>=3) issues.push('concentrazione '+dom.name+' '+(share*100).toFixed(0)+'% gestita con haircut');
   if(qavg!=null && qavg<80) issues.push('qualità dati media '+qavg.toFixed(0)+'/100');
   if(!top) issues.push('nessun segnale sopra soglia');
+  if(H?.ok!==true) issues.push('ricevuta autopilot non verificata');
   diagText.textContent=issues.length?'Attenzione: '+issues.join(' · ')+'.':'PASS: feed, freschezza, qualità dati, concentrazione e struttura decisionale sono coerenti.';
 }
 
@@ -1320,7 +1314,7 @@ function calcNow(){if(!sel)return;const cls=inferAssetClass(sel);if(['BTP_DIRECT
 
 ['capital','loss','spread','fees'].forEach(id=>document.getElementById(id).oninput=calcNow);
 document.getElementById('fx').oninput=()=>{document.getElementById('fx').dataset.userEdited='1';calcNow()};
-setMode(mode);initPremiumNav();load();setInterval(()=>load(false),900000);
+setMode(mode);initPremiumNav();load();setInterval(()=>load(false),900000);if('serviceWorker'in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
 </script>
 </body>
 </html>
