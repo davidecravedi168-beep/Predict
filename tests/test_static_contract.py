@@ -1,3 +1,4 @@
+import json
 import pathlib
 import unittest
 
@@ -35,14 +36,32 @@ class StaticContractTest(unittest.TestCase):
         self.assertNotIn('path: "."',y)
         self.assertIn('Private implementation file leaked',y)
 
-    def test_service_worker_uses_v9_shell_and_live_health(self):
+    def test_service_worker_manifest_and_deploy_share_current_icon_contract(self):
+        """Regression: icon family renames must not leave QA pinned to a retired filename."""
         sw=(ROOT/'sw.js').read_text(encoding='utf-8')
+        manifest=json.loads((ROOT/'manifest.webmanifest').read_text(encoding='utf-8'))
+        deploy=(ROOT/'.github/workflows/deploy-pages-V6.1-AUTO.yml').read_text(encoding='utf-8')
+
         self.assertIn('alpha-engine-v9-finance-cockpit',sw)
         self.assertIn('./finance-cockpit.js',sw)
         self.assertIn('./finance-cockpit.css',sw)
-        self.assertIn('./icon-192.png',sw)
-        self.assertNotIn('./assets/icon-192.png',sw)
+        self.assertIn('./freeze-ui.css',sw)
         self.assertIn('automation-health',sw)
         self.assertIn('market-series',sw)
+
+        icons=manifest.get('icons') or []
+        self.assertGreaterEqual(len(icons),2)
+        icon_sources=[]
+        for icon in icons:
+            src=str(icon.get('src') or '').lstrip('./')
+            self.assertTrue(src,icon)
+            icon_sources.append(src)
+            self.assertIn(f'./{src}',sw,f'{src} is in manifest but not cached by service worker')
+            self.assertIn(src,deploy,f'{src} is in manifest but not generated/copied by Pages deploy')
+
+        self.assertIn('alpha-home-192.png',icon_sources)
+        self.assertIn('alpha-home-512.png',icon_sources)
+        self.assertNotIn('./icon-192.png',sw)
+        self.assertIn("src = Image.open('icon-180.png')",deploy)
 
 if __name__=='__main__': unittest.main()
