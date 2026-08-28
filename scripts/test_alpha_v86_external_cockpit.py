@@ -2,10 +2,11 @@
 from copy import deepcopy
 from pathlib import Path
 import subprocess
-
-import engine
+import sys
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+import engine
 
 
 def signal(date='2026-08-28',ticker='TEST',direction='LONG',horizon=10,setup='BREAKOUT'):
