@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
-      - name: Refresh Alpha data + charts
+      - name: Refresh Alpha v8.6 data + charts
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -30,7 +30,7 @@ jobs:
           gh workflow run update-data.yml --repo "$repo" --ref main
 
           run_id=""
-          for _ in $(seq 1 30); do
+          for _ in $(seq 1 40); do
             sleep 5
             candidate="$(gh run list --repo "$repo" --workflow update-data.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
             if [ "$candidate" != "0" ] && [ "$candidate" != "$before" ]; then
@@ -39,10 +39,10 @@ jobs:
             fi
           done
 
-          test -n "$run_id" || { echo 'Alpha updater did not start'; exit 1; }
+          test -n "$run_id" || { echo 'Alpha v8.6 updater did not start'; exit 1; }
           gh run watch "$run_id" --repo "$repo" --exit-status
 
-      - name: Verify Alpha V8.5 snapshot
+      - name: Verify Alpha v8.6 episode-ledger snapshot
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -53,15 +53,25 @@ jobs:
           import json
           from datetime import datetime, timezone
           d=json.load(open('/tmp/latest.json', encoding='utf-8'))
-          assert d.get('schema_version') == '8.5', d.get('schema_version')
-          assert str(d.get('model_version','')).startswith('8.5.'), d.get('model_version')
-          assert (d.get('edge_core') or {}).get('domain_profile') == 'FINANCE'
+          assert d.get('schema_version') == '8.6', d.get('schema_version')
+          assert str(d.get('model_version','')).startswith('8.6.'), d.get('model_version')
+          edge=d.get('edge_core') or {}
+          assert edge.get('domain_profile') == 'FINANCE'
+          assert edge.get('signal_lock') == 'ONE_ACTIVE_EPISODE_PER_TICKER_WITH_STABLE_SETUP_KEY'
+          learning=d.get('model_learning') or {}
+          assert learning.get('learning_lineage') == 'ALPHA_V86_EPISODE_LEDGER_1'
+          mem=d.get('memory') or {}
+          for key in ('independent_episodes','active','superseded_or_excluded','legacy_resolved_excluded','resolved','learning_resolved'):
+              assert key in mem, key
+          rows=[*(d.get('signals') or []),*(d.get('watchlist') or [])]
+          assert rows
+          assert all('model_completeness_score' in x for x in rows)
           raw=d.get('engine_updated_at') or d.get('updated_at')
           ts=datetime.fromisoformat(raw.replace('Z','+00:00'))
           age=(datetime.now(timezone.utc)-ts).total_seconds()/60
           if age > 30:
               raise SystemExit(f'Alpha snapshot stale after refresh: {age:.1f}m')
-          print(f'Alpha V8.5 verified: {age:.1f}m old')
+          print(f"Alpha v8.6 verified: {age:.1f}m old · active={mem.get('active')} · clean resolved={mem.get('resolved')}")
           PY
 
       - name: Verify V9 observed chart feed
@@ -87,6 +97,23 @@ jobs:
           print(f'V9 chart feed verified: {observed}/{len(symbols)} usable symbols')
           PY
 
+      - name: Verify published source contracts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in engine.py index.html finance-cockpit.js; do
+            gh api "repos/$GITHUB_REPOSITORY/contents/$file?ref=main" --jq .content | tr -d '\n' | base64 -d > "/tmp/${file//\//_}"
+          done
+          grep -q '8.6.0-episode-ledger-cost-aware' /tmp/engine.py
+          grep -q 'ONE_ACTIVE_EPISODE_PER_TICKER_WITH_STABLE_SETUP_KEY' /tmp/engine.py
+          grep -q 'Decision ledger' /tmp/index.html
+          grep -q 'compactLedgerEpisodes' /tmp/finance-cockpit.js
+          grep -q 'z.observed_at===obsAt' /tmp/finance-cockpit.js
+          node --check /tmp/finance-cockpit.js
+          echo 'Published v8.6 source contracts verified.'
+
       - name: Publish Alpha to Pages
         env:
           GH_TOKEN: ${{ github.token }}
@@ -98,7 +125,7 @@ jobs:
           gh workflow run deploy-pages-V6.1-AUTO.yml --repo "$repo" --ref main
 
           run_id=""
-          for _ in $(seq 1 30); do
+          for _ in $(seq 1 40); do
             sleep 5
             candidate="$(gh run list --repo "$repo" --workflow deploy-pages-V6.1-AUTO.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
             if [ "$candidate" != "0" ] && [ "$candidate" != "$before" ]; then
@@ -109,6 +136,6 @@ jobs:
 
           test -n "$run_id" || { echo 'Alpha Pages deploy did not start'; exit 1; }
           gh run watch "$run_id" --repo "$repo" --exit-status
-          echo 'Alpha Engine refresh + observed charts + validation + publication complete.'
+          echo 'Alpha v8.6 episode ledger + V9 + observed charts + validation + publication complete.'
 
-# V9 full-cycle trigger marker
+# V8.6 episode-ledger full-cycle trigger marker
