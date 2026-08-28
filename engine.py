@@ -21,7 +21,7 @@ import pandas as pd
 import yfinance as yf
 from edge_core import EDGE_CORE_VERSION, assert_public_snapshot, cost_adjusted_return_pct, estimated_round_trip_cost_bps
 
-MODEL_VERSION = "8.6.0-episode-ledger-cost-aware"
+MODEL_VERSION = "8.6.1-math-risk-layer"
 LEARNING_LINEAGE = "ALPHA_V86_EPISODE_LEDGER_1"
 OUT = Path("data/latest.json")
 MEM = Path("data/memory.json")
@@ -1080,6 +1080,103 @@ def select_adaptive_horizon(ticker, data, direction, votes):
     }
 
 
+
+# ALPHA_MATH_LAYER_V1
+# Conservative mathematical overlay. It only penalizes confidence; it never
+# creates positive alpha from a formula and never promotes confidence by itself.
+def mathematical_confidence_guard(direction, rsi_value, annualized_vol, ret20, horizon):
+    adj = 0.0
+    reasons = []
+    h = max(1, int(horizon or 1))
+
+    # RSI extension: penalize a LONG near/inside overbought and a SHORT near/inside oversold.
+    if rsi_value is not None:
+        if direction == "LONG" and rsi_value >= 68:
+            p = min(6.0, max(0.0, (rsi_value - 68.0) * 0.45))
+            adj -= p
+            reasons.append(f"RSI extension penalty -{p:.2f}")
+        elif direction == "SHORT" and rsi_value <= 32:
+            p = min(6.0, max(0.0, (32.0 - rsi_value) * 0.45))
+            adj -= p
+            reasons.append(f"RSI extension penalty -{p:.2f}")
+
+    horizon_sigma = None
+    extension_z = None
+    if annualized_vol is not None and annualized_vol > 0:
+        horizon_sigma = annualized_vol * math.sqrt(h / 252.0)
+        if horizon_sigma >= 0.08:
+            p = min(5.0, (horizon_sigma - 0.08) * 45.0 + 1.0)
+            adj -= p
+            reasons.append(f"horizon volatility penalty -{p:.2f}")
+
+        # Normalize the observed 20-session move by its own volatility scale.
+        if ret20 is not None:
+            sigma20 = annualized_vol * math.sqrt(20.0 / 252.0)
+            if sigma20 > 0:
+                extension_z = abs(ret20) / sigma20
+                same_side = (direction == "LONG" and ret20 > 0) or (direction == "SHORT" and ret20 < 0)
+                if same_side and extension_z >= 1.25:
+                    p = min(5.0, (extension_z - 1.25) * 2.0)
+                    adj -= p
+                    reasons.append(f"price extension z penalty -{p:.2f}")
+
+    return round(max(-12.0, min(0.0, adj)), 3), {
+        "version": "ALPHA_MATH_LAYER_V1",
+        "penalty_only": True,
+        "horizon_sigma_pct": round(horizon_sigma * 100, 3) if horizon_sigma is not None else None,
+        "extension_z": round(extension_z, 3) if extension_z is not None else None,
+        "reasons": reasons,
+    }
+
+
+def mathematical_trade_metrics(direction, annualized_vol, ret20, horizon, risk_pct, reward1_pct, reward2_pct):
+    def cdf(z):
+        return 0.5 * (1.0 + math.erf(z / math.sqrt(2.0)))
+
+    out = {
+        "version": "ALPHA_MATH_LAYER_V1",
+        "distribution_assumption": "GAUSSIAN_TERMINAL_RETURN_PROXY",
+        "barrier_probability_claimed": False,
+        "break_even_probability_t1": None,
+        "break_even_probability_t2": None,
+        "terminal_directional_probability_proxy": None,
+        "terminal_target1_probability_proxy": None,
+        "terminal_target2_probability_proxy": None,
+        "terminal_stop_probability_proxy": None,
+        "horizon_sigma_pct": None,
+        "directional_drift_proxy_pct": None,
+    }
+
+    if risk_pct is not None and reward1_pct is not None and risk_pct + reward1_pct > 0:
+        out["break_even_probability_t1"] = round(risk_pct / (risk_pct + reward1_pct), 4)
+    if risk_pct is not None and reward2_pct is not None and risk_pct + reward2_pct > 0:
+        out["break_even_probability_t2"] = round(risk_pct / (risk_pct + reward2_pct), 4)
+
+    if annualized_vol is None or annualized_vol <= 0:
+        return out
+
+    h = max(1, int(horizon or 1))
+    sigma = annualized_vol * math.sqrt(h / 252.0)
+    if sigma <= 0:
+        return out
+
+    raw_mu = (ret20 / 20.0) * h if ret20 is not None else 0.0
+    mu = raw_mu if direction == "LONG" else -raw_mu
+    out["horizon_sigma_pct"] = round(sigma * 100, 3)
+    out["directional_drift_proxy_pct"] = round(mu * 100, 3)
+    out["terminal_directional_probability_proxy"] = round(1.0 - cdf((0.0 - mu) / sigma), 4)
+
+    if reward1_pct is not None:
+        r1 = reward1_pct / 100.0
+        out["terminal_target1_probability_proxy"] = round(1.0 - cdf((r1 - mu) / sigma), 4)
+    if reward2_pct is not None:
+        r2 = reward2_pct / 100.0
+        out["terminal_target2_probability_proxy"] = round(1.0 - cdf((r2 - mu) / sigma), 4)
+    if risk_pct is not None:
+        r = risk_pct / 100.0
+        out["terminal_stop_probability_proxy"] = round(cdf((-r - mu) / sigma), 4)
+    return out
+
 def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
     meta = ASSET_META[ticker]
     asset_class, cluster, benchmark = meta["asset_class"], meta["cluster"], meta.get("benchmark")
@@ -1248,7 +1345,8 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
     # Learning and calibration are horizon-specific: a good 3-day forecast is not
     # silently treated as evidence for a 20-day forecast.
     learn_adj, learn_meta = learning_adjustment(mem, asset_class, direction, horizon)
-    final_conf = clip(base_conf + agreement_adj + vol_adj + macro_adj + learn_adj, 50, 92)
+    math_adj, math_guard = mathematical_confidence_guard(direction, rv, vol, ret20, horizon)
+    final_conf = clip(base_conf + agreement_adj + vol_adj + macro_adj + learn_adj + math_adj, 50, 92)
     if data_quality < 70:
         final_conf = min(final_conf, 64)
 
@@ -1289,6 +1387,10 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
             stop, target1, target2 = price + dist, price - 1.4 * dist, price - 2.2 * dist
         risk_pct = abs(price - stop) / price * 100
 
+    reward1_pct = abs(target1 - price) / price * 100 if target1 is not None else None
+    reward2_pct = abs(target2 - price) / price * 100 if target2 is not None else None
+    math_metrics = mathematical_trade_metrics(direction, vol, ret20, horizon, risk_pct, reward1_pct, reward2_pct)
+
     if vol_z is None:
         risk_level = "DATI PARZIALI"
     elif vol_z >= 2.0:
@@ -1327,6 +1429,8 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
         reasons.append(f"Regime macro: penalità prudenziale {macro_adj:.1f} pt")
     if learn_adj < 0:
         reasons.append("Memoria errori: penalità empirica attiva")
+    if math_adj < 0:
+        reasons.append(f"Math guard: penalità prudenziale {math_adj:.1f} pt")
     elif learn_meta.get("state") == "POSITIVE_EDGE_SHADOW_ONLY":
         reasons.append("Edge positivo osservato ma ancora in shadow: nessun bonus")
     if forecast_p is None:
@@ -1390,8 +1494,17 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
         "target2_price": round(target2, 6) if target2 is not None else None,
         "risk_reward_1": 1.4 if stop is not None else None,
         "risk_reward_2": 2.2 if stop is not None else None,
-        "reward1_pct": round(abs(target1 - price) / price * 100, 3) if target1 is not None else None,
-        "reward2_pct": round(abs(target2 - price) / price * 100, 3) if target2 is not None else None,
+        "reward1_pct": round(reward1_pct, 3) if reward1_pct is not None else None,
+        "reward2_pct": round(reward2_pct, 3) if reward2_pct is not None else None,
+        "break_even_probability_t1": math_metrics.get("break_even_probability_t1"),
+        "break_even_probability_t2": math_metrics.get("break_even_probability_t2"),
+        "terminal_directional_probability_proxy": math_metrics.get("terminal_directional_probability_proxy"),
+        "terminal_target1_probability_proxy": math_metrics.get("terminal_target1_probability_proxy"),
+        "terminal_target2_probability_proxy": math_metrics.get("terminal_target2_probability_proxy"),
+        "terminal_stop_probability_proxy": math_metrics.get("terminal_stop_probability_proxy"),
+        "math_confidence_adjustment": math_adj,
+        "math_guard": math_guard,
+        "math_metrics": math_metrics,
         "yield_to_maturity_pct": None,
         "data_quality_score": data_quality,
         "data_quality_fields": expected,
@@ -1426,6 +1539,8 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
             "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
             "macro_regime_adjustment": "MODEL_DERIVED_FROM_OBSERVED_MARKET_CONTEXT" if macro_adj != 0 else "NO_ADJUSTMENT",
             "learning_adjustment": "RESOLVED_MEMORY_ONLY" if learn_adj != 0 else "NO_ADJUSTMENT",
+            "math_confidence_adjustment": "MODEL_DERIVED_PENALTY_ONLY_RSI_VOLATILITY_EXTENSION",
+            "math_metrics": "MODEL_DERIVED_GAUSSIAN_TERMINAL_PROXY_AND_BREAK_EVEN_ARITHMETIC",
             "external_model_votes": "DECLARED_TIMESTAMPED_EXTERNAL_FEED_SHADOW_ONLY" if ext_votes else "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL",
         },
     }
