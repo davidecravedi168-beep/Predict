@@ -2,10 +2,10 @@
   "ok": true,
   "app": "ALPHA_ENGINE",
   "edge_core_version": "1.0.0",
-  "checked_at": "2026-08-28T09:25:31+00:00",
+  "checked_at": "2026-08-28T09:37:50+00:00",
   "event": "workflow_dispatch",
   "schedule": null,
-  "artifact_digest": "1fe85f1c75448212",
+  "artifact_digest": "bfdefe3ca8e45093",
   "freshness": {
     "state": "FRESH",
     "age_minutes": 0.0,
@@ -13,7 +13,7 @@
   },
   "summary": {
     "model_version": "8.5.0-cost-aware-edge-core",
-    "updated_at": "2026-08-28T09:25:30+00:00",
+    "updated_at": "2026-08-28T09:37:50+00:00",
     "signals": 10,
     "watchlist": 27
   },
@@ -23,6 +23,6 @@
     "strict_no_fabrication": true
   },
   "workflow_version": "ALPHA-8.5-EDGE-CORE",
-  "run_id": "33159271484",
+  "run_id": "33160115471",
   "run_attempt": 1
 }
