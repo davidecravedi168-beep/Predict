@@ -1,13 +1,13 @@
-const CACHE = "alpha-engine-v9-finance-cockpit-r4";
+const CACHE = "alpha-engine-v9-finance-cockpit-r5-freeze";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./finance-cockpit.css",
+  "./freeze-ui.css",
   "./finance-cockpit.js",
   "./manifest.webmanifest",
-  "./icon-180.png",
-  "./icon-192.png",
-  "./icon-512.png"
+  "./alpha-icon.svg",
+  "./icon-180.png"
 ];
 
 self.addEventListener("install", e => {
