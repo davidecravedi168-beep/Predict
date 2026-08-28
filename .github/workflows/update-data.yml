@@ -52,12 +52,65 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Normalize V9 migration contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/apply_alpha_v86_external_cockpit.py')
+          s=p.read_text(encoding='utf-8')
+          old='Alpha Engine V9 · Finance Cockpit'
+          new='Alpha Engine V9 · Quant Broker Cockpit'
+          if old in s:
+              s=s.replace(old,new)
+              p.write_text(s,encoding='utf-8')
+          index=Path('index.html').read_text(encoding='utf-8')
+          if new not in index:
+              raise SystemExit('Current V9 Quant Broker Cockpit marker missing; refusing unknown index')
+          print('V9 migration marker normalized')
+          PY
+
       - name: Apply Alpha v8.6 episode-ledger migration
         run: python scripts/apply_alpha_v86_external_cockpit.py
 
+      - name: Apply V9 mobile UX safeguards
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          css_path=Path('finance-cockpit.css')
+          css=css_path.read_text(encoding='utf-8')
+          marker='/* V9 MOBILE UX R1 */'
+          if marker not in css:
+              css += '''\n/* V9 MOBILE UX R1 */\n.chartShell.noData{height:96px}\n@media(max-width:430px){\n  .chartShell{height:168px;margin-top:12px}\n  .chartShell.noData{height:82px}\n  .hero{padding-top:18px;padding-bottom:14px}\n  .heroStats{margin-top:11px}\n  .sectionTitle{margin-top:17px}\n  .tape{padding-bottom:8px}\n  .app{padding-bottom:calc(var(--nav) + 108px + env(safe-area-inset-bottom))}\n  .bottom{bottom:max(9px,env(safe-area-inset-bottom))}\n}\n'''
+              css_path.write_text(css,encoding='utf-8')
+
+          js_path=Path('finance-cockpit.js')
+          js=js_path.read_text(encoding='utf-8')
+          old="shell.className=`chartShell ${ch==null?'flat':ch>=0?'up':'down'}`;"
+          new="shell.className=`chartShell ${ch==null?'flat':ch>=0?'up':'down'} ${p.length<2?'noData':''}`;"
+          if old in js:
+              js=js.replace(old,new,1)
+              js_path.write_text(js,encoding='utf-8')
+          elif "p.length<2?'noData':''" not in js:
+              raise SystemExit('V9 chart shell contract changed; refusing blind mobile patch')
+
+          sw_path=Path('sw.js')
+          sw=sw_path.read_text(encoding='utf-8')
+          if 'alpha-engine-v9-finance-cockpit-r3' in sw:
+              sw=sw.replace('alpha-engine-v9-finance-cockpit-r3','alpha-engine-v9-finance-cockpit-r4')
+              sw_path.write_text(sw,encoding='utf-8')
+          elif 'alpha-engine-v9-finance-cockpit-r4' not in sw:
+              raise SystemExit('Unexpected service-worker cache contract')
+          print('V9 mobile UX safeguards applied')
+          PY
+
       - name: Source syntax checks
         run: |
-          python -m py_compile engine.py scripts/apply_alpha_v86_upgrade_v2.py scripts/apply_alpha_v86_external_cockpit.py scripts/test_alpha_v86_external_cockpit.py scripts/validate_v86_snapshot.py
+          python -m py_compile engine.py scripts/apply_alpha_v86_upgrade_v2.py scripts/apply_alpha_v86_external_cockpit.py scripts/test_alpha_v86_external_cockpit.py scripts/validate_v86_snapshot.py scripts/build_market_series.py
           node --check finance-cockpit.js
           git diff --check
 
@@ -110,6 +163,9 @@ jobs:
           cp engine.py /tmp/alpha-engine.py
           cp index.html /tmp/alpha-index.html
           cp finance-cockpit.js /tmp/alpha-finance-cockpit.js
+          cp finance-cockpit.css /tmp/alpha-finance-cockpit.css
+          cp sw.js /tmp/alpha-sw.js
+          cp scripts/apply_alpha_v86_external_cockpit.py /tmp/alpha-apply-v86-cockpit.py
           cp data/latest.json /tmp/alpha-latest.json
           cp data/memory.json /tmp/alpha-memory.json
           cp data/automation-health.json /tmp/alpha-automation-health.json
@@ -123,12 +179,15 @@ jobs:
             cp /tmp/alpha-engine.py engine.py
             cp /tmp/alpha-index.html index.html
             cp /tmp/alpha-finance-cockpit.js finance-cockpit.js
+            cp /tmp/alpha-finance-cockpit.css finance-cockpit.css
+            cp /tmp/alpha-sw.js sw.js
+            cp /tmp/alpha-apply-v86-cockpit.py scripts/apply_alpha_v86_external_cockpit.py
             cp /tmp/alpha-latest.json data/latest.json
             cp /tmp/alpha-memory.json data/memory.json
             cp /tmp/alpha-automation-health.json data/automation-health.json
             cp /tmp/alpha-market-series.json data/market-series.json
 
-            git add engine.py index.html finance-cockpit.js data/latest.json data/memory.json data/automation-health.json data/market-series.json
+            git add engine.py index.html finance-cockpit.js finance-cockpit.css sw.js scripts/apply_alpha_v86_external_cockpit.py data/latest.json data/memory.json data/automation-health.json data/market-series.json
             if git diff --cached --quiet; then
               echo "No verified source/data changes to commit."
               exit 0
@@ -136,7 +195,7 @@ jobs:
 
             git commit -m "bot: publish Alpha v8.6 episode ledger + refreshed data"
             if git push origin HEAD:main; then
-              echo "Alpha v8.6 source, snapshot and chart feed saved successfully."
+              echo "Alpha v8.6 source, snapshot, chart feed and mobile UX saved successfully."
               exit 0
             fi
             sleep 5
