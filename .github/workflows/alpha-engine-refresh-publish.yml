@@ -110,3 +110,5 @@ jobs:
           test -n "$run_id" || { echo 'Alpha Pages deploy did not start'; exit 1; }
           gh run watch "$run_id" --repo "$repo" --exit-status
           echo 'Alpha Engine refresh + observed charts + validation + publication complete.'
+
+# V9 full-cycle trigger marker
