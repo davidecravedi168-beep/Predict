@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Alpha Engine predictive analytics icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#171c24"/>
+      <stop offset="1" stop-color="#080b10"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".45" stop-color="#aeb6c2"/>
+      <stop offset="1" stop-color="#46505c"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#d89a2b"/>
+      <stop offset=".55" stop-color="#f6d47b"/>
+      <stop offset="1" stop-color="#fff1b1"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="10" y="10" width="492" height="492" rx="112" fill="url(#bg)" stroke="#2a313c" stroke-width="4"/>
+  <g opacity=".28" stroke="#5d6877" fill="none">
+    <path d="M88 392 L148 316 L218 350 L304 246 L380 270 L435 186" stroke-width="3"/>
+    <path d="M76 424 C150 246 269 143 437 119" stroke-dasharray="8 10" stroke-width="2"/>
+    <circle cx="88" cy="392" r="6" fill="#6c7684"/>
+    <circle cx="148" cy="316" r="6" fill="#6c7684"/>
+    <circle cx="218" cy="350" r="6" fill="#6c7684"/>
+    <circle cx="304" cy="246" r="6" fill="#6c7684"/>
+    <circle cx="380" cy="270" r="6" fill="#6c7684"/>
+    <circle cx="435" cy="186" r="6" fill="#6c7684"/>
+  </g>
+  <path d="M116 397 L250 104 L386 397 L326 373 L250 212 L176 373 Z" fill="url(#metal)"/>
+  <path d="M95 400 L154 343 L189 359 L230 318 L257 341 L307 286" fill="none" stroke="url(#gold)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M307 286 C348 254 377 222 418 168" fill="none" stroke="#f6d47b" stroke-width="8" stroke-linecap="round" stroke-dasharray="14 13"/>
+  <circle cx="95" cy="400" r="13" fill="#0c1016" stroke="#dba33d" stroke-width="7"/>
+  <circle cx="307" cy="286" r="14" fill="#fff1b1" stroke="#dba33d" stroke-width="6"/>
+  <g filter="url(#glow)">
+    <circle cx="418" cy="168" r="8" fill="#fff5c9"/>
+    <path d="M418 145 V191 M395 168 H441" stroke="#fff1b1" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <circle cx="418" cy="168" r="32" fill="none" stroke="#c9963d" stroke-width="2" stroke-dasharray="5 7" opacity=".7"/>
+</svg>
