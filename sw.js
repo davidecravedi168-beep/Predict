@@ -1,4 +1,4 @@
-const CACHE = "alpha-engine-v8-5-edge-core-r2";
+const CACHE = "alpha-engine-v9-finance-cockpit-r1";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -25,28 +25,18 @@ self.addEventListener("fetch", e => {
   const url = new URL(e.request.url);
   const isLiveData = /\/data\/(latest|automation-health|backtest-v8)\.json$/.test(url.pathname);
   const isNavigation = e.request.mode === "navigate";
-
-  // Financial decisions and the app shell are always network-first.
-  // no-store prevents an intermediary/browser HTTP cache from hiding a fresh Pages deploy.
   if (isLiveData || isNavigation) {
     e.respondWith(
       fetch(e.request, { cache: "no-store" }).then(r => {
-        if (r.ok) {
-          const copy = r.clone();
-          caches.open(CACHE).then(c => c.put(e.request, copy));
-        }
+        if (r.ok) caches.open(CACHE).then(c => c.put(e.request, r.clone()));
         return r;
       }).catch(() => caches.match(e.request).then(r => r || caches.match("./index.html")))
     );
     return;
   }
-
   e.respondWith(
     fetch(e.request, { cache: "no-cache" }).then(r => {
-      if (r.ok) {
-        const copy = r.clone();
-        caches.open(CACHE).then(c => c.put(e.request, copy));
-      }
+      if (r.ok) caches.open(CACHE).then(c => c.put(e.request, r.clone()));
       return r;
     }).catch(() => caches.match(e.request).then(r => r || caches.match("./index.html")))
   );
