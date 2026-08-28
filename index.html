@@ -60,6 +60,11 @@
 <section id="page-lab" class="page">
   <div class="sectionTitle"><h2>Quant lab</h2><span>Per chi vuole vedere sotto il cofano</span></div>
   <div id="labGrid" class="labGrid"></div>
+  <div class="sectionTitle"><h2>Decision ledger</h2><span>Un episodio attivo per asset · audit deduplicato</span></div>
+  <div id="ledgerKpis" class="summaryGrid"></div>
+  <div id="ledgerNote" class="notice">Il ledger usa solo osservazioni con timestamp di mercato nuovo. Le tesi sostituite restano in audit come SUPERSEDED e non vengono contate come esiti.</div>
+  <div class="periods"><button id="importLedgerBtn" class="period" type="button">IMPORT</button><button id="exportLedgerBtn" class="period" type="button">EXPORT</button><input id="importLedgerFile" type="file" accept="application/json,.json" hidden></div>
+  <div id="ledgerList" class="watchList"></div>
   <div class="footnote">Alpha Engine è supporto decisionale quantitativo. Confidence e score non sono probabilità di profitto quando il campione di calibrazione non è sufficiente. Costi, qualità dati, provenienza e limiti del modello restano visibili per evitare falsa precisione.</div>
 </section>
 </div>

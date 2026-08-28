@@ -21,8 +21,8 @@ import pandas as pd
 import yfinance as yf
 from edge_core import EDGE_CORE_VERSION, assert_public_snapshot, cost_adjusted_return_pct, estimated_round_trip_cost_bps
 
-MODEL_VERSION = "8.5.0-cost-aware-edge-core"
-LEARNING_LINEAGE = "ALPHA_V85_COST_AWARE_1"
+MODEL_VERSION = "8.6.0-episode-ledger-cost-aware"
+LEARNING_LINEAGE = "ALPHA_V86_EPISODE_LEDGER_1"
 OUT = Path("data/latest.json")
 MEM = Path("data/memory.json")
 EXTERNAL_MODELS = Path("data/external_models.json")
@@ -417,7 +417,7 @@ def _vote_hit(vote_direction, raw_return):
 def resolve_memory(mem, data):
     """Resolve only predictions whose entire horizon is now observable."""
     for p in mem.get("predictions", []):
-        if p.get("outcome") in ("HIT", "MISS"):
+        if p.get("outcome") in ("HIT", "MISS", "SUPERSEDED", "EXPIRED", "CANCELLED", "EXCLUDED_DUPLICATE"):
             continue
         ticker = p.get("ticker")
         s = get(data, ticker)
@@ -522,7 +522,16 @@ def resolve_memory(mem, data):
         p["exit"] = round(exit_price, 6)
         p["resolved"] = str(future.index[h - 1].date())
 
-    resolved = [p for p in mem.get("predictions", []) if p.get("outcome") in ("HIT", "MISS")]
+    resolved = [
+        p for p in mem.get("predictions", [])
+        if p.get("outcome") in ("HIT", "MISS")
+        and p.get("learning_lineage") == LEARNING_LINEAGE
+    ]
+    legacy_resolved = [
+        p for p in mem.get("predictions", [])
+        if p.get("outcome") in ("HIT", "MISS")
+        and p.get("learning_lineage") != LEARNING_LINEAGE
+    ]
     hits = sum(p["outcome"] == "HIT" for p in resolved)
     brier_vals = []
     for p in resolved:
@@ -609,8 +618,15 @@ def resolve_memory(mem, data):
         if p["outcome"] == "MISS" and safe_num(p.get("confidence_pct"), 0) >= 75
     )
 
+    lineage_rows = [p for p in mem.get("predictions", []) if p.get("learning_lineage") == LEARNING_LINEAGE]
+    active_rows = [p for p in lineage_rows if p.get("outcome") == "PENDING"]
+    superseded_rows = [p for p in mem.get("predictions", []) if p.get("outcome") in ("SUPERSEDED", "EXCLUDED_DUPLICATE")]
     mem["stats"] = {
-        "total": len(mem.get("predictions", [])),
+        "total": len(lineage_rows),
+        "independent_episodes": len(lineage_rows),
+        "active": len(active_rows),
+        "superseded_or_excluded": len(superseded_rows),
+        "legacy_resolved_excluded": len(legacy_resolved),
         "resolved": len(resolved),
         "hits": hits,
         "misses": len(resolved) - hits,
@@ -662,42 +678,122 @@ def append_external_predictions(mem, votes_by_ticker, data):
             existing.add(pid)
 
 
+def _episode_key_from_parts(ticker, direction, horizon, setup_family):
+    return f"{ticker}|{direction}|{int(horizon)}|{setup_family or 'MIXED'}"
+
+
+def _episode_key_from_prediction(p):
+    h = safe_num(p.get("horizon"))
+    if h is None or int(h) != h or int(h) < 1:
+        return None
+    ticker = str(p.get("ticker") or "")
+    direction = str(p.get("direction") or "")
+    if not ticker or direction not in ("LONG", "SHORT"):
+        return None
+    return _episode_key_from_parts(ticker, direction, int(h), p.get("horizon_setup_family") or "MIXED")
+
+
+def migrate_prediction_episodes(mem):
+    """Quarantine overlapping legacy PENDING rows before any learning/statistics."""
+    rows = mem.setdefault("predictions", [])
+    pending = []
+    for p in rows:
+        if p.get("outcome") != "PENDING":
+            continue
+        key = _episode_key_from_prediction(p)
+        if key:
+            p.setdefault("episode_key", key)
+            p.setdefault("episode_id", f"EP|{p.get('date')}|{key}")
+        p.setdefault("observations", 1)
+        p.setdefault("state", "ACTIVE")
+        pending.append(p)
+
+    # Exact active duplicates: keep the first immutable forecast, quarantine copies.
+    by_key = defaultdict(list)
+    for p in pending:
+        if p.get("episode_key"):
+            by_key[p["episode_key"]].append(p)
+    for group in by_key.values():
+        if len(group) < 2:
+            continue
+        ordered = sorted(group, key=lambda x: (str(x.get("date") or ""), str(x.get("id") or "")))
+        canonical = ordered[0]
+        for dup in ordered[1:]:
+            if dup.get("outcome") != "PENDING":
+                continue
+            canonical["observations"] = max(int(canonical.get("observations", 1) or 1), int(dup.get("observations", 1) or 1))
+            canonical["last_seen"] = max(str(canonical.get("last_seen") or canonical.get("date") or ""), str(dup.get("date") or ""))
+            dup["outcome"] = "EXCLUDED_DUPLICATE"
+            dup["state"] = "SUPERSEDED"
+            dup["superseded_by"] = canonical.get("id")
+            dup["resolution_state"] = "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
+
+    # One active thesis per ticker. If setup/direction/horizon changed, the newest
+    # survives as ACTIVE and older unresolved theses are audit-preserved as SUPERSEDED.
+    by_ticker = defaultdict(list)
+    for p in rows:
+        if p.get("outcome") == "PENDING" and p.get("ticker"):
+            by_ticker[p["ticker"]].append(p)
+    for group in by_ticker.values():
+        if len(group) < 2:
+            continue
+        ordered = sorted(group, key=lambda x: (str(x.get("date") or ""), str(x.get("id") or "")))
+        newest = ordered[-1]
+        for old in ordered[:-1]:
+            old["outcome"] = "SUPERSEDED"
+            old["state"] = "SUPERSEDED"
+            old["superseded_by"] = newest.get("id")
+            old["resolution_state"] = "LEGACY_OVERLAP_SUPERSEDED"
+        newest["state"] = "ACTIVE"
+    return mem
+
+
 def add_prediction(mem, sig):
-    pid = f'{sig["date"]}|{sig["ticker"]}|{sig["direction"]}|{sig["horizon"]}|{MODEL_VERSION}'
-    if any(p.get("id") == pid for p in mem.get("predictions", [])):
-        return
-    mem["predictions"].append({
-        "id": pid,
-        "model_version": MODEL_VERSION,
-        "learning_lineage": LEARNING_LINEAGE,
-        "date": sig["date"],
-        "ticker": sig["ticker"],
-        "sector": sig.get("sector"),
-        "asset_class": sig.get("asset_class"),
-        "cluster": sig.get("cluster"),
-        "role": sig.get("role"),
-        "direction": sig["direction"],
-        "horizon": sig["horizon"],
-        "horizon_state": sig.get("horizon_state"),
-        "horizon_setup_family": sig.get("horizon_setup_family"),
-        "horizon_policy_version": sig.get("horizon_policy_version"),
-        "confidence_pct": sig.get("confidence_pct"),
-        "forecast_probability": sig.get("forecast_probability"),
-        "probability_state": sig.get("probability_state"),
-        "entry": sig.get("entry_price", sig.get("price")),
-        "entry_source": (sig.get("provenance") or {}).get("entry_price"),
-        "risk_pct": sig.get("risk_pct"),
-        "stop": sig.get("stop_price"),
-        "target1": sig.get("target1_price"),
-        "target2": sig.get("target2_price"),
-        "data_quality_score": sig.get("data_quality_score"),
-        "model_votes": sig.get("model_votes", []),
-        "external_model_votes": sig.get("external_model_votes", []),
-        "learning_adjustment": sig.get("learning_adjustment", 0),
-        "risk_regime": sig.get("risk_regime"),
-        "rates_regime": sig.get("rates_regime"),
-        "outcome": "PENDING",
+    """Create or refresh exactly one independent active forecast episode per ticker."""
+    ledger = mem.setdefault("predictions", [])
+    h = int(sig["horizon"])
+    setup = sig.get("horizon_setup_family") or "MIXED"
+    episode_key = _episode_key_from_parts(sig["ticker"], sig["direction"], h, setup)
+    active = [p for p in ledger if p.get("outcome") == "PENDING" and p.get("ticker") == sig["ticker"]]
+
+    for p in active:
+        existing_key = p.get("episode_key") or _episode_key_from_prediction(p)
+        if existing_key == episode_key:
+            p["episode_key"] = episode_key
+            p.setdefault("episode_id", f"EP|{p.get('date')}|{episode_key}")
+            p["state"] = "ACTIVE"
+            p["last_seen"] = sig["date"]
+            p["observations"] = int(p.get("observations", 1) or 1) + 1
+            p["latest_confidence_pct"] = sig.get("confidence_pct")
+            p["latest_learning_adjustment"] = sig.get("learning_adjustment", 0)
+            p["latest_model_version"] = MODEL_VERSION
+            return {"action": "UPDATED_ACTIVE_EPISODE", "episode_id": p["episode_id"]}
+
+    for p in active:
+        p["outcome"] = "SUPERSEDED"
+        p["state"] = "SUPERSEDED"
+        p["superseded_on"] = sig["date"]
+        p["resolution_state"] = "SUPERSEDED_BY_NEW_ACTIVE_THESIS"
+
+    pid = f'EP|{sig["date"]}|{episode_key}|{MODEL_VERSION}'
+    ledger.append({
+        "id": pid, "episode_id": pid, "episode_key": episode_key,
+        "state": "ACTIVE", "observations": 1, "first_seen": sig["date"], "last_seen": sig["date"],
+        "model_version": MODEL_VERSION, "learning_lineage": LEARNING_LINEAGE,
+        "date": sig["date"], "ticker": sig["ticker"], "sector": sig.get("sector"),
+        "asset_class": sig.get("asset_class"), "cluster": sig.get("cluster"), "role": sig.get("role"),
+        "direction": sig["direction"], "horizon": sig["horizon"],
+        "horizon_state": sig.get("horizon_state"), "horizon_setup_family": sig.get("horizon_setup_family"),
+        "horizon_policy_version": sig.get("horizon_policy_version"), "confidence_pct": sig.get("confidence_pct"),
+        "forecast_probability": sig.get("forecast_probability"), "probability_state": sig.get("probability_state"),
+        "entry": sig.get("entry_price", sig.get("price")), "entry_source": (sig.get("provenance") or {}).get("entry_price"),
+        "risk_pct": sig.get("risk_pct"), "stop": sig.get("stop_price"), "target1": sig.get("target1_price"),
+        "target2": sig.get("target2_price"), "data_quality_score": sig.get("data_quality_score"),
+        "model_completeness_score": sig.get("model_completeness_score"), "model_votes": sig.get("model_votes", []),
+        "external_model_votes": sig.get("external_model_votes", []), "learning_adjustment": sig.get("learning_adjustment", 0),
+        "risk_regime": sig.get("risk_regime"), "rates_regime": sig.get("rates_regime"), "outcome": "PENDING",
     })
+    return {"action": "CREATED_NEW_EPISODE", "episode_id": pid}
 
 
 def _segment(mem, asset_class, direction, horizon=None):
@@ -1204,6 +1300,17 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
     else:
         risk_level = "MEDIO"
 
+    model_completeness_fields = {
+        "market_feature_set": data_quality >= 80,
+        "risk_envelope": stop is not None and target1 is not None and target2 is not None,
+        "empirical_probability": forecast_p is not None,
+        "learning_segment_mature": learn_meta.get("state") not in ("INSUFFICIENT_SAMPLE", "INSUFFICIENT_CALIBRATION_SAMPLE", "NO_CONFIDENCE_INDEX"),
+        "external_model_evidence": bool(ext_votes),
+    }
+    model_completeness_weights = {"market_feature_set": 40, "risk_envelope": 20, "empirical_probability": 15, "learning_segment_mature": 15, "external_model_evidence": 10}
+    model_completeness_score = sum(model_completeness_weights[k] for k, ok in model_completeness_fields.items() if ok)
+    decision_reliability_state = "CALIBRATION_LIMITED" if forecast_p is None else ("MODEL_COMPLETE" if model_completeness_score >= 80 else "PARTIAL_MODEL_EVIDENCE")
+
     edge, edge_reasons = historical_edge(mem, asset_class, direction, horizon)
     reasons = []
     if trend_score is not None:
@@ -1288,6 +1395,9 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
         "yield_to_maturity_pct": None,
         "data_quality_score": data_quality,
         "data_quality_fields": expected,
+        "model_completeness_score": model_completeness_score,
+        "model_completeness_fields": model_completeness_fields,
+        "decision_reliability_state": decision_reliability_state,
         "model_consensus": round(consensus, 3),
         "model_votes": votes,
         "external_model_votes": ext_votes,
@@ -1704,7 +1814,7 @@ def main():
     if data is None or data.empty:
         raise RuntimeError("No market data")
 
-    mem = resolve_memory(load_memory(), data)
+    mem = resolve_memory(migrate_prediction_episodes(load_memory()), data)
     regimes = classify_regimes(data)
     external_votes, external_status = load_external_model_votes()
     append_external_predictions(mem, external_votes, data)
@@ -1772,12 +1882,12 @@ def main():
     btp_available = [t for t in ("IITB.MI", "IITA.MI", "BTP10.MI", "BT27.MI") if t not in unavailable]
 
     result = {
-        "schema_version": "8.5",
+        "schema_version": "8.6",
         "model_version": MODEL_VERSION,
         "edge_core": {
             "version": EDGE_CORE_VERSION,
             "domain_profile": "FINANCE",
-            "signal_lock": "IMMUTABLE_MODEL_VERSION_DATE_TICKER_DIRECTION_HORIZON",
+            "signal_lock": "ONE_ACTIVE_EPISODE_PER_TICKER_WITH_STABLE_SETUP_KEY",
             "fail_closed": True,
             "secrets_server_side": True,
             "watchdog_recovery": True,
