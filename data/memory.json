@@ -9,7 +9,12 @@
       "horizon": 5,
       "probability": 0.8403,
       "entry": 82.89,
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "SRE|SHORT|5|MIXED",
+      "episode_id": "EP|2026-08-23|SRE|SHORT|5|MIXED",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-24"
     },
     {
       "id": "2026-08-23|VLO|LONG|5",
@@ -20,7 +25,14 @@
       "horizon": 5,
       "probability": 0.839,
       "entry": 348.86,
-      "outcome": "PENDING"
+      "outcome": "SUPERSEDED",
+      "episode_key": "VLO|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-23|VLO|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "last_seen": "2026-08-25",
+      "superseded_by": "2026-08-28|VLO|LONG|10|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_OVERLAP_SUPERSEDED"
     },
     {
       "id": "2026-08-23|COP|LONG|5",
@@ -31,7 +43,14 @@
       "horizon": 5,
       "probability": 0.8315,
       "entry": 134.87,
-      "outcome": "PENDING"
+      "outcome": "SUPERSEDED",
+      "episode_key": "COP|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-23|COP|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "last_seen": "2026-08-25",
+      "superseded_by": "2026-08-26|COP|LONG|3|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_OVERLAP_SUPERSEDED"
     },
     {
       "id": "2026-08-23|MPC|LONG|5",
@@ -42,7 +61,12 @@
       "horizon": 5,
       "probability": 0.828,
       "entry": 360.72,
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "MPC|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-23|MPC|LONG|5|MIXED",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-25"
     },
     {
       "id": "2026-08-23|AEP|SHORT|5",
@@ -53,7 +77,12 @@
       "horizon": 5,
       "probability": 0.8127,
       "entry": 120.94,
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "AEP|SHORT|5|MIXED",
+      "episode_id": "EP|2026-08-23|AEP|SHORT|5|MIXED",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-24"
     },
     {
       "id": "2026-08-23|XOP|LONG|5",
@@ -64,7 +93,12 @@
       "horizon": 5,
       "probability": 0.8072,
       "entry": 189.54,
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "XOP|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-23|XOP|LONG|5|MIXED",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-25"
     },
     {
       "id": "2026-08-23|XYL|SHORT|5",
@@ -75,7 +109,12 @@
       "horizon": 5,
       "probability": 0.7903,
       "entry": 113.42,
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "XYL|SHORT|5|MIXED",
+      "episode_id": "EP|2026-08-23|XYL|SHORT|5|MIXED",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-24"
     },
     {
       "id": "2026-08-23|DUK|SHORT|5",
@@ -86,7 +125,12 @@
       "horizon": 5,
       "probability": 0.7879,
       "entry": 119.85,
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "DUK|SHORT|5|MIXED",
+      "episode_id": "EP|2026-08-23|DUK|SHORT|5|MIXED",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-24"
     },
     {
       "id": "2026-08-24|SRE|SHORT|5",
@@ -97,7 +141,13 @@
       "horizon": 5,
       "entry": 82.89,
       "score": 84.03,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "SRE|SHORT|5|MIXED",
+      "episode_id": "EP|2026-08-24|SRE|SHORT|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|SRE|SHORT|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-24|VLO|LONG|5",
@@ -108,7 +158,13 @@
       "horizon": 5,
       "entry": 348.86,
       "score": 83.9,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "VLO|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-24|VLO|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|VLO|LONG|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-24|COP|LONG|5",
@@ -119,7 +175,13 @@
       "horizon": 5,
       "entry": 134.87,
       "score": 83.15,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "COP|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-24|COP|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|COP|LONG|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-24|MPC|LONG|5",
@@ -130,7 +192,13 @@
       "horizon": 5,
       "entry": 360.72,
       "score": 82.8,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "MPC|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-24|MPC|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|MPC|LONG|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-24|AEP|SHORT|5",
@@ -141,7 +209,13 @@
       "horizon": 5,
       "entry": 120.94,
       "score": 81.27,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "AEP|SHORT|5|MIXED",
+      "episode_id": "EP|2026-08-24|AEP|SHORT|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|AEP|SHORT|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-24|XOP|LONG|5",
@@ -152,7 +226,13 @@
       "horizon": 5,
       "entry": 189.54,
       "score": 80.72,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "XOP|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-24|XOP|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|XOP|LONG|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-24|XYL|SHORT|5",
@@ -163,7 +243,13 @@
       "horizon": 5,
       "entry": 113.42,
       "score": 79.03,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "XYL|SHORT|5|MIXED",
+      "episode_id": "EP|2026-08-24|XYL|SHORT|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|XYL|SHORT|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-24|DUK|SHORT|5",
@@ -174,7 +260,13 @@
       "horizon": 5,
       "entry": 119.85,
       "score": 78.79,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "DUK|SHORT|5|MIXED",
+      "episode_id": "EP|2026-08-24|DUK|SHORT|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|DUK|SHORT|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-24|AR|LONG|5",
@@ -185,7 +277,12 @@
       "horizon": 5,
       "entry": 38.385,
       "score": 79.73,
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "AR|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-24|AR|LONG|5|MIXED",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-25"
     },
     {
       "id": "2026-08-24|RRC|LONG|5",
@@ -196,7 +293,12 @@
       "horizon": 5,
       "entry": 41.41,
       "score": 77.27,
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "RRC|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-24|RRC|LONG|5|MIXED",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-25"
     },
     {
       "id": "2026-08-24|SO|SHORT|5",
@@ -207,7 +309,11 @@
       "horizon": 5,
       "entry": 90.1,
       "score": 77.25,
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "SO|SHORT|5|MIXED",
+      "episode_id": "EP|2026-08-24|SO|SHORT|5|MIXED",
+      "observations": 1,
+      "state": "ACTIVE"
     },
     {
       "id": "2026-08-25|AR|LONG|5",
@@ -218,7 +324,13 @@
       "horizon": 5,
       "probability": 0.8276,
       "entry": 37.9,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "AR|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-25|AR|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-24|AR|LONG|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-25|MPC|LONG|5",
@@ -229,7 +341,13 @@
       "horizon": 5,
       "probability": 0.8268,
       "entry": 362.52,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "MPC|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-25|MPC|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|MPC|LONG|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-25|VLO|LONG|5",
@@ -240,7 +358,13 @@
       "horizon": 5,
       "probability": 0.8098,
       "entry": 346.0,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "VLO|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-25|VLO|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|VLO|LONG|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-25|COP|LONG|5",
@@ -251,7 +375,13 @@
       "horizon": 5,
       "probability": 0.8075,
       "entry": 133.35,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "COP|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-25|COP|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|COP|LONG|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-25|XOP|LONG|5",
@@ -262,7 +392,13 @@
       "horizon": 5,
       "probability": 0.8002,
       "entry": 186.24,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "XOP|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-25|XOP|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-23|XOP|LONG|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-25|RRC|LONG|5",
@@ -273,7 +409,13 @@
       "horizon": 5,
       "probability": 0.788,
       "entry": 41.25,
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "RRC|LONG|5|MIXED",
+      "episode_id": "EP|2026-08-25|RRC|LONG|5|MIXED",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-24|RRC|LONG|5",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-25|SAP.DE|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -364,7 +506,12 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "SAP.DE|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-25|SAP.DE|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-26"
     },
     {
       "id": "2026-08-25|AWK|LONG|10|8.4.0-adaptive-horizon-governed",
@@ -455,7 +602,11 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "AWK|LONG|10|BREAKOUT",
+      "episode_id": "EP|2026-08-25|AWK|LONG|10|BREAKOUT",
+      "observations": 1,
+      "state": "ACTIVE"
     },
     {
       "id": "2026-08-25|VGK|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -546,7 +697,12 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "VGK|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-25|VGK|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-26"
     },
     {
       "id": "2026-08-25|SUSE.MI|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -619,7 +775,12 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "SUSE.MI|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-25|SUSE.MI|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28"
     },
     {
       "id": "2026-08-25|EURUSD=X|LONG|5|8.4.0-adaptive-horizon-governed",
@@ -692,7 +853,12 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "EURUSD=X|LONG|5|BREAKOUT",
+      "episode_id": "EP|2026-08-25|EURUSD=X|LONG|5|BREAKOUT",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28"
     },
     {
       "id": "2026-08-25|USMV|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -783,7 +949,14 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "SUPERSEDED",
+      "episode_key": "USMV|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-25|USMV|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "last_seen": "2026-08-26",
+      "superseded_by": "2026-08-28|USMV|LONG|10|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_OVERLAP_SUPERSEDED"
     },
     {
       "id": "2026-08-25|IBCI.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
@@ -865,7 +1038,15 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "IBCI.MI|SHORT|10|BREAKOUT",
+      "episode_id": "EP|2026-08-25|IBCI.MI|SHORT|10|BREAKOUT",
+      "observations": 2,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28",
+      "latest_confidence_pct": 68.48,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
     },
     {
       "id": "2026-08-25|HYG|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -947,7 +1128,12 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "HYG|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-25|HYG|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-26"
     },
     {
       "id": "2026-08-25|IITB.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
@@ -1020,7 +1206,15 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "IITB.MI|SHORT|10|BREAKOUT",
+      "episode_id": "EP|2026-08-25|IITB.MI|SHORT|10|BREAKOUT",
+      "observations": 2,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28",
+      "latest_confidence_pct": 69.79,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
     },
     {
       "id": "2026-08-25|GLD|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -1111,7 +1305,15 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "GLD|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-25|GLD|LONG|20|BREAKOUT",
+      "observations": 2,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28",
+      "latest_confidence_pct": 68.58,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
     },
     {
       "id": "2026-08-25|GBPUSD=X|LONG|10|8.4.0-adaptive-horizon-governed",
@@ -1184,7 +1386,15 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "GBPUSD=X|LONG|10|BREAKOUT",
+      "episode_id": "EP|2026-08-25|GBPUSD=X|LONG|10|BREAKOUT",
+      "observations": 2,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28",
+      "latest_confidence_pct": 70.09,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
     },
     {
       "id": "2026-08-25|IITA.MI|SHORT|20|8.4.0-adaptive-horizon-governed",
@@ -1266,7 +1476,12 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "IITA.MI|SHORT|20|RELATIVE",
+      "episode_id": "EP|2026-08-25|IITA.MI|SHORT|20|RELATIVE",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-26"
     },
     {
       "id": "2026-08-25|SHY|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -1348,7 +1563,12 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "SHY|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-25|SHY|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-26"
     },
     {
       "id": "2026-08-25|COP|LONG|3|8.4.0-adaptive-horizon-governed",
@@ -1439,7 +1659,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "SUPERSEDED",
+      "episode_key": "COP|LONG|3|BREAKOUT",
+      "episode_id": "EP|2026-08-25|COP|LONG|3|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-26|COP|LONG|3|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_OVERLAP_SUPERSEDED"
     },
     {
       "id": "2026-08-25|EUES.MI|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -1512,7 +1738,14 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "SUPERSEDED",
+      "episode_key": "EUES.MI|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-25|EUES.MI|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "last_seen": "2026-08-26",
+      "superseded_by": "2026-08-28|EUES.MI|LONG|40|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_OVERLAP_SUPERSEDED"
     },
     {
       "id": "2026-08-25|DBC|LONG|5|8.4.0-adaptive-horizon-governed",
@@ -1594,7 +1827,11 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "DBC|LONG|5|BREAKOUT",
+      "episode_id": "EP|2026-08-25|DBC|LONG|5|BREAKOUT",
+      "observations": 1,
+      "state": "ACTIVE"
     },
     {
       "id": "2026-08-25|BTP10.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
@@ -1676,7 +1913,15 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "BTP10.MI|SHORT|10|BREAKOUT",
+      "episode_id": "EP|2026-08-25|BTP10.MI|SHORT|10|BREAKOUT",
+      "observations": 2,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28",
+      "latest_confidence_pct": 70.55,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
     },
     {
       "id": "2026-08-26|GBPUSD=X|LONG|10|8.4.0-adaptive-horizon-governed",
@@ -1749,7 +1994,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "GBPUSD=X|LONG|10|BREAKOUT",
+      "episode_id": "EP|2026-08-26|GBPUSD=X|LONG|10|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|GBPUSD=X|LONG|10|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|SAP.DE|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -1840,7 +2091,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "SAP.DE|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-26|SAP.DE|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|SAP.DE|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|VGK|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -1931,7 +2188,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "VGK|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-26|VGK|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|VGK|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|SHY|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -2013,7 +2276,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "SHY|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-26|SHY|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|SHY|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|COP|LONG|3|8.4.0-adaptive-horizon-governed",
@@ -2104,7 +2373,11 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "COP|LONG|3|RELATIVE",
+      "episode_id": "EP|2026-08-26|COP|LONG|3|RELATIVE",
+      "observations": 1,
+      "state": "ACTIVE"
     },
     {
       "id": "2026-08-26|HYG|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -2186,7 +2459,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "HYG|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-26|HYG|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|HYG|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|GLD|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -2277,7 +2556,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "GLD|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-26|GLD|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|GLD|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|EUES.MI|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -2350,7 +2635,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "EUES.MI|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-26|EUES.MI|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|EUES.MI|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|BTP10.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
@@ -2432,7 +2723,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "BTP10.MI|SHORT|10|BREAKOUT",
+      "episode_id": "EP|2026-08-26|BTP10.MI|SHORT|10|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|BTP10.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|USMV|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -2523,7 +2820,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "USMV|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-26|USMV|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|USMV|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|SUSE.MI|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -2596,7 +2899,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "SUSE.MI|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-26|SUSE.MI|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|SUSE.MI|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|IITB.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
@@ -2669,7 +2978,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "IITB.MI|SHORT|10|BREAKOUT",
+      "episode_id": "EP|2026-08-26|IITB.MI|SHORT|10|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|IITB.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|MSFT|LONG|5|8.4.0-adaptive-horizon-governed",
@@ -2760,7 +3075,11 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "MSFT|LONG|5|RELATIVE",
+      "episode_id": "EP|2026-08-26|MSFT|LONG|5|RELATIVE",
+      "observations": 1,
+      "state": "ACTIVE"
     },
     {
       "id": "2026-08-26|SIE.DE|LONG|3|8.4.0-adaptive-horizon-governed",
@@ -2851,7 +3170,11 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "SIE.DE|LONG|3|BREAKOUT",
+      "episode_id": "EP|2026-08-26|SIE.DE|LONG|3|BREAKOUT",
+      "observations": 1,
+      "state": "ACTIVE"
     },
     {
       "id": "2026-08-26|ISP.MI|LONG|10|8.4.0-adaptive-horizon-governed",
@@ -2942,7 +3265,11 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "ISP.MI|LONG|10|BREAKOUT",
+      "episode_id": "EP|2026-08-26|ISP.MI|LONG|10|BREAKOUT",
+      "observations": 1,
+      "state": "ACTIVE"
     },
     {
       "id": "2026-08-26|IITA.MI|SHORT|20|8.4.0-adaptive-horizon-governed",
@@ -3024,7 +3351,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "IITA.MI|SHORT|20|RELATIVE",
+      "episode_id": "EP|2026-08-26|IITA.MI|SHORT|20|RELATIVE",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|IITA.MI|SHORT|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-26|VT|LONG|10|8.4.0-adaptive-horizon-governed",
@@ -3115,7 +3448,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "SUPERSEDED",
+      "episode_key": "VT|LONG|10|BREAKOUT",
+      "episode_id": "EP|2026-08-26|VT|LONG|10|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-28|VT|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_OVERLAP_SUPERSEDED"
     },
     {
       "id": "2026-08-28|EUES.MI|LONG|40|8.4.0-adaptive-horizon-governed",
@@ -3188,7 +3527,15 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "EUES.MI|LONG|40|BREAKOUT",
+      "episode_id": "EP|2026-08-28|EUES.MI|LONG|40|BREAKOUT",
+      "observations": 2,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28",
+      "latest_confidence_pct": 79.01,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
     },
     {
       "id": "2026-08-28|VLO|LONG|10|8.4.0-adaptive-horizon-governed",
@@ -3279,7 +3626,15 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "VLO|LONG|10|BREAKOUT",
+      "episode_id": "EP|2026-08-28|VLO|LONG|10|BREAKOUT",
+      "observations": 2,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28",
+      "latest_confidence_pct": 76.58,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
     },
     {
       "id": "2026-08-28|NVDA|LONG|5|8.4.0-adaptive-horizon-governed",
@@ -3370,7 +3725,15 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "NVDA|LONG|5|BREAKOUT",
+      "episode_id": "EP|2026-08-28|NVDA|LONG|5|BREAKOUT",
+      "observations": 2,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28",
+      "latest_confidence_pct": 75.95,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
     },
     {
       "id": "2026-08-28|SUSE.MI|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -3443,7 +3806,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "SUSE.MI|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-28|SUSE.MI|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|SUSE.MI|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|USMV|LONG|10|8.4.0-adaptive-horizon-governed",
@@ -3534,7 +3903,15 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "USMV|LONG|10|BREAKOUT",
+      "episode_id": "EP|2026-08-28|USMV|LONG|10|BREAKOUT",
+      "observations": 2,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28",
+      "latest_confidence_pct": 72.97,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
     },
     {
       "id": "2026-08-28|EURUSD=X|LONG|5|8.4.0-adaptive-horizon-governed",
@@ -3607,7 +3984,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "EURUSD=X|LONG|5|BREAKOUT",
+      "episode_id": "EP|2026-08-28|EURUSD=X|LONG|5|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|EURUSD=X|LONG|5|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|VT|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -3698,7 +4081,15 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "PENDING",
+      "episode_key": "VT|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-28|VT|LONG|20|BREAKOUT",
+      "observations": 2,
+      "state": "ACTIVE",
+      "last_seen": "2026-08-28",
+      "latest_confidence_pct": 70.17,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
     },
     {
       "id": "2026-08-28|GLD|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -3789,7 +4180,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "GLD|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-28|GLD|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|GLD|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|EUES.MI|LONG|40|8.5.0-cost-aware-edge-core",
@@ -3862,7 +4259,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "EUES.MI|LONG|40|BREAKOUT",
+      "episode_id": "EP|2026-08-28|EUES.MI|LONG|40|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-28|EUES.MI|LONG|40|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|VLO|LONG|10|8.5.0-cost-aware-edge-core",
@@ -3953,7 +4356,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "VLO|LONG|10|BREAKOUT",
+      "episode_id": "EP|2026-08-28|VLO|LONG|10|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-28|VLO|LONG|10|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|NVDA|LONG|5|8.5.0-cost-aware-edge-core",
@@ -4044,7 +4453,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "NVDA|LONG|5|BREAKOUT",
+      "episode_id": "EP|2026-08-28|NVDA|LONG|5|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-28|NVDA|LONG|5|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|SUSE.MI|LONG|20|8.5.0-cost-aware-edge-core",
@@ -4117,7 +4532,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "SUSE.MI|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-28|SUSE.MI|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|SUSE.MI|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|USMV|LONG|10|8.5.0-cost-aware-edge-core",
@@ -4208,7 +4629,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "USMV|LONG|10|BREAKOUT",
+      "episode_id": "EP|2026-08-28|USMV|LONG|10|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-28|USMV|LONG|10|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|BTP10.MI|SHORT|10|8.5.0-cost-aware-edge-core",
@@ -4290,7 +4717,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "BTP10.MI|SHORT|10|BREAKOUT",
+      "episode_id": "EP|2026-08-28|BTP10.MI|SHORT|10|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|BTP10.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|VT|LONG|20|8.5.0-cost-aware-edge-core",
@@ -4381,7 +4814,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "VT|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-28|VT|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-28|VT|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|EURUSD=X|LONG|5|8.5.0-cost-aware-edge-core",
@@ -4454,7 +4893,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "EURUSD=X|LONG|5|BREAKOUT",
+      "episode_id": "EP|2026-08-28|EURUSD=X|LONG|5|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|EURUSD=X|LONG|5|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|IITB.MI|SHORT|10|8.5.0-cost-aware-edge-core",
@@ -4527,7 +4972,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "IITB.MI|SHORT|10|BREAKOUT",
+      "episode_id": "EP|2026-08-28|IITB.MI|SHORT|10|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|IITB.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|GLD|LONG|20|8.5.0-cost-aware-edge-core",
@@ -4618,7 +5069,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "GLD|LONG|20|BREAKOUT",
+      "episode_id": "EP|2026-08-28|GLD|LONG|20|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|GLD|LONG|20|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     },
     {
       "id": "2026-08-28|GBPUSD=X|LONG|10|8.5.0-cost-aware-edge-core",
@@ -4691,11 +5148,21 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING"
+      "outcome": "EXCLUDED_DUPLICATE",
+      "episode_key": "GBPUSD=X|LONG|10|BREAKOUT",
+      "episode_id": "EP|2026-08-28|GBPUSD=X|LONG|10|BREAKOUT",
+      "observations": 1,
+      "state": "SUPERSEDED",
+      "superseded_by": "2026-08-25|GBPUSD=X|LONG|10|8.4.0-adaptive-horizon-governed",
+      "resolution_state": "LEGACY_DUPLICATE_EXCLUDED_FROM_STATS"
     }
   ],
   "stats": {
-    "total": 78,
+    "total": 0,
+    "independent_episodes": 0,
+    "active": 0,
+    "superseded_or_excluded": 46,
+    "legacy_resolved_excluded": 0,
     "resolved": 0,
     "hits": 0,
     "misses": 0,
@@ -4704,7 +5171,7 @@
     "brier": null,
     "brier_n": 0,
     "high_confidence_misses": 0,
-    "learning_lineage": "ALPHA_V85_COST_AWARE_1",
+    "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
     "learning_resolved": 0,
     "external_predictions_resolved": 0,
     "by_asset_class": {},
@@ -4715,5 +5182,5 @@
   "model_stats_by_asset_class": {},
   "external_model_stats": {},
   "external_predictions": [],
-  "version": "8.5.0-cost-aware-edge-core"
+  "version": "8.6.0-episode-ledger-cost-aware"
 }

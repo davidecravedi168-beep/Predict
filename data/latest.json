@@ -1,17 +1,17 @@
 {
-  "schema_version": "8.5",
-  "model_version": "8.5.0-cost-aware-edge-core",
+  "schema_version": "8.6",
+  "model_version": "8.6.0-episode-ledger-cost-aware",
   "edge_core": {
     "version": "1.0.0",
     "domain_profile": "FINANCE",
-    "signal_lock": "IMMUTABLE_MODEL_VERSION_DATE_TICKER_DIRECTION_HORIZON",
+    "signal_lock": "ONE_ACTIVE_EPISODE_PER_TICKER_WITH_STABLE_SETUP_KEY",
     "fail_closed": true,
     "secrets_server_side": true,
     "watchdog_recovery": true
   },
-  "updated_at": "2026-08-28T09:37:50+00:00",
-  "engine_updated_at": "2026-08-28T09:37:50+00:00",
-  "market_data_at": "2026-08-28T09:30:00+00:00",
+  "updated_at": "2026-08-28T10:30:53+00:00",
+  "engine_updated_at": "2026-08-28T10:30:53+00:00",
+  "market_data_at": "2026-08-28T10:30:00+00:00",
   "data_source": {
     "market_prices": "Yahoo Finance via yfinance",
     "type": "free public market-data aggregation",
@@ -64,23 +64,27 @@
     "missing_is_null": true
   },
   "market": {
-    "vix": 14.51,
+    "vix": 14.48,
     "spy_20d_pct": 3.965,
     "us10y_yield_pct": 4.672,
     "us10y_change_20d_bps": 0.9,
     "risk_regime": "RISK_ON",
     "rates_regime": "RATES_STABLE",
-    "dxy": 99.21,
-    "oil_20d_pct": -2.102,
-    "gold_20d_pct": 14.993,
-    "eurusd": 1.164551,
+    "dxy": 99.211,
+    "oil_20d_pct": -1.701,
+    "gold_20d_pct": 15.003,
+    "eurusd": 1.164822,
     "italy_gov_bond_20d_pct": -0.337,
     "italy_bond_regime": "ITALY_BOND_STABLE",
     "default_quote_currency": "USD",
     "provenance": "YAHOO_FINANCE_VIA_YFINANCE_OBSERVED_OR_DERIVED_FROM_OBSERVED_CLOSES"
   },
   "memory": {
-    "total": 78,
+    "total": 0,
+    "independent_episodes": 0,
+    "active": 0,
+    "superseded_or_excluded": 46,
+    "legacy_resolved_excluded": 0,
     "resolved": 0,
     "hits": 0,
     "misses": 0,
@@ -89,7 +93,7 @@
     "brier": null,
     "brier_n": 0,
     "high_confidence_misses": 0,
-    "learning_lineage": "ALPHA_V85_COST_AWARE_1",
+    "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
     "learning_resolved": 0,
     "external_predictions_resolved": 0,
     "by_asset_class": {},
@@ -106,7 +110,7 @@
     "min_penalty_segment_samples": 20,
     "min_probability_calibration_samples": 30,
     "min_positive_bonus_samples": 100,
-    "learning_lineage": "ALPHA_V85_COST_AWARE_1",
+    "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
     "max_positive_adjustment_points": 1.0,
     "max_negative_adjustment_points": -5.0,
     "submodel_stats": {},
@@ -222,17 +226,18 @@
     ]
   },
   "diversification": {
-    "score": 98.4,
-    "asset_classes": 6,
-    "clusters": 8,
-    "hhi": 0.18,
+    "score": 98.0,
+    "asset_classes": 7,
+    "clusters": 9,
+    "hhi": 0.16,
     "by_asset_class": {
-      "ETF_BOND_CREDIT": 2,
+      "ETF_BOND_CREDIT": 1,
       "EQUITY": 2,
       "ETF_EQUITY": 2,
       "BTP": 2,
       "FX": 1,
-      "ETF_COMMODITY": 1
+      "ETF_COMMODITY": 1,
+      "ETF_BOND_GOV": 1
     }
   },
   "coverage": {
@@ -277,7 +282,7 @@
   },
   "signals": [
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "EUES.MI",
       "display_ticker": "EUES · Euro Ultrashort Bond",
       "name": "EUES · Euro Ultrashort Bond",
@@ -407,6 +412,15 @@
         "volatility": true,
         "breakout_range": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.75,
       "model_votes": [
         {
@@ -494,7 +508,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "VLO",
       "display_ticker": "VLO",
       "name": "VLO",
@@ -626,6 +640,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -725,7 +748,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "NVDA",
       "display_ticker": "NVDA",
       "name": "NVDA",
@@ -857,6 +880,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -956,225 +988,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
-      "ticker": "SUSE.MI",
-      "display_ticker": "SUSE · Euro Corp 0-3Y",
-      "name": "SUSE · Euro Corp 0-3Y",
-      "sector": "EURO_SHORT_CREDIT",
-      "asset_class": "ETF_BOND_CREDIT",
-      "instrument_type": "ETF_BOND_CREDIT",
-      "cluster": "EURO_CREDIT",
-      "role": "DIVERSIFIER",
-      "benchmark": null,
-      "currency": "EUR",
-      "direction": "LONG",
-      "score": 78.03,
-      "confidence": 0.7482,
-      "confidence_pct": 74.82,
-      "raw_confidence_pct": 73.82,
-      "forecast_probability": null,
-      "probability_state": {
-        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
-        "n": 0,
-        "required": 30
-      },
-      "historical_edge": null,
-      "historical_edge_reasons": [
-        "Campione insufficiente (0/30): nessun edge storico dichiarato"
-      ],
-      "horizon": 20,
-      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
-      "horizon_setup_family": "BREAKOUT",
-      "horizon_policy_version": "AH-1.0",
-      "horizon_profile": {
-        "policy_version": "AH-1.0",
-        "state": "EMPIRICAL_STABLE_OVERRIDE",
-        "setup_family": "BREAKOUT",
-        "fallback": 10,
-        "selected": 20,
-        "candidates": [
-          5,
-          10,
-          20,
-          40
-        ],
-        "reason": "stable_candidate_exceeded_fallback_margin",
-        "min_observations": 18,
-        "min_half_observations": 8,
-        "switch_margin": 0.02,
-        "evidence": [
-          {
-            "horizon": 5,
-            "n": 170,
-            "hit_rate": 0.6412,
-            "avg_directional_return_pct": 0.0473,
-            "median_directional_return_pct": 0.06,
-            "first_half_hit_rate": 0.6471,
-            "second_half_hit_rate": 0.6353,
-            "min_half_hit_rate": 0.6353,
-            "stable": true
-          },
-          {
-            "horizon": 10,
-            "n": 86,
-            "hit_rate": 0.7326,
-            "avg_directional_return_pct": 0.103,
-            "median_directional_return_pct": 0.1413,
-            "first_half_hit_rate": 0.7907,
-            "second_half_hit_rate": 0.6744,
-            "min_half_hit_rate": 0.6744,
-            "stable": true
-          },
-          {
-            "horizon": 20,
-            "n": 45,
-            "hit_rate": 0.8667,
-            "avg_directional_return_pct": 0.2136,
-            "median_directional_return_pct": 0.2375,
-            "first_half_hit_rate": 0.8636,
-            "second_half_hit_rate": 0.8696,
-            "min_half_hit_rate": 0.8636,
-            "stable": true
-          },
-          {
-            "horizon": 40,
-            "n": 24,
-            "hit_rate": 0.875,
-            "avg_directional_return_pct": 0.4154,
-            "median_directional_return_pct": 0.4457,
-            "first_half_hit_rate": 0.8333,
-            "second_half_hit_rate": 0.9167,
-            "min_half_hit_rate": 0.8333,
-            "stable": true
-          }
-        ],
-        "provenance": "MODEL_DERIVED_FROM_PRE_FORECAST_OBSERVED_DAILY_CLOSES"
-      },
-      "risk_regime": "RISK_ON",
-      "rates_regime": "RATES_STABLE",
-      "italy_bond_regime": "ITALY_BOND_STABLE",
-      "price": 4.948,
-      "model_price": 4.948,
-      "entry_price": 4.948,
-      "ret5_pct": 0.03,
-      "ret20_pct": 0.162,
-      "ret60_pct": 0.355,
-      "rel20_pct": null,
-      "rsi": 53.85,
-      "volatility_pct": 0.812,
-      "volatility_z": -0.773,
-      "volume_z": -0.606,
-      "avg_volume20": 51132.0,
-      "atr14": 0.006143,
-      "risk_level": "BASSO RELATIVO",
-      "risk_pct": 0.186,
-      "stop_price": 4.938786,
-      "target1_price": 4.9609,
-      "target2_price": 4.968271,
-      "risk_reward_1": 1.4,
-      "risk_reward_2": 2.2,
-      "reward1_pct": 0.261,
-      "reward2_pct": 0.41,
-      "yield_to_maturity_pct": null,
-      "data_quality_score": 100,
-      "data_quality_fields": {
-        "price_history": true,
-        "ret5": true,
-        "ret20": true,
-        "trend": true,
-        "rsi": true,
-        "volatility": true,
-        "breakout_range": true
-      },
-      "model_consensus": 1.0,
-      "model_votes": [
-        {
-          "model_id": "TREND_Z",
-          "direction": "LONG",
-          "score": 50.42,
-          "conviction": 0.85,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "RSI_MOMENTUM",
-          "direction": "LONG",
-          "score": 54.81,
-          "conviction": 9.62,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "BREAKOUT_63D",
-          "direction": "LONG",
-          "score": 91.84,
-          "conviction": 83.67,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "MEAN_REVERSION_20D",
-          "direction": "LONG",
-          "score": 51.82,
-          "conviction": 3.63,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        }
-      ],
-      "external_model_votes": [],
-      "external_model_adjustment": 0.0,
-      "agreement_adjustment": 1.0,
-      "volatility_adjustment": 0.0,
-      "macro_regime_adjustment": 0.0,
-      "learning_adjustment": 0.0,
-      "learning_state": {
-        "state": "INSUFFICIENT_SAMPLE",
-        "n": 0,
-        "required": 20
-      },
-      "instrument_reference": {
-        "status": "VERIFIED_LISTING",
-        "issuer": "iShares/BlackRock",
-        "market": "Borsa Italiana",
-        "isin": "IE00BYZTVV78",
-        "verified_at": "2026-08-25",
-        "source": "BORSA_ITALIANA"
-      },
-      "reasons": [
-        "Trend standardizzato 50/100",
-        "Posizione nel range 63g 92/100",
-        "4/4 sotto-modelli interni concordi",
-        "Probabilità non pubblicata: campione di calibrazione insufficiente",
-        "Orizzonte 20 sedute: override empirico stabile su storico pre-forecast"
-      ],
-      "provenance": {
-        "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
-        "entry_price": "YFINANCE_15M_OBSERVED",
-        "quote_price": "YFINANCE_15M_OBSERVED",
-        "ret5_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
-        "ret20_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
-        "rel20_pct": "MISSING",
-        "rsi": "MODEL_DERIVED_RSI14",
-        "volatility_pct": "MODEL_DERIVED_REALIZED_VOL20",
-        "stop_price": "MODEL_DERIVED_ATR_DISTANCE_TRANSLATED_TO_OBSERVED_15M_ENTRY",
-        "target1_price": "MODEL_DERIVED_1.4R_FROM_TRANSLATED_STOP",
-        "target2_price": "MODEL_DERIVED_2.2R_FROM_TRANSLATED_STOP",
-        "forecast_probability": "MISSING_INSUFFICIENT_SAME_HORIZON_SAMPLE",
-        "horizon": "MODEL_DERIVED_EMPIRICAL_PRE_FORECAST",
-        "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
-        "macro_regime_adjustment": "NO_ADJUSTMENT",
-        "learning_adjustment": "NO_ADJUSTMENT",
-        "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
-      },
-      "quote_price": 4.948,
-      "date": "2026-08-28"
-    },
-    {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "USMV",
       "display_ticker": "USMV",
       "name": "USMV",
@@ -1306,6 +1120,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -1405,7 +1228,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "BTP10.MI",
       "display_ticker": "BTP10 · Italy BTP 10Y",
       "name": "BTP10 · Italy BTP 10Y",
@@ -1536,6 +1359,15 @@
         "breakout_range": true,
         "relative_strength": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.8,
       "model_votes": [
         {
@@ -1633,7 +1465,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "VT",
       "display_ticker": "VT",
       "name": "VT",
@@ -1765,6 +1597,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -1864,7 +1705,226 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
+      "ticker": "GBPUSD=X",
+      "display_ticker": "GBPUSD=X",
+      "name": "GBPUSD=X",
+      "sector": "FX",
+      "asset_class": "FX",
+      "instrument_type": "FX",
+      "cluster": "FX",
+      "role": "SATELLITE",
+      "benchmark": null,
+      "currency": "USD",
+      "direction": "LONG",
+      "score": 73.63,
+      "confidence": 0.7009,
+      "confidence_pct": 70.09,
+      "raw_confidence_pct": 70.09,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "historical_edge": null,
+      "historical_edge_reasons": [
+        "Campione insufficiente (0/30): nessun edge storico dichiarato"
+      ],
+      "horizon": 10,
+      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "horizon_profile": {
+        "policy_version": "AH-1.0",
+        "state": "EMPIRICAL_STABLE_OVERRIDE",
+        "setup_family": "BREAKOUT",
+        "fallback": 5,
+        "selected": 10,
+        "candidates": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "reason": "fallback_failed_stability_gate",
+        "min_observations": 18,
+        "min_half_observations": 8,
+        "switch_margin": 0.02,
+        "evidence": [
+          {
+            "horizon": 3,
+            "n": 151,
+            "hit_rate": 0.5033,
+            "avg_directional_return_pct": 0.0252,
+            "median_directional_return_pct": 0.0081,
+            "first_half_hit_rate": 0.48,
+            "second_half_hit_rate": 0.5263,
+            "min_half_hit_rate": 0.48,
+            "stable": false
+          },
+          {
+            "horizon": 5,
+            "n": 96,
+            "hit_rate": 0.4375,
+            "avg_directional_return_pct": 0.0485,
+            "median_directional_return_pct": -0.0777,
+            "first_half_hit_rate": 0.4167,
+            "second_half_hit_rate": 0.4583,
+            "min_half_hit_rate": 0.4167,
+            "stable": false
+          },
+          {
+            "horizon": 10,
+            "n": 55,
+            "hit_rate": 0.5455,
+            "avg_directional_return_pct": 0.0671,
+            "median_directional_return_pct": 0.1226,
+            "first_half_hit_rate": 0.5926,
+            "second_half_hit_rate": 0.5,
+            "min_half_hit_rate": 0.5,
+            "stable": true
+          },
+          {
+            "horizon": 20,
+            "n": 31,
+            "hit_rate": 0.4194,
+            "avg_directional_return_pct": 0.0234,
+            "median_directional_return_pct": -0.321,
+            "first_half_hit_rate": 0.3333,
+            "second_half_hit_rate": 0.5,
+            "min_half_hit_rate": 0.3333,
+            "stable": false
+          }
+        ],
+        "provenance": "MODEL_DERIVED_FROM_PRE_FORECAST_OBSERVED_DAILY_CLOSES"
+      },
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "italy_bond_regime": "ITALY_BOND_STABLE",
+      "price": 1.358696,
+      "model_price": 1.358696,
+      "entry_price": 1.358696,
+      "ret5_pct": -0.414,
+      "ret20_pct": 0.936,
+      "ret60_pct": 1.191,
+      "rel20_pct": null,
+      "rsi": 65.26,
+      "volatility_pct": 3.669,
+      "volatility_z": -2.15,
+      "volume_z": null,
+      "avg_volume20": 0.0,
+      "atr14": 0.005789,
+      "risk_level": "BASSO RELATIVO",
+      "risk_pct": 0.639,
+      "stop_price": 1.350013,
+      "target1_price": 1.370852,
+      "target2_price": 1.377798,
+      "risk_reward_1": 1.4,
+      "risk_reward_2": 2.2,
+      "reward1_pct": 0.895,
+      "reward2_pct": 1.406,
+      "yield_to_maturity_pct": null,
+      "data_quality_score": 100,
+      "data_quality_fields": {
+        "price_history": true,
+        "ret5": true,
+        "ret20": true,
+        "trend": true,
+        "rsi": true,
+        "volatility": true,
+        "breakout_range": true
+      },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
+      "model_consensus": 0.75,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "LONG",
+          "score": 54.34,
+          "conviction": 8.68,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "LONG",
+          "score": 69.08,
+          "conviction": 38.16,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "LONG",
+          "score": 86.32,
+          "conviction": 72.65,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "SHORT",
+          "score": 43.03,
+          "conviction": 13.95,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "external_model_adjustment": 0.0,
+      "agreement_adjustment": 0.0,
+      "volatility_adjustment": 0.0,
+      "macro_regime_adjustment": 0.0,
+      "learning_adjustment": 0.0,
+      "learning_state": {
+        "state": "INSUFFICIENT_SAMPLE",
+        "n": 0,
+        "required": 20
+      },
+      "instrument_reference": null,
+      "reasons": [
+        "Trend standardizzato 54/100",
+        "Posizione nel range 63g 86/100",
+        "Probabilità non pubblicata: campione di calibrazione insufficiente",
+        "Orizzonte 10 sedute: override empirico stabile su storico pre-forecast"
+      ],
+      "provenance": {
+        "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
+        "entry_price": "YFINANCE_15M_OBSERVED",
+        "quote_price": "YFINANCE_15M_OBSERVED",
+        "ret5_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
+        "ret20_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
+        "rel20_pct": "MISSING",
+        "rsi": "MODEL_DERIVED_RSI14",
+        "volatility_pct": "MODEL_DERIVED_REALIZED_VOL20",
+        "stop_price": "MODEL_DERIVED_ATR_DISTANCE_TRANSLATED_TO_OBSERVED_15M_ENTRY",
+        "target1_price": "MODEL_DERIVED_1.4R_FROM_TRANSLATED_STOP",
+        "target2_price": "MODEL_DERIVED_2.2R_FROM_TRANSLATED_STOP",
+        "forecast_probability": "MISSING_INSUFFICIENT_SAME_HORIZON_SAMPLE",
+        "horizon": "MODEL_DERIVED_EMPIRICAL_PRE_FORECAST",
+        "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
+        "macro_regime_adjustment": "NO_ADJUSTMENT",
+        "learning_adjustment": "NO_ADJUSTMENT",
+        "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
+      },
+      "quote_price": 1.358696,
+      "date": "2026-08-28"
+    },
+    {
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "IITB.MI",
       "display_ticker": "IITB · BTP Italia Dist",
       "name": "IITB · BTP Italia Dist",
@@ -1994,6 +2054,15 @@
         "volatility": true,
         "breakout_range": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.75,
       "model_votes": [
         {
@@ -2081,217 +2150,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
-      "ticker": "GBPUSD=X",
-      "display_ticker": "GBPUSD=X",
-      "name": "GBPUSD=X",
-      "sector": "FX",
-      "asset_class": "FX",
-      "instrument_type": "FX",
-      "cluster": "FX",
-      "role": "SATELLITE",
-      "benchmark": null,
-      "currency": "USD",
-      "direction": "LONG",
-      "score": 73.19,
-      "confidence": 0.6971,
-      "confidence_pct": 69.71,
-      "raw_confidence_pct": 69.71,
-      "forecast_probability": null,
-      "probability_state": {
-        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
-        "n": 0,
-        "required": 30
-      },
-      "historical_edge": null,
-      "historical_edge_reasons": [
-        "Campione insufficiente (0/30): nessun edge storico dichiarato"
-      ],
-      "horizon": 10,
-      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
-      "horizon_setup_family": "BREAKOUT",
-      "horizon_policy_version": "AH-1.0",
-      "horizon_profile": {
-        "policy_version": "AH-1.0",
-        "state": "EMPIRICAL_STABLE_OVERRIDE",
-        "setup_family": "BREAKOUT",
-        "fallback": 5,
-        "selected": 10,
-        "candidates": [
-          3,
-          5,
-          10,
-          20
-        ],
-        "reason": "fallback_failed_stability_gate",
-        "min_observations": 18,
-        "min_half_observations": 8,
-        "switch_margin": 0.02,
-        "evidence": [
-          {
-            "horizon": 3,
-            "n": 151,
-            "hit_rate": 0.5033,
-            "avg_directional_return_pct": 0.0251,
-            "median_directional_return_pct": 0.0081,
-            "first_half_hit_rate": 0.48,
-            "second_half_hit_rate": 0.5263,
-            "min_half_hit_rate": 0.48,
-            "stable": false
-          },
-          {
-            "horizon": 5,
-            "n": 96,
-            "hit_rate": 0.4375,
-            "avg_directional_return_pct": 0.0485,
-            "median_directional_return_pct": -0.0777,
-            "first_half_hit_rate": 0.4167,
-            "second_half_hit_rate": 0.4583,
-            "min_half_hit_rate": 0.4167,
-            "stable": false
-          },
-          {
-            "horizon": 10,
-            "n": 55,
-            "hit_rate": 0.5455,
-            "avg_directional_return_pct": 0.0671,
-            "median_directional_return_pct": 0.1226,
-            "first_half_hit_rate": 0.5926,
-            "second_half_hit_rate": 0.5,
-            "min_half_hit_rate": 0.5,
-            "stable": true
-          },
-          {
-            "horizon": 20,
-            "n": 31,
-            "hit_rate": 0.4194,
-            "avg_directional_return_pct": 0.0234,
-            "median_directional_return_pct": -0.321,
-            "first_half_hit_rate": 0.3333,
-            "second_half_hit_rate": 0.5,
-            "min_half_hit_rate": 0.3333,
-            "stable": false
-          }
-        ],
-        "provenance": "MODEL_DERIVED_FROM_PRE_FORECAST_OBSERVED_DAILY_CLOSES"
-      },
-      "risk_regime": "RISK_ON",
-      "rates_regime": "RATES_STABLE",
-      "italy_bond_regime": "ITALY_BOND_STABLE",
-      "price": 1.358474,
-      "model_price": 1.358474,
-      "entry_price": 1.358474,
-      "ret5_pct": -0.431,
-      "ret20_pct": 0.92,
-      "ret60_pct": 1.175,
-      "rel20_pct": null,
-      "rsi": 64.81,
-      "volatility_pct": 3.676,
-      "volatility_z": -2.144,
-      "volume_z": null,
-      "avg_volume20": 0.0,
-      "atr14": 0.005786,
-      "risk_level": "BASSO RELATIVO",
-      "risk_pct": 0.639,
-      "stop_price": 1.349795,
-      "target1_price": 1.370625,
-      "target2_price": 1.377568,
-      "risk_reward_1": 1.4,
-      "risk_reward_2": 2.2,
-      "reward1_pct": 0.894,
-      "reward2_pct": 1.406,
-      "yield_to_maturity_pct": null,
-      "data_quality_score": 100,
-      "data_quality_fields": {
-        "price_history": true,
-        "ret5": true,
-        "ret20": true,
-        "trend": true,
-        "rsi": true,
-        "volatility": true,
-        "breakout_range": true
-      },
-      "model_consensus": 0.75,
-      "model_votes": [
-        {
-          "model_id": "TREND_Z",
-          "direction": "LONG",
-          "score": 53.95,
-          "conviction": 7.9,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "RSI_MOMENTUM",
-          "direction": "LONG",
-          "score": 68.51,
-          "conviction": 37.02,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "BREAKOUT_63D",
-          "direction": "LONG",
-          "score": 85.87,
-          "conviction": 71.74,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "MEAN_REVERSION_20D",
-          "direction": "SHORT",
-          "score": 43.36,
-          "conviction": 13.27,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        }
-      ],
-      "external_model_votes": [],
-      "external_model_adjustment": 0.0,
-      "agreement_adjustment": 0.0,
-      "volatility_adjustment": 0.0,
-      "macro_regime_adjustment": 0.0,
-      "learning_adjustment": 0.0,
-      "learning_state": {
-        "state": "INSUFFICIENT_SAMPLE",
-        "n": 0,
-        "required": 20
-      },
-      "instrument_reference": null,
-      "reasons": [
-        "Trend standardizzato 54/100",
-        "Posizione nel range 63g 86/100",
-        "Probabilità non pubblicata: campione di calibrazione insufficiente",
-        "Orizzonte 10 sedute: override empirico stabile su storico pre-forecast"
-      ],
-      "provenance": {
-        "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
-        "entry_price": "YFINANCE_15M_OBSERVED",
-        "quote_price": "YFINANCE_15M_OBSERVED",
-        "ret5_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
-        "ret20_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
-        "rel20_pct": "MISSING",
-        "rsi": "MODEL_DERIVED_RSI14",
-        "volatility_pct": "MODEL_DERIVED_REALIZED_VOL20",
-        "stop_price": "MODEL_DERIVED_ATR_DISTANCE_TRANSLATED_TO_OBSERVED_15M_ENTRY",
-        "target1_price": "MODEL_DERIVED_1.4R_FROM_TRANSLATED_STOP",
-        "target2_price": "MODEL_DERIVED_2.2R_FROM_TRANSLATED_STOP",
-        "forecast_probability": "MISSING_INSUFFICIENT_SAME_HORIZON_SAMPLE",
-        "horizon": "MODEL_DERIVED_EMPIRICAL_PRE_FORECAST",
-        "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
-        "macro_regime_adjustment": "NO_ADJUSTMENT",
-        "learning_adjustment": "NO_ADJUSTMENT",
-        "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
-      },
-      "quote_price": 1.358474,
-      "date": "2026-08-28"
-    },
-    {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "GLD",
       "display_ticker": "GLD",
       "name": "GLD",
@@ -2423,6 +2282,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -2520,11 +2388,241 @@
       },
       "quote_price": 422.600006,
       "date": "2026-08-28"
+    },
+    {
+      "model_version": "8.6.0-episode-ledger-cost-aware",
+      "ticker": "IBCI.MI",
+      "display_ticker": "IBCI · Euro Inflation Linked",
+      "name": "IBCI · Euro Inflation Linked",
+      "sector": "INFLATION_LINKED",
+      "asset_class": "ETF_BOND_GOV",
+      "instrument_type": "ETF_BOND_GOV",
+      "cluster": "INFLATION_LINKED",
+      "role": "DIVERSIFIER",
+      "benchmark": "IEF",
+      "currency": "EUR",
+      "direction": "SHORT",
+      "score": 71.74,
+      "confidence": 0.6848,
+      "confidence_pct": 68.48,
+      "raw_confidence_pct": 68.48,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "historical_edge": null,
+      "historical_edge_reasons": [
+        "Campione insufficiente (0/30): nessun edge storico dichiarato"
+      ],
+      "horizon": 10,
+      "horizon_state": "RULE_BASED_FALLBACK_NO_STABLE_EDGE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "horizon_profile": {
+        "policy_version": "AH-1.0",
+        "state": "RULE_BASED_FALLBACK_NO_STABLE_EDGE",
+        "setup_family": "BREAKOUT",
+        "fallback": 10,
+        "selected": 10,
+        "candidates": [
+          5,
+          10,
+          20,
+          40
+        ],
+        "reason": "no_candidate_passed_stability_gate",
+        "min_observations": 18,
+        "min_half_observations": 8,
+        "switch_margin": 0.02,
+        "evidence": [
+          {
+            "horizon": 5,
+            "n": 64,
+            "hit_rate": 0.3906,
+            "avg_directional_return_pct": -0.1435,
+            "median_directional_return_pct": -0.1801,
+            "first_half_hit_rate": 0.4688,
+            "second_half_hit_rate": 0.3125,
+            "min_half_hit_rate": 0.3125,
+            "stable": false
+          },
+          {
+            "horizon": 10,
+            "n": 39,
+            "hit_rate": 0.3846,
+            "avg_directional_return_pct": -0.2468,
+            "median_directional_return_pct": -0.1324,
+            "first_half_hit_rate": 0.4737,
+            "second_half_hit_rate": 0.3,
+            "min_half_hit_rate": 0.3,
+            "stable": false
+          },
+          {
+            "horizon": 20,
+            "n": 25,
+            "hit_rate": 0.36,
+            "avg_directional_return_pct": -0.4403,
+            "median_directional_return_pct": -0.5733,
+            "first_half_hit_rate": 0.4167,
+            "second_half_hit_rate": 0.3077,
+            "min_half_hit_rate": 0.3077,
+            "stable": false
+          },
+          {
+            "horizon": 40,
+            "n": 15,
+            "hit_rate": 0.2,
+            "avg_directional_return_pct": -0.3702,
+            "median_directional_return_pct": -0.9562,
+            "first_half_hit_rate": 0.2857,
+            "second_half_hit_rate": 0.125,
+            "min_half_hit_rate": 0.125,
+            "stable": false
+          }
+        ],
+        "provenance": "MODEL_DERIVED_FROM_PRE_FORECAST_OBSERVED_DAILY_CLOSES"
+      },
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "italy_bond_regime": "ITALY_BOND_STABLE",
+      "price": 235.770004,
+      "model_price": 235.770004,
+      "entry_price": 235.770004,
+      "ret5_pct": -0.025,
+      "ret20_pct": -0.072,
+      "ret60_pct": -0.628,
+      "rel20_pct": -0.509,
+      "rsi": 37.99,
+      "volatility_pct": 2.649,
+      "volatility_z": -0.595,
+      "volume_z": -0.644,
+      "avg_volume20": 2117.55,
+      "atr14": 0.687144,
+      "risk_level": "MEDIO",
+      "risk_pct": 0.437,
+      "stop_price": 236.80072,
+      "target1_price": 234.327002,
+      "target2_price": 233.502429,
+      "risk_reward_1": 1.4,
+      "risk_reward_2": 2.2,
+      "reward1_pct": 0.612,
+      "reward2_pct": 0.962,
+      "yield_to_maturity_pct": null,
+      "data_quality_score": 100,
+      "data_quality_fields": {
+        "price_history": true,
+        "ret5": true,
+        "ret20": true,
+        "trend": true,
+        "rsi": true,
+        "volatility": true,
+        "breakout_range": true,
+        "relative_strength": true
+      },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
+      "model_consensus": 0.8,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "SHORT",
+          "score": 40.72,
+          "conviction": 18.57,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RELATIVE_Z",
+          "direction": "SHORT",
+          "score": 37.92,
+          "conviction": 24.16,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "SHORT",
+          "score": 34.99,
+          "conviction": 30.02,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "SHORT",
+          "score": 9.59,
+          "conviction": 80.81,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "LONG",
+          "score": 62.34,
+          "conviction": 24.68,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "external_model_adjustment": 0.0,
+      "agreement_adjustment": 0.0,
+      "volatility_adjustment": 0.0,
+      "macro_regime_adjustment": 0.0,
+      "learning_adjustment": 0.0,
+      "learning_state": {
+        "state": "INSUFFICIENT_SAMPLE",
+        "n": 0,
+        "required": 20
+      },
+      "instrument_reference": null,
+      "reasons": [
+        "Trend standardizzato 41/100",
+        "Forza relativa standardizzata 38/100",
+        "Posizione nel range 63g 10/100",
+        "Probabilità non pubblicata: campione di calibrazione insufficiente",
+        "Orizzonte 10 sedute: fallback BREAKOUT · nessun override abbastanza robusto"
+      ],
+      "provenance": {
+        "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
+        "entry_price": "YFINANCE_15M_OBSERVED",
+        "quote_price": "YFINANCE_15M_OBSERVED",
+        "ret5_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
+        "ret20_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
+        "rel20_pct": "MODEL_DERIVED_FROM_OBSERVED_BENCHMARK",
+        "rsi": "MODEL_DERIVED_RSI14",
+        "volatility_pct": "MODEL_DERIVED_REALIZED_VOL20",
+        "stop_price": "MODEL_DERIVED_ATR_DISTANCE_TRANSLATED_TO_OBSERVED_15M_ENTRY",
+        "target1_price": "MODEL_DERIVED_1.4R_FROM_TRANSLATED_STOP",
+        "target2_price": "MODEL_DERIVED_2.2R_FROM_TRANSLATED_STOP",
+        "forecast_probability": "MISSING_INSUFFICIENT_SAME_HORIZON_SAMPLE",
+        "horizon": "RULE_BASED_ASSET_CLASS_SETUP_FALLBACK",
+        "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
+        "macro_regime_adjustment": "NO_ADJUSTMENT",
+        "learning_adjustment": "NO_ADJUSTMENT",
+        "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
+      },
+      "quote_price": 235.770004,
+      "date": "2026-08-28"
     }
   ],
   "watchlist": [
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "EUES.MI",
       "display_ticker": "EUES · Euro Ultrashort Bond",
       "name": "EUES · Euro Ultrashort Bond",
@@ -2654,6 +2752,15 @@
         "volatility": true,
         "breakout_range": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.75,
       "model_votes": [
         {
@@ -2741,7 +2848,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "VLO",
       "display_ticker": "VLO",
       "name": "VLO",
@@ -2873,6 +2980,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -2972,7 +3088,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "NVDA",
       "display_ticker": "NVDA",
       "name": "NVDA",
@@ -3104,6 +3220,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -3203,7 +3328,237 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
+      "ticker": "SAP.DE",
+      "display_ticker": "SAP.DE",
+      "name": "SAP.DE",
+      "sector": "EUROPE_EQUITY",
+      "asset_class": "EQUITY",
+      "instrument_type": "EQUITY",
+      "cluster": "EUROPE_EQUITY",
+      "role": "CORE",
+      "benchmark": "VGK",
+      "currency": "EUR",
+      "direction": "LONG",
+      "score": 80.47,
+      "confidence": 0.759,
+      "confidence_pct": 75.9,
+      "raw_confidence_pct": 75.9,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "historical_edge": null,
+      "historical_edge_reasons": [
+        "Campione insufficiente (0/30): nessun edge storico dichiarato"
+      ],
+      "horizon": 20,
+      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "horizon_profile": {
+        "policy_version": "AH-1.0",
+        "state": "EMPIRICAL_STABLE_OVERRIDE",
+        "setup_family": "BREAKOUT",
+        "fallback": 10,
+        "selected": 20,
+        "candidates": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "reason": "stable_candidate_exceeded_fallback_margin",
+        "min_observations": 18,
+        "min_half_observations": 8,
+        "switch_margin": 0.02,
+        "evidence": [
+          {
+            "horizon": 3,
+            "n": 181,
+            "hit_rate": 0.5193,
+            "avg_directional_return_pct": 0.3363,
+            "median_directional_return_pct": 0.0475,
+            "first_half_hit_rate": 0.5333,
+            "second_half_hit_rate": 0.5055,
+            "min_half_hit_rate": 0.5055,
+            "stable": false
+          },
+          {
+            "horizon": 5,
+            "n": 114,
+            "hit_rate": 0.5439,
+            "avg_directional_return_pct": 0.5138,
+            "median_directional_return_pct": 0.3078,
+            "first_half_hit_rate": 0.4737,
+            "second_half_hit_rate": 0.614,
+            "min_half_hit_rate": 0.4737,
+            "stable": false
+          },
+          {
+            "horizon": 10,
+            "n": 61,
+            "hit_rate": 0.6066,
+            "avg_directional_return_pct": 1.0421,
+            "median_directional_return_pct": 0.9119,
+            "first_half_hit_rate": 0.6667,
+            "second_half_hit_rate": 0.5484,
+            "min_half_hit_rate": 0.5484,
+            "stable": true
+          },
+          {
+            "horizon": 20,
+            "n": 34,
+            "hit_rate": 0.6471,
+            "avg_directional_return_pct": 1.5663,
+            "median_directional_return_pct": 2.4398,
+            "first_half_hit_rate": 0.5882,
+            "second_half_hit_rate": 0.7059,
+            "min_half_hit_rate": 0.5882,
+            "stable": true
+          }
+        ],
+        "provenance": "MODEL_DERIVED_FROM_PRE_FORECAST_OBSERVED_DAILY_CLOSES"
+      },
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "italy_bond_regime": "ITALY_BOND_STABLE",
+      "price": 188.119995,
+      "model_price": 188.119995,
+      "entry_price": 188.160004,
+      "ret5_pct": 0.0,
+      "ret20_pct": 19.305,
+      "ret60_pct": 16.497,
+      "rel20_pct": 20.363,
+      "rsi": 60.8,
+      "volatility_pct": 33.454,
+      "volatility_z": -0.275,
+      "volume_z": -2.039,
+      "avg_volume20": 2334608.6,
+      "atr14": 5.537141,
+      "risk_level": "MEDIO",
+      "risk_pct": 4.415,
+      "stop_price": 179.854293,
+      "target1_price": 199.787999,
+      "target2_price": 206.432568,
+      "risk_reward_1": 1.4,
+      "risk_reward_2": 2.2,
+      "reward1_pct": 6.181,
+      "reward2_pct": 9.713,
+      "yield_to_maturity_pct": null,
+      "data_quality_score": 100,
+      "data_quality_fields": {
+        "price_history": true,
+        "ret5": true,
+        "ret20": true,
+        "trend": true,
+        "rsi": true,
+        "volatility": true,
+        "breakout_range": true,
+        "relative_strength": true,
+        "volume": true
+      },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
+      "model_consensus": 0.8,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "LONG",
+          "score": 73.6,
+          "conviction": 47.2,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RELATIVE_Z",
+          "direction": "LONG",
+          "score": 89.54,
+          "conviction": 79.07,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "LONG",
+          "score": 63.5,
+          "conviction": 27.01,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "LONG",
+          "score": 97.14,
+          "conviction": 94.28,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "SHORT",
+          "score": 33.85,
+          "conviction": 32.3,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "external_model_adjustment": 0.0,
+      "agreement_adjustment": 0.0,
+      "volatility_adjustment": 0.0,
+      "macro_regime_adjustment": 0.0,
+      "learning_adjustment": 0.0,
+      "learning_state": {
+        "state": "INSUFFICIENT_SAMPLE",
+        "n": 0,
+        "required": 20
+      },
+      "instrument_reference": null,
+      "reasons": [
+        "Trend standardizzato 74/100",
+        "Forza relativa standardizzata 90/100",
+        "Posizione nel range 63g 97/100",
+        "Probabilità non pubblicata: campione di calibrazione insufficiente",
+        "Orizzonte 20 sedute: override empirico stabile su storico pre-forecast"
+      ],
+      "provenance": {
+        "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
+        "entry_price": "YFINANCE_15M_OBSERVED",
+        "quote_price": "YFINANCE_15M_OBSERVED",
+        "ret5_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
+        "ret20_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
+        "rel20_pct": "MODEL_DERIVED_FROM_OBSERVED_BENCHMARK",
+        "rsi": "MODEL_DERIVED_RSI14",
+        "volatility_pct": "MODEL_DERIVED_REALIZED_VOL20",
+        "stop_price": "MODEL_DERIVED_ATR_DISTANCE_TRANSLATED_TO_OBSERVED_15M_ENTRY",
+        "target1_price": "MODEL_DERIVED_1.4R_FROM_TRANSLATED_STOP",
+        "target2_price": "MODEL_DERIVED_2.2R_FROM_TRANSLATED_STOP",
+        "forecast_probability": "MISSING_INSUFFICIENT_SAME_HORIZON_SAMPLE",
+        "horizon": "MODEL_DERIVED_EMPIRICAL_PRE_FORECAST",
+        "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
+        "macro_regime_adjustment": "NO_ADJUSTMENT",
+        "learning_adjustment": "NO_ADJUSTMENT",
+        "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
+      },
+      "quote_price": 188.160004
+    },
+    {
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "MSFT",
       "display_ticker": "MSFT",
       "name": "MSFT",
@@ -3277,7 +3632,7 @@
             "n": 54,
             "hit_rate": 0.6296,
             "avg_directional_return_pct": 0.4117,
-            "median_directional_return_pct": 0.8175,
+            "median_directional_return_pct": 0.8174,
             "first_half_hit_rate": 0.6667,
             "second_half_hit_rate": 0.5926,
             "min_half_hit_rate": 0.5926,
@@ -3335,6 +3690,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -3433,455 +3797,7 @@
       "quote_price": 504.880005
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
-      "ticker": "SAP.DE",
-      "display_ticker": "SAP.DE",
-      "name": "SAP.DE",
-      "sector": "EUROPE_EQUITY",
-      "asset_class": "EQUITY",
-      "instrument_type": "EQUITY",
-      "cluster": "EUROPE_EQUITY",
-      "role": "CORE",
-      "benchmark": "VGK",
-      "currency": "EUR",
-      "direction": "LONG",
-      "score": 79.45,
-      "confidence": 0.7503,
-      "confidence_pct": 75.03,
-      "raw_confidence_pct": 75.03,
-      "forecast_probability": null,
-      "probability_state": {
-        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
-        "n": 0,
-        "required": 30
-      },
-      "historical_edge": null,
-      "historical_edge_reasons": [
-        "Campione insufficiente (0/30): nessun edge storico dichiarato"
-      ],
-      "horizon": 20,
-      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
-      "horizon_setup_family": "BREAKOUT",
-      "horizon_policy_version": "AH-1.0",
-      "horizon_profile": {
-        "policy_version": "AH-1.0",
-        "state": "EMPIRICAL_STABLE_OVERRIDE",
-        "setup_family": "BREAKOUT",
-        "fallback": 10,
-        "selected": 20,
-        "candidates": [
-          3,
-          5,
-          10,
-          20
-        ],
-        "reason": "stable_candidate_exceeded_fallback_margin",
-        "min_observations": 18,
-        "min_half_observations": 8,
-        "switch_margin": 0.02,
-        "evidence": [
-          {
-            "horizon": 3,
-            "n": 181,
-            "hit_rate": 0.5193,
-            "avg_directional_return_pct": 0.3363,
-            "median_directional_return_pct": 0.0475,
-            "first_half_hit_rate": 0.5333,
-            "second_half_hit_rate": 0.5055,
-            "min_half_hit_rate": 0.5055,
-            "stable": false
-          },
-          {
-            "horizon": 5,
-            "n": 114,
-            "hit_rate": 0.5439,
-            "avg_directional_return_pct": 0.5138,
-            "median_directional_return_pct": 0.3078,
-            "first_half_hit_rate": 0.4737,
-            "second_half_hit_rate": 0.614,
-            "min_half_hit_rate": 0.4737,
-            "stable": false
-          },
-          {
-            "horizon": 10,
-            "n": 61,
-            "hit_rate": 0.6066,
-            "avg_directional_return_pct": 1.0421,
-            "median_directional_return_pct": 0.9119,
-            "first_half_hit_rate": 0.6667,
-            "second_half_hit_rate": 0.5484,
-            "min_half_hit_rate": 0.5484,
-            "stable": true
-          },
-          {
-            "horizon": 20,
-            "n": 34,
-            "hit_rate": 0.6471,
-            "avg_directional_return_pct": 1.5663,
-            "median_directional_return_pct": 2.4398,
-            "first_half_hit_rate": 0.5882,
-            "second_half_hit_rate": 0.7059,
-            "min_half_hit_rate": 0.5882,
-            "stable": true
-          }
-        ],
-        "provenance": "MODEL_DERIVED_FROM_PRE_FORECAST_OBSERVED_DAILY_CLOSES"
-      },
-      "risk_regime": "RISK_ON",
-      "rates_regime": "RATES_STABLE",
-      "italy_bond_regime": "ITALY_BOND_STABLE",
-      "price": 189.0,
-      "model_price": 189.0,
-      "entry_price": 189.0,
-      "ret5_pct": 0.468,
-      "ret20_pct": 19.863,
-      "ret60_pct": 17.042,
-      "rel20_pct": 20.363,
-      "rsi": 62.14,
-      "volatility_pct": 33.171,
-      "volatility_z": -0.295,
-      "volume_z": -2.114,
-      "avg_volume20": 2329834.3,
-      "atr14": 5.504283,
-      "risk_level": "MEDIO",
-      "risk_pct": 4.368,
-      "stop_price": 180.743575,
-      "target1_price": 200.558995,
-      "target2_price": 207.164135,
-      "risk_reward_1": 1.4,
-      "risk_reward_2": 2.2,
-      "reward1_pct": 6.116,
-      "reward2_pct": 9.611,
-      "yield_to_maturity_pct": null,
-      "data_quality_score": 100,
-      "data_quality_fields": {
-        "price_history": true,
-        "ret5": true,
-        "ret20": true,
-        "trend": true,
-        "rsi": true,
-        "volatility": true,
-        "breakout_range": true,
-        "relative_strength": true,
-        "volume": true
-      },
-      "model_consensus": 0.833,
-      "model_votes": [
-        {
-          "model_id": "TREND_Z",
-          "direction": "LONG",
-          "score": 74.88,
-          "conviction": 49.77,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "RELATIVE_Z",
-          "direction": "LONG",
-          "score": 89.54,
-          "conviction": 79.07,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "RSI_MOMENTUM",
-          "direction": "LONG",
-          "score": 65.18,
-          "conviction": 30.36,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "BREAKOUT_63D",
-          "direction": "LONG",
-          "score": 98.57,
-          "conviction": 97.14,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "MEAN_REVERSION_20D",
-          "direction": "SHORT",
-          "score": 32.49,
-          "conviction": 35.02,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "VOLUME_CONFIRM",
-          "direction": "LONG",
-          "score": 71.14,
-          "conviction": 42.29,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        }
-      ],
-      "external_model_votes": [],
-      "external_model_adjustment": 0.0,
-      "agreement_adjustment": 0.0,
-      "volatility_adjustment": 0.0,
-      "macro_regime_adjustment": 0.0,
-      "learning_adjustment": 0.0,
-      "learning_state": {
-        "state": "INSUFFICIENT_SAMPLE",
-        "n": 0,
-        "required": 20
-      },
-      "instrument_reference": null,
-      "reasons": [
-        "Trend standardizzato 75/100",
-        "Forza relativa standardizzata 90/100",
-        "Posizione nel range 63g 99/100",
-        "Probabilità non pubblicata: campione di calibrazione insufficiente",
-        "Orizzonte 20 sedute: override empirico stabile su storico pre-forecast"
-      ],
-      "provenance": {
-        "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
-        "entry_price": "YFINANCE_15M_OBSERVED",
-        "quote_price": "YFINANCE_15M_OBSERVED",
-        "ret5_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
-        "ret20_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
-        "rel20_pct": "MODEL_DERIVED_FROM_OBSERVED_BENCHMARK",
-        "rsi": "MODEL_DERIVED_RSI14",
-        "volatility_pct": "MODEL_DERIVED_REALIZED_VOL20",
-        "stop_price": "MODEL_DERIVED_ATR_DISTANCE_TRANSLATED_TO_OBSERVED_15M_ENTRY",
-        "target1_price": "MODEL_DERIVED_1.4R_FROM_TRANSLATED_STOP",
-        "target2_price": "MODEL_DERIVED_2.2R_FROM_TRANSLATED_STOP",
-        "forecast_probability": "MISSING_INSUFFICIENT_SAME_HORIZON_SAMPLE",
-        "horizon": "MODEL_DERIVED_EMPIRICAL_PRE_FORECAST",
-        "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
-        "macro_regime_adjustment": "NO_ADJUSTMENT",
-        "learning_adjustment": "NO_ADJUSTMENT",
-        "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
-      },
-      "quote_price": 189.0
-    },
-    {
-      "model_version": "8.5.0-cost-aware-edge-core",
-      "ticker": "SUSE.MI",
-      "display_ticker": "SUSE · Euro Corp 0-3Y",
-      "name": "SUSE · Euro Corp 0-3Y",
-      "sector": "EURO_SHORT_CREDIT",
-      "asset_class": "ETF_BOND_CREDIT",
-      "instrument_type": "ETF_BOND_CREDIT",
-      "cluster": "EURO_CREDIT",
-      "role": "DIVERSIFIER",
-      "benchmark": null,
-      "currency": "EUR",
-      "direction": "LONG",
-      "score": 78.03,
-      "confidence": 0.7482,
-      "confidence_pct": 74.82,
-      "raw_confidence_pct": 73.82,
-      "forecast_probability": null,
-      "probability_state": {
-        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
-        "n": 0,
-        "required": 30
-      },
-      "historical_edge": null,
-      "historical_edge_reasons": [
-        "Campione insufficiente (0/30): nessun edge storico dichiarato"
-      ],
-      "horizon": 20,
-      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
-      "horizon_setup_family": "BREAKOUT",
-      "horizon_policy_version": "AH-1.0",
-      "horizon_profile": {
-        "policy_version": "AH-1.0",
-        "state": "EMPIRICAL_STABLE_OVERRIDE",
-        "setup_family": "BREAKOUT",
-        "fallback": 10,
-        "selected": 20,
-        "candidates": [
-          5,
-          10,
-          20,
-          40
-        ],
-        "reason": "stable_candidate_exceeded_fallback_margin",
-        "min_observations": 18,
-        "min_half_observations": 8,
-        "switch_margin": 0.02,
-        "evidence": [
-          {
-            "horizon": 5,
-            "n": 170,
-            "hit_rate": 0.6412,
-            "avg_directional_return_pct": 0.0473,
-            "median_directional_return_pct": 0.06,
-            "first_half_hit_rate": 0.6471,
-            "second_half_hit_rate": 0.6353,
-            "min_half_hit_rate": 0.6353,
-            "stable": true
-          },
-          {
-            "horizon": 10,
-            "n": 86,
-            "hit_rate": 0.7326,
-            "avg_directional_return_pct": 0.103,
-            "median_directional_return_pct": 0.1413,
-            "first_half_hit_rate": 0.7907,
-            "second_half_hit_rate": 0.6744,
-            "min_half_hit_rate": 0.6744,
-            "stable": true
-          },
-          {
-            "horizon": 20,
-            "n": 45,
-            "hit_rate": 0.8667,
-            "avg_directional_return_pct": 0.2136,
-            "median_directional_return_pct": 0.2375,
-            "first_half_hit_rate": 0.8636,
-            "second_half_hit_rate": 0.8696,
-            "min_half_hit_rate": 0.8636,
-            "stable": true
-          },
-          {
-            "horizon": 40,
-            "n": 24,
-            "hit_rate": 0.875,
-            "avg_directional_return_pct": 0.4154,
-            "median_directional_return_pct": 0.4457,
-            "first_half_hit_rate": 0.8333,
-            "second_half_hit_rate": 0.9167,
-            "min_half_hit_rate": 0.8333,
-            "stable": true
-          }
-        ],
-        "provenance": "MODEL_DERIVED_FROM_PRE_FORECAST_OBSERVED_DAILY_CLOSES"
-      },
-      "risk_regime": "RISK_ON",
-      "rates_regime": "RATES_STABLE",
-      "italy_bond_regime": "ITALY_BOND_STABLE",
-      "price": 4.948,
-      "model_price": 4.948,
-      "entry_price": 4.948,
-      "ret5_pct": 0.03,
-      "ret20_pct": 0.162,
-      "ret60_pct": 0.355,
-      "rel20_pct": null,
-      "rsi": 53.85,
-      "volatility_pct": 0.812,
-      "volatility_z": -0.773,
-      "volume_z": -0.606,
-      "avg_volume20": 51132.0,
-      "atr14": 0.006143,
-      "risk_level": "BASSO RELATIVO",
-      "risk_pct": 0.186,
-      "stop_price": 4.938786,
-      "target1_price": 4.9609,
-      "target2_price": 4.968271,
-      "risk_reward_1": 1.4,
-      "risk_reward_2": 2.2,
-      "reward1_pct": 0.261,
-      "reward2_pct": 0.41,
-      "yield_to_maturity_pct": null,
-      "data_quality_score": 100,
-      "data_quality_fields": {
-        "price_history": true,
-        "ret5": true,
-        "ret20": true,
-        "trend": true,
-        "rsi": true,
-        "volatility": true,
-        "breakout_range": true
-      },
-      "model_consensus": 1.0,
-      "model_votes": [
-        {
-          "model_id": "TREND_Z",
-          "direction": "LONG",
-          "score": 50.42,
-          "conviction": 0.85,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "RSI_MOMENTUM",
-          "direction": "LONG",
-          "score": 54.81,
-          "conviction": 9.62,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "BREAKOUT_63D",
-          "direction": "LONG",
-          "score": 91.84,
-          "conviction": 83.67,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "MEAN_REVERSION_20D",
-          "direction": "LONG",
-          "score": 51.82,
-          "conviction": 3.63,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        }
-      ],
-      "external_model_votes": [],
-      "external_model_adjustment": 0.0,
-      "agreement_adjustment": 1.0,
-      "volatility_adjustment": 0.0,
-      "macro_regime_adjustment": 0.0,
-      "learning_adjustment": 0.0,
-      "learning_state": {
-        "state": "INSUFFICIENT_SAMPLE",
-        "n": 0,
-        "required": 20
-      },
-      "instrument_reference": {
-        "status": "VERIFIED_LISTING",
-        "issuer": "iShares/BlackRock",
-        "market": "Borsa Italiana",
-        "isin": "IE00BYZTVV78",
-        "verified_at": "2026-08-25",
-        "source": "BORSA_ITALIANA"
-      },
-      "reasons": [
-        "Trend standardizzato 50/100",
-        "Posizione nel range 63g 92/100",
-        "4/4 sotto-modelli interni concordi",
-        "Probabilità non pubblicata: campione di calibrazione insufficiente",
-        "Orizzonte 20 sedute: override empirico stabile su storico pre-forecast"
-      ],
-      "provenance": {
-        "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
-        "entry_price": "YFINANCE_15M_OBSERVED",
-        "quote_price": "YFINANCE_15M_OBSERVED",
-        "ret5_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
-        "ret20_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
-        "rel20_pct": "MISSING",
-        "rsi": "MODEL_DERIVED_RSI14",
-        "volatility_pct": "MODEL_DERIVED_REALIZED_VOL20",
-        "stop_price": "MODEL_DERIVED_ATR_DISTANCE_TRANSLATED_TO_OBSERVED_15M_ENTRY",
-        "target1_price": "MODEL_DERIVED_1.4R_FROM_TRANSLATED_STOP",
-        "target2_price": "MODEL_DERIVED_2.2R_FROM_TRANSLATED_STOP",
-        "forecast_probability": "MISSING_INSUFFICIENT_SAME_HORIZON_SAMPLE",
-        "horizon": "MODEL_DERIVED_EMPIRICAL_PRE_FORECAST",
-        "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
-        "macro_regime_adjustment": "NO_ADJUSTMENT",
-        "learning_adjustment": "NO_ADJUSTMENT",
-        "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
-      },
-      "quote_price": 4.948,
-      "date": "2026-08-28"
-    },
-    {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "USMV",
       "display_ticker": "USMV",
       "name": "USMV",
@@ -4013,6 +3929,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -4112,7 +4037,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "BTP10.MI",
       "display_ticker": "BTP10 · Italy BTP 10Y",
       "name": "BTP10 · Italy BTP 10Y",
@@ -4243,6 +4168,15 @@
         "breakout_range": true,
         "relative_strength": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.8,
       "model_votes": [
         {
@@ -4340,7 +4274,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "VT",
       "display_ticker": "VT",
       "name": "VT",
@@ -4472,6 +4406,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -4571,7 +4514,226 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
+      "ticker": "GBPUSD=X",
+      "display_ticker": "GBPUSD=X",
+      "name": "GBPUSD=X",
+      "sector": "FX",
+      "asset_class": "FX",
+      "instrument_type": "FX",
+      "cluster": "FX",
+      "role": "SATELLITE",
+      "benchmark": null,
+      "currency": "USD",
+      "direction": "LONG",
+      "score": 73.63,
+      "confidence": 0.7009,
+      "confidence_pct": 70.09,
+      "raw_confidence_pct": 70.09,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "historical_edge": null,
+      "historical_edge_reasons": [
+        "Campione insufficiente (0/30): nessun edge storico dichiarato"
+      ],
+      "horizon": 10,
+      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "horizon_profile": {
+        "policy_version": "AH-1.0",
+        "state": "EMPIRICAL_STABLE_OVERRIDE",
+        "setup_family": "BREAKOUT",
+        "fallback": 5,
+        "selected": 10,
+        "candidates": [
+          3,
+          5,
+          10,
+          20
+        ],
+        "reason": "fallback_failed_stability_gate",
+        "min_observations": 18,
+        "min_half_observations": 8,
+        "switch_margin": 0.02,
+        "evidence": [
+          {
+            "horizon": 3,
+            "n": 151,
+            "hit_rate": 0.5033,
+            "avg_directional_return_pct": 0.0252,
+            "median_directional_return_pct": 0.0081,
+            "first_half_hit_rate": 0.48,
+            "second_half_hit_rate": 0.5263,
+            "min_half_hit_rate": 0.48,
+            "stable": false
+          },
+          {
+            "horizon": 5,
+            "n": 96,
+            "hit_rate": 0.4375,
+            "avg_directional_return_pct": 0.0485,
+            "median_directional_return_pct": -0.0777,
+            "first_half_hit_rate": 0.4167,
+            "second_half_hit_rate": 0.4583,
+            "min_half_hit_rate": 0.4167,
+            "stable": false
+          },
+          {
+            "horizon": 10,
+            "n": 55,
+            "hit_rate": 0.5455,
+            "avg_directional_return_pct": 0.0671,
+            "median_directional_return_pct": 0.1226,
+            "first_half_hit_rate": 0.5926,
+            "second_half_hit_rate": 0.5,
+            "min_half_hit_rate": 0.5,
+            "stable": true
+          },
+          {
+            "horizon": 20,
+            "n": 31,
+            "hit_rate": 0.4194,
+            "avg_directional_return_pct": 0.0234,
+            "median_directional_return_pct": -0.321,
+            "first_half_hit_rate": 0.3333,
+            "second_half_hit_rate": 0.5,
+            "min_half_hit_rate": 0.3333,
+            "stable": false
+          }
+        ],
+        "provenance": "MODEL_DERIVED_FROM_PRE_FORECAST_OBSERVED_DAILY_CLOSES"
+      },
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "italy_bond_regime": "ITALY_BOND_STABLE",
+      "price": 1.358696,
+      "model_price": 1.358696,
+      "entry_price": 1.358696,
+      "ret5_pct": -0.414,
+      "ret20_pct": 0.936,
+      "ret60_pct": 1.191,
+      "rel20_pct": null,
+      "rsi": 65.26,
+      "volatility_pct": 3.669,
+      "volatility_z": -2.15,
+      "volume_z": null,
+      "avg_volume20": 0.0,
+      "atr14": 0.005789,
+      "risk_level": "BASSO RELATIVO",
+      "risk_pct": 0.639,
+      "stop_price": 1.350013,
+      "target1_price": 1.370852,
+      "target2_price": 1.377798,
+      "risk_reward_1": 1.4,
+      "risk_reward_2": 2.2,
+      "reward1_pct": 0.895,
+      "reward2_pct": 1.406,
+      "yield_to_maturity_pct": null,
+      "data_quality_score": 100,
+      "data_quality_fields": {
+        "price_history": true,
+        "ret5": true,
+        "ret20": true,
+        "trend": true,
+        "rsi": true,
+        "volatility": true,
+        "breakout_range": true
+      },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
+      "model_consensus": 0.75,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "LONG",
+          "score": 54.34,
+          "conviction": 8.68,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "LONG",
+          "score": 69.08,
+          "conviction": 38.16,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "LONG",
+          "score": 86.32,
+          "conviction": 72.65,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "SHORT",
+          "score": 43.03,
+          "conviction": 13.95,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "external_model_adjustment": 0.0,
+      "agreement_adjustment": 0.0,
+      "volatility_adjustment": 0.0,
+      "macro_regime_adjustment": 0.0,
+      "learning_adjustment": 0.0,
+      "learning_state": {
+        "state": "INSUFFICIENT_SAMPLE",
+        "n": 0,
+        "required": 20
+      },
+      "instrument_reference": null,
+      "reasons": [
+        "Trend standardizzato 54/100",
+        "Posizione nel range 63g 86/100",
+        "Probabilità non pubblicata: campione di calibrazione insufficiente",
+        "Orizzonte 10 sedute: override empirico stabile su storico pre-forecast"
+      ],
+      "provenance": {
+        "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
+        "entry_price": "YFINANCE_15M_OBSERVED",
+        "quote_price": "YFINANCE_15M_OBSERVED",
+        "ret5_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
+        "ret20_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
+        "rel20_pct": "MISSING",
+        "rsi": "MODEL_DERIVED_RSI14",
+        "volatility_pct": "MODEL_DERIVED_REALIZED_VOL20",
+        "stop_price": "MODEL_DERIVED_ATR_DISTANCE_TRANSLATED_TO_OBSERVED_15M_ENTRY",
+        "target1_price": "MODEL_DERIVED_1.4R_FROM_TRANSLATED_STOP",
+        "target2_price": "MODEL_DERIVED_2.2R_FROM_TRANSLATED_STOP",
+        "forecast_probability": "MISSING_INSUFFICIENT_SAME_HORIZON_SAMPLE",
+        "horizon": "MODEL_DERIVED_EMPIRICAL_PRE_FORECAST",
+        "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
+        "macro_regime_adjustment": "NO_ADJUSTMENT",
+        "learning_adjustment": "NO_ADJUSTMENT",
+        "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
+      },
+      "quote_price": 1.358696,
+      "date": "2026-08-28"
+    },
+    {
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "BIL",
       "display_ticker": "BIL",
       "name": "BIL",
@@ -4656,7 +4818,7 @@
             "n": 18,
             "hit_rate": 1.0,
             "avg_directional_return_pct": 0.9492,
-            "median_directional_return_pct": 1.0074,
+            "median_directional_return_pct": 1.0073,
             "first_half_hit_rate": 1.0,
             "second_half_hit_rate": 1.0,
             "min_half_hit_rate": 1.0,
@@ -4677,7 +4839,7 @@
       "rel20_pct": null,
       "rsi": null,
       "volatility_pct": 0.172,
-      "volatility_z": -0.977,
+      "volatility_z": -0.978,
       "volume_z": -0.574,
       "avg_volume20": 8959225.0,
       "atr14": 0.015,
@@ -4701,6 +4863,15 @@
         "volatility": true,
         "breakout_range": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.667,
       "model_votes": [
         {
@@ -4772,7 +4943,7 @@
       "quote_price": 91.635002
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "IITB.MI",
       "display_ticker": "IITB · BTP Italia Dist",
       "name": "IITB · BTP Italia Dist",
@@ -4902,6 +5073,15 @@
         "volatility": true,
         "breakout_range": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.75,
       "model_votes": [
         {
@@ -4989,217 +5169,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
-      "ticker": "GBPUSD=X",
-      "display_ticker": "GBPUSD=X",
-      "name": "GBPUSD=X",
-      "sector": "FX",
-      "asset_class": "FX",
-      "instrument_type": "FX",
-      "cluster": "FX",
-      "role": "SATELLITE",
-      "benchmark": null,
-      "currency": "USD",
-      "direction": "LONG",
-      "score": 73.19,
-      "confidence": 0.6971,
-      "confidence_pct": 69.71,
-      "raw_confidence_pct": 69.71,
-      "forecast_probability": null,
-      "probability_state": {
-        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
-        "n": 0,
-        "required": 30
-      },
-      "historical_edge": null,
-      "historical_edge_reasons": [
-        "Campione insufficiente (0/30): nessun edge storico dichiarato"
-      ],
-      "horizon": 10,
-      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
-      "horizon_setup_family": "BREAKOUT",
-      "horizon_policy_version": "AH-1.0",
-      "horizon_profile": {
-        "policy_version": "AH-1.0",
-        "state": "EMPIRICAL_STABLE_OVERRIDE",
-        "setup_family": "BREAKOUT",
-        "fallback": 5,
-        "selected": 10,
-        "candidates": [
-          3,
-          5,
-          10,
-          20
-        ],
-        "reason": "fallback_failed_stability_gate",
-        "min_observations": 18,
-        "min_half_observations": 8,
-        "switch_margin": 0.02,
-        "evidence": [
-          {
-            "horizon": 3,
-            "n": 151,
-            "hit_rate": 0.5033,
-            "avg_directional_return_pct": 0.0251,
-            "median_directional_return_pct": 0.0081,
-            "first_half_hit_rate": 0.48,
-            "second_half_hit_rate": 0.5263,
-            "min_half_hit_rate": 0.48,
-            "stable": false
-          },
-          {
-            "horizon": 5,
-            "n": 96,
-            "hit_rate": 0.4375,
-            "avg_directional_return_pct": 0.0485,
-            "median_directional_return_pct": -0.0777,
-            "first_half_hit_rate": 0.4167,
-            "second_half_hit_rate": 0.4583,
-            "min_half_hit_rate": 0.4167,
-            "stable": false
-          },
-          {
-            "horizon": 10,
-            "n": 55,
-            "hit_rate": 0.5455,
-            "avg_directional_return_pct": 0.0671,
-            "median_directional_return_pct": 0.1226,
-            "first_half_hit_rate": 0.5926,
-            "second_half_hit_rate": 0.5,
-            "min_half_hit_rate": 0.5,
-            "stable": true
-          },
-          {
-            "horizon": 20,
-            "n": 31,
-            "hit_rate": 0.4194,
-            "avg_directional_return_pct": 0.0234,
-            "median_directional_return_pct": -0.321,
-            "first_half_hit_rate": 0.3333,
-            "second_half_hit_rate": 0.5,
-            "min_half_hit_rate": 0.3333,
-            "stable": false
-          }
-        ],
-        "provenance": "MODEL_DERIVED_FROM_PRE_FORECAST_OBSERVED_DAILY_CLOSES"
-      },
-      "risk_regime": "RISK_ON",
-      "rates_regime": "RATES_STABLE",
-      "italy_bond_regime": "ITALY_BOND_STABLE",
-      "price": 1.358474,
-      "model_price": 1.358474,
-      "entry_price": 1.358474,
-      "ret5_pct": -0.431,
-      "ret20_pct": 0.92,
-      "ret60_pct": 1.175,
-      "rel20_pct": null,
-      "rsi": 64.81,
-      "volatility_pct": 3.676,
-      "volatility_z": -2.144,
-      "volume_z": null,
-      "avg_volume20": 0.0,
-      "atr14": 0.005786,
-      "risk_level": "BASSO RELATIVO",
-      "risk_pct": 0.639,
-      "stop_price": 1.349795,
-      "target1_price": 1.370625,
-      "target2_price": 1.377568,
-      "risk_reward_1": 1.4,
-      "risk_reward_2": 2.2,
-      "reward1_pct": 0.894,
-      "reward2_pct": 1.406,
-      "yield_to_maturity_pct": null,
-      "data_quality_score": 100,
-      "data_quality_fields": {
-        "price_history": true,
-        "ret5": true,
-        "ret20": true,
-        "trend": true,
-        "rsi": true,
-        "volatility": true,
-        "breakout_range": true
-      },
-      "model_consensus": 0.75,
-      "model_votes": [
-        {
-          "model_id": "TREND_Z",
-          "direction": "LONG",
-          "score": 53.95,
-          "conviction": 7.9,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "RSI_MOMENTUM",
-          "direction": "LONG",
-          "score": 68.51,
-          "conviction": 37.02,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "BREAKOUT_63D",
-          "direction": "LONG",
-          "score": 85.87,
-          "conviction": 71.74,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        },
-        {
-          "model_id": "MEAN_REVERSION_20D",
-          "direction": "SHORT",
-          "score": 43.36,
-          "conviction": 13.27,
-          "weight": 1.0,
-          "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
-        }
-      ],
-      "external_model_votes": [],
-      "external_model_adjustment": 0.0,
-      "agreement_adjustment": 0.0,
-      "volatility_adjustment": 0.0,
-      "macro_regime_adjustment": 0.0,
-      "learning_adjustment": 0.0,
-      "learning_state": {
-        "state": "INSUFFICIENT_SAMPLE",
-        "n": 0,
-        "required": 20
-      },
-      "instrument_reference": null,
-      "reasons": [
-        "Trend standardizzato 54/100",
-        "Posizione nel range 63g 86/100",
-        "Probabilità non pubblicata: campione di calibrazione insufficiente",
-        "Orizzonte 10 sedute: override empirico stabile su storico pre-forecast"
-      ],
-      "provenance": {
-        "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
-        "entry_price": "YFINANCE_15M_OBSERVED",
-        "quote_price": "YFINANCE_15M_OBSERVED",
-        "ret5_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
-        "ret20_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
-        "rel20_pct": "MISSING",
-        "rsi": "MODEL_DERIVED_RSI14",
-        "volatility_pct": "MODEL_DERIVED_REALIZED_VOL20",
-        "stop_price": "MODEL_DERIVED_ATR_DISTANCE_TRANSLATED_TO_OBSERVED_15M_ENTRY",
-        "target1_price": "MODEL_DERIVED_1.4R_FROM_TRANSLATED_STOP",
-        "target2_price": "MODEL_DERIVED_2.2R_FROM_TRANSLATED_STOP",
-        "forecast_probability": "MISSING_INSUFFICIENT_SAME_HORIZON_SAMPLE",
-        "horizon": "MODEL_DERIVED_EMPIRICAL_PRE_FORECAST",
-        "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
-        "macro_regime_adjustment": "NO_ADJUSTMENT",
-        "learning_adjustment": "NO_ADJUSTMENT",
-        "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
-      },
-      "quote_price": 1.358474,
-      "date": "2026-08-28"
-    },
-    {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "XLF",
       "display_ticker": "XLF",
       "name": "XLF",
@@ -5331,6 +5301,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -5429,7 +5408,7 @@
       "quote_price": 57.900002
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "IITA.MI",
       "display_ticker": "IITA · BTP Italia Acc",
       "name": "IITA · BTP Italia Acc",
@@ -5441,10 +5420,10 @@
       "benchmark": "IITB.MI",
       "currency": "EUR",
       "direction": "SHORT",
-      "score": 72.58,
-      "confidence": 0.6919,
-      "confidence_pct": 69.19,
-      "raw_confidence_pct": 69.19,
+      "score": 72.71,
+      "confidence": 0.6931,
+      "confidence_pct": 69.31,
+      "raw_confidence_pct": 69.31,
       "forecast_probability": null,
       "probability_state": {
         "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
@@ -5526,28 +5505,28 @@
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
       "italy_bond_regime": "ITALY_BOND_STABLE",
-      "price": 5.698,
-      "model_price": 5.698,
-      "entry_price": 5.698,
-      "ret5_pct": -0.018,
-      "ret20_pct": -0.367,
-      "ret60_pct": -0.853,
-      "rel20_pct": -0.03,
-      "rsi": 34.36,
-      "volatility_pct": 4.02,
-      "volatility_z": -0.171,
-      "volume_z": -1.35,
-      "avg_volume20": 89639.2,
-      "atr14": 0.017857,
+      "price": 5.697,
+      "model_price": 5.697,
+      "entry_price": 5.697,
+      "ret5_pct": -0.035,
+      "ret20_pct": -0.385,
+      "ret60_pct": -0.87,
+      "rel20_pct": -0.048,
+      "rsi": 34.15,
+      "volatility_pct": 4.031,
+      "volatility_z": -0.166,
+      "volume_z": -1.249,
+      "avg_volume20": 89961.75,
+      "atr14": 0.018,
       "risk_level": "MEDIO",
-      "risk_pct": 0.47,
-      "stop_price": 5.724786,
-      "target1_price": 5.6605,
-      "target2_price": 5.639071,
+      "risk_pct": 0.474,
+      "stop_price": 5.724,
+      "target1_price": 5.6592,
+      "target2_price": 5.6376,
       "risk_reward_1": 1.4,
       "risk_reward_2": 2.2,
-      "reward1_pct": 0.658,
-      "reward2_pct": 1.034,
+      "reward1_pct": 0.664,
+      "reward2_pct": 1.043,
       "yield_to_maturity_pct": null,
       "data_quality_score": 100,
       "data_quality_fields": {
@@ -5560,13 +5539,22 @@
         "breakout_range": true,
         "relative_strength": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.8,
       "model_votes": [
         {
           "model_id": "TREND_Z",
           "direction": "SHORT",
-          "score": 41.95,
-          "conviction": 16.11,
+          "score": 41.37,
+          "conviction": 17.25,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -5574,8 +5562,8 @@
         {
           "model_id": "RELATIVE_Z",
           "direction": "SHORT",
-          "score": 43.07,
-          "conviction": 13.86,
+          "score": 38.9,
+          "conviction": 22.21,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -5583,8 +5571,8 @@
         {
           "model_id": "RSI_MOMENTUM",
           "direction": "SHORT",
-          "score": 30.44,
-          "conviction": 39.11,
+          "score": 30.18,
+          "conviction": 39.63,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -5592,8 +5580,8 @@
         {
           "model_id": "BREAKOUT_63D",
           "direction": "SHORT",
-          "score": 9.16,
-          "conviction": 81.68,
+          "score": 8.4,
+          "conviction": 83.21,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -5601,8 +5589,8 @@
         {
           "model_id": "MEAN_REVERSION_20D",
           "direction": "LONG",
-          "score": 62.79,
-          "conviction": 25.59,
+          "score": 63.28,
+          "conviction": 26.56,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -5628,9 +5616,9 @@
         "source": "BORSA_ITALIANA_BLACKROCK"
       },
       "reasons": [
-        "Trend standardizzato 42/100",
-        "Forza relativa standardizzata 43/100",
-        "Posizione nel range 63g 9/100",
+        "Trend standardizzato 41/100",
+        "Forza relativa standardizzata 39/100",
+        "Posizione nel range 63g 8/100",
         "Probabilità non pubblicata: campione di calibrazione insufficiente",
         "Orizzonte 10 sedute: fallback BREAKOUT · nessun override abbastanza robusto"
       ],
@@ -5653,10 +5641,10 @@
         "learning_adjustment": "NO_ADJUSTMENT",
         "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
       },
-      "quote_price": 5.698
+      "quote_price": 5.697
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "SPY",
       "display_ticker": "SPY",
       "name": "SPY",
@@ -5708,7 +5696,7 @@
             "n": 237,
             "hit_rate": 0.5654,
             "avg_directional_return_pct": 0.0956,
-            "median_directional_return_pct": 0.1836,
+            "median_directional_return_pct": 0.1837,
             "first_half_hit_rate": 0.5169,
             "second_half_hit_rate": 0.6134,
             "min_half_hit_rate": 0.5169,
@@ -5787,6 +5775,15 @@
         "breakout_range": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.8,
       "model_votes": [
         {
@@ -5875,7 +5872,7 @@
       "quote_price": 771.039978
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "GLD",
       "display_ticker": "GLD",
       "name": "GLD",
@@ -6007,6 +6004,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -6106,7 +6112,7 @@
       "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "HYG",
       "display_ticker": "HYG",
       "name": "HYG",
@@ -6180,7 +6186,7 @@
             "n": 42,
             "hit_rate": 0.6667,
             "avg_directional_return_pct": 0.415,
-            "median_directional_return_pct": 0.4906,
+            "median_directional_return_pct": 0.4907,
             "first_half_hit_rate": 0.7143,
             "second_half_hit_rate": 0.619,
             "min_half_hit_rate": 0.619,
@@ -6237,6 +6243,15 @@
         "breakout_range": true,
         "relative_strength": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.6,
       "model_votes": [
         {
@@ -6327,7 +6342,7 @@
       "quote_price": 79.860001
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "IBCI.MI",
       "display_ticker": "IBCI · Euro Inflation Linked",
       "name": "IBCI · Euro Inflation Linked",
@@ -6339,10 +6354,10 @@
       "benchmark": "IEF",
       "currency": "EUR",
       "direction": "SHORT",
-      "score": 71.12,
-      "confidence": 0.6795,
-      "confidence_pct": 67.95,
-      "raw_confidence_pct": 67.95,
+      "score": 71.74,
+      "confidence": 0.6848,
+      "confidence_pct": 68.48,
+      "raw_confidence_pct": 68.48,
       "forecast_probability": null,
       "probability_state": {
         "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
@@ -6424,24 +6439,24 @@
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
       "italy_bond_regime": "ITALY_BOND_STABLE",
-      "price": 235.809998,
-      "model_price": 235.809998,
-      "entry_price": 235.809998,
-      "ret5_pct": -0.008,
-      "ret20_pct": -0.055,
-      "ret60_pct": -0.611,
+      "price": 235.770004,
+      "model_price": 235.770004,
+      "entry_price": 235.770004,
+      "ret5_pct": -0.025,
+      "ret20_pct": -0.072,
+      "ret60_pct": -0.628,
       "rel20_pct": -0.509,
-      "rsi": 38.37,
-      "volatility_pct": 2.639,
-      "volatility_z": -0.601,
-      "volume_z": -0.689,
-      "avg_volume20": 2101.55,
+      "rsi": 37.99,
+      "volatility_pct": 2.649,
+      "volatility_z": -0.595,
+      "volume_z": -0.644,
+      "avg_volume20": 2117.55,
       "atr14": 0.687144,
       "risk_level": "MEDIO",
       "risk_pct": 0.437,
-      "stop_price": 236.840713,
-      "target1_price": 234.366997,
-      "target2_price": 233.542425,
+      "stop_price": 236.80072,
+      "target1_price": 234.327002,
+      "target2_price": 233.502429,
       "risk_reward_1": 1.4,
       "risk_reward_2": 2.2,
       "reward1_pct": 0.612,
@@ -6458,13 +6473,22 @@
         "breakout_range": true,
         "relative_strength": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.8,
       "model_votes": [
         {
           "model_id": "TREND_Z",
           "direction": "SHORT",
-          "score": 41.51,
-          "conviction": 16.99,
+          "score": 40.72,
+          "conviction": 18.57,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -6481,8 +6505,8 @@
         {
           "model_id": "RSI_MOMENTUM",
           "direction": "SHORT",
-          "score": 35.46,
-          "conviction": 29.08,
+          "score": 34.99,
+          "conviction": 30.02,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -6490,8 +6514,8 @@
         {
           "model_id": "BREAKOUT_63D",
           "direction": "SHORT",
-          "score": 11.07,
-          "conviction": 77.86,
+          "score": 9.59,
+          "conviction": 80.81,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -6499,8 +6523,8 @@
         {
           "model_id": "MEAN_REVERSION_20D",
           "direction": "LONG",
-          "score": 61.64,
-          "conviction": 23.28,
+          "score": 62.34,
+          "conviction": 24.68,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -6519,9 +6543,9 @@
       },
       "instrument_reference": null,
       "reasons": [
-        "Trend standardizzato 42/100",
+        "Trend standardizzato 41/100",
         "Forza relativa standardizzata 38/100",
-        "Posizione nel range 63g 11/100",
+        "Posizione nel range 63g 10/100",
         "Probabilità non pubblicata: campione di calibrazione insufficiente",
         "Orizzonte 10 sedute: fallback BREAKOUT · nessun override abbastanza robusto"
       ],
@@ -6544,10 +6568,11 @@
         "learning_adjustment": "NO_ADJUSTMENT",
         "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
       },
-      "quote_price": 235.809998
+      "quote_price": 235.770004,
+      "date": "2026-08-28"
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "SHY",
       "display_ticker": "SHY",
       "name": "SHY",
@@ -6653,7 +6678,7 @@
       "rel20_pct": -0.021,
       "rsi": 62.0,
       "volatility_pct": 1.084,
-      "volatility_z": -0.432,
+      "volatility_z": -0.433,
       "volume_z": 0.299,
       "avg_volume20": 3370930.0,
       "atr14": 0.066429,
@@ -6678,6 +6703,15 @@
         "breakout_range": true,
         "relative_strength": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.6,
       "model_votes": [
         {
@@ -6768,7 +6802,7 @@
       "quote_price": 82.040001
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "BNDX",
       "display_ticker": "BNDX",
       "name": "BNDX",
@@ -6831,7 +6865,7 @@
             "n": 39,
             "hit_rate": 0.4872,
             "avg_directional_return_pct": -0.0015,
-            "median_directional_return_pct": -0.0938,
+            "median_directional_return_pct": -0.0939,
             "first_half_hit_rate": 0.6842,
             "second_half_hit_rate": 0.3,
             "min_half_hit_rate": 0.3,
@@ -6898,6 +6932,15 @@
         "volatility": true,
         "breakout_range": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.75,
       "model_votes": [
         {
@@ -6983,7 +7026,7 @@
       "quote_price": 47.700001
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "DBC",
       "display_ticker": "DBC",
       "name": "DBC",
@@ -7114,6 +7157,15 @@
         "breakout_range": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.6,
       "model_votes": [
         {
@@ -7203,7 +7255,7 @@
       "quote_price": 30.855
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "ETH-USD",
       "display_ticker": "ETH-USD",
       "name": "ETH-USD",
@@ -7215,10 +7267,10 @@
       "benchmark": "BTC-USD",
       "currency": "USD",
       "direction": "LONG",
-      "score": 70.93,
-      "confidence": 0.6579,
-      "confidence_pct": 65.79,
-      "raw_confidence_pct": 67.79,
+      "score": 70.96,
+      "confidence": 0.6582,
+      "confidence_pct": 65.82,
+      "raw_confidence_pct": 67.82,
       "forecast_probability": null,
       "probability_state": {
         "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
@@ -7265,7 +7317,7 @@
             "horizon": 5,
             "n": 127,
             "hit_rate": 0.4882,
-            "avg_directional_return_pct": 0.414,
+            "avg_directional_return_pct": 0.4137,
             "median_directional_return_pct": -0.2524,
             "first_half_hit_rate": 0.4921,
             "second_half_hit_rate": 0.4844,
@@ -7276,7 +7328,7 @@
             "horizon": 10,
             "n": 71,
             "hit_rate": 0.5211,
-            "avg_directional_return_pct": 1.2809,
+            "avg_directional_return_pct": 1.2802,
             "median_directional_return_pct": 0.9407,
             "first_half_hit_rate": 0.6,
             "second_half_hit_rate": 0.4444,
@@ -7300,28 +7352,28 @@
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
       "italy_bond_regime": "ITALY_BOND_STABLE",
-      "price": 2491.939941,
-      "model_price": 2491.939941,
-      "entry_price": 2492.199951,
-      "ret5_pct": 1.141,
-      "ret20_pct": 30.091,
-      "ret60_pct": 54.759,
-      "rel20_pct": 7.747,
-      "rsi": 83.17,
-      "volatility_pct": 68.966,
-      "volatility_z": 1.247,
-      "volume_z": 0.764,
-      "avg_volume20": 14108167957.8,
+      "price": 2490.929932,
+      "model_price": 2490.929932,
+      "entry_price": 2491.0,
+      "ret5_pct": 1.1,
+      "ret20_pct": 30.038,
+      "ret60_pct": 54.696,
+      "rel20_pct": 7.811,
+      "rsi": 83.07,
+      "volatility_pct": 68.982,
+      "volatility_z": 1.248,
+      "volume_z": 0.654,
+      "avg_volume20": 14073354159.4,
       "atr14": 113.689566,
       "risk_level": "ALTO",
-      "risk_pct": 6.843,
-      "stop_price": 2321.665602,
-      "target1_price": 2730.94804,
-      "target2_price": 2867.375519,
+      "risk_pct": 6.846,
+      "stop_price": 2320.46565,
+      "target1_price": 2729.74809,
+      "target2_price": 2866.17557,
       "risk_reward_1": 1.4,
       "risk_reward_2": 2.2,
-      "reward1_pct": 9.581,
-      "reward2_pct": 15.056,
+      "reward1_pct": 9.585,
+      "reward2_pct": 15.062,
       "yield_to_maturity_pct": null,
       "data_quality_score": 100,
       "data_quality_fields": {
@@ -7334,13 +7386,22 @@
         "breakout_range": true,
         "relative_strength": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.8,
       "model_votes": [
         {
           "model_id": "TREND_Z",
           "direction": "LONG",
-          "score": 80.5,
-          "conviction": 61.0,
+          "score": 80.43,
+          "conviction": 60.85,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -7348,8 +7409,8 @@
         {
           "model_id": "RELATIVE_Z",
           "direction": "LONG",
-          "score": 81.83,
-          "conviction": 63.66,
+          "score": 82.0,
+          "conviction": 64.01,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -7366,8 +7427,8 @@
         {
           "model_id": "BREAKOUT_63D",
           "direction": "LONG",
-          "score": 97.53,
-          "conviction": 95.06,
+          "score": 97.42,
+          "conviction": 94.85,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -7375,8 +7436,8 @@
         {
           "model_id": "MEAN_REVERSION_20D",
           "direction": "SHORT",
-          "score": 16.36,
-          "conviction": 67.28,
+          "score": 16.45,
+          "conviction": 67.1,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -7397,7 +7458,7 @@
       "reasons": [
         "Trend standardizzato 80/100",
         "Forza relativa standardizzata 82/100",
-        "Posizione nel range 63g 98/100",
+        "Posizione nel range 63g 97/100",
         "Probabilità non pubblicata: campione di calibrazione insufficiente",
         "Orizzonte 3 sedute: override empirico stabile su storico pre-forecast"
       ],
@@ -7420,10 +7481,10 @@
         "learning_adjustment": "NO_ADJUSTMENT",
         "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
       },
-      "quote_price": 2492.199951
+      "quote_price": 2491.0
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "SLV",
       "display_ticker": "SLV",
       "name": "SLV",
@@ -7555,6 +7616,15 @@
         "relative_strength": true,
         "volume": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.833,
       "model_votes": [
         {
@@ -7653,7 +7723,7 @@
       "quote_price": null
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "SGOV",
       "display_ticker": "SGOV",
       "name": "SGOV",
@@ -7759,7 +7829,7 @@
       "rel20_pct": -0.001,
       "rsi": null,
       "volatility_pct": 0.152,
-      "volatility_z": -0.898,
+      "volatility_z": -0.899,
       "volume_z": 0.017,
       "avg_volume20": 20232150.0,
       "atr14": 0.017143,
@@ -7784,6 +7854,15 @@
         "breakout_range": true,
         "relative_strength": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.5,
       "model_votes": [
         {
@@ -7865,7 +7944,7 @@
       "quote_price": null
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "NQ=F",
       "display_ticker": "NQ",
       "name": "NQ",
@@ -7877,10 +7956,10 @@
       "benchmark": "SPY",
       "currency": "USD",
       "direction": "LONG",
-      "score": 59.03,
-      "confidence": 0.5767,
-      "confidence_pct": 57.67,
-      "raw_confidence_pct": 57.67,
+      "score": 58.65,
+      "confidence": 0.5735,
+      "confidence_pct": 57.35,
+      "raw_confidence_pct": 57.35,
       "forecast_probability": null,
       "probability_state": {
         "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
@@ -7962,28 +8041,28 @@
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
       "italy_bond_regime": "ITALY_BOND_STABLE",
-      "price": 29620.0,
-      "model_price": 29620.0,
-      "entry_price": 29620.0,
-      "ret5_pct": 0.79,
-      "ret20_pct": 4.28,
-      "ret60_pct": -3.308,
+      "price": 29600.75,
+      "model_price": 29600.75,
+      "entry_price": 29600.75,
+      "ret5_pct": 0.725,
+      "ret20_pct": 4.212,
+      "ret60_pct": -3.371,
       "rel20_pct": 1.198,
-      "rsi": 47.75,
-      "volatility_pct": 17.578,
-      "volatility_z": -0.142,
-      "volume_z": -2.891,
-      "avg_volume20": 479304.6,
+      "rsi": 47.4,
+      "volatility_pct": 17.601,
+      "volatility_z": -0.137,
+      "volume_z": -2.878,
+      "avg_volume20": 479434.1,
       "atr14": 385.142857,
       "risk_level": "MEDIO",
-      "risk_pct": 1.95,
-      "stop_price": 29042.285714,
-      "target1_price": 30428.8,
-      "target2_price": 30890.971429,
+      "risk_pct": 1.952,
+      "stop_price": 29023.035714,
+      "target1_price": 30409.55,
+      "target2_price": 30871.721429,
       "risk_reward_1": 1.4,
       "risk_reward_2": 2.2,
-      "reward1_pct": 2.731,
-      "reward2_pct": 4.291,
+      "reward1_pct": 2.732,
+      "reward2_pct": 4.294,
       "yield_to_maturity_pct": null,
       "data_quality_score": 100,
       "data_quality_fields": {
@@ -7996,13 +8075,22 @@
         "breakout_range": true,
         "relative_strength": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.8,
       "model_votes": [
         {
           "model_id": "TREND_Z",
           "direction": "LONG",
-          "score": 54.76,
-          "conviction": 9.52,
+          "score": 54.28,
+          "conviction": 8.56,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -8019,8 +8107,8 @@
         {
           "model_id": "RSI_MOMENTUM",
           "direction": "SHORT",
-          "score": 47.18,
-          "conviction": 5.63,
+          "score": 46.74,
+          "conviction": 6.51,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -8028,8 +8116,8 @@
         {
           "model_id": "BREAKOUT_63D",
           "direction": "LONG",
-          "score": 67.58,
-          "conviction": 35.16,
+          "score": 67.01,
+          "conviction": 34.02,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -8037,8 +8125,8 @@
         {
           "model_id": "MEAN_REVERSION_20D",
           "direction": "LONG",
-          "score": 55.42,
-          "conviction": 10.84,
+          "score": 55.82,
+          "conviction": 11.65,
           "weight": 1.0,
           "as_of": "2026-08-28",
           "origin": "INTERNAL_SUBMODEL"
@@ -8057,9 +8145,9 @@
       },
       "instrument_reference": null,
       "reasons": [
-        "Trend standardizzato 55/100",
+        "Trend standardizzato 54/100",
         "Forza relativa standardizzata 59/100",
-        "Posizione nel range 63g 68/100",
+        "Posizione nel range 63g 67/100",
         "Probabilità non pubblicata: campione di calibrazione insufficiente",
         "Orizzonte 5 sedute: override empirico stabile su storico pre-forecast"
       ],
@@ -8085,7 +8173,7 @@
       "quote_price": null
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "BND",
       "display_ticker": "BND",
       "name": "BND",
@@ -8148,7 +8236,7 @@
             "n": 62,
             "hit_rate": 0.5161,
             "avg_directional_return_pct": 0.1257,
-            "median_directional_return_pct": 0.1179,
+            "median_directional_return_pct": 0.1178,
             "first_half_hit_rate": 0.6452,
             "second_half_hit_rate": 0.3871,
             "min_half_hit_rate": 0.3871,
@@ -8216,6 +8304,15 @@
         "breakout_range": true,
         "relative_strength": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.6,
       "model_votes": [
         {
@@ -8306,7 +8403,7 @@
       "quote_price": null
     },
     {
-      "model_version": "8.5.0-cost-aware-edge-core",
+      "model_version": "8.6.0-episode-ledger-cost-aware",
       "ticker": "EMB",
       "display_ticker": "EMB",
       "name": "EMB",
@@ -8436,6 +8533,15 @@
         "volatility": true,
         "breakout_range": true
       },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
       "model_consensus": 0.75,
       "model_votes": [
         {
@@ -8499,6 +8605,232 @@
         "Posizione nel range 63g 54/100",
         "Probabilità non pubblicata: campione di calibrazione insufficiente",
         "Orizzonte 20 sedute: fallback confermato dallo storico"
+      ],
+      "provenance": {
+        "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
+        "entry_price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
+        "quote_price": "MISSING_UNTIL_INTRADAY_OVERLAY",
+        "ret5_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
+        "ret20_pct": "MODEL_DERIVED_FROM_OBSERVED_CLOSES",
+        "rel20_pct": "MISSING",
+        "rsi": "MODEL_DERIVED_RSI14",
+        "volatility_pct": "MODEL_DERIVED_REALIZED_VOL20",
+        "stop_price": "MODEL_DERIVED_ATR14_1.5X",
+        "target1_price": "MODEL_DERIVED_1.4R",
+        "target2_price": "MODEL_DERIVED_2.2R",
+        "forecast_probability": "MISSING_INSUFFICIENT_SAME_HORIZON_SAMPLE",
+        "horizon": "MODEL_DERIVED_EMPIRICAL_PRE_FORECAST",
+        "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
+        "macro_regime_adjustment": "NO_ADJUSTMENT",
+        "learning_adjustment": "NO_ADJUSTMENT",
+        "external_model_votes": "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL"
+      },
+      "quote_price": null
+    },
+    {
+      "model_version": "8.6.0-episode-ledger-cost-aware",
+      "ticker": "SUSE.MI",
+      "display_ticker": "SUSE · Euro Corp 0-3Y",
+      "name": "SUSE · Euro Corp 0-3Y",
+      "sector": "EURO_SHORT_CREDIT",
+      "asset_class": "ETF_BOND_CREDIT",
+      "instrument_type": "ETF_BOND_CREDIT",
+      "cluster": "EURO_CREDIT",
+      "role": "DIVERSIFIER",
+      "benchmark": null,
+      "currency": "EUR",
+      "direction": "LONG",
+      "score": 63.67,
+      "confidence": 0.5162,
+      "confidence_pct": 51.62,
+      "raw_confidence_pct": 61.62,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "historical_edge": null,
+      "historical_edge_reasons": [
+        "Campione insufficiente (0/30): nessun edge storico dichiarato"
+      ],
+      "horizon": 20,
+      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "horizon_profile": {
+        "policy_version": "AH-1.0",
+        "state": "EMPIRICAL_STABLE_OVERRIDE",
+        "setup_family": "BREAKOUT",
+        "fallback": 10,
+        "selected": 20,
+        "candidates": [
+          5,
+          10,
+          20,
+          40
+        ],
+        "reason": "stable_candidate_exceeded_fallback_margin",
+        "min_observations": 18,
+        "min_half_observations": 8,
+        "switch_margin": 0.02,
+        "evidence": [
+          {
+            "horizon": 5,
+            "n": 170,
+            "hit_rate": 0.6412,
+            "avg_directional_return_pct": 0.0473,
+            "median_directional_return_pct": 0.06,
+            "first_half_hit_rate": 0.6471,
+            "second_half_hit_rate": 0.6353,
+            "min_half_hit_rate": 0.6353,
+            "stable": true
+          },
+          {
+            "horizon": 10,
+            "n": 86,
+            "hit_rate": 0.7326,
+            "avg_directional_return_pct": 0.103,
+            "median_directional_return_pct": 0.1413,
+            "first_half_hit_rate": 0.7907,
+            "second_half_hit_rate": 0.6744,
+            "min_half_hit_rate": 0.6744,
+            "stable": true
+          },
+          {
+            "horizon": 20,
+            "n": 45,
+            "hit_rate": 0.8667,
+            "avg_directional_return_pct": 0.2136,
+            "median_directional_return_pct": 0.2375,
+            "first_half_hit_rate": 0.8636,
+            "second_half_hit_rate": 0.8696,
+            "min_half_hit_rate": 0.8636,
+            "stable": true
+          },
+          {
+            "horizon": 40,
+            "n": 24,
+            "hit_rate": 0.875,
+            "avg_directional_return_pct": 0.4154,
+            "median_directional_return_pct": 0.4457,
+            "first_half_hit_rate": 0.8333,
+            "second_half_hit_rate": 0.9167,
+            "min_half_hit_rate": 0.8333,
+            "stable": true
+          }
+        ],
+        "provenance": "MODEL_DERIVED_FROM_PRE_FORECAST_OBSERVED_DAILY_CLOSES"
+      },
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "italy_bond_regime": "ITALY_BOND_STABLE",
+      "price": 4.9445,
+      "model_price": 4.9445,
+      "entry_price": 4.9445,
+      "ret5_pct": -0.04,
+      "ret20_pct": 0.091,
+      "ret60_pct": 0.284,
+      "rel20_pct": null,
+      "rsi": 47.46,
+      "volatility_pct": 0.856,
+      "volatility_z": -0.674,
+      "volume_z": -0.523,
+      "avg_volume20": 51653.0,
+      "atr14": 0.006393,
+      "risk_level": "MEDIO",
+      "risk_pct": 0.194,
+      "stop_price": 4.934911,
+      "target1_price": 4.957925,
+      "target2_price": 4.965596,
+      "risk_reward_1": 1.4,
+      "risk_reward_2": 2.2,
+      "reward1_pct": 0.272,
+      "reward2_pct": 0.427,
+      "yield_to_maturity_pct": null,
+      "data_quality_score": 100,
+      "data_quality_fields": {
+        "price_history": true,
+        "ret5": true,
+        "ret20": true,
+        "trend": true,
+        "rsi": true,
+        "volatility": true,
+        "breakout_range": true
+      },
+      "model_completeness_score": 60,
+      "model_completeness_fields": {
+        "market_feature_set": true,
+        "risk_envelope": true,
+        "empirical_probability": false,
+        "learning_segment_mature": false,
+        "external_model_evidence": false
+      },
+      "decision_reliability_state": "CALIBRATION_LIMITED",
+      "model_consensus": 0.5,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "SHORT",
+          "score": 40.52,
+          "conviction": 18.95,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "SHORT",
+          "score": 46.82,
+          "conviction": 6.36,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "LONG",
+          "score": 77.55,
+          "conviction": 55.1,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "LONG",
+          "score": 60.01,
+          "conviction": 20.01,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "external_model_adjustment": 0.0,
+      "agreement_adjustment": -10.0,
+      "volatility_adjustment": 0.0,
+      "macro_regime_adjustment": 0.0,
+      "learning_adjustment": 0.0,
+      "learning_state": {
+        "state": "INSUFFICIENT_SAMPLE",
+        "n": 0,
+        "required": 20
+      },
+      "instrument_reference": {
+        "status": "VERIFIED_LISTING",
+        "issuer": "iShares/BlackRock",
+        "market": "Borsa Italiana",
+        "isin": "IE00BYZTVV78",
+        "verified_at": "2026-08-25",
+        "source": "BORSA_ITALIANA"
+      },
+      "reasons": [
+        "Trend standardizzato 41/100",
+        "Posizione nel range 63g 78/100",
+        "Contro-modello in disaccordo: confidenza penalizzata",
+        "Probabilità non pubblicata: campione di calibrazione insufficiente",
+        "Orizzonte 20 sedute: override empirico stabile su storico pre-forecast"
       ],
       "provenance": {
         "price": "YFINANCE_DAILY_ADJUSTED_CLOSE_OBSERVED",
