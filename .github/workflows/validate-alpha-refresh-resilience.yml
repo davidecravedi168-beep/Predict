@@ -22,6 +22,11 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+          cache: 'pip'
+      - name: Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Apply patch in disposable workspace
         run: python scripts/apply_alpha_refresh_resilience.py
       - name: Syntax and static contract
