@@ -3,9 +3,7 @@ name: Update Alpha Engine Data
 on:
   workflow_dispatch:
   schedule:
-    # Ogni 30 minuti, 24h nei feriali: necessario per ES/NQ e controllo continuo.
     - cron: "*/30 * * * 1-5"
-    # Riapertura futures USA la domenica sera (UTC).
     - cron: "*/30 22-23 * * 0"
 
 permissions:
@@ -18,7 +16,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout latest main
@@ -30,7 +28,7 @@ jobs:
       - name: Sync before calculation
         shell: bash
         run: |
-          set -e
+          set -euo pipefail
           git fetch origin main
           git reset --hard origin/main
 
@@ -51,120 +49,24 @@ jobs:
       - name: Run engine with retry
         shell: bash
         run: |
-          set -e
+          set -euo pipefail
           for attempt in 1 2 3; do
             echo "Alpha Engine attempt $attempt/3"
             if python engine.py; then
-              exit 0
+              break
             fi
-            if [ "$attempt" -lt 3 ]; then
-              echo "Retry in 25 seconds..."
-              sleep 25
+            if [ "$attempt" -eq 3 ]; then
+              echo "Engine failed after 3 attempts."
+              exit 1
             fi
+            sleep 25
           done
-          echo "Engine failed after 3 attempts."
-          exit 1
 
-      - name: Validate generated data
-        shell: bash
-        run: |
-          python - <<'PY'
-          import json, math
-          from pathlib import Path
-          from datetime import datetime, timezone
+      - name: Build observed market chart feed
+        run: python scripts/build_market_series.py
 
-          p = Path("data/latest.json")
-          if not p.exists(): raise SystemExit("data/latest.json missing")
-          d = json.loads(p.read_text(encoding="utf-8"))
-
-          if d.get("schema_version") != "8.5": raise SystemExit(f"unexpected schema_version: {d.get('schema_version')}")
-          if not str(d.get("model_version","")).startswith("8.5."): raise SystemExit("V8.5 model_version missing")
-          if d.get("data_quality",{}).get("strict_no_fabrication") is not True: raise SystemExit("strict_no_fabrication gate missing")
-
-          engine_ts = d.get("engine_updated_at") or d.get("updated_at")
-          if not engine_ts: raise SystemExit("engine_updated_at/updated_at missing")
-          ts = datetime.fromisoformat(engine_ts.replace("Z","+00:00"))
-          age = (datetime.now(timezone.utc) - ts).total_seconds()
-          if age > 600: raise SystemExit(f"latest.json too old: {age:.0f}s")
-
-          signals=d.get("signals"); watch=d.get("watchlist")
-          if not isinstance(signals,list): raise SystemExit("signals missing/not list")
-          if not isinstance(watch,list): raise SystemExit("watchlist missing/not list")
-          if len({x.get('ticker') for x in signals}) != len(signals): raise SystemExit("duplicate ticker in signals")
-
-          def finite_or_none(v): return v is None or (isinstance(v,(int,float)) and math.isfinite(v))
-          def validate_row(x, where):
-              req=("ticker","asset_class","cluster","direction","score","confidence_pct","data_quality_score","provenance")
-              miss=[k for k in req if x.get(k) is None]
-              if miss: raise SystemExit(f"{where} {x.get('ticker')} missing {miss}")
-              if x.get("direction") not in ("LONG","SHORT"): raise SystemExit(f"bad direction {x.get('ticker')}")
-              for k in ("score","confidence_pct","data_quality_score","price","entry_price","stop_price","target1_price","target2_price"):
-                  if not finite_or_none(x.get(k)): raise SystemExit(f"non-finite {k} for {x.get('ticker')}")
-              p0=x.get("entry_price"); st=x.get("stop_price"); t1=x.get("target1_price"); t2=x.get("target2_price")
-              fp=x.get("forecast_probability")
-              if fp is not None:
-                  if not isinstance(fp,(int,float)) or not math.isfinite(fp) or not (0 <= fp <= 1): raise SystemExit(f"invalid forecast_probability {x.get('ticker')}")
-                  ps=x.get("probability_state") or {}
-                  if ps.get("state") != "EMPIRICALLY_CALIBRATED" or int(ps.get("n",0) or 0) < 30:
-                      raise SystemExit(f"probability published without enough empirical sample {x.get('ticker')}")
-              hp=x.get("horizon_profile") or {}
-              h=x.get("horizon")
-              if not isinstance(h,int) or h < 1 or int(hp.get("selected",-1) or -1) != h:
-                  raise SystemExit(f"adaptive horizon/profile invalid {x.get('ticker')}")
-              if x.get("horizon_policy_version") != "AH-1.0":
-                  raise SystemExit(f"horizon policy mismatch {x.get('ticker')}")
-              if (x.get("provenance") or {}).get("horizon") not in ("MODEL_DERIVED_EMPIRICAL_PRE_FORECAST","RULE_BASED_ASSET_CLASS_SETUP_FALLBACK"):
-                  raise SystemExit(f"horizon provenance invalid {x.get('ticker')}")
-              if d.get("data_source",{}).get("official_bond_terms_feed") is not True and x.get("yield_to_maturity_pct") is not None:
-                  raise SystemExit(f"YTM must remain null without official bond terms feed: {x.get('ticker')}")
-              if p0 is not None and p0 <= 0: raise SystemExit(f"non-positive price {x.get('ticker')}")
-              if None not in (p0,st,t1):
-                  if x["direction"]=="LONG" and not (st<p0<t1): raise SystemExit(f"LONG geometry invalid {x.get('ticker')}")
-                  if x["direction"]=="SHORT" and not (t1<p0<st): raise SystemExit(f"SHORT geometry invalid {x.get('ticker')}")
-                  if t2 is not None:
-                      if x["direction"]=="LONG" and t2<t1: raise SystemExit(f"LONG T2 invalid {x.get('ticker')}")
-                      if x["direction"]=="SHORT" and t2>t1: raise SystemExit(f"SHORT T2 invalid {x.get('ticker')}")
-              prov=x.get("provenance") or {}
-              for fld in ("price","entry_price","stop_price","target1_price"):
-                  if fld not in prov: raise SystemExit(f"provenance missing {fld} for {x.get('ticker')}")
-
-          for x in signals: validate_row(x,"signal")
-          for x in watch: validate_row(x,"watch")
-
-          div=d.get("diversification",{})
-          if signals and not isinstance(div.get("by_asset_class"),dict): raise SystemExit("diversification metadata missing")
-          learning=d.get("model_learning",{})
-          if learning.get("no_lookahead") is not True: raise SystemExit("learning no-lookahead guard missing")
-          if learning.get("learning_lineage") != "ALPHA_V85_COST_AWARE_1": raise SystemExit("learning lineage mismatch")
-          if float(learning.get("max_positive_adjustment_points",99)) > 1.0: raise SystemExit("positive learning cap too high")
-          if float(learning.get("max_negative_adjustment_points",0)) > -4.0: raise SystemExit("negative learning guard too weak")
-          gov=d.get("model_governance",{})
-          hp=gov.get("horizon_policy",{})
-          if gov.get("outcome_target") != "ADAPTIVE_HORIZON_DIRECTIONAL_RETURN": raise SystemExit("adaptive outcome target missing")
-          if hp.get("version") != "AH-1.0" or hp.get("no_lookahead") is not True: raise SystemExit("adaptive horizon governance missing")
-          ext=d.get("external_models",{})
-          if ext.get("positive_boost_enabled") is not False: raise SystemExit("external model positive boost must be disabled")
-          if ext.get("independent_verification_claimed") is not False: raise SystemExit("external independent verification must not be claimed")
-          if int(ext.get("min_resolved_before_downside_guard",20) or 0) < 20: raise SystemExit("external track-record gate too weak")
-          cov=d.get("coverage",{})
-          if "DISABLED" not in str(cov.get("btp_direct","")): raise SystemExit("direct BTP feed guard missing")
-          expected_btp={"IITB.MI","IITA.MI","BTP10.MI","BT27.MI"}
-          if not expected_btp.issubset(set(cov.get("btp_proxies_verified",[]))): raise SystemExit("verified BTP proxy registry incomplete")
-          from collections import Counter
-          cc=Counter(x.get("asset_class") for x in signals); kc=Counter(x.get("cluster") for x in signals)
-          if any(v>2 for v in cc.values()): raise SystemExit(f"asset-class concentration cap breached: {dict(cc)}")
-          if any(v>2 for v in kc.values()): raise SystemExit(f"cluster concentration cap breached: {dict(kc)}")
-          if sum(x.get("role")=="SATELLITE" for x in signals)>1: raise SystemExit("satellite concentration cap breached")
-
-          if d.get("edge_core",{}).get("version") != "1.0.0": raise SystemExit("Edge Core metadata missing")
-          if d.get("execution_assumptions",{}).get("cost_model") != "CONSERVATIVE_ASSET_CLASS_ROUND_TRIP_BPS": raise SystemExit("cost model missing")
-          print("V8.5 cost-aware Edge Core health check OK")
-          print("engine_updated_at:", engine_ts)
-          print("market_data_at:", d.get("market_data_at"))
-          print("asset_classes:", d.get("data_quality",{}).get("by_asset_class",{}))
-          print("signals:", len(signals), "watchlist:", len(watch))
-          print("diversification:", div)
-          PY
+      - name: Validate V8.5 snapshot and V9 chart feed
+        run: python scripts/validate_v85_snapshot.py
 
       - name: QA pass 1
         run: python -m unittest discover -s tests -p 'test_*.py' -v
@@ -180,45 +82,38 @@ jobs:
       - name: Save generated snapshot
         shell: bash
         run: |
-          set -e
-
+          set -euo pipefail
           git config user.name "alpha-engine-bot"
           git config user.email "alpha-engine-bot@users.noreply.github.com"
 
-          # Salviamo temporaneamente SOLO i file prodotti dal motore.
           cp data/latest.json /tmp/alpha-latest.json
           cp data/memory.json /tmp/alpha-memory.json
           cp data/automation-health.json /tmp/alpha-automation-health.json
+          cp data/market-series.json /tmp/alpha-market-series.json
 
           for attempt in 1 2 3; do
             echo "Push attempt $attempt/3"
-
-            # Ripartiamo sempre dall'ultima versione remota:
-            # niente rebase e quindi niente conflitti add/add.
             git fetch origin main
             git reset --hard origin/main
 
             cp /tmp/alpha-latest.json data/latest.json
             cp /tmp/alpha-memory.json data/memory.json
             cp /tmp/alpha-automation-health.json data/automation-health.json
+            cp /tmp/alpha-market-series.json data/market-series.json
 
-            git add data/latest.json data/memory.json data/automation-health.json
-
+            git add data/latest.json data/memory.json data/automation-health.json data/market-series.json
             if git diff --cached --quiet; then
               echo "No data changes to commit."
               exit 0
             fi
 
-            git commit -m "bot: refresh Alpha Engine data"
-
+            git commit -m "bot: refresh Alpha Engine data + charts"
             if git push origin HEAD:main; then
-              echo "Market data saved successfully."
+              echo "Alpha snapshot and chart feed saved successfully."
               exit 0
             fi
-
-            echo "Repository changed during push. Retrying safely..."
             sleep 5
           done
 
-          echo "Unable to save market data after 3 attempts."
+          echo "Unable to save Alpha data after 3 attempts."
           exit 1
