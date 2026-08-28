@@ -1,4 +1,4 @@
-const CACHE = "alpha-engine-v9-finance-cockpit-r3";
+const CACHE = "alpha-engine-v9-finance-cockpit-r4";
 const APP_SHELL = [
   "./",
   "./index.html",

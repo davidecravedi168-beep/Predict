@@ -10,7 +10,7 @@ COCKPIT = ROOT / 'finance-cockpit.js'
 
 
 def patch_index(text):
-    if 'Alpha Engine V9 · Finance Cockpit' not in text:
+    if 'Alpha Engine V9 · Quant Broker Cockpit' not in text:
         raise RuntimeError('Current V9 cockpit marker missing; refusing unknown index')
     old = '''  <div id="labGrid" class="labGrid"></div>
   <div class="footnote">Alpha Engine è supporto decisionale quantitativo. Confidence e score non sono probabilità di profitto quando il campione di calibrazione non è sufficiente. Costi, qualità dati, provenienza e limiti del modello restano visibili per evitare falsa precisione.</div>'''
