@@ -77,6 +77,14 @@ new_boot = r'''async function boot(){try{
 }catch(e){$('syncText').textContent='DATA ERROR';$('healthDot').className='dot bad';$('heroName').textContent='Dati non disponibili';$('heroTicker').textContent='FAIL CLOSED';$('heroReason').textContent='Alpha non mostra segnali finché data/latest.json non è leggibile.';console.error(e)}}
 '''
 s = s[:start] + new_boot + s[end:]
-
 p.write_text(s, encoding='utf-8')
-print('Alpha V9 market-series chart patch applied')
+
+sw = Path('sw.js')
+w = sw.read_text(encoding='utf-8')
+w2 = w.replace('(latest|automation-health|backtest-v8)', '(latest|market-series|automation-health|backtest-v8)')
+if w2 == w:
+    raise SystemExit('service worker live-data marker not found')
+w2 = w2.replace('alpha-engine-v9-finance-cockpit-r1', 'alpha-engine-v9-finance-cockpit-r2')
+sw.write_text(w2, encoding='utf-8')
+
+print('Alpha V9 real market charts + cache policy patch applied')
