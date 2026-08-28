@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - "index.html"
+      - "finance-cockpit.css"
+      - "finance-cockpit.js"
       - "manifest.webmanifest"
       - "sw.js"
       - "assets/**"
@@ -37,6 +39,9 @@ jobs:
         with:
           ref: main
 
+      - name: Verify V9 frontend syntax
+        run: node --check finance-cockpit.js
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
@@ -46,7 +51,7 @@ jobs:
           set -euo pipefail
           rm -rf _site
           mkdir -p _site/data
-          cp index.html manifest.webmanifest sw.js icon-180.png icon-192.png icon-512.png _site/
+          cp index.html finance-cockpit.css finance-cockpit.js manifest.webmanifest sw.js icon-180.png icon-192.png icon-512.png _site/
           cp data/latest.json data/backtest-v8.json _site/data/
           if [ -f data/market-series.json ]; then cp data/market-series.json _site/data/; fi
           if [ -f data/automation-health.json ]; then cp data/automation-health.json _site/data/; fi
