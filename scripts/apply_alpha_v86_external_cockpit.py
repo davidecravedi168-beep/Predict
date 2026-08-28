@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+"""Apply Alpha v8.6 episode-ledger semantics to the current external-JS V9 cockpit."""
+from pathlib import Path
+from apply_alpha_v86_upgrade_v2 import patch_engine, replace_unique
+
+ROOT = Path(__file__).resolve().parents[1]
+ENGINE = ROOT / 'engine.py'
+INDEX = ROOT / 'index.html'
+COCKPIT = ROOT / 'finance-cockpit.js'
+
+
+def patch_index(text):
+    if 'Alpha Engine V9 · Finance Cockpit' not in text:
+        raise RuntimeError('Current V9 cockpit marker missing; refusing unknown index')
+    old = '''  <div id="labGrid" class="labGrid"></div>
+  <div class="footnote">Alpha Engine è supporto decisionale quantitativo. Confidence e score non sono probabilità di profitto quando il campione di calibrazione non è sufficiente. Costi, qualità dati, provenienza e limiti del modello restano visibili per evitare falsa precisione.</div>'''
+    new = '''  <div id="labGrid" class="labGrid"></div>
+  <div class="sectionTitle"><h2>Decision ledger</h2><span>Un episodio attivo per asset · audit deduplicato</span></div>
+  <div id="ledgerKpis" class="summaryGrid"></div>
+  <div id="ledgerNote" class="notice">Il ledger usa solo osservazioni con timestamp di mercato nuovo. Le tesi sostituite restano in audit come SUPERSEDED e non vengono contate come esiti.</div>
+  <div class="periods"><button id="importLedgerBtn" class="period" type="button">IMPORT</button><button id="exportLedgerBtn" class="period" type="button">EXPORT</button><input id="importLedgerFile" type="file" accept="application/json,.json" hidden></div>
+  <div id="ledgerList" class="watchList"></div>
+  <div class="footnote">Alpha Engine è supporto decisionale quantitativo. Confidence e score non sono probabilità di profitto quando il campione di calibrazione non è sufficiente. Costi, qualità dati, provenienza e limiti del modello restano visibili per evitare falsa precisione.</div>'''
+    return replace_unique(text, old, new, 'external V9 Decision Ledger UI')
+
+
+def patch_cockpit(text):
+    changed = False
+    state_old = "const state={data:null,series:null,health:null,selected:null,period:'1M',page:'home',filter:'ALL',query:'',favs:new Set(JSON.parse(localStorage.getItem('alpha-v9-favs')||'[]')),chartPoints:[]};"
+    state_new = state_old + '''
+const LEDGER_KEY='alpha_decision_journal_v86';
+const LEDGER_LEGACY_KEYS=['alpha_decision_journal_v70','alpha_decision_journal_v44'];
+const LEDGER_TERMINAL=new Set(['TARGET1','TARGET2','STOP','AMBIGUO','SUPERSEDED','EXPIRED']);
+const nval=(v,d=null)=>Number.isFinite(Number(v))?Number(v):d;
+function ledgerEpisodeKey(z){return [z?.ticker||'',z?.direction||'',nval(z?.horizon,null)??'NA',z?.horizon_setup_family||'MIXED'].join('|')}
+function compactLedgerEpisodes(rows){
+ const sorted=(Array.isArray(rows)?rows:[]).filter(z=>z&&z.ticker&&z.direction).map(z=>({...z})).sort((a,b)=>nval(a.ts,0)-nval(b.ts,0)),out=[],activeByKey=new Map();
+ for(const z of sorted){
+  z.direction=String(z.direction).toUpperCase()==='SHORT'?'SHORT':'LONG';
+  if(LEDGER_TERMINAL.has(z.status)){out.push(z);continue}
+  const key=ledgerEpisodeKey(z),prev=activeByKey.get(key);
+  if(prev){
+   const pe=nval(prev.price,null),ze=nval(z.price,null);prev.episode_id=prev.episode_id||prev.id;prev.episode_key=key;
+   prev.last_seen_at=z.observed_at||z.market_data_at||z.updated_at||prev.last_seen_at;
+   prev.last_model_version=z.model_version||prev.last_model_version||prev.model_version;
+   prev.latest_confidence=nval(z.confidence,prev.latest_confidence);
+   prev.observed_high=Math.max(nval(prev.observed_high,pe??-Infinity),nval(z.observed_high,ze??-Infinity));
+   prev.observed_low=Math.min(nval(prev.observed_low,pe??Infinity),nval(z.observed_low,ze??Infinity));
+   if(nval(z.last_price,null)!=null)prev.last_price=z.last_price;if(z.observed_at)prev.observed_at=z.observed_at;
+   prev.observations=Math.max(nval(prev.observations,0),nval(z.observations,0));prev.duplicate_snapshots=nval(prev.duplicate_snapshots,0)+1;continue;
+  }
+  z.episode_id=z.episode_id||z.id;z.episode_key=key;z.status=z.status||((nval(z.stop,null)!=null&&nval(z.target1,null)!=null)?'OPEN':'OBSERVE_ONLY');
+  z.first_seen_at=z.first_seen_at||z.updated_at||new Date(nval(z.ts,Date.now())).toISOString();z.last_seen_at=z.last_seen_at||z.observed_at||z.market_data_at||z.updated_at||z.first_seen_at;
+  activeByKey.set(key,z);out.push(z);
+ }
+ const byTicker=new Map();out.forEach(z=>{if(!LEDGER_TERMINAL.has(z.status)){const a=byTicker.get(z.ticker)||[];a.push(z);byTicker.set(z.ticker,a)}});
+ for(const group of byTicker.values()){if(group.length<2)continue;group.sort((a,b)=>nval(a.ts,0)-nval(b.ts,0));const newest=group[group.length-1];group.slice(0,-1).forEach(old=>{old.status='SUPERSEDED';old.superseded_by=newest.episode_id||newest.id;old.resolved_at=newest.first_seen_at||newest.updated_at||new Date().toISOString()})}
+ return out.sort((a,b)=>nval(a.ts,0)-nval(b.ts,0));
+}
+function readLedger(){
+ try{let raw=localStorage.getItem(LEDGER_KEY);if(!raw){for(const k of LEDGER_LEGACY_KEYS){const v=localStorage.getItem(k);if(v){raw=v;break}}}const parsed=JSON.parse(raw||'[]');return compactLedgerEpisodes(Array.isArray(parsed)?parsed:(Array.isArray(parsed?.journal)?parsed.journal:[]))}catch{return[]}
+}
+function saveLedger(rows){try{localStorage.setItem(LEDGER_KEY,JSON.stringify(compactLedgerEpisodes(rows).slice(-750)))}catch{}}
+function ledgerFeedRows(){return [...(state.data?.signals||[]),...(state.data?.watchlist||[])]}
+function ledgerPrice(x){if(!x)return null;const observed=lastPrice(x.ticker);return Number.isFinite(observed)?observed:nval(x.quote_price,nval(x.entry_price,nval(x.price,null)))}
+function directionalPct(dir,entry,px){if(!(entry>0)||px==null)return null;return (dir==='SHORT'?(entry-px)/entry:(px-entry)/entry)*100}
+function snapshotLedger(){
+ if(!state.data)return;let j=readLedger(),changed=false;const now=Date.now(),seenAt=state.data.market_data_at||state.data.updated_at||new Date().toISOString();
+ for(const x of (state.data.signals||[])){if(!x?.ticker||!x?.direction)continue;const key=[x.ticker,x.direction,nval(x.horizon,null)??'NA',x.horizon_setup_family||'MIXED'].join('|'),same=j.find(z=>!LEDGER_TERMINAL.has(z.status)&&ledgerEpisodeKey(z)===key);
+  if(same){same.last_seen_at=seenAt;same.last_model_version=state.data.model_version||x.model_version||same.model_version;same.latest_confidence=nval(x.confidence_pct,same.latest_confidence);same.model_completeness=nval(x.model_completeness_score,same.model_completeness);changed=true;continue}
+  const episodeId='EP_'+x.ticker+'_'+x.direction+'_'+now,prior=j.filter(z=>!LEDGER_TERMINAL.has(z.status)&&z.ticker===x.ticker);for(const old of prior){old.status='SUPERSEDED';old.superseded_by=episodeId;old.resolved_at=seenAt;changed=true}
+  const px=ledgerPrice(x),levels=nval(x.stop_price,null)!=null&&nval(x.target1_price,null)!=null;j.push({id:episodeId,episode_id:episodeId,episode_key:key,ts:now,first_seen_at:state.data.updated_at||new Date().toISOString(),last_seen_at:seenAt,updated_at:state.data.updated_at||null,market_data_at:state.data.market_data_at||null,model_version:state.data.model_version||x.model_version||'unknown',learning_lineage:state.data.model_learning?.learning_lineage||null,ticker:x.ticker,direction:x.direction,asset_class:x.asset_class||null,currency:x.currency||'',price:px,score:nval(x.score,null),confidence:nval(x.confidence_pct,null),learning_adjustment:nval(x.learning_adjustment,0),data_quality:nval(x.data_quality_score,null),model_completeness:nval(x.model_completeness_score,null),horizon:nval(x.horizon,null),horizon_state:x.horizon_state||null,horizon_setup_family:x.horizon_setup_family||null,stop:nval(x.stop_price,null),target1:nval(x.target1_price,null),target2:nval(x.target2_price,null),status:levels?'OPEN':'OBSERVE_ONLY',observations:0,observed_high:px,observed_low:px,last_price:px,current_return_pct:0,mfe_pct:0,mae_pct:0,r_multiple:0});changed=true;
+ }
+ if(changed)saveLedger(j)
+}
+function observeLedger(){
+ if(!state.data)return;const byTicker=new Map();ledgerFeedRows().forEach(x=>{if(x?.ticker&&ledgerPrice(x)!=null&&!byTicker.has(x.ticker))byTicker.set(x.ticker,x)});let j=readLedger(),changed=false;const obsAt=state.data.market_data_at||state.data.updated_at||new Date().toISOString();
+ for(const z of j){if(LEDGER_TERMINAL.has(z.status)||z.observed_at===obsAt)continue;const x=byTicker.get(z.ticker),entry=nval(z.price,null),cur=ledgerPrice(x);if(!x||entry==null||cur==null)continue;z.last_price=cur;z.observed_high=Math.max(nval(z.observed_high,entry),cur);z.observed_low=Math.min(nval(z.observed_low,entry),cur);z.observed_at=obsAt;z.observations=nval(z.observations,0)+1;z.current_return_pct=directionalPct(z.direction,entry,cur);z.mfe_pct=z.direction==='SHORT'?directionalPct('SHORT',entry,z.observed_low):directionalPct('LONG',entry,z.observed_high);z.mae_pct=Math.min(0,z.direction==='SHORT'?directionalPct('SHORT',entry,z.observed_high):directionalPct('LONG',entry,z.observed_low));const stop=nval(z.stop,null),t1=nval(z.target1,null),t2=nval(z.target2,null),stopHit=stop!=null&&(z.direction==='SHORT'?z.observed_high>=stop:z.observed_low<=stop),t1Hit=t1!=null&&(z.direction==='SHORT'?z.observed_low<=t1:z.observed_high>=t1),t2Hit=t2!=null&&(z.direction==='SHORT'?z.observed_low<=t2:z.observed_high>=t2);if(t2Hit)z.status='TARGET2';else if(t1Hit)z.status='TARGET1';else if(stopHit)z.status='STOP';else z.status=(stop==null||t1==null)?'OBSERVE_ONLY':'OPEN';const risk=stop==null?null:Math.abs(entry-stop);if(risk>0)z.r_multiple=z.status==='STOP'?-1:z.status==='TARGET1'?Math.abs(t1-entry)/risk:z.status==='TARGET2'?Math.abs(t2-entry)/risk:(z.direction==='SHORT'?entry-cur:cur-entry)/risk;if(['TARGET1','TARGET2','STOP'].includes(z.status))z.resolved_at=obsAt;changed=true}
+ if(changed)saveLedger(j)
+}
+function ledgerStats(){const j=readLedger(),resolved=j.filter(z=>['TARGET1','TARGET2','STOP'].includes(z.status)),wins=resolved.filter(z=>z.status!=='STOP'),active=j.filter(z=>!LEDGER_TERMINAL.has(z.status)),sup=j.filter(z=>z.status==='SUPERSEDED'),dups=j.reduce((a,z)=>a+nval(z.duplicate_snapshots,0),0),rs=resolved.map(z=>nval(z.r_multiple,null)).filter(v=>v!=null);return{j,resolved,wins,active,sup,dups,avgR:rs.length?rs.reduce((a,b)=>a+b,0)/rs.length:null}}
+function renderLedger(){if(!$('ledgerKpis'))return;const s=ledgerStats(),mem=state.data?.memory||{};$('ledgerKpis').innerHTML=[['Active',s.active.length,'episodi unici'],['Resolved',s.resolved.length,s.resolved?`Hit rate ${num(s.wins.length/s.resolved.length*100,1)}%`:'campione immaturo'],['Avg R',s.avgR==null?'—':`${num(s.avgR,2)}R`,'solo esiti chiusi'],['Dedup',s.dups,'snapshot assorbiti'],['Superseded',s.sup.length,'tesi sostituite'],['Backend N',mem.independent_episodes??mem.total??'—',`learning ${mem.learning_resolved??mem.resolved??0}`]].map(c=>`<div class="card"><div class="k">${esc(c[0])}</div><div class="v">${esc(c[1])}</div><div class="n">${esc(c[2])}</div></div>`).join('');const recent=[...s.j].sort((a,b)=>nval(b.ts,0)-nval(a.ts,0)).slice(0,10);$('ledgerList').innerHTML=recent.map(z=>`<div class="watchRow"><div class="watchName"><b>${esc(z.ticker)}</b><span>${esc(z.direction)} · ${esc(z.horizon??'—')}d · ${esc(z.status||'OPEN')}</span></div><div class="watchPrice">${esc(price(z.last_price??z.price,z.currency))}</div><div class="watchChange ${z.status==='STOP'?'negative':String(z.status||'').startsWith('TARGET')?'positive':'neutral'}">${nval(z.r_multiple,null)==null?'—':esc(num(z.r_multiple,2)+'R')}</div><div class="sigDir ${z.direction==='LONG'?'positive':'negative'}">${esc(z.direction)}</div></div>`).join('')||'<div class="errorBox">Il ledger inizierà dal prossimo segnale valido o da un import.</div>'}
+function syncLedger(){snapshotLedger();observeLedger();renderLedger()}
+function exportLedger(){const payload={format:'ALPHA-DECISION-JOURNAL',version:'8.6',exported_at:new Date().toISOString(),journal:readLedger()},blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='alpha-v86-decision-journal-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+async function importLedger(ev){const f=ev.target.files?.[0];ev.target.value='';if(!f)return;try{if(f.size>2*1024*1024)throw Error('file troppo grande');const o=JSON.parse(await f.text()),rows=Array.isArray(o)?o:o?.journal;if(!Array.isArray(rows))throw Error('formato non riconosciuto');saveLedger([...readLedger(),...rows]);observeLedger();renderLedger();$('ledgerNote').textContent=`Import completato: ${rows.length} righe ricevute, deduplicazione applicata.`}catch(e){$('ledgerNote').textContent=`Import non riuscito: ${e.message}`}}
+function bindLedger(){const ex=$('exportLedgerBtn'),im=$('importLedgerBtn'),fi=$('importLedgerFile');if(!ex||ex.dataset.bound)return;ex.dataset.bound='1';ex.addEventListener('click',exportLedger);im.addEventListener('click',()=>fi.click());fi.addEventListener('change',importLedger)}'''
+    text, c = replace_unique(text, state_old, state_new, 'external V9 ledger runtime')
+    changed |= c
+
+    hero_old = "['Data quality',a?.data_quality_score!=null?`${num(a.data_quality_score,0)}/100`:'—']"
+    hero_new = "['Data quality',a?.data_quality_score!=null?`${num(a.data_quality_score,0)}/100`:'—'],['Model completeness',a?.model_completeness_score!=null?`${num(a.model_completeness_score,0)}/100`:'—']"
+    text, c = replace_unique(text, hero_old, hero_new, 'hero model completeness')
+    changed |= c
+
+    lab_old = "<div class=\"card\"><div class=\"k\">MODEL GOVERNANCE</div><div class=\"v\">V8.5</div><div class=\"rows\"><div class=\"dataRow\"><span>Edge Core</span><b>${esc(d.edge_core?.version||'—')}</b></div><div class=\"dataRow\"><span>No look-ahead</span><b>${d.model_learning?.no_lookahead?'ON':'OFF'}</b></div><div class=\"dataRow\"><span>Resolved</span><b>${mem.resolved||0}</b></div><div class=\"dataRow\"><span>Backtest</span><b class=\"${bt.state==='OK'?'positive':'negative'}\">${esc(bt.state||'—')}</b></div></div></div>"
+    lab_new = "<div class=\"card\"><div class=\"k\">MODEL GOVERNANCE</div><div class=\"v\">${esc(d.model_version||'—')}</div><div class=\"rows\"><div class=\"dataRow\"><span>Edge Core</span><b>${esc(d.edge_core?.version||'—')}</b></div><div class=\"dataRow\"><span>No look-ahead</span><b>${d.model_learning?.no_lookahead?'ON':'OFF'}</b></div><div class=\"dataRow\"><span>Independent episodes</span><b>${mem.independent_episodes??mem.total??'—'}</b></div><div class=\"dataRow\"><span>Active</span><b>${mem.active??'—'}</b></div><div class=\"dataRow\"><span>Resolved clean lineage</span><b>${mem.resolved||0}</b></div><div class=\"dataRow\"><span>Legacy resolved excluded</span><b>${mem.legacy_resolved_excluded??0}</b></div><div class=\"dataRow\"><span>Episode guard</span><b>${d.edge_core?.signal_lock==='ONE_ACTIVE_EPISODE_PER_TICKER_WITH_STABLE_SETUP_KEY'?'ON':'CHECK'}</b></div><div class=\"dataRow\"><span>Backtest</span><b class=\"${bt.state==='OK'?'positive':'negative'}\">${esc(bt.state||'—')}</b></div></div></div>"
+    text, c = replace_unique(text, lab_old, lab_new, 'lab episode governance')
+    changed |= c
+
+    all_old = 'function renderAll(){renderStatus();renderHero();renderTape();renderSummary();renderIdeas();renderWatch();renderSignals();renderMacro();renderLab()}'
+    all_new = 'function renderAll(){renderStatus();renderHero();renderTape();renderSummary();renderIdeas();renderWatch();renderSignals();renderMacro();renderLab();renderLedger()}'
+    text, c = replace_unique(text, all_old, all_new, 'render ledger')
+    changed |= c
+
+    load_old = "state.selected=first;renderFilters();renderAll();$('loading').style.display='none';$('content').style.display='block'"
+    load_new = "state.selected=first;renderFilters();syncLedger();bindLedger();renderAll();$('loading').style.display='none';$('content').style.display='block'"
+    text, c = replace_unique(text, load_old, load_new, 'load ledger sync')
+    changed |= c
+    return text, changed
+
+
+def main():
+    engine=ENGINE.read_text(encoding='utf-8')
+    index=INDEX.read_text(encoding='utf-8')
+    cockpit=COCKPIT.read_text(encoding='utf-8')
+    engine2,ce=patch_engine(engine)
+    index2,ci=patch_index(index)
+    cockpit2,cc=patch_cockpit(cockpit)
+    for marker in ['8.6.0-episode-ledger-cost-aware','def migrate_prediction_episodes(mem):','ONE_ACTIVE_EPISODE_PER_TICKER_WITH_STABLE_SETUP_KEY','model_completeness_score']:
+        if marker not in engine2: raise RuntimeError('engine verification failed: '+marker)
+    for marker in ['Decision ledger','ledgerKpis','importLedgerFile']:
+        if marker not in index2: raise RuntimeError('index verification failed: '+marker)
+    for marker in ['compactLedgerEpisodes','syncLedger','Model completeness','Episode guard','alpha_decision_journal_v86',"version:'8.6'"]:
+        if marker not in cockpit2: raise RuntimeError('cockpit verification failed: '+marker)
+    if ce: ENGINE.write_text(engine2,encoding='utf-8')
+    if ci: INDEX.write_text(index2,encoding='utf-8')
+    if cc: COCKPIT.write_text(cockpit2,encoding='utf-8')
+    print(f'Alpha v8.6 external cockpit migration: engine={ce} index={ci} cockpit={cc}')
+
+if __name__=='__main__':
+    main()
