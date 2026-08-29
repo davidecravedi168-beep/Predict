@@ -22,6 +22,7 @@ import yfinance as yf
 from edge_core import EDGE_CORE_VERSION, assert_public_snapshot, cost_adjusted_return_pct, estimated_round_trip_cost_bps
 
 MODEL_VERSION = "8.6.1-math-risk-layer"
+# Migration compatibility baseline: 8.6.0-episode-ledger-cost-aware
 LEARNING_LINEAGE = "ALPHA_V86_EPISODE_LEDGER_1"
 OUT = Path("data/latest.json")
 MEM = Path("data/memory.json")
