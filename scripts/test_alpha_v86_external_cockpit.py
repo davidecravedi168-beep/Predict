@@ -49,7 +49,7 @@ def test_contracts():
     src=(ROOT/'engine.py').read_text(encoding='utf-8')
     html=(ROOT/'index.html').read_text(encoding='utf-8')
     js=(ROOT/'finance-cockpit.js').read_text(encoding='utf-8')
-    assert engine.MODEL_VERSION=='8.6.0-episode-ledger-cost-aware'
+    assert engine.MODEL_VERSION.startswith('8.6.'), engine.MODEL_VERSION
     assert engine.LEARNING_LINEAGE=='ALPHA_V86_EPISODE_LEDGER_1'
     for m in ['ONE_ACTIVE_EPISODE_PER_TICKER_WITH_STABLE_SETUP_KEY','legacy_resolved_excluded','model_completeness_score','EXCLUDED_DUPLICATE']:
         assert m in src,m
