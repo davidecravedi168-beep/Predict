@@ -814,9 +814,12 @@
       "outcome": "PENDING",
       "episode_key": "SUSE.MI|LONG|20|BREAKOUT",
       "episode_id": "EP|2026-08-25|SUSE.MI|LONG|20|BREAKOUT",
-      "observations": 1,
+      "observations": 2,
       "state": "ACTIVE",
-      "last_seen": "2026-08-28"
+      "last_seen": "2026-08-29",
+      "latest_confidence_pct": 77.1,
+      "latest_learning_adjustment": 0.0,
+      "latest_model_version": "8.6.1-math-risk-layer"
     },
     {
       "id": "2026-08-25|EURUSD=X|LONG|5|8.4.0-adaptive-horizon-governed",
@@ -1167,12 +1170,12 @@
       "outcome": "PENDING",
       "episode_key": "HYG|LONG|20|BREAKOUT",
       "episode_id": "EP|2026-08-25|HYG|LONG|20|BREAKOUT",
-      "observations": 5,
+      "observations": 6,
       "state": "ACTIVE",
-      "last_seen": "2026-08-28",
+      "last_seen": "2026-08-29",
       "latest_confidence_pct": 68.85,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
+      "latest_model_version": "8.6.1-math-risk-layer"
     },
     {
       "id": "2026-08-25|IITB.MI|SHORT|10|8.4.0-adaptive-horizon-governed",
@@ -1248,12 +1251,12 @@
       "outcome": "PENDING",
       "episode_key": "IITB.MI|SHORT|10|BREAKOUT",
       "episode_id": "EP|2026-08-25|IITB.MI|SHORT|10|BREAKOUT",
-      "observations": 6,
+      "observations": 7,
       "state": "ACTIVE",
-      "last_seen": "2026-08-28",
-      "latest_confidence_pct": 71.01,
+      "last_seen": "2026-08-29",
+      "latest_confidence_pct": 68.81,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
+      "latest_model_version": "8.6.1-math-risk-layer"
     },
     {
       "id": "2026-08-25|GLD|LONG|20|8.4.0-adaptive-horizon-governed",
@@ -1955,12 +1958,12 @@
       "outcome": "PENDING",
       "episode_key": "BTP10.MI|SHORT|10|BREAKOUT",
       "episode_id": "EP|2026-08-25|BTP10.MI|SHORT|10|BREAKOUT",
-      "observations": 6,
+      "observations": 7,
       "state": "ACTIVE",
-      "last_seen": "2026-08-28",
-      "latest_confidence_pct": 71.22,
+      "last_seen": "2026-08-29",
+      "latest_confidence_pct": 69.47,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
+      "latest_model_version": "8.6.1-math-risk-layer"
     },
     {
       "id": "2026-08-26|GBPUSD=X|LONG|10|8.4.0-adaptive-horizon-governed",
@@ -3114,11 +3117,13 @@
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING",
+      "outcome": "SUPERSEDED",
       "episode_key": "MSFT|LONG|5|RELATIVE",
       "episode_id": "EP|2026-08-26|MSFT|LONG|5|RELATIVE",
       "observations": 1,
-      "state": "ACTIVE"
+      "state": "SUPERSEDED",
+      "superseded_on": "2026-08-29",
+      "resolution_state": "SUPERSEDED_BY_NEW_ACTIVE_THESIS"
     },
     {
       "id": "2026-08-26|SIE.DE|LONG|3|8.4.0-adaptive-horizon-governed",
@@ -3949,12 +3954,12 @@
       "outcome": "PENDING",
       "episode_key": "USMV|LONG|10|BREAKOUT",
       "episode_id": "EP|2026-08-28|USMV|LONG|10|BREAKOUT",
-      "observations": 6,
+      "observations": 7,
       "state": "ACTIVE",
-      "last_seen": "2026-08-28",
-      "latest_confidence_pct": 72.65,
+      "last_seen": "2026-08-29",
+      "latest_confidence_pct": 71.53,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
+      "latest_model_version": "8.6.1-math-risk-layer"
     },
     {
       "id": "2026-08-28|EURUSD=X|LONG|5|8.4.0-adaptive-horizon-governed",
@@ -5204,9 +5209,9 @@
       "episode_id": "EP|2026-08-28|BNDX|SHORT|10|BREAKOUT|8.6.0-episode-ledger-cost-aware",
       "episode_key": "BNDX|SHORT|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 3,
+      "observations": 4,
       "first_seen": "2026-08-28",
-      "last_seen": "2026-08-28",
+      "last_seen": "2026-08-29",
       "model_version": "8.6.0-episode-ledger-cost-aware",
       "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
       "date": "2026-08-28",
@@ -5280,16 +5285,16 @@
       "outcome": "PENDING",
       "latest_confidence_pct": 72.54,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
+      "latest_model_version": "8.6.1-math-risk-layer"
     },
     {
       "id": "EP|2026-08-28|XLU|SHORT|10|BREAKOUT|8.6.0-episode-ledger-cost-aware",
       "episode_id": "EP|2026-08-28|XLU|SHORT|10|BREAKOUT|8.6.0-episode-ledger-cost-aware",
       "episode_key": "XLU|SHORT|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 3,
+      "observations": 4,
       "first_seen": "2026-08-28",
-      "last_seen": "2026-08-28",
+      "last_seen": "2026-08-29",
       "model_version": "8.6.0-episode-ledger-cost-aware",
       "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
       "date": "2026-08-28",
@@ -5381,14 +5386,210 @@
       "outcome": "PENDING",
       "latest_confidence_pct": 68.88,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.0-episode-ledger-cost-aware"
+      "latest_model_version": "8.6.1-math-risk-layer"
+    },
+    {
+      "id": "EP|2026-08-29|MSFT|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
+      "episode_id": "EP|2026-08-29|MSFT|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
+      "episode_key": "MSFT|LONG|10|BREAKOUT",
+      "state": "ACTIVE",
+      "observations": 1,
+      "first_seen": "2026-08-29",
+      "last_seen": "2026-08-29",
+      "model_version": "8.6.1-math-risk-layer",
+      "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
+      "date": "2026-08-29",
+      "ticker": "MSFT",
+      "sector": "US_QUALITY_GROWTH",
+      "asset_class": "EQUITY",
+      "cluster": "US_MEGA_CAP",
+      "role": "CORE",
+      "direction": "LONG",
+      "horizon": 10,
+      "horizon_state": "EMPIRICAL_SUPPORTS_FALLBACK",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "confidence_pct": 73.33,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "entry": 513.669983,
+      "entry_source": "YFINANCE_15M_OBSERVED",
+      "risk_pct": 2.848,
+      "stop": 499.044708,
+      "target1": 534.145368,
+      "target2": 545.845588,
+      "data_quality_score": 100,
+      "model_completeness_score": 60,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "LONG",
+          "score": 73.73,
+          "conviction": 47.47,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RELATIVE_Z",
+          "direction": "LONG",
+          "score": 73.95,
+          "conviction": 47.89,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "LONG",
+          "score": 57.2,
+          "conviction": 14.39,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "LONG",
+          "score": 100.0,
+          "conviction": 100.0,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "SHORT",
+          "score": 36.34,
+          "conviction": 27.31,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "VOLUME_CONFIRM",
+          "direction": "LONG",
+          "score": 53.57,
+          "conviction": 7.13,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "learning_adjustment": 0.0,
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "outcome": "PENDING"
+    },
+    {
+      "id": "EP|2026-08-29|WTRG|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
+      "episode_id": "EP|2026-08-29|WTRG|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
+      "episode_key": "WTRG|LONG|10|BREAKOUT",
+      "state": "ACTIVE",
+      "observations": 1,
+      "first_seen": "2026-08-29",
+      "last_seen": "2026-08-29",
+      "model_version": "8.6.1-math-risk-layer",
+      "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
+      "date": "2026-08-29",
+      "ticker": "WTRG",
+      "sector": "WATER_UTILITIES_EQUITY",
+      "asset_class": "EQUITY",
+      "cluster": "DEFENSIVES",
+      "role": "DIVERSIFIER",
+      "direction": "LONG",
+      "horizon": 10,
+      "horizon_state": "RULE_BASED_FALLBACK_NO_STABLE_EDGE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "confidence_pct": 73.03,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "entry": 41.099998,
+      "entry_source": "YFINANCE_15M_OBSERVED",
+      "risk_pct": 2.901,
+      "stop": 39.907498,
+      "target1": 42.769498,
+      "target2": 43.723498,
+      "data_quality_score": 100,
+      "model_completeness_score": 60,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "LONG",
+          "score": 69.44,
+          "conviction": 38.89,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RELATIVE_Z",
+          "direction": "LONG",
+          "score": 86.14,
+          "conviction": 72.28,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "LONG",
+          "score": 65.54,
+          "conviction": 31.08,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "LONG",
+          "score": 95.57,
+          "conviction": 91.14,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "SHORT",
+          "score": 34.4,
+          "conviction": 31.2,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "VOLUME_CONFIRM",
+          "direction": "LONG",
+          "score": 60.49,
+          "conviction": 20.99,
+          "weight": 1.0,
+          "as_of": "2026-08-28",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "learning_adjustment": 0.0,
+      "risk_regime": "RISK_ON",
+      "rates_regime": "RATES_STABLE",
+      "outcome": "PENDING"
     }
   ],
   "stats": {
-    "total": 2,
-    "independent_episodes": 2,
-    "active": 2,
-    "superseded_or_excluded": 46,
+    "total": 4,
+    "independent_episodes": 4,
+    "active": 4,
+    "superseded_or_excluded": 47,
     "legacy_resolved_excluded": 4,
     "resolved": 0,
     "hits": 0,
@@ -5409,5 +5610,5 @@
   "model_stats_by_asset_class": {},
   "external_model_stats": {},
   "external_predictions": [],
-  "version": "8.6.0-episode-ledger-cost-aware"
+  "version": "8.6.1-math-risk-layer"
 }
