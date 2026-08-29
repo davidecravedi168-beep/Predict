@@ -82,7 +82,7 @@ jobs:
           gh run watch "$run_id" --exit-status
           echo "recovered=1" >> "$GITHUB_OUTPUT"
 
-      - name: Verify V8.5 snapshot contract and freshness
+      - name: Verify V8.6 snapshot contract and freshness
         shell: bash
         run: |
           git fetch origin main
@@ -92,18 +92,18 @@ jobs:
           from datetime import datetime, timezone
 
           d = json.load(open('/tmp/latest.json', encoding='utf-8'))
-          if d.get('schema_version') != '8.5':
-              raise SystemExit(f"Expected schema 8.5, got {d.get('schema_version')}")
-          if not str(d.get('model_version', '')).startswith('8.5.'):
-              raise SystemExit(f"Expected V8.5 model, got {d.get('model_version')}")
+          if d.get('schema_version') != '8.6':
+              raise SystemExit(f"Expected schema 8.6, got {d.get('schema_version')}")
+          if not str(d.get('model_version', '')).startswith('8.6.'):
+              raise SystemExit(f"Expected V8.6 model, got {d.get('model_version')}")
           if (d.get('edge_core') or {}).get('domain_profile') != 'FINANCE':
               raise SystemExit('Finance Edge Core profile missing')
           raw = d.get('engine_updated_at') or d.get('updated_at')
           ts = datetime.fromisoformat(raw.replace('Z', '+00:00'))
           age = (datetime.now(timezone.utc) - ts).total_seconds() / 60
           if age > 30:
-              raise SystemExit(f'V8.5 snapshot is stale after pulse: {age:.1f}m')
-          print(f'Alpha V8.5 freshness verified: {age:.1f}m old')
+              raise SystemExit(f'V8.6 snapshot is stale after pulse: {age:.1f}m')
+          print(f'Alpha V8.6 freshness verified: {age:.1f}m old')
           PY
 
       - name: Publish latest snapshot to GitHub Pages
