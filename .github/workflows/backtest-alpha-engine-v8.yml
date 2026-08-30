@@ -5,6 +5,11 @@ on:
   schedule:
     # Weekly independent research audit; off-peak UTC reduces scheduler contention.
     - cron: "17 4 * * 0"
+  push:
+    branches: [main]
+    paths:
+      - 'engine.py'
+      - '.github/workflows/backtest-alpha-engine-v8.yml'
 
 permissions:
   contents: write
