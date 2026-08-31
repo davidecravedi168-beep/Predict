@@ -74,7 +74,25 @@ jobs:
           PY
 
       - name: Apply Alpha v8.6 episode-ledger migration
-        run: python scripts/apply_alpha_v86_external_cockpit.py
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess, sys
+          index=Path('index.html').read_text(encoding='utf-8')
+          cockpit=Path('finance-cockpit.js').read_text(encoding='utf-8')
+          engine=Path('engine.py').read_text(encoding='utf-8')
+          already=(
+              'Decision ledger' in index and 'ledgerKpis' in index and 'importLedgerFile' in index
+              and 'compactLedgerEpisodes' in cockpit and 'syncLedger' in cockpit and 'alpha_decision_journal_v86' in cockpit
+              and 'ONE_ACTIVE_EPISODE_PER_TICKER_WITH_STABLE_SETUP_KEY' in engine and 'model_completeness_score' in engine
+          )
+          if already:
+              print('Alpha v8.6 episode-ledger migration already applied; idempotent skip')
+          else:
+              subprocess.run([sys.executable,'scripts/apply_alpha_v86_external_cockpit.py'],check=True)
+          PY
 
       - name: Apply V9 mobile UX safeguards
         shell: bash
