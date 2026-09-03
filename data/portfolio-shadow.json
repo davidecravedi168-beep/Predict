@@ -1,7 +1,114 @@
 {
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
-  "portfolio_risk": {"status":"PENDING_REFRESH","signal_count":0,"exposures":{},"factor_proxy_shares":{},"flags":[],"policy":"Generated from canonical signals on governance refresh."},
-  "champion_shadow": {"state":"NO_SHADOW_SAMPLE","champion":{"n":0},"shadow":{"n":0},"comparable_n":0,"promotion_eligible_for_review":false,"reasons":["MIN_30_COMPARABLE_FORWARD_OUTCOMES_NOT_MET"],"policy":"Shadow never changes production automatically."},
+  "portfolio_risk": {
+    "status": "HEALTHY",
+    "signal_count": 10,
+    "exposures": {
+      "asset_class": {
+        "counts": {
+          "ETF_EQUITY": 2,
+          "ETF_BOND_CREDIT": 2,
+          "EQUITY": 2,
+          "BTP": 2,
+          "ETF_COMMODITY": 1,
+          "ETF_BOND_GOV": 1
+        },
+        "shares": {
+          "ETF_EQUITY": 0.2,
+          "ETF_BOND_CREDIT": 0.2,
+          "EQUITY": 0.2,
+          "BTP": 0.2,
+          "ETF_COMMODITY": 0.1,
+          "ETF_BOND_GOV": 0.1
+        },
+        "top": "ETF_EQUITY",
+        "top_share": 0.2
+      },
+      "cluster": {
+        "counts": {
+          "US_SECTORS": 1,
+          "EURO_CREDIT": 1,
+          "US_MEGA_CAP": 1,
+          "DEFENSIVES": 1,
+          "ENERGY": 1,
+          "CREDIT": 1,
+          "ITALY_RATES": 2,
+          "COMMODITIES": 1,
+          "US_RATES": 1
+        },
+        "shares": {
+          "US_SECTORS": 0.1,
+          "EURO_CREDIT": 0.1,
+          "US_MEGA_CAP": 0.1,
+          "DEFENSIVES": 0.1,
+          "ENERGY": 0.1,
+          "CREDIT": 0.1,
+          "ITALY_RATES": 0.2,
+          "COMMODITIES": 0.1,
+          "US_RATES": 0.1
+        },
+        "top": "ITALY_RATES",
+        "top_share": 0.2
+      },
+      "direction": {
+        "counts": {
+          "LONG": 6,
+          "SHORT": 4
+        },
+        "shares": {
+          "LONG": 0.6,
+          "SHORT": 0.4
+        },
+        "top": "LONG",
+        "top_share": 0.6
+      },
+      "currency": {
+        "counts": {
+          "USD": 7,
+          "EUR": 3
+        },
+        "shares": {
+          "USD": 0.7,
+          "EUR": 0.3
+        },
+        "top": "USD",
+        "top_share": 0.7
+      }
+    },
+    "factor_proxy_shares": {
+      "EQUITY_BETA": 0.4,
+      "USD_DENOMINATED": 0.7,
+      "DIRECTION_LONG": 0.6,
+      "DURATION_RATES": 0.5,
+      "DIRECTION_SHORT": 0.4,
+      "COMMODITY": 0.1
+    },
+    "flags": [],
+    "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
+  },
+  "champion_shadow": {
+    "state": "NO_SHADOW_SAMPLE",
+    "champion": {
+      "n": 5,
+      "hit_rate": 0.8,
+      "avg_return_pct": 0.894,
+      "brier": null,
+      "brier_n": 0
+    },
+    "shadow": {
+      "n": 0,
+      "hit_rate": null,
+      "avg_return_pct": null,
+      "brier": null,
+      "brier_n": 0
+    },
+    "comparable_n": 0,
+    "promotion_eligible_for_review": false,
+    "reasons": [
+      "MIN_30_COMPARABLE_FORWARD_OUTCOMES_NOT_MET"
+    ],
+    "policy": "Shadow never changes production automatically. Promotion requires a separate review, sufficient comparable forward evidence, persistence and risk checks."
+  },
   "capital_policy": "PAPER/RESEARCH ONLY; this diagnostic cannot authorize real-money deployment."
 }

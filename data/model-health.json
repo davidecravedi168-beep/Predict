@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-03T08:59:41.234903+00:00",
-  "source_updated_at": "2026-09-03T08:59:23+00:00",
+  "generated_at": "2026-09-03T20:43:06.417314+00:00",
+  "source_updated_at": "2026-09-03T20:42:49+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "operational": true,
   "forward": {
     "maturity": "COLD_START",
-    "independent_episodes": 29,
+    "independent_episodes": 30,
     "active": 24,
-    "resolved": 0,
-    "hits": 0,
+    "resolved": 1,
+    "hits": 1,
     "misses": 0,
-    "hit_rate_pct": null,
+    "hit_rate_pct": 100.0,
     "brier": null,
     "brier_n": 0,
     "calibration_threshold": 30,
@@ -31,8 +31,9 @@
     }
   },
   "data": {
-    "availability_ratio": 0.9773,
+    "availability_ratio": 0.9659,
     "unavailable_tickers": [
+      "AAPL",
       "STM.MI",
       "CTRA"
     ],
@@ -42,8 +43,7 @@
   "flags": [
     "FORWARD_SAMPLE_BELOW_CALIBRATION_THRESHOLD",
     "BACKTEST_NET_EXPECTANCY_NON_POSITIVE",
-    "BACKTEST_HIT_RATE_BELOW_52_PERCENT",
-    "MANY_ACTIVE_EPISODES_WITHOUT_RESOLVED_FORWARD_SAMPLE"
+    "BACKTEST_HIT_RATE_BELOW_52_PERCENT"
   ],
   "status": "CAUTION",
   "note": "Research/paper only. Forward evidence takes precedence over legacy/lightweight backtest for promotion decisions."

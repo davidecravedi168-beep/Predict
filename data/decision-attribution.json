@@ -1,9 +1,52 @@
 {
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
-  "eligible_forward_resolved": 0,
+  "eligible_forward_resolved": 5,
   "submodel_attribution": [],
-  "friction_stress": {"state":"INSUFFICIENT_FORWARD_SAMPLE","baseline_n":0,"baseline_avg_net_return_pct":null,"tiers":[{"extra_friction_bps":5,"n":0,"positive_rate":null,"avg_return_pct":null,"median_return_pct":null,"positive_survival_ratio":null},{"extra_friction_bps":10,"n":0,"positive_rate":null,"avg_return_pct":null,"median_return_pct":null,"positive_survival_ratio":null},{"extra_friction_bps":20,"n":0,"positive_rate":null,"avg_return_pct":null,"median_return_pct":null,"positive_survival_ratio":null},{"extra_friction_bps":35,"n":0,"positive_rate":null,"avg_return_pct":null,"median_return_pct":null,"positive_survival_ratio":null}],"method":"Incremental friction only; generated from forward observations."},
-  "policy": {"minimum_n_for_directional_attribution":20,"auto_retune":false,"capital_mode":"PAPER_RESEARCH_ONLY"},
-  "note": "Attribution is diagnostic association, not causal proof."
+  "friction_stress": {
+    "state": "INSUFFICIENT_FORWARD_SAMPLE",
+    "baseline_n": 5,
+    "baseline_avg_net_return_pct": 0.894,
+    "tiers": [
+      {
+        "extra_friction_bps": 5,
+        "n": 5,
+        "positive_rate": 0.8,
+        "avg_return_pct": 0.844,
+        "median_return_pct": 0.677,
+        "positive_survival_ratio": 1.0
+      },
+      {
+        "extra_friction_bps": 10,
+        "n": 5,
+        "positive_rate": 0.6,
+        "avg_return_pct": 0.794,
+        "median_return_pct": 0.627,
+        "positive_survival_ratio": 0.75
+      },
+      {
+        "extra_friction_bps": 20,
+        "n": 5,
+        "positive_rate": 0.6,
+        "avg_return_pct": 0.694,
+        "median_return_pct": 0.527,
+        "positive_survival_ratio": 0.75
+      },
+      {
+        "extra_friction_bps": 35,
+        "n": 5,
+        "positive_rate": 0.6,
+        "avg_return_pct": 0.544,
+        "median_return_pct": 0.377,
+        "positive_survival_ratio": 0.75
+      }
+    ],
+    "method": "Incremental friction is subtracted from already cost-adjusted forward return_pct; no spread/slippage observations are fabricated."
+  },
+  "policy": {
+    "minimum_n_for_directional_attribution": 20,
+    "auto_retune": false,
+    "capital_mode": "PAPER_RESEARCH_ONLY"
+  },
+  "note": "Attribution is diagnostic association, not causal proof. Forward evidence only; legacy rows do not drive promotion or retuning."
 }
