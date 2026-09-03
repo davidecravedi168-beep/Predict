@@ -8,7 +8,9 @@ on:
       - "index.html"
       - "finance-cockpit.css"
       - "freeze-ui.css"
+      - "quant-governance.css"
       - "finance-cockpit.js"
+      - "quant-governance.js"
       - "niche-status.js"
       - "manifest.webmanifest"
       - "sw.js"
@@ -17,7 +19,7 @@ on:
       - "assets/**"
       - "data/**"
   workflow_run:
-    workflows: ["Update Alpha Engine Data"]
+    workflows: ["Update Alpha Engine Data", "Alpha Engine — Model Health & Root Sync"]
     types: [completed]
 
 permissions:
@@ -56,18 +58,24 @@ jobs:
           print('Unified Alpha icon family generated from icon-180.png')
           PY
 
-      - name: Verify V9 frontend and icon contract
+      - name: Verify V9 frontend, governance and icon contract
         shell: bash
         run: |
           set -euo pipefail
           node --check finance-cockpit.js
+          node --check quant-governance.js
           node --check niche-status.js
           test -s freeze-ui.css
+          test -s quant-governance.css
           test -s icon-180.png
           test -s alpha-home-180.png
           test -s alpha-home-192.png
           test -s alpha-home-512.png
+          grep -q 'quant-governance.css' index.html
+          grep -q 'quant-governance.js' index.html
           python3 - <<'PY'
+          import json
+          from pathlib import Path
           from PIL import Image, ImageChops
           expected={'alpha-home-180.png':(180,180),'alpha-home-192.png':(192,192),'alpha-home-512.png':(512,512)}
           for name,size in expected.items():
@@ -75,7 +83,12 @@ jobs:
               assert im.size==size,(name,im.size,size)
           src=Image.open('icon-180.png').convert('RGBA')
           assert ImageChops.difference(src,Image.open('alpha-home-180.png').convert('RGBA')).getbbox() is None
-          print('PASS: iPhone/Android icon family uses the identical selected artwork')
+          if Path('data/quant-governance.json').exists():
+              g=json.loads(Path('data/quant-governance.json').read_text(encoding='utf-8'))
+              assert g.get('schema_version') == '2.0'
+              assert g.get('promotion_state') in {'RESEARCH_ONLY','PAPER_ONLY'}
+              assert g.get('policy',{}).get('live_capital_auto_promotion') is False
+          print('PASS: frontend, governance and icon contracts verified')
           PY
 
       - name: Configure Pages
@@ -87,10 +100,12 @@ jobs:
           set -euo pipefail
           rm -rf _site
           mkdir -p _site/data
-          cp index.html finance-cockpit.css freeze-ui.css finance-cockpit.js niche-status.js manifest.webmanifest sw.js icon-180.png alpha-home-180.png alpha-home-192.png alpha-home-512.png _site/
+          cp index.html finance-cockpit.css freeze-ui.css quant-governance.css finance-cockpit.js quant-governance.js niche-status.js manifest.webmanifest sw.js icon-180.png alpha-home-180.png alpha-home-192.png alpha-home-512.png _site/
           cp data/latest.json data/backtest-v8.json _site/data/
           if [ -f data/market-series.json ]; then cp data/market-series.json _site/data/; fi
           if [ -f data/automation-health.json ]; then cp data/automation-health.json _site/data/; fi
+          if [ -f data/model-health.json ]; then cp data/model-health.json _site/data/; fi
+          if [ -f data/quant-governance.json ]; then cp data/quant-governance.json _site/data/; fi
           if find _site -type f \( -name '*.py' -o -name '*.yml' -o -name '*memory*' \) | grep -q .; then
             echo 'Private implementation file leaked into public artifact'
             exit 1
