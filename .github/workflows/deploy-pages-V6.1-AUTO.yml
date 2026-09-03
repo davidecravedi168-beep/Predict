@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["index.html","finance-cockpit.css","freeze-ui.css","quant-governance.css","finance-cockpit.js","quant-governance.js","portfolio-shadow.js","niche-status.js","manifest.webmanifest","sw.js","alpha-icon.svg","icon-180.png","assets/**","data/**"]
+    paths: ["index.html","finance-cockpit.css","freeze-ui.css","quant-governance.css","finance-cockpit.js","quant-governance.js","portfolio-shadow.js","decision-attribution.js","niche-status.js","manifest.webmanifest","sw.js","alpha-icon.svg","icon-180.png","assets/**","data/**"]
   workflow_run:
     workflows: ["Update Alpha Engine Data", "Alpha Engine — Model Health & Root Sync"]
     types: [completed]
@@ -30,8 +30,9 @@ jobs:
           PY
       - name: Verify frontend and governance contracts
         run: |
-          node --check finance-cockpit.js && node --check quant-governance.js && node --check portfolio-shadow.js && node --check niche-status.js
+          node --check finance-cockpit.js && node --check quant-governance.js && node --check portfolio-shadow.js && node --check decision-attribution.js && node --check niche-status.js
           grep -q 'portfolio-shadow.js' index.html
+          grep -q 'decision-attribution.js' index.html
           python3 - <<'PY'
           import json
           from pathlib import Path
@@ -39,15 +40,17 @@ jobs:
            g=json.loads(Path('data/quant-governance.json').read_text()); assert g.get('schema_version') in {'2.0','2.1','2.2'}; assert g.get('policy',{}).get('live_capital_auto_promotion') is False
           if Path('data/portfolio-shadow.json').exists():
            p=json.loads(Path('data/portfolio-shadow.json').read_text()); assert p.get('schema_version')=='1.0'; assert 'PAPER/RESEARCH' in p.get('capital_policy','')
+          if Path('data/decision-attribution.json').exists():
+           a=json.loads(Path('data/decision-attribution.json').read_text()); assert a.get('schema_version')=='1.0'; assert a.get('policy',{}).get('auto_retune') is False
           PY
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Build public allowlist
         run: |
           rm -rf _site && mkdir -p _site/data
-          cp index.html finance-cockpit.css freeze-ui.css quant-governance.css finance-cockpit.js quant-governance.js portfolio-shadow.js niche-status.js manifest.webmanifest sw.js icon-180.png alpha-home-180.png alpha-home-192.png alpha-home-512.png _site/
+          cp index.html finance-cockpit.css freeze-ui.css quant-governance.css finance-cockpit.js quant-governance.js portfolio-shadow.js decision-attribution.js niche-status.js manifest.webmanifest sw.js icon-180.png alpha-home-180.png alpha-home-192.png alpha-home-512.png _site/
           cp data/latest.json data/backtest-v8.json _site/data/
-          for f in market-series automation-health model-health quant-governance portfolio-shadow; do [ ! -f data/$f.json ] || cp data/$f.json _site/data/; done
+          for f in market-series automation-health model-health quant-governance portfolio-shadow decision-attribution; do [ ! -f data/$f.json ] || cp data/$f.json _site/data/; done
           if find _site -type f \( -name '*.py' -o -name '*.yml' -o -name '*memory*' \) | grep -q .; then exit 1; fi
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
