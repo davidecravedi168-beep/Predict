@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-03T23:43:14.902565+00:00",
-  "source_updated_at": "2026-09-03T23:42:57+00:00",
+  "generated_at": "2026-09-03T23:56:55.709422+00:00",
+  "source_updated_at": "2026-09-03T23:56:33+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -326,12 +326,11 @@
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
-    "freshness_minutes": 0.3,
-    "availability_ratio": 0.9659,
+    "freshness_minutes": 0.4,
+    "availability_ratio": 0.9773,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
     "unavailable_tickers": [
-      "XLU",
       "STM.MI",
       "CTRA"
     ]
@@ -342,10 +341,10 @@
     "cluster_concentration": {
       "counts": {
         "US_SECTORS": 1,
+        "DEFENSIVES": 1,
         "US_MEGA_CAP": 1,
         "ENERGY": 1,
         "CREDIT": 1,
-        "DEFENSIVES": 1,
         "COMMODITIES": 2,
         "EURO_CREDIT": 1,
         "US_RATES": 1,

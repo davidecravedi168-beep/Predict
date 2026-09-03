@@ -28,10 +28,10 @@
       "cluster": {
         "counts": {
           "US_SECTORS": 1,
+          "DEFENSIVES": 1,
           "US_MEGA_CAP": 1,
           "ENERGY": 1,
           "CREDIT": 1,
-          "DEFENSIVES": 1,
           "COMMODITIES": 2,
           "EURO_CREDIT": 1,
           "US_RATES": 1,
@@ -39,10 +39,10 @@
         },
         "shares": {
           "US_SECTORS": 0.1,
+          "DEFENSIVES": 0.1,
           "US_MEGA_CAP": 0.1,
           "ENERGY": 0.1,
           "CREDIT": 0.1,
-          "DEFENSIVES": 0.1,
           "COMMODITIES": 0.2,
           "EURO_CREDIT": 0.1,
           "US_RATES": 0.1,
