@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 import json
-from collections import Counter
+import math
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
+from statistics import median
 
 LATEST = Path('data/latest.json')
 HEALTH = Path('data/model-health.json')
+MEMORY = Path('data/memory.json')
 OUT = Path('data/quant-governance.json')
 
 
@@ -44,7 +47,151 @@ def _concentration(rows, key):
     }
 
 
-def build_governance(d, health=None, now=None):
+def _wilson_lower(hits, n, z=1.96):
+    if n <= 0:
+        return None
+    p = hits / n
+    denom = 1 + z * z / n
+    centre = p + z * z / (2 * n)
+    adj = z * math.sqrt((p * (1 - p) + z * z / (4 * n)) / n)
+    return round((centre - adj) / denom, 4)
+
+
+def _confidence_band(row):
+    c = _f(row.get('confidence_pct'))
+    if c is None:
+        c = _f(row.get('latest_confidence_pct'))
+    if c is None:
+        p = _f(row.get('forecast_probability') or row.get('probability'))
+        c = p * 100 if p is not None else None
+    if c is None:
+        return 'UNKNOWN'
+    if c < 60:
+        return '<60'
+    if c < 70:
+        return '60-70'
+    if c < 80:
+        return '70-80'
+    return '80+'
+
+
+def _clean_forward_rows(memory_data):
+    predictions = list((memory_data or {}).get('predictions') or [])
+    out = []
+    for row in predictions:
+        outcome = str(row.get('outcome') or '').upper()
+        if outcome not in {'HIT', 'MISS'}:
+            continue
+        if not row.get('resolved'):
+            continue
+        resolution_state = str(row.get('resolution_state') or '').upper()
+        if any(x in resolution_state for x in ('EXCLUDED', 'SUPERSEDED', 'DUPLICATE', 'AMBIGUOUS')):
+            continue
+        # Forward segmentation intentionally excludes pre-versioned legacy rows.
+        if not row.get('model_version'):
+            continue
+        out.append(row)
+    return out
+
+
+def _max_drawdown_pct(rows):
+    equity = 0.0
+    peak = 0.0
+    worst = 0.0
+    ordered = sorted(rows, key=lambda x: str(x.get('resolved') or x.get('date') or ''))
+    for row in ordered:
+        r = _f(row.get('return_pct'))
+        if r is None:
+            continue
+        equity += r
+        peak = max(peak, equity)
+        worst = min(worst, equity - peak)
+    return round(worst, 4)
+
+
+def _segment_metrics(name, rows):
+    n = len(rows)
+    hits = sum(1 for r in rows if str(r.get('outcome') or '').upper() == 'HIT')
+    returns = [_f(r.get('return_pct')) for r in rows]
+    returns = [x for x in returns if x is not None]
+    probs = []
+    for r in rows:
+        p = _f(r.get('forecast_probability'))
+        if p is None:
+            continue
+        y = 1.0 if str(r.get('outcome') or '').upper() == 'HIT' else 0.0
+        probs.append((p, y))
+    hit_rate = hits / n if n else None
+    avg_return = sum(returns) / len(returns) if returns else None
+    med_return = median(returns) if returns else None
+    brier = sum((p - y) ** 2 for p, y in probs) / len(probs) if probs else None
+    if n < 5:
+        evidence = 'INSUFFICIENT'
+    elif n < 20:
+        evidence = 'OBSERVE'
+    elif avg_return is not None and avg_return > 0 and hit_rate is not None and hit_rate >= 0.52:
+        evidence = 'PROMISING'
+    elif avg_return is not None and avg_return <= 0:
+        evidence = 'WEAK'
+    else:
+        evidence = 'MIXED'
+    return {
+        'segment': str(name),
+        'n': n,
+        'hits': hits,
+        'misses': n - hits,
+        'hit_rate': round(hit_rate, 4) if hit_rate is not None else None,
+        'wilson_lower_95': _wilson_lower(hits, n),
+        'avg_return_pct_after_costs': round(avg_return, 4) if avg_return is not None else None,
+        'median_return_pct_after_costs': round(med_return, 4) if med_return is not None else None,
+        'max_drawdown_pct_flat_sequence': _max_drawdown_pct(rows),
+        'brier': round(brier, 6) if brier is not None else None,
+        'brier_n': len(probs),
+        'evidence': evidence,
+    }
+
+
+def _segment_analysis(memory_data):
+    rows = _clean_forward_rows(memory_data)
+    dimensions = {
+        'asset_class': lambda r: r.get('asset_class') or r.get('sector') or 'UNKNOWN',
+        'regime': lambda r: f"{r.get('risk_regime') or 'UNKNOWN'} | {r.get('rates_regime') or 'UNKNOWN'}",
+        'horizon': lambda r: f"{_i(r.get('horizon'))}d" if _i(r.get('horizon')) else 'UNKNOWN',
+        'confidence_band': _confidence_band,
+        'setup_family': lambda r: r.get('horizon_setup_family') or 'UNKNOWN',
+    }
+    result = {}
+    ranked = []
+    for dimension, key_fn in dimensions.items():
+        groups = defaultdict(list)
+        for row in rows:
+            groups[str(key_fn(row))].append(row)
+        metrics = [_segment_metrics(k, v) for k, v in groups.items()]
+        metrics.sort(key=lambda x: (-x['n'], x['segment']))
+        result[dimension] = metrics
+        for m in metrics:
+            if m['n'] >= 5:
+                ranked.append({'dimension': dimension, **m})
+    ranked.sort(
+        key=lambda x: (
+            x['evidence'] == 'PROMISING',
+            x['wilson_lower_95'] if x['wilson_lower_95'] is not None else -1,
+            x['avg_return_pct_after_costs'] if x['avg_return_pct_after_costs'] is not None else -1e9,
+            x['n'],
+        ),
+        reverse=True,
+    )
+    return {
+        'eligible_forward_resolved': len(rows),
+        'minimum_n_to_display': 5,
+        'minimum_n_for_directional_evidence': 20,
+        'dimensions': result,
+        'ranked_evidence': ranked[:12],
+        'policy': 'Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation.',
+    }
+
+
+def build_governance(d, health=None, now=None, memory_data=None):
     health = health or {}
     now = now or datetime.now(timezone.utc)
     mem = d.get('memory') or {}
@@ -125,6 +272,10 @@ def build_governance(d, health=None, now=None):
     if resolved < 30 and probabilities:
         blockers.append('EMPIRICAL_PROBABILITY_PUBLISHED_BEFORE_MINIMUM_FORWARD_SAMPLE')
 
+    segments = _segment_analysis(memory_data or {})
+    if segments['eligible_forward_resolved'] != resolved:
+        flags.append('SEGMENT_LEDGER_RESOLVED_COUNT_DIFFERS_FROM_SUMMARY')
+
     if blockers:
         status = 'BLOCKED'
         promotion = 'RESEARCH_ONLY'
@@ -143,7 +294,7 @@ def build_governance(d, health=None, now=None):
         paper_risk_unit_cap = 1.0
 
     return {
-        'schema_version': '2.0',
+        'schema_version': '2.1',
         'generated_at': now.isoformat(),
         'source_updated_at': source_raw,
         'model_version': d.get('model_version'),
@@ -165,6 +316,7 @@ def build_governance(d, health=None, now=None):
             'brier': brier,
             'brier_n': brier_n,
         },
+        'forward_segments': segments,
         'data_quality': {
             'freshness_minutes': freshness_minutes,
             'availability_ratio': availability,
@@ -198,9 +350,14 @@ def build_governance(d, health=None, now=None):
 def main():
     d = json.loads(LATEST.read_text(encoding='utf-8'))
     h = json.loads(HEALTH.read_text(encoding='utf-8')) if HEALTH.exists() else {}
-    out = build_governance(d, h)
+    m = json.loads(MEMORY.read_text(encoding='utf-8')) if MEMORY.exists() else {}
+    out = build_governance(d, h, memory_data=m)
     OUT.write_text(json.dumps(out, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
-    print(f"quant-governance: {out['status']} · {out['promotion_state']} · forward={out['forward']['resolved']} resolved · flags={len(out['flags'])} · blockers={len(out['blockers'])}")
+    print(
+        f"quant-governance: {out['status']} · {out['promotion_state']} · "
+        f"forward={out['forward']['resolved']} resolved · segments={out['forward_segments']['eligible_forward_resolved']} · "
+        f"flags={len(out['flags'])} · blockers={len(out['blockers'])}"
+    )
 
 
 if __name__ == '__main__':
