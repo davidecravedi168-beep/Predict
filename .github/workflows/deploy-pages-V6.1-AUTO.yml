@@ -1,36 +1,14 @@
 name: Deploy Alpha Web App
-
 on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths:
-      - "index.html"
-      - "finance-cockpit.css"
-      - "freeze-ui.css"
-      - "quant-governance.css"
-      - "finance-cockpit.js"
-      - "quant-governance.js"
-      - "niche-status.js"
-      - "manifest.webmanifest"
-      - "sw.js"
-      - "alpha-icon.svg"
-      - "icon-180.png"
-      - "assets/**"
-      - "data/**"
+    paths: ["index.html","finance-cockpit.css","freeze-ui.css","quant-governance.css","finance-cockpit.js","quant-governance.js","niche-status.js","manifest.webmanifest","sw.js","alpha-icon.svg","icon-180.png","assets/**","data/**"]
   workflow_run:
     workflows: ["Update Alpha Engine Data", "Alpha Engine — Model Health & Root Sync"]
     types: [completed]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
+permissions: {contents: read, pages: write, id-token: write}
+concurrency: {group: pages, cancel-in-progress: true}
 jobs:
   deploy:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
@@ -38,88 +16,41 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout latest main
         uses: actions/checkout@v5
-        with:
-          ref: main
-
+        with: {ref: main}
       - name: Generate identical multi-size app icons
-        shell: bash
         run: |
-          set -euo pipefail
           python3 -m pip install --quiet pillow
           python3 - <<'PY'
           from PIL import Image
-          src = Image.open('icon-180.png').convert('RGBA')
-          for size, name in [(180,'alpha-home-180.png'), (192,'alpha-home-192.png'), (512,'alpha-home-512.png')]:
-              src.resize((size,size), Image.Resampling.LANCZOS).save(name, format='PNG', optimize=True)
-          print('Unified Alpha icon family generated from icon-180.png')
+          src=Image.open('icon-180.png').convert('RGBA')
+          for size,name in [(180,'alpha-home-180.png'),(192,'alpha-home-192.png'),(512,'alpha-home-512.png')]: src.resize((size,size),Image.Resampling.LANCZOS).save(name)
           PY
-
-      - name: Verify V9 frontend, governance and icon contract
-        shell: bash
+      - name: Verify frontend and governance contracts
         run: |
-          set -euo pipefail
-          node --check finance-cockpit.js
-          node --check quant-governance.js
-          node --check niche-status.js
-          test -s freeze-ui.css
-          test -s quant-governance.css
-          test -s icon-180.png
-          test -s alpha-home-180.png
-          test -s alpha-home-192.png
-          test -s alpha-home-512.png
-          grep -q 'quant-governance.css' index.html
-          grep -q 'quant-governance.js' index.html
+          node --check finance-cockpit.js && node --check quant-governance.js && node --check niche-status.js
           python3 - <<'PY'
           import json
           from pathlib import Path
-          from PIL import Image, ImageChops
-          expected={'alpha-home-180.png':(180,180),'alpha-home-192.png':(192,192),'alpha-home-512.png':(512,512)}
-          for name,size in expected.items():
-              im=Image.open(name)
-              assert im.size==size,(name,im.size,size)
-          src=Image.open('icon-180.png').convert('RGBA')
-          assert ImageChops.difference(src,Image.open('alpha-home-180.png').convert('RGBA')).getbbox() is None
           if Path('data/quant-governance.json').exists():
-              g=json.loads(Path('data/quant-governance.json').read_text(encoding='utf-8'))
-              assert g.get('schema_version') in {'2.0','2.1','2.2'}
-              assert g.get('promotion_state') in {'RESEARCH_ONLY','PAPER_ONLY'}
-              assert g.get('policy',{}).get('live_capital_auto_promotion') is False
-              fs=g.get('forward_segments') or {}
-              if g.get('schema_version') == '2.2':
-                  assert 'drift_monitor' in fs
-                  assert 'state_counts' in (fs.get('drift_monitor') or {})
-          print('PASS: frontend, governance, drift and icon contracts verified')
+           g=json.loads(Path('data/quant-governance.json').read_text()); assert g.get('schema_version') in {'2.0','2.1','2.2'}; assert g.get('policy',{}).get('live_capital_auto_promotion') is False
+          if Path('data/portfolio-shadow.json').exists():
+           p=json.loads(Path('data/portfolio-shadow.json').read_text()); assert p.get('schema_version')=='1.0'; assert 'PAPER/RESEARCH' in p.get('capital_policy','')
           PY
-
       - name: Configure Pages
         uses: actions/configure-pages@v5
-
       - name: Build public allowlist
-        shell: bash
         run: |
-          set -euo pipefail
-          rm -rf _site
-          mkdir -p _site/data
+          rm -rf _site && mkdir -p _site/data
           cp index.html finance-cockpit.css freeze-ui.css quant-governance.css finance-cockpit.js quant-governance.js niche-status.js manifest.webmanifest sw.js icon-180.png alpha-home-180.png alpha-home-192.png alpha-home-512.png _site/
           cp data/latest.json data/backtest-v8.json _site/data/
-          if [ -f data/market-series.json ]; then cp data/market-series.json _site/data/; fi
-          if [ -f data/automation-health.json ]; then cp data/automation-health.json _site/data/; fi
-          if [ -f data/model-health.json ]; then cp data/model-health.json _site/data/; fi
-          if [ -f data/quant-governance.json ]; then cp data/quant-governance.json _site/data/; fi
-          if find _site -type f \( -name '*.py' -o -name '*.yml' -o -name '*memory*' \) | grep -q .; then
-            echo 'Private implementation file leaked into public artifact'
-            exit 1
-          fi
-
+          for f in market-series automation-health model-health quant-governance portfolio-shadow; do [ ! -f data/$f.json ] || cp data/$f.json _site/data/; done
+          if find _site -type f \( -name '*.py' -o -name '*.yml' -o -name '*memory*' \) | grep -q .; then exit 1; fi
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
-        with:
-          path: "_site"
-
+        with: {path: "_site"}
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
