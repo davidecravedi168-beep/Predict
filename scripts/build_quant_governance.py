@@ -87,7 +87,6 @@ def _clean_forward_rows(memory_data):
         resolution_state = str(row.get('resolution_state') or '').upper()
         if any(x in resolution_state for x in ('EXCLUDED', 'SUPERSEDED', 'DUPLICATE', 'AMBIGUOUS')):
             continue
-        # Forward segmentation intentionally excludes pre-versioned legacy rows.
         if not row.get('model_version'):
             continue
         out.append(row)
@@ -109,7 +108,7 @@ def _max_drawdown_pct(rows):
     return round(worst, 4)
 
 
-def _segment_metrics(name, rows):
+def _basic_metrics(rows):
     n = len(rows)
     hits = sum(1 for r in rows if str(r.get('outcome') or '').upper() == 'HIT')
     returns = [_f(r.get('return_pct')) for r in rows]
@@ -121,17 +120,94 @@ def _segment_metrics(name, rows):
             continue
         y = 1.0 if str(r.get('outcome') or '').upper() == 'HIT' else 0.0
         probs.append((p, y))
-    hit_rate = hits / n if n else None
-    avg_return = sum(returns) / len(returns) if returns else None
-    med_return = median(returns) if returns else None
-    brier = sum((p - y) ** 2 for p, y in probs) / len(probs) if probs else None
+    return {
+        'n': n,
+        'hit_rate': hits / n if n else None,
+        'avg_return': sum(returns) / len(returns) if returns else None,
+        'median_return': median(returns) if returns else None,
+        'brier': sum((p - y) ** 2 for p, y in probs) / len(probs) if probs else None,
+        'brier_n': len(probs),
+    }
+
+
+def _drift_metrics(rows):
+    ordered = sorted(rows, key=lambda x: str(x.get('resolved') or x.get('date') or ''))
+    n = len(ordered)
+    if n < 10:
+        return {
+            'state': 'INSUFFICIENT_HISTORY',
+            'window_n': 0,
+            'prior_n': 0,
+            'recent_n': 0,
+            'hit_rate_delta': None,
+            'avg_return_delta_pct': None,
+            'brier_delta': None,
+        }
+
+    window_n = min(20, max(5, n // 2))
+    if n < window_n * 2:
+        window_n = n // 2
+    prior = ordered[-2 * window_n:-window_n]
+    recent = ordered[-window_n:]
+    if len(prior) < 5 or len(recent) < 5:
+        return {
+            'state': 'INSUFFICIENT_HISTORY',
+            'window_n': window_n,
+            'prior_n': len(prior),
+            'recent_n': len(recent),
+            'hit_rate_delta': None,
+            'avg_return_delta_pct': None,
+            'brier_delta': None,
+        }
+
+    a = _basic_metrics(prior)
+    b = _basic_metrics(recent)
+    hit_delta = (b['hit_rate'] - a['hit_rate']) if a['hit_rate'] is not None and b['hit_rate'] is not None else None
+    ret_delta = (b['avg_return'] - a['avg_return']) if a['avg_return'] is not None and b['avg_return'] is not None else None
+    brier_delta = (b['brier'] - a['brier']) if a['brier'] is not None and b['brier'] is not None and a['brier_n'] >= 5 and b['brier_n'] >= 5 else None
+
+    severe_hit = hit_delta is not None and hit_delta <= -0.20
+    severe_return = ret_delta is not None and ret_delta <= -1.00
+    severe_brier = brier_delta is not None and brier_delta >= 0.08
+    watch_hit = hit_delta is not None and hit_delta <= -0.12
+    watch_return = ret_delta is not None and ret_delta <= -0.60
+    watch_brier = brier_delta is not None and brier_delta >= 0.05
+
+    if window_n >= 10 and ((severe_hit and severe_return) or severe_brier):
+        state = 'DRIFT'
+    elif watch_hit or watch_return or watch_brier:
+        state = 'WATCH'
+    else:
+        state = 'STABLE'
+
+    return {
+        'state': state,
+        'window_n': window_n,
+        'prior_n': len(prior),
+        'recent_n': len(recent),
+        'prior_hit_rate': round(a['hit_rate'], 4) if a['hit_rate'] is not None else None,
+        'recent_hit_rate': round(b['hit_rate'], 4) if b['hit_rate'] is not None else None,
+        'hit_rate_delta': round(hit_delta, 4) if hit_delta is not None else None,
+        'prior_avg_return_pct': round(a['avg_return'], 4) if a['avg_return'] is not None else None,
+        'recent_avg_return_pct': round(b['avg_return'], 4) if b['avg_return'] is not None else None,
+        'avg_return_delta_pct': round(ret_delta, 4) if ret_delta is not None else None,
+        'prior_brier': round(a['brier'], 6) if a['brier'] is not None else None,
+        'recent_brier': round(b['brier'], 6) if b['brier'] is not None else None,
+        'brier_delta': round(brier_delta, 6) if brier_delta is not None else None,
+    }
+
+
+def _segment_metrics(name, rows):
+    base = _basic_metrics(rows)
+    n = base['n']
+    hits = sum(1 for r in rows if str(r.get('outcome') or '').upper() == 'HIT')
     if n < 5:
         evidence = 'INSUFFICIENT'
     elif n < 20:
         evidence = 'OBSERVE'
-    elif avg_return is not None and avg_return > 0 and hit_rate is not None and hit_rate >= 0.52:
+    elif base['avg_return'] is not None and base['avg_return'] > 0 and base['hit_rate'] is not None and base['hit_rate'] >= 0.52:
         evidence = 'PROMISING'
-    elif avg_return is not None and avg_return <= 0:
+    elif base['avg_return'] is not None and base['avg_return'] <= 0:
         evidence = 'WEAK'
     else:
         evidence = 'MIXED'
@@ -140,14 +216,15 @@ def _segment_metrics(name, rows):
         'n': n,
         'hits': hits,
         'misses': n - hits,
-        'hit_rate': round(hit_rate, 4) if hit_rate is not None else None,
+        'hit_rate': round(base['hit_rate'], 4) if base['hit_rate'] is not None else None,
         'wilson_lower_95': _wilson_lower(hits, n),
-        'avg_return_pct_after_costs': round(avg_return, 4) if avg_return is not None else None,
-        'median_return_pct_after_costs': round(med_return, 4) if med_return is not None else None,
+        'avg_return_pct_after_costs': round(base['avg_return'], 4) if base['avg_return'] is not None else None,
+        'median_return_pct_after_costs': round(base['median_return'], 4) if base['median_return'] is not None else None,
         'max_drawdown_pct_flat_sequence': _max_drawdown_pct(rows),
-        'brier': round(brier, 6) if brier is not None else None,
-        'brier_n': len(probs),
+        'brier': round(base['brier'], 6) if base['brier'] is not None else None,
+        'brier_n': base['brier_n'],
         'evidence': evidence,
+        'drift': _drift_metrics(rows),
     }
 
 
@@ -162,6 +239,7 @@ def _segment_analysis(memory_data):
     }
     result = {}
     ranked = []
+    drift_rows = []
     for dimension, key_fn in dimensions.items():
         groups = defaultdict(list)
         for row in rows:
@@ -170,8 +248,12 @@ def _segment_analysis(memory_data):
         metrics.sort(key=lambda x: (-x['n'], x['segment']))
         result[dimension] = metrics
         for m in metrics:
+            enriched = {'dimension': dimension, **m}
             if m['n'] >= 5:
-                ranked.append({'dimension': dimension, **m})
+                ranked.append(enriched)
+            if m['drift']['state'] in {'DRIFT', 'WATCH', 'STABLE'}:
+                drift_rows.append(enriched)
+
     ranked.sort(
         key=lambda x: (
             x['evidence'] == 'PROMISING',
@@ -181,12 +263,38 @@ def _segment_analysis(memory_data):
         ),
         reverse=True,
     )
+    state_priority = {'DRIFT': 3, 'WATCH': 2, 'STABLE': 1}
+    drift_rows.sort(
+        key=lambda x: (
+            state_priority.get(x['drift']['state'], 0),
+            -(x['drift']['hit_rate_delta'] or 0),
+            -(x['drift']['avg_return_delta_pct'] or 0),
+            x['n'],
+        ),
+        reverse=True,
+    )
+    drift_counts = Counter(x['drift']['state'] for x in drift_rows)
     return {
         'eligible_forward_resolved': len(rows),
         'minimum_n_to_display': 5,
         'minimum_n_for_directional_evidence': 20,
+        'minimum_n_for_drift_window': 10,
         'dimensions': result,
         'ranked_evidence': ranked[:12],
+        'drift_monitor': {
+            'state_counts': dict(drift_counts),
+            'segments_evaluated': len(drift_rows),
+            'alerts': [
+                {
+                    'dimension': x['dimension'],
+                    'segment': x['segment'],
+                    'n': x['n'],
+                    **x['drift'],
+                }
+                for x in drift_rows if x['drift']['state'] in {'DRIFT', 'WATCH'}
+            ][:12],
+            'policy': 'Drift is diagnostic only. It may reduce trust or trigger review, but never auto-retunes model weights or thresholds.',
+        },
         'policy': 'Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation.',
     }
 
@@ -275,6 +383,11 @@ def build_governance(d, health=None, now=None, memory_data=None):
     segments = _segment_analysis(memory_data or {})
     if segments['eligible_forward_resolved'] != resolved:
         flags.append('SEGMENT_LEDGER_RESOLVED_COUNT_DIFFERS_FROM_SUMMARY')
+    drift_counts = segments['drift_monitor']['state_counts']
+    if drift_counts.get('DRIFT', 0) > 0:
+        flags.append('FORWARD_SEGMENT_DRIFT_DETECTED')
+    elif drift_counts.get('WATCH', 0) > 0:
+        flags.append('FORWARD_SEGMENT_DRIFT_WATCH')
 
     if blockers:
         status = 'BLOCKED'
@@ -294,7 +407,7 @@ def build_governance(d, health=None, now=None, memory_data=None):
         paper_risk_unit_cap = 1.0
 
     return {
-        'schema_version': '2.1',
+        'schema_version': '2.2',
         'generated_at': now.isoformat(),
         'source_updated_at': source_raw,
         'model_version': d.get('model_version'),
@@ -353,10 +466,11 @@ def main():
     m = json.loads(MEMORY.read_text(encoding='utf-8')) if MEMORY.exists() else {}
     out = build_governance(d, h, memory_data=m)
     OUT.write_text(json.dumps(out, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+    dm = out['forward_segments']['drift_monitor']['state_counts']
     print(
         f"quant-governance: {out['status']} · {out['promotion_state']} · "
         f"forward={out['forward']['resolved']} resolved · segments={out['forward_segments']['eligible_forward_resolved']} · "
-        f"flags={len(out['flags'])} · blockers={len(out['blockers'])}"
+        f"drift={dm} · flags={len(out['flags'])} · blockers={len(out['blockers'])}"
     )
 
 
