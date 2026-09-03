@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-09-03T07:48:51.169663+00:00",
+  "source_updated_at": "2026-09-03T07:48:31+00:00",
+  "model_version": "8.6.1-math-risk-layer",
+  "operational": true,
+  "forward": {
+    "maturity": "COLD_START",
+    "independent_episodes": 29,
+    "active": 24,
+    "resolved": 0,
+    "hits": 0,
+    "misses": 0,
+    "hit_rate_pct": null,
+    "brier": null,
+    "brier_n": 0,
+    "calibration_threshold": 30,
+    "probability_publication_allowed": false
+  },
+  "backtest": {
+    "state": "AVAILABLE",
+    "signals": 340,
+    "hit_rate_pct": 49.71,
+    "avg_return_pct_after_costs": -0.3215,
+    "gross_avg_return_pct": -0.2093,
+    "best_supported_horizon": {
+      "days": 20,
+      "n": 50,
+      "hit_rate": 0.6,
+      "avg_return_pct": 0.6907
+    }
+  },
+  "data": {
+    "availability_ratio": 0.9773,
+    "unavailable_tickers": [
+      "STM.MI",
+      "CTRA"
+    ],
+    "signals": 10,
+    "watchlist": 27
+  },
+  "flags": [
+    "FORWARD_SAMPLE_BELOW_CALIBRATION_THRESHOLD",
+    "BACKTEST_NET_EXPECTANCY_NON_POSITIVE",
+    "BACKTEST_HIT_RATE_BELOW_52_PERCENT",
+    "MANY_ACTIVE_EPISODES_WITHOUT_RESOLVED_FORWARD_SAMPLE"
+  ],
+  "status": "CAUTION",
+  "note": "Research/paper only. Forward evidence takes precedence over legacy/lightweight backtest for promotion decisions."
+}
