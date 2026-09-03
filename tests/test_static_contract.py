@@ -13,10 +13,8 @@ class StaticContractTest(unittest.TestCase):
     def test_ui_is_finance_specific_and_has_ledger(self):
         html=(ROOT/'index.html').read_text(encoding='utf-8')
         js=(ROOT/'finance-cockpit.js').read_text(encoding='utf-8')
-        # Assert the current finance-specific product contract.  This must not
-        # pin the data pipeline to a retired marketing subtitle: a harmless
-        # copy change previously made every refresh fail *after* fresh market
-        # data had already been calculated, so the snapshot was never saved.
+        # Assert the current finance-specific product contract. This must not
+        # pin the data pipeline to retired marketing copy or formatting.
         for label in ('PREDICTIVE QUANT COCKPIT','Signal desk','Macro cockpit','Quant lab','Decision ledger'):
             self.assertIn(label,html)
         self.assertIn('Content-Security-Policy',html)
@@ -25,10 +23,19 @@ class StaticContractTest(unittest.TestCase):
         self.assertIn('compactLedgerEpisodes',js)
         self.assertIn('SUPERSEDED',js)
 
-    def test_workflow_runs_double_qa_and_v86_validator(self):
+    def test_workflow_runs_observable_qa_and_v86_validator(self):
         y=(ROOT/'.github/workflows/update-data.yml').read_text(encoding='utf-8')
-        self.assertIn('QA pass 1',y)
-        self.assertIn('QA pass 2',y)
+        # Keep QA fail-closed, but require independently visible modules so a
+        # single failing contract can be diagnosed without disabling QA.
+        for marker in (
+            'QA decision attribution',
+            'QA edge core',
+            'QA portfolio shadow',
+            'QA quant governance',
+            'QA static contract',
+            'QA pass 2',
+        ):
+            self.assertIn(marker,y)
         self.assertIn('write_automation_health.py',y)
         self.assertIn('validate_v86_snapshot.py',y)
         self.assertIn('apply_alpha_v86_external_cockpit.py',y)
@@ -38,7 +45,13 @@ class StaticContractTest(unittest.TestCase):
         self.assertIn('Build public allowlist',y)
         self.assertIn('path: "_site"',y)
         self.assertNotIn('path: "."',y)
-        self.assertIn('Private implementation file leaked',y)
+        # Validate the actual leak-prevention behavior rather than requiring a
+        # particular human-readable error message.
+        self.assertIn('find _site -type f',y)
+        self.assertIn("-name '*.py'",y)
+        self.assertIn("-name '*.yml'",y)
+        self.assertIn("-name '*memory*'",y)
+        self.assertIn('exit 1',y)
 
     def test_service_worker_manifest_and_deploy_share_current_icon_contract(self):
         """Regression: icon family renames must not leave QA pinned to a retired filename."""
@@ -66,6 +79,7 @@ class StaticContractTest(unittest.TestCase):
         self.assertIn('alpha-home-192.png',icon_sources)
         self.assertIn('alpha-home-512.png',icon_sources)
         self.assertNotIn('./icon-192.png',sw)
-        self.assertIn("src = Image.open('icon-180.png')",deploy)
+        # Formatting around '=' is irrelevant; the source icon contract is not.
+        self.assertIn("Image.open('icon-180.png')",deploy)
 
 if __name__=='__main__': unittest.main()
