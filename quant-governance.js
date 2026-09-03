@@ -8,6 +8,37 @@
     const c=node('div','qgCard');c.append(node('div','qgK',k),node('div','qgV',v),node('div','qgN',n));return c;
   }
 
+  function renderDrift(section,fs){
+    const dm=fs?.drift_monitor;
+    if(!dm)return;
+    const wrap=node('div','qgDrift');
+    const counts=dm.state_counts||{};
+    const state=counts.DRIFT?'DRIFT':counts.WATCH?'WATCH':counts.STABLE?'STABLE':'WAIT';
+    const head=node('div','qgDriftHead');
+    head.append(node('b','',`Temporal stability · ${state}`),node('span','',`${dm.segments_evaluated??0} segmenti valutati`));
+    wrap.append(head);
+    const alerts=(dm.alerts||[]).slice(0,3);
+    if(!alerts.length){
+      wrap.append(node('div','qgSegEmpty',dm.segments_evaluated?'Nessun deterioramento rolling rilevato.':'Servono almeno due finestre da 5 esiti per misurare drift.'));
+    }else{
+      const list=node('div','qgSegList');
+      for(const a of alerts){
+        const row=node('div',`qgSegRow qgDrift-${String(a.state||'WATCH').toLowerCase()}`);
+        const left=node('div','qgSegName');
+        left.append(node('b','',`${a.dimension} · ${a.segment}`),node('span','',`${a.state} · n=${a.n} · finestre ${a.prior_n}/${a.recent_n}`));
+        const right=node('div','qgSegMetrics');
+        right.append(
+          node('b','',`Δ hit ${fmtPct(a.hit_rate_delta)}`),
+          node('span','',`Δ return ${fmtNum(a.avg_return_delta_pct,2)} pp · Δ Brier ${fmtNum(a.brier_delta,3)}`)
+        );
+        row.append(left,right);list.append(row);
+      }
+      wrap.append(list);
+    }
+    wrap.append(node('div','qgSegPolicy','Drift = revisione obbligatoria, non auto-retuning: Alpha non modifica pesi o soglie da solo.'));
+    section.append(wrap);
+  }
+
   function renderSegments(box,g){
     const fs=g.forward_segments;
     if(!fs)return;
@@ -23,7 +54,7 @@
       for(const s of ranked){
         const row=node('div','qgSegRow');
         const left=node('div','qgSegName');
-        left.append(node('b','',`${s.dimension} · ${s.segment}`),node('span','',`n=${s.n} · ${s.evidence}`));
+        left.append(node('b','',`${s.dimension} · ${s.segment}`),node('span','',`n=${s.n} · ${s.evidence} · drift ${s.drift?.state||'—'}`));
         const right=node('div','qgSegMetrics');
         right.append(
           node('b','',fmtPct(s.hit_rate)),
@@ -33,6 +64,7 @@
       }
       section.append(list);
     }
+    renderDrift(section,fs);
     section.append(node('div','qgSegPolicy','Diagnostica soltanto: i segmenti non modificano automaticamente pesi, soglie o capitale.'));
     box.append(section);
   }
