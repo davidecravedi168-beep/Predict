@@ -3,3 +3,4 @@ This file is touched only by the external recovery watchdog when native schedule
 Recovery heartbeat: 2026-09-03T04:48:40.348Z — recover stale Alpha engine data and automation health receipt.
 Manual validation heartbeat: 2026-09-03T07:42:00Z — run full refresh after quant-governance upgrade.
 Post-segmentation validation trigger: 2026-09-03 — run full engine, QA, governance segmentation and publish cycle.
+Post-drift validation trigger: 2026-09-03 — run full engine, QA, temporal drift governance and publish cycle.
