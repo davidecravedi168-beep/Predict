@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "model_version": "8.6.1-math-risk-layer",
+  "portfolio_risk": {"status":"PENDING_REFRESH","signal_count":0,"exposures":{},"factor_proxy_shares":{},"flags":[],"policy":"Generated from canonical signals on governance refresh."},
+  "champion_shadow": {"state":"NO_SHADOW_SAMPLE","champion":{"n":0},"shadow":{"n":0},"comparable_n":0,"promotion_eligible_for_review":false,"reasons":["MIN_30_COMPARABLE_FORWARD_OUTCOMES_NOT_MET"],"policy":"Shadow never changes production automatically."},
+  "capital_policy": "PAPER/RESEARCH ONLY; this diagnostic cannot authorize real-money deployment."
+}
