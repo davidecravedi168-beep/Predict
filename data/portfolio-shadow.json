@@ -10,19 +10,17 @@
           "ETF_EQUITY": 2,
           "EQUITY": 2,
           "ETF_BOND_CREDIT": 2,
-          "ETF_COMMODITY": 1,
+          "ETF_COMMODITY": 2,
           "ETF_BOND_GOV": 1,
-          "BTP": 1,
-          "CRYPTO": 1
+          "BTP": 1
         },
         "shares": {
           "ETF_EQUITY": 0.2,
           "EQUITY": 0.2,
           "ETF_BOND_CREDIT": 0.2,
-          "ETF_COMMODITY": 0.1,
+          "ETF_COMMODITY": 0.2,
           "ETF_BOND_GOV": 0.1,
-          "BTP": 0.1,
-          "CRYPTO": 0.1
+          "BTP": 0.1
         },
         "top": "ETF_EQUITY",
         "top_share": 0.2
@@ -34,11 +32,10 @@
           "US_MEGA_CAP": 1,
           "ENERGY": 1,
           "CREDIT": 1,
-          "COMMODITIES": 1,
+          "COMMODITIES": 2,
           "EURO_CREDIT": 1,
           "US_RATES": 1,
-          "ITALY_RATES": 1,
-          "CRYPTO": 1
+          "ITALY_RATES": 1
         },
         "shares": {
           "US_SECTORS": 0.1,
@@ -46,14 +43,13 @@
           "US_MEGA_CAP": 0.1,
           "ENERGY": 0.1,
           "CREDIT": 0.1,
-          "COMMODITIES": 0.1,
+          "COMMODITIES": 0.2,
           "EURO_CREDIT": 0.1,
           "US_RATES": 0.1,
-          "ITALY_RATES": 0.1,
-          "CRYPTO": 0.1
+          "ITALY_RATES": 0.1
         },
-        "top": "US_SECTORS",
-        "top_share": 0.1
+        "top": "COMMODITIES",
+        "top_share": 0.2
       },
       "direction": {
         "counts": {
@@ -86,7 +82,7 @@
       "DIRECTION_LONG": 0.7,
       "DURATION_RATES": 0.4,
       "DIRECTION_SHORT": 0.3,
-      "COMMODITY": 0.1
+      "COMMODITY": 0.2
     },
     "flags": [
       "CURRENCY_CONCENTRATION"
