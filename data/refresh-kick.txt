@@ -4,3 +4,4 @@ Recovery heartbeat: 2026-09-03T04:48:40.348Z — recover stale Alpha engine data
 Manual validation heartbeat: 2026-09-03T07:42:00Z — run full refresh after quant-governance upgrade.
 Post-segmentation validation trigger: 2026-09-03 — run full engine, QA, governance segmentation and publish cycle.
 Post-drift validation trigger: 2026-09-03 — run full engine, QA, temporal drift governance and publish cycle.
+Portfolio-shadow validation trigger: 2026-09-03 — run full engine, QA, portfolio exposure, champion-shadow governance and publish cycle.
