@@ -1,0 +1,5 @@
+.qgPanel{margin:14px 0 18px;padding:14px;border:1px solid rgba(255,255,255,.09);border-radius:18px;background:rgba(255,255,255,.025)}
+.qgHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.qgTitle{display:flex;flex-direction:column;gap:3px}.qgTitle b{font-size:15px}.qgTitle span,.qgN,.qgNote{font-size:11px;opacity:.7}.qgBadge{font-size:10px;font-weight:800;letter-spacing:.06em;padding:7px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.1)}
+.qgGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.qgCard{padding:11px;border-radius:14px;background:rgba(255,255,255,.035);min-width:0}.qgK{font-size:10px;opacity:.65;text-transform:uppercase;letter-spacing:.04em}.qgV{font-size:17px;font-weight:800;margin-top:4px}.qgN{margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qgNote{margin-top:10px;line-height:1.45;overflow-wrap:anywhere}
+.qg-blocked{border-color:rgba(255,90,90,.35)}.qg-caution{border-color:rgba(255,191,72,.25)}.qg-healthy{border-color:rgba(80,220,150,.22)}
+@media(max-width:720px){.qgGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.qgV{font-size:16px}}
