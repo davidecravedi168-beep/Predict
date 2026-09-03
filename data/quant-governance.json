@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-03T20:57:14.058917+00:00",
-  "source_updated_at": "2026-09-03T20:56:51+00:00",
+  "generated_at": "2026-09-03T21:19:10.626761+00:00",
+  "source_updated_at": "2026-09-03T21:18:48+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -14,8 +14,8 @@
   },
   "forward": {
     "maturity": "COLD_START",
-    "independent_episodes": 30,
-    "active": 24,
+    "independent_episodes": 31,
+    "active": 25,
     "resolved": 1,
     "hit_rate": 1.0,
     "brier": null,
@@ -342,36 +342,38 @@
       "counts": {
         "US_SECTORS": 1,
         "EURO_CREDIT": 1,
-        "US_MEGA_CAP": 1,
         "DEFENSIVES": 1,
+        "US_MEGA_CAP": 1,
         "ENERGY": 1,
         "CREDIT": 1,
-        "ITALY_RATES": 2,
+        "ITALY_RATES": 1,
         "COMMODITIES": 1,
-        "US_RATES": 1
+        "US_RATES": 1,
+        "FX": 1
       },
-      "top": "ITALY_RATES",
-      "top_share": 0.2
+      "top": "US_SECTORS",
+      "top_share": 0.1
     },
     "asset_class_concentration": {
       "counts": {
         "ETF_EQUITY": 2,
         "ETF_BOND_CREDIT": 2,
         "EQUITY": 2,
-        "BTP": 2,
+        "BTP": 1,
         "ETF_COMMODITY": 1,
-        "ETF_BOND_GOV": 1
+        "ETF_BOND_GOV": 1,
+        "FX": 1
       },
       "top": "ETF_EQUITY",
       "top_share": 0.2
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 6,
-        "SHORT": 4
+        "LONG": 7,
+        "SHORT": 3
       },
       "top": "LONG",
-      "top_share": 0.6
+      "top_share": 0.7
     }
   },
   "legacy_backtest": {
