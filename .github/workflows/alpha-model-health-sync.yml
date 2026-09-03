@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: alpha-model-health-sync
+  group: alpha-engine-data
   cancel-in-progress: false
 
 jobs:
@@ -34,11 +34,14 @@ jobs:
         run: python scripts/build_quant_governance.py
       - name: Build portfolio risk and champion-shadow receipt
         run: python scripts/build_portfolio_shadow.py
+      - name: Build decision attribution and friction receipt
+        run: python scripts/build_decision_attribution.py
       - name: Governance regression tests
         run: |
-          python -m unittest tests.test_quant_governance -v
-          python -m unittest tests.test_portfolio_shadow -v
-      - name: Enforce fail-closed calibration contract
+          python -m unittest discover -s tests -p 'test_quant_governance.py' -v
+          python -m unittest discover -s tests -p 'test_portfolio_shadow.py' -v
+          python -m unittest discover -s tests -p 'test_decision_attribution.py' -v
+      - name: Enforce fail-closed governance contract
         shell: bash
         run: |
           set -euo pipefail
@@ -49,27 +52,31 @@ jobs:
           h=json.loads(Path('data/model-health.json').read_text())
           g=json.loads(Path('data/quant-governance.json').read_text())
           p=json.loads(Path('data/portfolio-shadow.json').read_text())
+          a=json.loads(Path('data/decision-attribution.json').read_text())
           resolved=int((d.get('memory') or {}).get('resolved') or 0)
           if resolved < 30 and any(x.get('forecast_probability') is not None for x in d.get('signals') or []): raise SystemExit('Fail-closed breach: probability published too early')
           if h.get('status')=='BLOCKED' or g.get('status')=='BLOCKED': raise SystemExit('Governance BLOCKED')
           if g.get('policy',{}).get('live_capital_auto_promotion') is not False: raise SystemExit('Live auto-promotion must remain disabled')
-          if p.get('capital_policy','').find('PAPER/RESEARCH') < 0: raise SystemExit('Portfolio diagnostic capital policy missing')
-          print('Forward, portfolio and shadow governance verified')
+          if 'PAPER/RESEARCH' not in p.get('capital_policy',''): raise SystemExit('Portfolio capital policy missing')
+          if a.get('policy',{}).get('auto_retune') is not False: raise SystemExit('Attribution must not auto-retune')
+          if a.get('policy',{}).get('capital_mode') != 'PAPER_RESEARCH_ONLY': raise SystemExit('Attribution capital mode invalid')
+          print('Forward, portfolio, shadow, attribution and friction governance verified')
           PY
       - name: Sync canonical public root snapshot
         run: cp data/latest.json latest.json
-      - name: Commit health, governance, portfolio and root snapshot
+      - name: Commit governed receipts and root snapshot
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "alpha-engine-bot"
           git config user.email "alpha-engine-bot@users.noreply.github.com"
-          git add data/model-health.json data/quant-governance.json data/portfolio-shadow.json latest.json
+          git add data/model-health.json data/quant-governance.json data/portfolio-shadow.json data/decision-attribution.json latest.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "bot: publish Alpha health governance portfolio and shadow diagnostics"
+          git commit -m "bot: publish Alpha governed diagnostics"
           for attempt in 1 2 3 4 5; do
             if git push origin HEAD:main; then exit 0; fi
-            git fetch origin main && git rebase origin/main
+            git fetch origin main
+            if git rebase origin/main; then :; else git rebase --abort; exit 1; fi
             sleep $((attempt * 2))
           done
           exit 1
