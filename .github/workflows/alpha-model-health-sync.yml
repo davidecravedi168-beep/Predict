@@ -33,6 +33,12 @@ jobs:
       - name: Build forward-health receipt
         run: python scripts/build_model_health.py
 
+      - name: Build expert quant-governance receipt
+        run: python scripts/build_quant_governance.py
+
+      - name: Governance regression tests
+        run: python -m unittest tests.test_quant_governance -v
+
       - name: Enforce fail-closed calibration contract
         shell: bash
         run: |
@@ -42,13 +48,16 @@ jobs:
           from pathlib import Path
           d=json.loads(Path('data/latest.json').read_text(encoding='utf-8'))
           h=json.loads(Path('data/model-health.json').read_text(encoding='utf-8'))
+          g=json.loads(Path('data/quant-governance.json').read_text(encoding='utf-8'))
           resolved=int((d.get('memory') or {}).get('resolved') or 0)
           rows=d.get('signals') or []
           if resolved < 30 and any(x.get('forecast_probability') is not None for x in rows):
               raise SystemExit('Fail-closed breach: empirical forecast probability published before 30 resolved forward episodes')
-          if h.get('status') == 'BLOCKED':
-              raise SystemExit('Model health BLOCKED')
-          print(f"Forward health verified: resolved={resolved} status={h.get('status')}")
+          if h.get('status') == 'BLOCKED' or g.get('status') == 'BLOCKED':
+              raise SystemExit(f"Governance BLOCKED: health={h.get('status')} quant={g.get('status')} blockers={g.get('blockers')}")
+          if g.get('policy',{}).get('live_capital_auto_promotion') is not False:
+              raise SystemExit('Governance breach: live capital auto-promotion must remain disabled')
+          print(f"Forward governance verified: resolved={resolved} health={h.get('status')} quant={g.get('status')}")
           PY
 
       - name: Sync canonical public root snapshot
@@ -66,18 +75,18 @@ jobs:
           print('Canonical root snapshot synchronized')
           PY
 
-      - name: Commit health receipt and synchronized root snapshot
+      - name: Commit health, governance and synchronized root snapshot
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "alpha-engine-bot"
           git config user.email "alpha-engine-bot@users.noreply.github.com"
-          git add data/model-health.json latest.json
+          git add data/model-health.json data/quant-governance.json latest.json
           if git diff --cached --quiet; then
-            echo 'No model-health/root-sync changes to publish.'
+            echo 'No model-health/governance/root-sync changes to publish.'
             exit 0
           fi
-          git commit -m "bot: publish Alpha model health and canonical root snapshot"
+          git commit -m "bot: publish Alpha health, governance and canonical snapshot"
           for attempt in 1 2 3 4 5; do
             if git push origin HEAD:main; then
               exit 0
