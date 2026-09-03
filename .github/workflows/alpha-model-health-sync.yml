@@ -1,0 +1,90 @@
+name: Alpha Engine — Model Health & Root Sync
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Update Alpha Engine Data"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: alpha-model-health-sync
+  cancel-in-progress: false
+
+jobs:
+  health-sync:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Build forward-health receipt
+        run: python scripts/build_model_health.py
+
+      - name: Enforce fail-closed calibration contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('data/latest.json').read_text(encoding='utf-8'))
+          h=json.loads(Path('data/model-health.json').read_text(encoding='utf-8'))
+          resolved=int((d.get('memory') or {}).get('resolved') or 0)
+          rows=d.get('signals') or []
+          if resolved < 30 and any(x.get('forecast_probability') is not None for x in rows):
+              raise SystemExit('Fail-closed breach: empirical forecast probability published before 30 resolved forward episodes')
+          if h.get('status') == 'BLOCKED':
+              raise SystemExit('Model health BLOCKED')
+          print(f"Forward health verified: resolved={resolved} status={h.get('status')}")
+          PY
+
+      - name: Sync canonical public root snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp data/latest.json latest.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('data/latest.json').read_text(encoding='utf-8'))
+          b=json.loads(Path('latest.json').read_text(encoding='utf-8'))
+          assert a == b, 'root latest.json diverged from canonical data/latest.json'
+          assert a.get('schema_version') == '8.6'
+          print('Canonical root snapshot synchronized')
+          PY
+
+      - name: Commit health receipt and synchronized root snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "alpha-engine-bot"
+          git config user.email "alpha-engine-bot@users.noreply.github.com"
+          git add data/model-health.json latest.json
+          if git diff --cached --quiet; then
+            echo 'No model-health/root-sync changes to publish.'
+            exit 0
+          fi
+          git commit -m "bot: publish Alpha model health and canonical root snapshot"
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git fetch origin main
+            git rebase origin/main
+            sleep $((attempt * 2))
+          done
+          echo 'Unable to publish model health after retries.'
+          exit 1
