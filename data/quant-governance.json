@@ -1,7 +1,7 @@
 {
-  "schema_version": "2.1",
-  "generated_at": "2026-09-03T07:52:53.328785+00:00",
-  "source_updated_at": "2026-09-03T07:52:33+00:00",
+  "schema_version": "2.2",
+  "generated_at": "2026-09-03T07:57:44.366635+00:00",
+  "source_updated_at": "2026-09-03T07:57:25+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -25,6 +25,7 @@
     "eligible_forward_resolved": 4,
     "minimum_n_to_display": 5,
     "minimum_n_for_directional_evidence": 20,
+    "minimum_n_for_drift_window": 10,
     "dimensions": {
       "asset_class": [
         {
@@ -39,7 +40,16 @@
           "max_drawdown_pct_flat_sequence": 0.0,
           "brier": null,
           "brier_n": 0,
-          "evidence": "INSUFFICIENT"
+          "evidence": "INSUFFICIENT",
+          "drift": {
+            "state": "INSUFFICIENT_HISTORY",
+            "window_n": 0,
+            "prior_n": 0,
+            "recent_n": 0,
+            "hit_rate_delta": null,
+            "avg_return_delta_pct": null,
+            "brier_delta": null
+          }
         },
         {
           "segment": "ETF_COMMODITY",
@@ -53,7 +63,16 @@
           "max_drawdown_pct_flat_sequence": 0.0,
           "brier": null,
           "brier_n": 0,
-          "evidence": "INSUFFICIENT"
+          "evidence": "INSUFFICIENT",
+          "drift": {
+            "state": "INSUFFICIENT_HISTORY",
+            "window_n": 0,
+            "prior_n": 0,
+            "recent_n": 0,
+            "hit_rate_delta": null,
+            "avg_return_delta_pct": null,
+            "brier_delta": null
+          }
         },
         {
           "segment": "FX",
@@ -67,7 +86,16 @@
           "max_drawdown_pct_flat_sequence": -0.5333,
           "brier": null,
           "brier_n": 0,
-          "evidence": "INSUFFICIENT"
+          "evidence": "INSUFFICIENT",
+          "drift": {
+            "state": "INSUFFICIENT_HISTORY",
+            "window_n": 0,
+            "prior_n": 0,
+            "recent_n": 0,
+            "hit_rate_delta": null,
+            "avg_return_delta_pct": null,
+            "brier_delta": null
+          }
         }
       ],
       "regime": [
@@ -83,7 +111,16 @@
           "max_drawdown_pct_flat_sequence": -0.5333,
           "brier": null,
           "brier_n": 0,
-          "evidence": "INSUFFICIENT"
+          "evidence": "INSUFFICIENT",
+          "drift": {
+            "state": "INSUFFICIENT_HISTORY",
+            "window_n": 0,
+            "prior_n": 0,
+            "recent_n": 0,
+            "hit_rate_delta": null,
+            "avg_return_delta_pct": null,
+            "brier_delta": null
+          }
         }
       ],
       "horizon": [
@@ -99,7 +136,16 @@
           "max_drawdown_pct_flat_sequence": 0.0,
           "brier": null,
           "brier_n": 0,
-          "evidence": "INSUFFICIENT"
+          "evidence": "INSUFFICIENT",
+          "drift": {
+            "state": "INSUFFICIENT_HISTORY",
+            "window_n": 0,
+            "prior_n": 0,
+            "recent_n": 0,
+            "hit_rate_delta": null,
+            "avg_return_delta_pct": null,
+            "brier_delta": null
+          }
         },
         {
           "segment": "5d",
@@ -113,7 +159,16 @@
           "max_drawdown_pct_flat_sequence": -0.5333,
           "brier": null,
           "brier_n": 0,
-          "evidence": "INSUFFICIENT"
+          "evidence": "INSUFFICIENT",
+          "drift": {
+            "state": "INSUFFICIENT_HISTORY",
+            "window_n": 0,
+            "prior_n": 0,
+            "recent_n": 0,
+            "hit_rate_delta": null,
+            "avg_return_delta_pct": null,
+            "brier_delta": null
+          }
         }
       ],
       "confidence_band": [
@@ -129,7 +184,16 @@
           "max_drawdown_pct_flat_sequence": -0.5333,
           "brier": null,
           "brier_n": 0,
-          "evidence": "INSUFFICIENT"
+          "evidence": "INSUFFICIENT",
+          "drift": {
+            "state": "INSUFFICIENT_HISTORY",
+            "window_n": 0,
+            "prior_n": 0,
+            "recent_n": 0,
+            "hit_rate_delta": null,
+            "avg_return_delta_pct": null,
+            "brier_delta": null
+          }
         },
         {
           "segment": "60-70",
@@ -143,7 +207,16 @@
           "max_drawdown_pct_flat_sequence": 0.0,
           "brier": null,
           "brier_n": 0,
-          "evidence": "INSUFFICIENT"
+          "evidence": "INSUFFICIENT",
+          "drift": {
+            "state": "INSUFFICIENT_HISTORY",
+            "window_n": 0,
+            "prior_n": 0,
+            "recent_n": 0,
+            "hit_rate_delta": null,
+            "avg_return_delta_pct": null,
+            "brier_delta": null
+          }
         }
       ],
       "setup_family": [
@@ -159,7 +232,16 @@
           "max_drawdown_pct_flat_sequence": -0.5333,
           "brier": null,
           "brier_n": 0,
-          "evidence": "INSUFFICIENT"
+          "evidence": "INSUFFICIENT",
+          "drift": {
+            "state": "INSUFFICIENT_HISTORY",
+            "window_n": 0,
+            "prior_n": 0,
+            "recent_n": 0,
+            "hit_rate_delta": null,
+            "avg_return_delta_pct": null,
+            "brier_delta": null
+          }
         },
         {
           "segment": "RELATIVE",
@@ -173,11 +255,26 @@
           "max_drawdown_pct_flat_sequence": 0.0,
           "brier": null,
           "brier_n": 0,
-          "evidence": "INSUFFICIENT"
+          "evidence": "INSUFFICIENT",
+          "drift": {
+            "state": "INSUFFICIENT_HISTORY",
+            "window_n": 0,
+            "prior_n": 0,
+            "recent_n": 0,
+            "hit_rate_delta": null,
+            "avg_return_delta_pct": null,
+            "brier_delta": null
+          }
         }
       ]
     },
     "ranked_evidence": [],
+    "drift_monitor": {
+      "state_counts": {},
+      "segments_evaluated": 0,
+      "alerts": [],
+      "policy": "Drift is diagnostic only. It may reduce trust or trigger review, but never auto-retunes model weights or thresholds."
+    },
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
@@ -198,11 +295,10 @@
         "DEFENSIVES": 2,
         "CREDIT": 1,
         "ITALY_RATES": 2,
-        "ENERGY": 1,
         "US_RATES": 1,
-        "REAL_ASSETS": 1,
-        "COMMODITIES": 1,
-        "FX": 1
+        "ENERGY": 2,
+        "GLOBAL_RATES": 1,
+        "COMMODITIES": 1
       },
       "top": "DEFENSIVES",
       "top_share": 0.2
@@ -212,21 +308,20 @@
         "EQUITY": 2,
         "ETF_BOND_CREDIT": 1,
         "BTP": 2,
+        "ETF_BOND_GOV": 2,
         "ETF_EQUITY": 2,
-        "ETF_BOND_GOV": 1,
-        "ETF_COMMODITY": 1,
-        "FX": 1
+        "ETF_COMMODITY": 1
       },
       "top": "EQUITY",
       "top_share": 0.2
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 4,
-        "SHORT": 6
+        "LONG": 5,
+        "SHORT": 5
       },
-      "top": "SHORT",
-      "top_share": 0.6
+      "top": "LONG",
+      "top_share": 0.5
     }
   },
   "legacy_backtest": {
