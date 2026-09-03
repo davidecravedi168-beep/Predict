@@ -2,10 +2,10 @@
   "ok": true,
   "app": "ALPHA_ENGINE",
   "edge_core_version": "1.0.0",
-  "checked_at": "2026-09-03T05:50:23+00:00",
+  "checked_at": "2026-09-03T06:03:19+00:00",
   "event": "schedule",
   "schedule": "07,22,37,52 * * * 1-5",
-  "artifact_digest": "84ad995f1ede9cf9",
+  "artifact_digest": "5b97d179dfb3747e",
   "freshness": {
     "state": "FRESH",
     "age_minutes": 0.0,
@@ -13,7 +13,7 @@
   },
   "summary": {
     "model_version": "8.6.1-math-risk-layer",
-    "updated_at": "2026-09-03T05:50:21+00:00",
+    "updated_at": "2026-09-03T06:03:17+00:00",
     "signals": 10,
     "watchlist": 27
   },
@@ -23,6 +23,6 @@
     "strict_no_fabrication": true
   },
   "workflow_version": "ALPHA-8.6-EPISODE-LEDGER",
-  "run_id": "33720518866",
+  "run_id": "33721449399",
   "run_attempt": 1
 }
