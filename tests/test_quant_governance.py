@@ -1,5 +1,5 @@
 import unittest
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from scripts.build_quant_governance import build_governance
 
@@ -31,14 +31,15 @@ def base_snapshot():
 
 def forward_memory(n=30, hits=18):
     rows = []
+    start = datetime(2026, 8, 1, tzinfo=timezone.utc)
     for i in range(n):
         hit = i < hits
         rows.append({
             'id': f'EP-{i}',
             'model_version': '8.6.1-test',
             'learning_lineage': 'ALPHA_V86_EPISODE_LEDGER_1',
-            'date': f'2026-08-{(i % 20) + 1:02d}',
-            'resolved': f'2026-09-{(i % 3) + 1:02d}',
+            'date': (start + timedelta(days=i)).date().isoformat(),
+            'resolved': (start + timedelta(days=i + 5)).date().isoformat(),
             'ticker': f'T{i}',
             'asset_class': 'EQUITY' if i % 2 == 0 else 'ETF_EQUITY',
             'cluster': 'TEST',
@@ -55,13 +56,40 @@ def forward_memory(n=30, hits=18):
     return {'predictions': rows}
 
 
+def single_segment_memory(prior_hits, recent_hits, window=10):
+    rows = []
+    start = datetime(2026, 7, 1, tzinfo=timezone.utc)
+    outcomes = ([True] * prior_hits + [False] * (window - prior_hits) +
+                [True] * recent_hits + [False] * (window - recent_hits))
+    for i, hit in enumerate(outcomes):
+        rows.append({
+            'id': f'D-{i}',
+            'model_version': '8.6.1-test',
+            'date': (start + timedelta(days=i)).date().isoformat(),
+            'resolved': (start + timedelta(days=i + 3)).date().isoformat(),
+            'ticker': f'D{i}',
+            'asset_class': 'EQUITY',
+            'cluster': 'ONE',
+            'direction': 'LONG',
+            'horizon': 10,
+            'horizon_setup_family': 'TREND',
+            'confidence_pct': 75,
+            'risk_regime': 'RISK_ON',
+            'rates_regime': 'RATES_STABLE',
+            'outcome': 'HIT' if hit else 'MISS',
+            'return_pct': 1.1 if hit else -1.1,
+            'forecast_probability': 0.65,
+        })
+    return {'predictions': rows}
+
+
 class QuantGovernanceTests(unittest.TestCase):
     def test_calibrating_sample_is_paper_only(self):
         out = build_governance(base_snapshot(), now=NOW, memory_data=forward_memory())
         self.assertEqual(out['promotion_state'], 'PAPER_ONLY')
         self.assertTrue(out['calibration']['allowed'])
         self.assertFalse(out['blockers'])
-        self.assertEqual(out['schema_version'], '2.1')
+        self.assertEqual(out['schema_version'], '2.2')
 
     def test_probability_before_30_resolved_blocks(self):
         d = base_snapshot()
@@ -106,6 +134,7 @@ class QuantGovernanceTests(unittest.TestCase):
         self.assertTrue(seg['dimensions']['confidence_band'])
         self.assertTrue(seg['dimensions']['setup_family'])
         self.assertTrue(all('wilson_lower_95' in x for x in seg['ranked_evidence']))
+        self.assertIn('drift_monitor', seg)
 
     def test_excluded_and_legacy_rows_do_not_enter_forward_segments(self):
         m = forward_memory(4, 3)
@@ -130,6 +159,34 @@ class QuantGovernanceTests(unittest.TestCase):
         self.assertEqual(out['promotion_state'], 'PAPER_ONLY')
         self.assertFalse(out['policy']['live_capital_auto_promotion'])
         self.assertIn('never auto-retune', out['forward_segments']['policy'])
+
+    def test_clear_recent_deterioration_triggers_segment_drift(self):
+        d = base_snapshot()
+        d['memory']['resolved'] = 20
+        d['memory']['brier_n'] = 20
+        out = build_governance(d, now=NOW, memory_data=single_segment_memory(9, 2, 10))
+        dm = out['forward_segments']['drift_monitor']
+        self.assertGreater(dm['state_counts'].get('DRIFT', 0), 0)
+        self.assertIn('FORWARD_SEGMENT_DRIFT_DETECTED', out['flags'])
+        self.assertTrue(any(x['state'] == 'DRIFT' for x in dm['alerts']))
+
+    def test_similar_windows_remain_stable(self):
+        d = base_snapshot()
+        d['memory']['resolved'] = 20
+        d['memory']['brier_n'] = 20
+        out = build_governance(d, now=NOW, memory_data=single_segment_memory(7, 7, 10))
+        states = out['forward_segments']['drift_monitor']['state_counts']
+        self.assertGreater(states.get('STABLE', 0), 0)
+        self.assertNotIn('FORWARD_SEGMENT_DRIFT_DETECTED', out['flags'])
+
+    def test_small_history_never_claims_drift(self):
+        d = base_snapshot()
+        d['memory']['resolved'] = 8
+        d['memory']['brier_n'] = 8
+        out = build_governance(d, now=NOW, memory_data=forward_memory(8, 4))
+        dm = out['forward_segments']['drift_monitor']
+        self.assertEqual(dm['segments_evaluated'], 0)
+        self.assertNotIn('FORWARD_SEGMENT_DRIFT_DETECTED', out['flags'])
 
 
 if __name__ == '__main__':
