@@ -29,33 +29,60 @@ def base_snapshot():
     }
 
 
+def forward_memory(n=30, hits=18):
+    rows = []
+    for i in range(n):
+        hit = i < hits
+        rows.append({
+            'id': f'EP-{i}',
+            'model_version': '8.6.1-test',
+            'learning_lineage': 'ALPHA_V86_EPISODE_LEDGER_1',
+            'date': f'2026-08-{(i % 20) + 1:02d}',
+            'resolved': f'2026-09-{(i % 3) + 1:02d}',
+            'ticker': f'T{i}',
+            'asset_class': 'EQUITY' if i % 2 == 0 else 'ETF_EQUITY',
+            'cluster': 'TEST',
+            'direction': 'LONG' if i % 3 else 'SHORT',
+            'horizon': 10 if i % 2 == 0 else 20,
+            'horizon_setup_family': 'TREND' if i % 2 == 0 else 'BREAKOUT',
+            'confidence_pct': 75 if i % 2 == 0 else 65,
+            'risk_regime': 'RISK_ON',
+            'rates_regime': 'RATES_STABLE',
+            'outcome': 'HIT' if hit else 'MISS',
+            'return_pct': 1.0 if hit else -0.7,
+            'forecast_probability': 0.60,
+        })
+    return {'predictions': rows}
+
+
 class QuantGovernanceTests(unittest.TestCase):
     def test_calibrating_sample_is_paper_only(self):
-        out = build_governance(base_snapshot(), now=NOW)
+        out = build_governance(base_snapshot(), now=NOW, memory_data=forward_memory())
         self.assertEqual(out['promotion_state'], 'PAPER_ONLY')
         self.assertTrue(out['calibration']['allowed'])
         self.assertFalse(out['blockers'])
+        self.assertEqual(out['schema_version'], '2.1')
 
     def test_probability_before_30_resolved_blocks(self):
         d = base_snapshot()
         d['memory']['resolved'] = 5
         d['memory']['brier_n'] = 5
         d['signals'][0]['forecast_probability'] = 0.67
-        out = build_governance(d, now=NOW)
+        out = build_governance(d, now=NOW, memory_data=forward_memory(5, 3))
         self.assertEqual(out['status'], 'BLOCKED')
         self.assertIn('EMPIRICAL_PROBABILITY_PUBLISHED_BEFORE_MINIMUM_FORWARD_SAMPLE', out['blockers'])
 
     def test_future_timestamp_blocks(self):
         d = base_snapshot()
         d['engine_updated_at'] = '2026-09-03T10:30:00+00:00'
-        out = build_governance(d, now=NOW)
+        out = build_governance(d, now=NOW, memory_data=forward_memory())
         self.assertIn('SOURCE_TIMESTAMP_IN_FUTURE', out['blockers'])
 
     def test_cold_start_never_promotes_live(self):
         d = base_snapshot()
         d['memory']['resolved'] = 0
         d['memory']['brier_n'] = 0
-        out = build_governance(d, now=NOW)
+        out = build_governance(d, now=NOW, memory_data={'predictions': []})
         self.assertEqual(out['promotion_state'], 'RESEARCH_ONLY')
         self.assertFalse(out['policy']['live_capital_auto_promotion'])
 
@@ -65,9 +92,44 @@ class QuantGovernanceTests(unittest.TestCase):
             {'ticker': str(i), 'cluster': 'SAME', 'asset_class': 'EQUITY', 'direction': 'LONG', 'model_completeness_score': 0.9}
             for i in range(6)
         ]
-        out = build_governance(d, now=NOW)
+        out = build_governance(d, now=NOW, memory_data=forward_memory())
         self.assertIn('SIGNAL_CLUSTER_CONCENTRATION_ABOVE_50_PERCENT', out['flags'])
         self.assertIn('SIGNAL_DIRECTION_CONCENTRATION_ABOVE_80_PERCENT', out['flags'])
+
+    def test_forward_segments_include_asset_regime_horizon_and_confidence(self):
+        out = build_governance(base_snapshot(), now=NOW, memory_data=forward_memory())
+        seg = out['forward_segments']
+        self.assertEqual(seg['eligible_forward_resolved'], 30)
+        self.assertTrue(seg['dimensions']['asset_class'])
+        self.assertTrue(seg['dimensions']['regime'])
+        self.assertTrue(seg['dimensions']['horizon'])
+        self.assertTrue(seg['dimensions']['confidence_band'])
+        self.assertTrue(seg['dimensions']['setup_family'])
+        self.assertTrue(all('wilson_lower_95' in x for x in seg['ranked_evidence']))
+
+    def test_excluded_and_legacy_rows_do_not_enter_forward_segments(self):
+        m = forward_memory(4, 3)
+        m['predictions'].append({
+            'model_version': '8.6.1-test', 'resolved': '2026-09-01', 'outcome': 'HIT',
+            'resolution_state': 'LEGACY_DUPLICATE_EXCLUDED_FROM_STATS', 'asset_class': 'CRYPTO',
+        })
+        m['predictions'].append({
+            'resolved': '2026-09-01', 'outcome': 'HIT', 'asset_class': 'CRYPTO',
+        })
+        d = base_snapshot()
+        d['memory']['resolved'] = 4
+        d['memory']['brier_n'] = 4
+        out = build_governance(d, now=NOW, memory_data=m)
+        self.assertEqual(out['forward_segments']['eligible_forward_resolved'], 4)
+
+    def test_segment_diagnostics_never_auto_promote_live(self):
+        d = base_snapshot()
+        d['memory']['resolved'] = 120
+        d['memory']['brier_n'] = 120
+        out = build_governance(d, now=NOW, memory_data=forward_memory(120, 80))
+        self.assertEqual(out['promotion_state'], 'PAPER_ONLY')
+        self.assertFalse(out['policy']['live_capital_auto_promotion'])
+        self.assertIn('never auto-retune', out['forward_segments']['policy'])
 
 
 if __name__ == '__main__':

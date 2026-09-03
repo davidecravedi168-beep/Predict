@@ -85,7 +85,7 @@ jobs:
           assert ImageChops.difference(src,Image.open('alpha-home-180.png').convert('RGBA')).getbbox() is None
           if Path('data/quant-governance.json').exists():
               g=json.loads(Path('data/quant-governance.json').read_text(encoding='utf-8'))
-              assert g.get('schema_version') == '2.0'
+              assert g.get('schema_version') in {'2.0','2.1'}
               assert g.get('promotion_state') in {'RESEARCH_ONLY','PAPER_ONLY'}
               assert g.get('policy',{}).get('live_capital_auto_promotion') is False
           print('PASS: frontend, governance and icon contracts verified')
