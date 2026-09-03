@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "model_version": "8.6.1-math-risk-layer",
+  "eligible_forward_resolved": 0,
+  "submodel_attribution": [],
+  "friction_stress": {"state":"INSUFFICIENT_FORWARD_SAMPLE","baseline_n":0,"baseline_avg_net_return_pct":null,"tiers":[{"extra_friction_bps":5,"n":0,"positive_rate":null,"avg_return_pct":null,"median_return_pct":null,"positive_survival_ratio":null},{"extra_friction_bps":10,"n":0,"positive_rate":null,"avg_return_pct":null,"median_return_pct":null,"positive_survival_ratio":null},{"extra_friction_bps":20,"n":0,"positive_rate":null,"avg_return_pct":null,"median_return_pct":null,"positive_survival_ratio":null},{"extra_friction_bps":35,"n":0,"positive_rate":null,"avg_return_pct":null,"median_return_pct":null,"positive_survival_ratio":null}],"method":"Incremental friction only; generated from forward observations."},
+  "policy": {"minimum_n_for_directional_attribution":20,"auto_retune":false,"capital_mode":"PAPER_RESEARCH_ONLY"},
+  "note": "Attribution is diagnostic association, not causal proof."
+}
