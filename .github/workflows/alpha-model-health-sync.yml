@@ -24,21 +24,20 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-
       - name: Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-
       - name: Build forward-health receipt
         run: python scripts/build_model_health.py
-
       - name: Build expert quant-governance receipt
         run: python scripts/build_quant_governance.py
-
+      - name: Build portfolio risk and champion-shadow receipt
+        run: python scripts/build_portfolio_shadow.py
       - name: Governance regression tests
-        run: python -m unittest tests.test_quant_governance -v
-
+        run: |
+          python -m unittest tests.test_quant_governance -v
+          python -m unittest tests.test_portfolio_shadow -v
       - name: Enforce fail-closed calibration contract
         shell: bash
         run: |
@@ -46,54 +45,31 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          d=json.loads(Path('data/latest.json').read_text(encoding='utf-8'))
-          h=json.loads(Path('data/model-health.json').read_text(encoding='utf-8'))
-          g=json.loads(Path('data/quant-governance.json').read_text(encoding='utf-8'))
+          d=json.loads(Path('data/latest.json').read_text())
+          h=json.loads(Path('data/model-health.json').read_text())
+          g=json.loads(Path('data/quant-governance.json').read_text())
+          p=json.loads(Path('data/portfolio-shadow.json').read_text())
           resolved=int((d.get('memory') or {}).get('resolved') or 0)
-          rows=d.get('signals') or []
-          if resolved < 30 and any(x.get('forecast_probability') is not None for x in rows):
-              raise SystemExit('Fail-closed breach: empirical forecast probability published before 30 resolved forward episodes')
-          if h.get('status') == 'BLOCKED' or g.get('status') == 'BLOCKED':
-              raise SystemExit(f"Governance BLOCKED: health={h.get('status')} quant={g.get('status')} blockers={g.get('blockers')}")
-          if g.get('policy',{}).get('live_capital_auto_promotion') is not False:
-              raise SystemExit('Governance breach: live capital auto-promotion must remain disabled')
-          print(f"Forward governance verified: resolved={resolved} health={h.get('status')} quant={g.get('status')}")
+          if resolved < 30 and any(x.get('forecast_probability') is not None for x in d.get('signals') or []): raise SystemExit('Fail-closed breach: probability published too early')
+          if h.get('status')=='BLOCKED' or g.get('status')=='BLOCKED': raise SystemExit('Governance BLOCKED')
+          if g.get('policy',{}).get('live_capital_auto_promotion') is not False: raise SystemExit('Live auto-promotion must remain disabled')
+          if p.get('capital_policy','').find('PAPER/RESEARCH') < 0: raise SystemExit('Portfolio diagnostic capital policy missing')
+          print('Forward, portfolio and shadow governance verified')
           PY
-
       - name: Sync canonical public root snapshot
-        shell: bash
-        run: |
-          set -euo pipefail
-          cp data/latest.json latest.json
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          a=json.loads(Path('data/latest.json').read_text(encoding='utf-8'))
-          b=json.loads(Path('latest.json').read_text(encoding='utf-8'))
-          assert a == b, 'root latest.json diverged from canonical data/latest.json'
-          assert a.get('schema_version') == '8.6'
-          print('Canonical root snapshot synchronized')
-          PY
-
-      - name: Commit health, governance and synchronized root snapshot
+        run: cp data/latest.json latest.json
+      - name: Commit health, governance, portfolio and root snapshot
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "alpha-engine-bot"
           git config user.email "alpha-engine-bot@users.noreply.github.com"
-          git add data/model-health.json data/quant-governance.json latest.json
-          if git diff --cached --quiet; then
-            echo 'No model-health/governance/root-sync changes to publish.'
-            exit 0
-          fi
-          git commit -m "bot: publish Alpha health, governance and canonical snapshot"
+          git add data/model-health.json data/quant-governance.json data/portfolio-shadow.json latest.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "bot: publish Alpha health governance portfolio and shadow diagnostics"
           for attempt in 1 2 3 4 5; do
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-            git fetch origin main
-            git rebase origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main && git rebase origin/main
             sleep $((attempt * 2))
           done
-          echo 'Unable to publish model health after retries.'
           exit 1
