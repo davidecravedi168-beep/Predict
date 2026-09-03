@@ -5,3 +5,4 @@ Manual validation heartbeat: 2026-09-03T07:42:00Z — run full refresh after qua
 Post-segmentation validation trigger: 2026-09-03 — run full engine, QA, governance segmentation and publish cycle.
 Post-drift validation trigger: 2026-09-03 — run full engine, QA, temporal drift governance and publish cycle.
 Portfolio-shadow validation trigger: 2026-09-03 — run full engine, QA, portfolio exposure, champion-shadow governance and publish cycle.
+Attribution-friction validation trigger: 2026-09-03 — run full engine, QA, serialized governance writers, decision attribution and friction stress publish cycle.
