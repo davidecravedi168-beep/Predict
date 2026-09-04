@@ -3,79 +3,83 @@
   "model_version": "8.6.1-math-risk-layer",
   "portfolio_risk": {
     "status": "ATTENTION",
-    "signal_count": 8,
+    "signal_count": 10,
     "exposures": {
       "asset_class": {
         "counts": {
-          "EQUITY": 2,
           "ETF_COMMODITY": 2,
+          "EQUITY": 2,
           "ETF_EQUITY": 2,
+          "ETF_BOND_CREDIT": 2,
           "ETF_BOND_GOV": 1,
           "BTP": 1
         },
         "shares": {
-          "EQUITY": 0.25,
-          "ETF_COMMODITY": 0.25,
-          "ETF_EQUITY": 0.25,
-          "ETF_BOND_GOV": 0.125,
-          "BTP": 0.125
+          "ETF_COMMODITY": 0.2,
+          "EQUITY": 0.2,
+          "ETF_EQUITY": 0.2,
+          "ETF_BOND_CREDIT": 0.2,
+          "ETF_BOND_GOV": 0.1,
+          "BTP": 0.1
         },
-        "top": "EQUITY",
-        "top_share": 0.25
+        "top": "ETF_COMMODITY",
+        "top_share": 0.2
       },
       "cluster": {
         "counts": {
-          "DEFENSIVES": 2,
           "COMMODITIES": 2,
+          "DEFENSIVES": 2,
           "ENERGY": 2,
+          "EURO_CREDIT": 2,
           "US_RATES": 1,
           "ITALY_RATES": 1
         },
         "shares": {
-          "DEFENSIVES": 0.25,
-          "COMMODITIES": 0.25,
-          "ENERGY": 0.25,
-          "US_RATES": 0.125,
-          "ITALY_RATES": 0.125
+          "COMMODITIES": 0.2,
+          "DEFENSIVES": 0.2,
+          "ENERGY": 0.2,
+          "EURO_CREDIT": 0.2,
+          "US_RATES": 0.1,
+          "ITALY_RATES": 0.1
         },
-        "top": "DEFENSIVES",
-        "top_share": 0.25
+        "top": "COMMODITIES",
+        "top_share": 0.2
       },
       "direction": {
         "counts": {
-          "LONG": 6,
+          "LONG": 8,
           "SHORT": 2
         },
         "shares": {
-          "LONG": 0.75,
-          "SHORT": 0.25
+          "LONG": 0.8,
+          "SHORT": 0.2
         },
         "top": "LONG",
-        "top_share": 0.75
+        "top_share": 0.8
       },
       "currency": {
         "counts": {
           "USD": 7,
-          "EUR": 1
+          "EUR": 3
         },
         "shares": {
-          "USD": 0.875,
-          "EUR": 0.125
+          "USD": 0.7,
+          "EUR": 0.3
         },
         "top": "USD",
-        "top_share": 0.875
+        "top_share": 0.7
       }
     },
     "factor_proxy_shares": {
-      "EQUITY_BETA": 0.5,
-      "USD_DENOMINATED": 0.875,
-      "DIRECTION_LONG": 0.75,
-      "COMMODITY": 0.25,
-      "DURATION_RATES": 0.25,
-      "DIRECTION_SHORT": 0.25
+      "COMMODITY": 0.2,
+      "USD_DENOMINATED": 0.7,
+      "DIRECTION_LONG": 0.8,
+      "EQUITY_BETA": 0.4,
+      "DURATION_RATES": 0.4,
+      "DIRECTION_SHORT": 0.2
     },
     "flags": [
-      "CURRENCY_CONCENTRATION"
+      "DIRECTION_CONCENTRATION"
     ],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
   },

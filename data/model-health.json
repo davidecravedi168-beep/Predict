@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-04T14:46:14.991581+00:00",
-  "source_updated_at": "2026-09-04T14:45:55+00:00",
+  "generated_at": "2026-09-04T14:58:19.449048+00:00",
+  "source_updated_at": "2026-09-04T14:57:59+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "operational": true,
   "forward": {
     "maturity": "COLD_START",
-    "independent_episodes": 36,
-    "active": 28,
+    "independent_episodes": 37,
+    "active": 29,
     "resolved": 3,
     "hits": 1,
     "misses": 2,
@@ -36,7 +36,7 @@
       "STM.MI",
       "CTRA"
     ],
-    "signals": 8,
+    "signals": 10,
     "watchlist": 27
   },
   "flags": [
