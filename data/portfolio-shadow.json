@@ -8,17 +8,17 @@
       "asset_class": {
         "counts": {
           "ETF_BOND_CREDIT": 2,
-          "EQUITY": 2,
           "ETF_COMMODITY": 2,
           "ETF_EQUITY": 2,
+          "EQUITY": 2,
           "BTP": 1,
           "ETF_BOND_GOV": 1
         },
         "shares": {
           "ETF_BOND_CREDIT": 0.2,
-          "EQUITY": 0.2,
           "ETF_COMMODITY": 0.2,
           "ETF_EQUITY": 0.2,
+          "EQUITY": 0.2,
           "BTP": 0.1,
           "ETF_BOND_GOV": 0.1
         },
@@ -28,17 +28,19 @@
       "cluster": {
         "counts": {
           "EURO_CREDIT": 2,
-          "DEFENSIVES": 2,
           "COMMODITIES": 2,
-          "ENERGY": 2,
+          "US_SECTORS": 1,
+          "DEFENSIVES": 2,
+          "ENERGY": 1,
           "ITALY_RATES": 1,
           "US_RATES": 1
         },
         "shares": {
           "EURO_CREDIT": 0.2,
-          "DEFENSIVES": 0.2,
           "COMMODITIES": 0.2,
-          "ENERGY": 0.2,
+          "US_SECTORS": 0.1,
+          "DEFENSIVES": 0.2,
+          "ENERGY": 0.1,
           "ITALY_RATES": 0.1,
           "US_RATES": 0.1
         },
@@ -73,9 +75,9 @@
     "factor_proxy_shares": {
       "DURATION_RATES": 0.4,
       "DIRECTION_LONG": 0.8,
-      "EQUITY_BETA": 0.4,
-      "USD_DENOMINATED": 0.7,
       "COMMODITY": 0.2,
+      "USD_DENOMINATED": 0.7,
+      "EQUITY_BETA": 0.4,
       "DIRECTION_SHORT": 0.2
     },
     "flags": [
