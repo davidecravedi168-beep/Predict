@@ -31,7 +31,8 @@
         "counts": {
           "US_SECTORS": 1,
           "EURO_CREDIT": 1,
-          "DEFENSIVES": 2,
+          "DEFENSIVES": 1,
+          "US_MEGA_CAP": 1,
           "ENERGY": 1,
           "CREDIT": 1,
           "ITALY_RATES": 1,
@@ -42,7 +43,8 @@
         "shares": {
           "US_SECTORS": 0.1,
           "EURO_CREDIT": 0.1,
-          "DEFENSIVES": 0.2,
+          "DEFENSIVES": 0.1,
+          "US_MEGA_CAP": 0.1,
           "ENERGY": 0.1,
           "CREDIT": 0.1,
           "ITALY_RATES": 0.1,
@@ -50,8 +52,8 @@
           "US_RATES": 0.1,
           "CRYPTO": 0.1
         },
-        "top": "DEFENSIVES",
-        "top_share": 0.2
+        "top": "US_SECTORS",
+        "top_share": 0.1
       },
       "direction": {
         "counts": {

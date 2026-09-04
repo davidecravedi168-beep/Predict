@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-04T09:47:20.141879+00:00",
-  "source_updated_at": "2026-09-04T09:46:59+00:00",
+  "generated_at": "2026-09-04T09:57:25.781902+00:00",
+  "source_updated_at": "2026-09-04T09:57:04+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -327,11 +327,10 @@
   },
   "data_quality": {
     "freshness_minutes": 0.4,
-    "availability_ratio": 0.9659,
+    "availability_ratio": 0.9773,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
     "unavailable_tickers": [
-      "MSFT",
       "STM.MI",
       "CTRA"
     ]
@@ -343,7 +342,8 @@
       "counts": {
         "US_SECTORS": 1,
         "EURO_CREDIT": 1,
-        "DEFENSIVES": 2,
+        "DEFENSIVES": 1,
+        "US_MEGA_CAP": 1,
         "ENERGY": 1,
         "CREDIT": 1,
         "ITALY_RATES": 1,
@@ -351,8 +351,8 @@
         "US_RATES": 1,
         "CRYPTO": 1
       },
-      "top": "DEFENSIVES",
-      "top_share": 0.2
+      "top": "US_SECTORS",
+      "top_share": 0.1
     },
     "asset_class_concentration": {
       "counts": {
