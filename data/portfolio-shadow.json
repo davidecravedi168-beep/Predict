@@ -7,65 +7,63 @@
     "exposures": {
       "asset_class": {
         "counts": {
-          "ETF_EQUITY": 2,
           "EQUITY": 2,
           "ETF_BOND_CREDIT": 2,
-          "ETF_COMMODITY": 1,
+          "ETF_EQUITY": 2,
           "ETF_BOND_GOV": 1,
+          "ETF_COMMODITY": 1,
           "BTP": 1,
           "CRYPTO": 1
         },
         "shares": {
-          "ETF_EQUITY": 0.2,
           "EQUITY": 0.2,
           "ETF_BOND_CREDIT": 0.2,
-          "ETF_COMMODITY": 0.1,
+          "ETF_EQUITY": 0.2,
           "ETF_BOND_GOV": 0.1,
+          "ETF_COMMODITY": 0.1,
           "BTP": 0.1,
           "CRYPTO": 0.1
         },
-        "top": "ETF_EQUITY",
+        "top": "EQUITY",
         "top_share": 0.2
       },
       "cluster": {
         "counts": {
-          "US_SECTORS": 1,
-          "DEFENSIVES": 1,
-          "US_MEGA_CAP": 1,
-          "ENERGY": 1,
+          "DEFENSIVES": 2,
           "CREDIT": 1,
-          "COMMODITIES": 1,
-          "EURO_CREDIT": 1,
+          "ENERGY": 1,
           "US_RATES": 1,
+          "REAL_ASSETS": 1,
+          "EURO_CREDIT": 1,
+          "COMMODITIES": 1,
           "ITALY_RATES": 1,
           "CRYPTO": 1
         },
         "shares": {
-          "US_SECTORS": 0.1,
-          "DEFENSIVES": 0.1,
-          "US_MEGA_CAP": 0.1,
-          "ENERGY": 0.1,
+          "DEFENSIVES": 0.2,
           "CREDIT": 0.1,
-          "COMMODITIES": 0.1,
-          "EURO_CREDIT": 0.1,
+          "ENERGY": 0.1,
           "US_RATES": 0.1,
+          "REAL_ASSETS": 0.1,
+          "EURO_CREDIT": 0.1,
+          "COMMODITIES": 0.1,
           "ITALY_RATES": 0.1,
           "CRYPTO": 0.1
         },
-        "top": "US_SECTORS",
-        "top_share": 0.1
+        "top": "DEFENSIVES",
+        "top_share": 0.2
       },
       "direction": {
         "counts": {
-          "LONG": 7,
-          "SHORT": 3
+          "LONG": 6,
+          "SHORT": 4
         },
         "shares": {
-          "LONG": 0.7,
-          "SHORT": 0.3
+          "LONG": 0.6,
+          "SHORT": 0.4
         },
         "top": "LONG",
-        "top_share": 0.7
+        "top_share": 0.6
       },
       "currency": {
         "counts": {
@@ -83,9 +81,9 @@
     "factor_proxy_shares": {
       "EQUITY_BETA": 0.4,
       "USD_DENOMINATED": 0.8,
-      "DIRECTION_LONG": 0.7,
+      "DIRECTION_LONG": 0.6,
       "DURATION_RATES": 0.4,
-      "DIRECTION_SHORT": 0.3,
+      "DIRECTION_SHORT": 0.4,
       "COMMODITY": 0.1
     },
     "flags": [
