@@ -10,17 +10,19 @@
           "ETF_EQUITY": 2,
           "EQUITY": 2,
           "ETF_BOND_CREDIT": 1,
-          "BTP": 2,
+          "BTP": 1,
           "ETF_COMMODITY": 2,
-          "ETF_BOND_GOV": 1
+          "ETF_BOND_GOV": 1,
+          "CRYPTO": 1
         },
         "shares": {
           "ETF_EQUITY": 0.2,
           "EQUITY": 0.2,
           "ETF_BOND_CREDIT": 0.1,
-          "BTP": 0.2,
+          "BTP": 0.1,
           "ETF_COMMODITY": 0.2,
-          "ETF_BOND_GOV": 0.1
+          "ETF_BOND_GOV": 0.1,
+          "CRYPTO": 0.1
         },
         "top": "ETF_EQUITY",
         "top_share": 0.2
@@ -32,9 +34,10 @@
           "US_MEGA_CAP": 1,
           "ENERGY": 1,
           "CREDIT": 1,
-          "ITALY_RATES": 2,
+          "ITALY_RATES": 1,
           "COMMODITIES": 2,
-          "US_RATES": 1
+          "US_RATES": 1,
+          "CRYPTO": 1
         },
         "shares": {
           "US_SECTORS": 0.1,
@@ -42,44 +45,45 @@
           "US_MEGA_CAP": 0.1,
           "ENERGY": 0.1,
           "CREDIT": 0.1,
-          "ITALY_RATES": 0.2,
+          "ITALY_RATES": 0.1,
           "COMMODITIES": 0.2,
-          "US_RATES": 0.1
+          "US_RATES": 0.1,
+          "CRYPTO": 0.1
         },
-        "top": "ITALY_RATES",
+        "top": "COMMODITIES",
         "top_share": 0.2
       },
       "direction": {
         "counts": {
-          "LONG": 6,
-          "SHORT": 4
+          "LONG": 7,
+          "SHORT": 3
         },
         "shares": {
-          "LONG": 0.6,
-          "SHORT": 0.4
+          "LONG": 0.7,
+          "SHORT": 0.3
         },
         "top": "LONG",
-        "top_share": 0.6
+        "top_share": 0.7
       },
       "currency": {
         "counts": {
-          "USD": 8,
-          "EUR": 2
+          "USD": 9,
+          "EUR": 1
         },
         "shares": {
-          "USD": 0.8,
-          "EUR": 0.2
+          "USD": 0.9,
+          "EUR": 0.1
         },
         "top": "USD",
-        "top_share": 0.8
+        "top_share": 0.9
       }
     },
     "factor_proxy_shares": {
       "EQUITY_BETA": 0.4,
-      "USD_DENOMINATED": 0.8,
-      "DIRECTION_LONG": 0.6,
-      "DURATION_RATES": 0.4,
-      "DIRECTION_SHORT": 0.4,
+      "USD_DENOMINATED": 0.9,
+      "DIRECTION_LONG": 0.7,
+      "DURATION_RATES": 0.3,
+      "DIRECTION_SHORT": 0.3,
       "COMMODITY": 0.2
     },
     "flags": [
