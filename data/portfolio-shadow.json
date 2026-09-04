@@ -8,52 +8,50 @@
       "asset_class": {
         "counts": {
           "EQUITY": 2,
-          "ETF_EQUITY": 2,
           "ETF_COMMODITY": 2,
-          "BTP": 1,
-          "ETF_BOND_GOV": 1
+          "ETF_EQUITY": 2,
+          "ETF_BOND_GOV": 1,
+          "BTP": 1
         },
         "shares": {
           "EQUITY": 0.25,
-          "ETF_EQUITY": 0.25,
           "ETF_COMMODITY": 0.25,
-          "BTP": 0.125,
-          "ETF_BOND_GOV": 0.125
+          "ETF_EQUITY": 0.25,
+          "ETF_BOND_GOV": 0.125,
+          "BTP": 0.125
         },
         "top": "EQUITY",
         "top_share": 0.25
       },
       "cluster": {
         "counts": {
-          "DEFENSIVES": 1,
-          "ENERGY": 2,
-          "US_MEGA_CAP": 1,
+          "DEFENSIVES": 2,
           "COMMODITIES": 2,
-          "ITALY_RATES": 1,
-          "US_RATES": 1
+          "ENERGY": 2,
+          "US_RATES": 1,
+          "ITALY_RATES": 1
         },
         "shares": {
-          "DEFENSIVES": 0.125,
-          "ENERGY": 0.25,
-          "US_MEGA_CAP": 0.125,
+          "DEFENSIVES": 0.25,
           "COMMODITIES": 0.25,
-          "ITALY_RATES": 0.125,
-          "US_RATES": 0.125
+          "ENERGY": 0.25,
+          "US_RATES": 0.125,
+          "ITALY_RATES": 0.125
         },
-        "top": "ENERGY",
+        "top": "DEFENSIVES",
         "top_share": 0.25
       },
       "direction": {
         "counts": {
-          "LONG": 5,
-          "SHORT": 3
+          "LONG": 6,
+          "SHORT": 2
         },
         "shares": {
-          "LONG": 0.625,
-          "SHORT": 0.375
+          "LONG": 0.75,
+          "SHORT": 0.25
         },
         "top": "LONG",
-        "top_share": 0.625
+        "top_share": 0.75
       },
       "currency": {
         "counts": {
@@ -71,10 +69,10 @@
     "factor_proxy_shares": {
       "EQUITY_BETA": 0.5,
       "USD_DENOMINATED": 0.875,
-      "DIRECTION_LONG": 0.625,
-      "DIRECTION_SHORT": 0.375,
+      "DIRECTION_LONG": 0.75,
       "COMMODITY": 0.25,
-      "DURATION_RATES": 0.25
+      "DURATION_RATES": 0.25,
+      "DIRECTION_SHORT": 0.25
     },
     "flags": [
       "CURRENCY_CONCENTRATION"
