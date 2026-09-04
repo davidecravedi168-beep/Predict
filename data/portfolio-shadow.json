@@ -3,84 +3,78 @@
   "model_version": "8.6.1-math-risk-layer",
   "portfolio_risk": {
     "status": "ATTENTION",
-    "signal_count": 10,
+    "signal_count": 9,
     "exposures": {
       "asset_class": {
         "counts": {
           "ETF_EQUITY": 2,
           "EQUITY": 2,
-          "ETF_BOND_CREDIT": 1,
           "ETF_COMMODITY": 2,
           "ETF_BOND_GOV": 1,
           "BTP": 2
         },
         "shares": {
-          "ETF_EQUITY": 0.2,
-          "EQUITY": 0.2,
-          "ETF_BOND_CREDIT": 0.1,
-          "ETF_COMMODITY": 0.2,
-          "ETF_BOND_GOV": 0.1,
-          "BTP": 0.2
+          "ETF_EQUITY": 0.2222,
+          "EQUITY": 0.2222,
+          "ETF_COMMODITY": 0.2222,
+          "ETF_BOND_GOV": 0.1111,
+          "BTP": 0.2222
         },
         "top": "ETF_EQUITY",
-        "top_share": 0.2
+        "top_share": 0.2222
       },
       "cluster": {
         "counts": {
           "US_SECTORS": 1,
-          "DEFENSIVES": 1,
-          "US_MEGA_CAP": 1,
-          "ENERGY": 1,
-          "CREDIT": 1,
+          "DEFENSIVES": 2,
+          "US_BROAD": 1,
           "COMMODITIES": 2,
           "US_RATES": 1,
           "ITALY_RATES": 2
         },
         "shares": {
-          "US_SECTORS": 0.1,
-          "DEFENSIVES": 0.1,
-          "US_MEGA_CAP": 0.1,
-          "ENERGY": 0.1,
-          "CREDIT": 0.1,
-          "COMMODITIES": 0.2,
-          "US_RATES": 0.1,
-          "ITALY_RATES": 0.2
+          "US_SECTORS": 0.1111,
+          "DEFENSIVES": 0.2222,
+          "US_BROAD": 0.1111,
+          "COMMODITIES": 0.2222,
+          "US_RATES": 0.1111,
+          "ITALY_RATES": 0.2222
         },
-        "top": "COMMODITIES",
-        "top_share": 0.2
+        "top": "DEFENSIVES",
+        "top_share": 0.2222
       },
       "direction": {
         "counts": {
           "LONG": 6,
-          "SHORT": 4
+          "SHORT": 3
         },
         "shares": {
-          "LONG": 0.6,
-          "SHORT": 0.4
+          "LONG": 0.6667,
+          "SHORT": 0.3333
         },
         "top": "LONG",
-        "top_share": 0.6
+        "top_share": 0.6667
       },
       "currency": {
         "counts": {
-          "USD": 8,
+          "USD": 7,
           "EUR": 2
         },
         "shares": {
-          "USD": 0.8,
-          "EUR": 0.2
+          "USD": 0.7778,
+          "EUR": 0.2222
         },
         "top": "USD",
-        "top_share": 0.8
+        "top_share": 0.7778
       }
     },
     "factor_proxy_shares": {
-      "EQUITY_BETA": 0.4,
-      "USD_DENOMINATED": 0.8,
-      "DIRECTION_LONG": 0.6,
-      "DURATION_RATES": 0.4,
-      "DIRECTION_SHORT": 0.4,
-      "COMMODITY": 0.2
+      "EQUITY_BETA": 0.4444,
+      "USD_DENOMINATED": 0.7778,
+      "DIRECTION_LONG": 0.6667,
+      "COMMODITY": 0.2222,
+      "DURATION_RATES": 0.3333,
+      "DIRECTION_SHORT": 0.3333
     },
     "flags": [
       "CURRENCY_CONCENTRATION"
@@ -90,9 +84,9 @@
   "champion_shadow": {
     "state": "NO_SHADOW_SAMPLE",
     "champion": {
-      "n": 5,
-      "hit_rate": 0.8,
-      "avg_return_pct": 0.894,
+      "n": 8,
+      "hit_rate": 0.625,
+      "avg_return_pct": 0.3842,
       "brier": null,
       "brier_n": 0
     },
