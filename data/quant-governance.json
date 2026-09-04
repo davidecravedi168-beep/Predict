@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-04T15:46:29.111078+00:00",
-  "source_updated_at": "2026-09-04T15:46:08+00:00",
+  "generated_at": "2026-09-04T15:57:14.598154+00:00",
+  "source_updated_at": "2026-09-04T15:56:56+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -445,7 +445,7 @@
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
-    "freshness_minutes": 0.4,
+    "freshness_minutes": 0.3,
     "availability_ratio": 0.9773,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
@@ -455,39 +455,39 @@
     ]
   },
   "signal_book": {
-    "signals": 9,
+    "signals": 10,
     "watchlist": 27,
     "cluster_concentration": {
       "counts": {
+        "EURO_CREDIT": 2,
         "DEFENSIVES": 2,
         "COMMODITIES": 2,
-        "EURO_CREDIT": 1,
         "ENERGY": 2,
         "ITALY_RATES": 1,
         "US_RATES": 1
       },
-      "top": "DEFENSIVES",
-      "top_share": 0.2222
+      "top": "EURO_CREDIT",
+      "top_share": 0.2
     },
     "asset_class_concentration": {
       "counts": {
+        "ETF_BOND_CREDIT": 2,
         "EQUITY": 2,
         "ETF_COMMODITY": 2,
-        "ETF_BOND_CREDIT": 1,
         "ETF_EQUITY": 2,
         "BTP": 1,
         "ETF_BOND_GOV": 1
       },
-      "top": "EQUITY",
-      "top_share": 0.2222
+      "top": "ETF_BOND_CREDIT",
+      "top_share": 0.2
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 7,
+        "LONG": 8,
         "SHORT": 2
       },
       "top": "LONG",
-      "top_share": 0.7778
+      "top_share": 0.8
     }
   },
   "legacy_backtest": {
