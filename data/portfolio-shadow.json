@@ -7,57 +7,55 @@
     "exposures": {
       "asset_class": {
         "counts": {
+          "EQUITY": 2,
           "ETF_COMMODITY": 2,
           "ETF_BOND_CREDIT": 1,
-          "EQUITY": 2,
           "ETF_EQUITY": 2,
           "BTP": 1,
           "ETF_BOND_GOV": 1
         },
         "shares": {
+          "EQUITY": 0.2222,
           "ETF_COMMODITY": 0.2222,
           "ETF_BOND_CREDIT": 0.1111,
-          "EQUITY": 0.2222,
           "ETF_EQUITY": 0.2222,
           "BTP": 0.1111,
           "ETF_BOND_GOV": 0.1111
         },
-        "top": "ETF_COMMODITY",
+        "top": "EQUITY",
         "top_share": 0.2222
       },
       "cluster": {
         "counts": {
+          "DEFENSIVES": 2,
           "COMMODITIES": 2,
           "EURO_CREDIT": 1,
-          "DEFENSIVES": 1,
           "ENERGY": 2,
-          "US_MEGA_CAP": 1,
           "ITALY_RATES": 1,
           "US_RATES": 1
         },
         "shares": {
+          "DEFENSIVES": 0.2222,
           "COMMODITIES": 0.2222,
           "EURO_CREDIT": 0.1111,
-          "DEFENSIVES": 0.1111,
           "ENERGY": 0.2222,
-          "US_MEGA_CAP": 0.1111,
           "ITALY_RATES": 0.1111,
           "US_RATES": 0.1111
         },
-        "top": "COMMODITIES",
+        "top": "DEFENSIVES",
         "top_share": 0.2222
       },
       "direction": {
         "counts": {
-          "LONG": 6,
-          "SHORT": 3
+          "LONG": 7,
+          "SHORT": 2
         },
         "shares": {
-          "LONG": 0.6667,
-          "SHORT": 0.3333
+          "LONG": 0.7778,
+          "SHORT": 0.2222
         },
         "top": "LONG",
-        "top_share": 0.6667
+        "top_share": 0.7778
       },
       "currency": {
         "counts": {
@@ -73,14 +71,15 @@
       }
     },
     "factor_proxy_shares": {
-      "COMMODITY": 0.2222,
-      "USD_DENOMINATED": 0.7778,
-      "DIRECTION_LONG": 0.6667,
-      "DURATION_RATES": 0.3333,
       "EQUITY_BETA": 0.4444,
-      "DIRECTION_SHORT": 0.3333
+      "USD_DENOMINATED": 0.7778,
+      "DIRECTION_LONG": 0.7778,
+      "COMMODITY": 0.2222,
+      "DURATION_RATES": 0.3333,
+      "DIRECTION_SHORT": 0.2222
     },
     "flags": [
+      "DIRECTION_CONCENTRATION",
       "CURRENCY_CONCENTRATION"
     ],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
