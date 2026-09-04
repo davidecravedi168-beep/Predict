@@ -7,53 +7,49 @@
     "exposures": {
       "asset_class": {
         "counts": {
-          "ETF_EQUITY": 2,
           "EQUITY": 2,
           "ETF_BOND_CREDIT": 2,
-          "ETF_COMMODITY": 1,
+          "ETF_EQUITY": 2,
           "ETF_BOND_GOV": 1,
+          "ETF_COMMODITY": 1,
           "BTP": 1,
           "CRYPTO": 1
         },
         "shares": {
-          "ETF_EQUITY": 0.2,
           "EQUITY": 0.2,
           "ETF_BOND_CREDIT": 0.2,
-          "ETF_COMMODITY": 0.1,
+          "ETF_EQUITY": 0.2,
           "ETF_BOND_GOV": 0.1,
+          "ETF_COMMODITY": 0.1,
           "BTP": 0.1,
           "CRYPTO": 0.1
         },
-        "top": "ETF_EQUITY",
+        "top": "EQUITY",
         "top_share": 0.2
       },
       "cluster": {
         "counts": {
-          "US_SECTORS": 1,
-          "DEFENSIVES": 1,
-          "US_MEGA_CAP": 1,
-          "ENERGY": 1,
+          "DEFENSIVES": 2,
           "CREDIT": 1,
-          "COMMODITIES": 1,
-          "EURO_CREDIT": 1,
+          "ENERGY": 2,
           "US_RATES": 1,
+          "EURO_CREDIT": 1,
+          "COMMODITIES": 1,
           "ITALY_RATES": 1,
           "CRYPTO": 1
         },
         "shares": {
-          "US_SECTORS": 0.1,
-          "DEFENSIVES": 0.1,
-          "US_MEGA_CAP": 0.1,
-          "ENERGY": 0.1,
+          "DEFENSIVES": 0.2,
           "CREDIT": 0.1,
-          "COMMODITIES": 0.1,
-          "EURO_CREDIT": 0.1,
+          "ENERGY": 0.2,
           "US_RATES": 0.1,
+          "EURO_CREDIT": 0.1,
+          "COMMODITIES": 0.1,
           "ITALY_RATES": 0.1,
           "CRYPTO": 0.1
         },
-        "top": "US_SECTORS",
-        "top_share": 0.1
+        "top": "DEFENSIVES",
+        "top_share": 0.2
       },
       "direction": {
         "counts": {
