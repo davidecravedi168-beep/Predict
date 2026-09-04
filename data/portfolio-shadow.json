@@ -9,18 +9,18 @@
         "counts": {
           "ETF_COMMODITY": 2,
           "EQUITY": 2,
-          "ETF_EQUITY": 2,
           "ETF_BOND_CREDIT": 2,
-          "ETF_BOND_GOV": 1,
-          "BTP": 1
+          "ETF_EQUITY": 2,
+          "BTP": 1,
+          "ETF_BOND_GOV": 1
         },
         "shares": {
           "ETF_COMMODITY": 0.2,
           "EQUITY": 0.2,
-          "ETF_EQUITY": 0.2,
           "ETF_BOND_CREDIT": 0.2,
-          "ETF_BOND_GOV": 0.1,
-          "BTP": 0.1
+          "ETF_EQUITY": 0.2,
+          "BTP": 0.1,
+          "ETF_BOND_GOV": 0.1
         },
         "top": "ETF_COMMODITY",
         "top_share": 0.2
@@ -29,18 +29,18 @@
         "counts": {
           "COMMODITIES": 2,
           "DEFENSIVES": 2,
-          "ENERGY": 2,
           "EURO_CREDIT": 2,
-          "US_RATES": 1,
-          "ITALY_RATES": 1
+          "ENERGY": 2,
+          "ITALY_RATES": 1,
+          "US_RATES": 1
         },
         "shares": {
           "COMMODITIES": 0.2,
           "DEFENSIVES": 0.2,
-          "ENERGY": 0.2,
           "EURO_CREDIT": 0.2,
-          "US_RATES": 0.1,
-          "ITALY_RATES": 0.1
+          "ENERGY": 0.2,
+          "ITALY_RATES": 0.1,
+          "US_RATES": 0.1
         },
         "top": "COMMODITIES",
         "top_share": 0.2
