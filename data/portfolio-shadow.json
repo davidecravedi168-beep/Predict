@@ -30,8 +30,8 @@
           "EURO_CREDIT": 2,
           "COMMODITIES": 2,
           "DEFENSIVES": 2,
-          "ENERGY": 1,
           "US_SECTORS": 1,
+          "ENERGY": 1,
           "ITALY_RATES": 1,
           "US_RATES": 1
         },
@@ -39,8 +39,8 @@
           "EURO_CREDIT": 0.2,
           "COMMODITIES": 0.2,
           "DEFENSIVES": 0.2,
-          "ENERGY": 0.1,
           "US_SECTORS": 0.1,
+          "ENERGY": 0.1,
           "ITALY_RATES": 0.1,
           "US_RATES": 0.1
         },
