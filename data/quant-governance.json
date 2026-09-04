@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-04T23:16:47.195978+00:00",
-  "source_updated_at": "2026-09-04T23:16:30+00:00",
+  "generated_at": "2026-09-04T23:27:58.898241+00:00",
+  "source_updated_at": "2026-09-04T23:27:40+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -462,10 +462,11 @@
         "EURO_CREDIT": 1,
         "COMMODITIES": 2,
         "DEFENSIVES": 2,
-        "ITALY_RATES": 2,
+        "ITALY_RATES": 1,
         "ENERGY": 1,
         "GLOBAL_EQUITY": 1,
-        "US_RATES": 1
+        "US_RATES": 1,
+        "CRYPTO": 1
       },
       "top": "COMMODITIES",
       "top_share": 0.2
@@ -475,20 +476,21 @@
         "ETF_BOND_CREDIT": 1,
         "ETF_COMMODITY": 2,
         "EQUITY": 2,
-        "BTP": 2,
+        "BTP": 1,
         "ETF_EQUITY": 2,
-        "ETF_BOND_GOV": 1
+        "ETF_BOND_GOV": 1,
+        "CRYPTO": 1
       },
       "top": "ETF_COMMODITY",
       "top_share": 0.2
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 7,
-        "SHORT": 3
+        "LONG": 8,
+        "SHORT": 2
       },
       "top": "LONG",
-      "top_share": 0.7
+      "top_share": 0.8
     }
   },
   "legacy_backtest": {
