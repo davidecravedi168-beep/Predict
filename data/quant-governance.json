@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-04T16:44:52.183005+00:00",
-  "source_updated_at": "2026-09-04T16:44:31+00:00",
+  "generated_at": "2026-09-04T16:57:10.990399+00:00",
+  "source_updated_at": "2026-09-04T16:56:47+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -461,7 +461,8 @@
       "counts": {
         "EURO_CREDIT": 1,
         "COMMODITIES": 2,
-        "DEFENSIVES": 2,
+        "DEFENSIVES": 1,
+        "US_MEGA_CAP": 1,
         "US_SECTORS": 1,
         "ENERGY": 1,
         "ITALY_RATES": 1,
@@ -486,11 +487,11 @@
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 8,
-        "SHORT": 2
+        "LONG": 7,
+        "SHORT": 3
       },
       "top": "LONG",
-      "top_share": 0.8
+      "top_share": 0.7
     }
   },
   "legacy_backtest": {
