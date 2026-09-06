@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-04T23:57:01.282976+00:00",
-  "source_updated_at": "2026-09-04T23:56:43+00:00",
+  "generated_at": "2026-09-06T22:10:44.761009+00:00",
+  "source_updated_at": "2026-09-06T22:10:26+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -14,8 +14,8 @@
   },
   "forward": {
     "maturity": "COLD_START",
-    "independent_episodes": 37,
-    "active": 29,
+    "independent_episodes": 38,
+    "active": 30,
     "resolved": 3,
     "hit_rate": 0.3333,
     "brier": null,
@@ -446,12 +446,13 @@
   },
   "data_quality": {
     "freshness_minutes": 0.3,
-    "availability_ratio": 0.9773,
+    "availability_ratio": 0.9659,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
     "unavailable_tickers": [
       "STM.MI",
-      "CTRA"
+      "CTRA",
+      "TLT"
     ]
   },
   "signal_book": {
@@ -462,10 +463,11 @@
         "EURO_CREDIT": 1,
         "COMMODITIES": 2,
         "DEFENSIVES": 2,
-        "ITALY_RATES": 2,
+        "ITALY_RATES": 1,
         "ENERGY": 1,
         "GLOBAL_EQUITY": 1,
-        "US_RATES": 1
+        "US_RATES": 1,
+        "CRYPTO": 1
       },
       "top": "COMMODITIES",
       "top_share": 0.2
@@ -475,27 +477,28 @@
         "ETF_BOND_CREDIT": 1,
         "ETF_COMMODITY": 2,
         "EQUITY": 2,
-        "BTP": 2,
+        "BTP": 1,
         "ETF_EQUITY": 2,
-        "ETF_BOND_GOV": 1
+        "ETF_BOND_GOV": 1,
+        "CRYPTO": 1
       },
       "top": "ETF_COMMODITY",
       "top_share": 0.2
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 7,
-        "SHORT": 3
+        "LONG": 9,
+        "SHORT": 1
       },
       "top": "LONG",
-      "top_share": 0.7
+      "top_share": 0.9
     }
   },
   "legacy_backtest": {
     "state": "AVAILABLE",
-    "signals": 340,
-    "hit_rate": 0.4971,
-    "avg_return_pct_after_costs": -0.3215
+    "signals": 337,
+    "hit_rate": 0.4777,
+    "avg_return_pct_after_costs": -0.0562
   },
   "calibration": {
     "empirical_probabilities_published": 0,
@@ -506,6 +509,7 @@
     "BRIER_SAMPLE_NOT_CALIBRATION_READY",
     "LEGACY_BACKTEST_EXPECTANCY_NON_POSITIVE",
     "LEGACY_BACKTEST_HIT_RATE_BELOW_52_PERCENT",
+    "SIGNAL_DIRECTION_CONCENTRATION_ABOVE_80_PERCENT",
     "SEGMENT_LEDGER_RESOLVED_COUNT_DIFFERS_FROM_SUMMARY"
   ],
   "blockers": [],
