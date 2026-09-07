@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-07T17:45:31.471347+00:00",
-  "source_updated_at": "2026-09-07T17:45:14+00:00",
+  "generated_at": "2026-09-07T17:57:07.316502+00:00",
+  "source_updated_at": "2026-09-07T17:56:46+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "operational": true,
   "forward": {
