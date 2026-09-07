@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-07T15:47:13.077956+00:00",
-  "source_updated_at": "2026-09-07T15:46:54+00:00",
+  "generated_at": "2026-09-07T15:57:53.101741+00:00",
+  "source_updated_at": "2026-09-07T15:57:34+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -455,38 +455,40 @@
     ]
   },
   "signal_book": {
-    "signals": 9,
+    "signals": 10,
     "watchlist": 27,
     "cluster_concentration": {
       "counts": {
-        "ITALY_RATES": 2,
+        "EURO_CREDIT": 1,
         "COMMODITIES": 2,
         "DEFENSIVES": 2,
+        "ITALY_RATES": 2,
         "ENERGY": 1,
         "GLOBAL_EQUITY": 1,
         "US_RATES": 1
       },
-      "top": "ITALY_RATES",
-      "top_share": 0.2222
+      "top": "COMMODITIES",
+      "top_share": 0.2
     },
     "asset_class_concentration": {
       "counts": {
-        "BTP": 2,
+        "ETF_BOND_CREDIT": 1,
         "ETF_COMMODITY": 2,
         "EQUITY": 2,
+        "BTP": 2,
         "ETF_EQUITY": 2,
         "ETF_BOND_GOV": 1
       },
-      "top": "BTP",
-      "top_share": 0.2222
+      "top": "ETF_COMMODITY",
+      "top_share": 0.2
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 7,
+        "LONG": 8,
         "SHORT": 2
       },
       "top": "LONG",
-      "top_share": 0.7778
+      "top_share": 0.8
     }
   },
   "legacy_backtest": {
