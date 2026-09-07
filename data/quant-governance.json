@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-07T13:01:55.979840+00:00",
-  "source_updated_at": "2026-09-07T13:01:38+00:00",
+  "generated_at": "2026-09-07T13:22:38.652409+00:00",
+  "source_updated_at": "2026-09-07T13:22:18+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -462,9 +462,9 @@
         "ITALY_RATES": 2,
         "COMMODITIES": 2,
         "DEFENSIVES": 2,
+        "CRYPTO": 1,
         "ENERGY": 1,
         "GLOBAL_EQUITY": 1,
-        "CRYPTO": 1,
         "US_RATES": 1
       },
       "top": "ITALY_RATES",
@@ -475,8 +475,8 @@
         "BTP": 2,
         "ETF_COMMODITY": 2,
         "EQUITY": 2,
-        "ETF_EQUITY": 2,
         "CRYPTO": 1,
+        "ETF_EQUITY": 2,
         "ETF_BOND_GOV": 1
       },
       "top": "BTP",
