@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-07T02:46:53.996476+00:00",
-  "source_updated_at": "2026-09-07T02:46:35+00:00",
+  "generated_at": "2026-09-07T02:58:18.756162+00:00",
+  "source_updated_at": "2026-09-07T02:58:02+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -14,8 +14,8 @@
   },
   "forward": {
     "maturity": "COLD_START",
-    "independent_episodes": 38,
-    "active": 30,
+    "independent_episodes": 39,
+    "active": 31,
     "resolved": 3,
     "hit_rate": 0.3333,
     "brier": null,
@@ -464,8 +464,8 @@
         "DEFENSIVES": 2,
         "ITALY_RATES": 1,
         "ENERGY": 1,
-        "CRYPTO": 1,
         "GLOBAL_EQUITY": 1,
+        "CRYPTO": 1,
         "US_RATES": 1
       },
       "top": "COMMODITIES",
