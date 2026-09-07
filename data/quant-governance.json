@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-07T13:36:56.791963+00:00",
-  "source_updated_at": "2026-09-07T13:36:35+00:00",
+  "generated_at": "2026-09-07T13:50:43.857485+00:00",
+  "source_updated_at": "2026-09-07T13:50:26+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -445,13 +445,14 @@
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
-    "freshness_minutes": 0.4,
-    "availability_ratio": 0.9773,
+    "freshness_minutes": 0.3,
+    "availability_ratio": 0.9659,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
     "unavailable_tickers": [
       "STM.MI",
-      "CTRA"
+      "CTRA",
+      "IGF"
     ]
   },
   "signal_book": {
