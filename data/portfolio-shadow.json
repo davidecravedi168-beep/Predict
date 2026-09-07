@@ -11,16 +11,18 @@
           "ETF_COMMODITY": 2,
           "EQUITY": 2,
           "BTP": 2,
-          "ETF_EQUITY": 2,
-          "ETF_BOND_GOV": 1
+          "ETF_EQUITY": 1,
+          "ETF_BOND_GOV": 1,
+          "CRYPTO": 1
         },
         "shares": {
           "ETF_BOND_CREDIT": 0.1,
           "ETF_COMMODITY": 0.2,
           "EQUITY": 0.2,
           "BTP": 0.2,
-          "ETF_EQUITY": 0.2,
-          "ETF_BOND_GOV": 0.1
+          "ETF_EQUITY": 0.1,
+          "ETF_BOND_GOV": 0.1,
+          "CRYPTO": 0.1
         },
         "top": "ETF_COMMODITY",
         "top_share": 0.2
@@ -32,8 +34,8 @@
           "DEFENSIVES": 2,
           "ITALY_RATES": 2,
           "ENERGY": 1,
-          "GLOBAL_EQUITY": 1,
-          "US_RATES": 1
+          "US_RATES": 1,
+          "CRYPTO": 1
         },
         "shares": {
           "EURO_CREDIT": 0.1,
@@ -41,8 +43,8 @@
           "DEFENSIVES": 0.2,
           "ITALY_RATES": 0.2,
           "ENERGY": 0.1,
-          "GLOBAL_EQUITY": 0.1,
-          "US_RATES": 0.1
+          "US_RATES": 0.1,
+          "CRYPTO": 0.1
         },
         "top": "COMMODITIES",
         "top_share": 0.2
@@ -77,7 +79,7 @@
       "DIRECTION_LONG": 0.8,
       "COMMODITY": 0.2,
       "USD_DENOMINATED": 0.7,
-      "EQUITY_BETA": 0.4,
+      "EQUITY_BETA": 0.3,
       "DIRECTION_SHORT": 0.2
     },
     "flags": [
