@@ -1,44 +1,44 @@
 {
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
-  "eligible_forward_resolved": 10,
+  "eligible_forward_resolved": 13,
   "submodel_attribution": [],
   "friction_stress": {
     "state": "INSUFFICIENT_FORWARD_SAMPLE",
-    "baseline_n": 10,
-    "baseline_avg_net_return_pct": -0.1422,
+    "baseline_n": 13,
+    "baseline_avg_net_return_pct": -0.2404,
     "tiers": [
       {
         "extra_friction_bps": 5,
-        "n": 10,
-        "positive_rate": 0.5,
-        "avg_return_pct": -0.1922,
-        "median_return_pct": -0.2801,
+        "n": 13,
+        "positive_rate": 0.4615,
+        "avg_return_pct": -0.2904,
+        "median_return_pct": -0.5811,
         "positive_survival_ratio": 1.0
       },
       {
         "extra_friction_bps": 10,
-        "n": 10,
-        "positive_rate": 0.4,
-        "avg_return_pct": -0.2422,
-        "median_return_pct": -0.3301,
-        "positive_survival_ratio": 0.8
+        "n": 13,
+        "positive_rate": 0.3846,
+        "avg_return_pct": -0.3404,
+        "median_return_pct": -0.6311,
+        "positive_survival_ratio": 0.8333
       },
       {
         "extra_friction_bps": 20,
-        "n": 10,
-        "positive_rate": 0.4,
-        "avg_return_pct": -0.3422,
-        "median_return_pct": -0.4301,
-        "positive_survival_ratio": 0.8
+        "n": 13,
+        "positive_rate": 0.3846,
+        "avg_return_pct": -0.4404,
+        "median_return_pct": -0.7311,
+        "positive_survival_ratio": 0.8333
       },
       {
         "extra_friction_bps": 35,
-        "n": 10,
-        "positive_rate": 0.4,
-        "avg_return_pct": -0.4922,
-        "median_return_pct": -0.5801,
-        "positive_survival_ratio": 0.8
+        "n": 13,
+        "positive_rate": 0.3846,
+        "avg_return_pct": -0.5904,
+        "median_return_pct": -0.8811,
+        "positive_survival_ratio": 0.8333
       }
     ],
     "method": "Incremental friction is subtracted from already cost-adjusted forward return_pct; no spread/slippage observations are fabricated."

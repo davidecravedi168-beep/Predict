@@ -7,40 +7,38 @@
     "exposures": {
       "asset_class": {
         "counts": {
-          "ETF_COMMODITY": 2,
-          "EQUITY": 2,
           "BTP": 2,
           "ETF_EQUITY": 2,
-          "ETF_BOND_GOV": 1
+          "EQUITY": 2,
+          "ETF_BOND_GOV": 1,
+          "ETF_COMMODITY": 2
         },
         "shares": {
-          "ETF_COMMODITY": 0.2222,
-          "EQUITY": 0.2222,
           "BTP": 0.2222,
           "ETF_EQUITY": 0.2222,
-          "ETF_BOND_GOV": 0.1111
+          "EQUITY": 0.2222,
+          "ETF_BOND_GOV": 0.1111,
+          "ETF_COMMODITY": 0.2222
         },
-        "top": "ETF_COMMODITY",
+        "top": "BTP",
         "top_share": 0.2222
       },
       "cluster": {
         "counts": {
-          "COMMODITIES": 2,
-          "DEFENSIVES": 2,
           "ITALY_RATES": 2,
-          "ENERGY": 1,
-          "GLOBAL_EQUITY": 1,
-          "US_RATES": 1
+          "ENERGY": 2,
+          "DEFENSIVES": 2,
+          "US_RATES": 1,
+          "COMMODITIES": 2
         },
         "shares": {
-          "COMMODITIES": 0.2222,
-          "DEFENSIVES": 0.2222,
           "ITALY_RATES": 0.2222,
-          "ENERGY": 0.1111,
-          "GLOBAL_EQUITY": 0.1111,
-          "US_RATES": 0.1111
+          "ENERGY": 0.2222,
+          "DEFENSIVES": 0.2222,
+          "US_RATES": 0.1111,
+          "COMMODITIES": 0.2222
         },
-        "top": "COMMODITIES",
+        "top": "ITALY_RATES",
         "top_share": 0.2222
       },
       "direction": {
@@ -57,24 +55,24 @@
       },
       "currency": {
         "counts": {
-          "USD": 7,
-          "EUR": 2
+          "EUR": 2,
+          "USD": 7
         },
         "shares": {
-          "USD": 0.7778,
-          "EUR": 0.2222
+          "EUR": 0.2222,
+          "USD": 0.7778
         },
         "top": "USD",
         "top_share": 0.7778
       }
     },
     "factor_proxy_shares": {
-      "COMMODITY": 0.2222,
-      "USD_DENOMINATED": 0.7778,
+      "DURATION_RATES": 0.3333,
       "DIRECTION_LONG": 0.7778,
       "EQUITY_BETA": 0.4444,
-      "DURATION_RATES": 0.3333,
-      "DIRECTION_SHORT": 0.2222
+      "USD_DENOMINATED": 0.7778,
+      "DIRECTION_SHORT": 0.2222,
+      "COMMODITY": 0.2222
     },
     "flags": [
       "DIRECTION_CONCENTRATION",
@@ -85,9 +83,9 @@
   "champion_shadow": {
     "state": "NO_SHADOW_SAMPLE",
     "champion": {
-      "n": 10,
-      "hit_rate": 0.5,
-      "avg_return_pct": -0.1422,
+      "n": 13,
+      "hit_rate": 0.4615,
+      "avg_return_pct": -0.2404,
       "brier": null,
       "brier_n": 0
     },
