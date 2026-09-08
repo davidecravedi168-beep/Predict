@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-08T15:22:36.582235+00:00",
-  "source_updated_at": "2026-09-08T15:22:17+00:00",
+  "generated_at": "2026-09-08T15:37:51.059319+00:00",
+  "source_updated_at": "2026-09-08T15:37:29+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -578,7 +578,7 @@
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
-    "freshness_minutes": 0.3,
+    "freshness_minutes": 0.4,
     "availability_ratio": 0.9773,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
@@ -588,7 +588,7 @@
     ]
   },
   "signal_book": {
-    "signals": 10,
+    "signals": 9,
     "watchlist": 27,
     "cluster_concentration": {
       "counts": {
@@ -596,11 +596,10 @@
         "ENERGY": 2,
         "DEFENSIVES": 2,
         "US_RATES": 1,
-        "COMMODITIES": 2,
-        "FX": 1
+        "COMMODITIES": 2
       },
       "top": "ITALY_RATES",
-      "top_share": 0.2
+      "top_share": 0.2222
     },
     "asset_class_concentration": {
       "counts": {
@@ -608,19 +607,18 @@
         "ETF_EQUITY": 2,
         "EQUITY": 2,
         "ETF_BOND_GOV": 1,
-        "ETF_COMMODITY": 2,
-        "FX": 1
+        "ETF_COMMODITY": 2
       },
       "top": "BTP",
-      "top_share": 0.2
+      "top_share": 0.2222
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 8,
+        "LONG": 7,
         "SHORT": 2
       },
       "top": "LONG",
-      "top_share": 0.8
+      "top_share": 0.7778
     }
   },
   "legacy_backtest": {
