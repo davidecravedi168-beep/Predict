@@ -34,8 +34,8 @@
           "DEFENSIVES": 2,
           "ITALY_RATES": 1,
           "ENERGY": 1,
-          "GLOBAL_EQUITY": 1,
           "CRYPTO": 1,
+          "GLOBAL_EQUITY": 1,
           "US_RATES": 1
         },
         "shares": {
@@ -44,8 +44,8 @@
           "DEFENSIVES": 0.2,
           "ITALY_RATES": 0.1,
           "ENERGY": 0.1,
-          "GLOBAL_EQUITY": 0.1,
           "CRYPTO": 0.1,
+          "GLOBAL_EQUITY": 0.1,
           "US_RATES": 0.1
         },
         "top": "COMMODITIES",
