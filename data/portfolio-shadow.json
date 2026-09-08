@@ -9,18 +9,18 @@
         "counts": {
           "BTP": 2,
           "ETF_BOND_CREDIT": 1,
-          "ETF_BOND_GOV": 1,
+          "ETF_BOND_GOV": 2,
           "ETF_EQUITY": 2,
           "EQUITY": 2,
-          "ETF_COMMODITY": 2
+          "ETF_COMMODITY": 1
         },
         "shares": {
           "BTP": 0.2,
           "ETF_BOND_CREDIT": 0.1,
-          "ETF_BOND_GOV": 0.1,
+          "ETF_BOND_GOV": 0.2,
           "ETF_EQUITY": 0.2,
           "EQUITY": 0.2,
-          "ETF_COMMODITY": 0.2
+          "ETF_COMMODITY": 0.1
         },
         "top": "BTP",
         "top_share": 0.2
@@ -32,7 +32,8 @@
           "US_RATES": 1,
           "ENERGY": 2,
           "DEFENSIVES": 2,
-          "COMMODITIES": 2
+          "COMMODITIES": 1,
+          "BROAD_BONDS": 1
         },
         "shares": {
           "ITALY_RATES": 0.2,
@@ -40,22 +41,23 @@
           "US_RATES": 0.1,
           "ENERGY": 0.2,
           "DEFENSIVES": 0.2,
-          "COMMODITIES": 0.2
+          "COMMODITIES": 0.1,
+          "BROAD_BONDS": 0.1
         },
         "top": "ITALY_RATES",
         "top_share": 0.2
       },
       "direction": {
         "counts": {
-          "LONG": 7,
-          "SHORT": 3
+          "LONG": 6,
+          "SHORT": 4
         },
         "shares": {
-          "LONG": 0.7,
-          "SHORT": 0.3
+          "LONG": 0.6,
+          "SHORT": 0.4
         },
         "top": "LONG",
-        "top_share": 0.7
+        "top_share": 0.6
       },
       "currency": {
         "counts": {
@@ -71,12 +73,12 @@
       }
     },
     "factor_proxy_shares": {
-      "DURATION_RATES": 0.4,
-      "DIRECTION_LONG": 0.7,
+      "DURATION_RATES": 0.5,
+      "DIRECTION_LONG": 0.6,
       "USD_DENOMINATED": 0.8,
-      "DIRECTION_SHORT": 0.3,
+      "DIRECTION_SHORT": 0.4,
       "EQUITY_BETA": 0.4,
-      "COMMODITY": 0.2
+      "COMMODITY": 0.1
     },
     "flags": [
       "CURRENCY_CONCENTRATION"
