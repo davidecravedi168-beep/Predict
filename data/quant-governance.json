@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-08T09:50:43.144992+00:00",
-  "source_updated_at": "2026-09-08T09:50:21+00:00",
+  "generated_at": "2026-09-08T10:00:15.571342+00:00",
+  "source_updated_at": "2026-09-08T09:59:54+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -530,11 +530,11 @@
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 7,
-        "SHORT": 3
+        "LONG": 8,
+        "SHORT": 2
       },
       "top": "LONG",
-      "top_share": 0.7
+      "top_share": 0.8
     }
   },
   "legacy_backtest": {

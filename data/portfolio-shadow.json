@@ -49,15 +49,15 @@
       },
       "direction": {
         "counts": {
-          "LONG": 7,
-          "SHORT": 3
+          "LONG": 8,
+          "SHORT": 2
         },
         "shares": {
-          "LONG": 0.7,
-          "SHORT": 0.3
+          "LONG": 0.8,
+          "SHORT": 0.2
         },
         "top": "LONG",
-        "top_share": 0.7
+        "top_share": 0.8
       },
       "currency": {
         "counts": {
@@ -75,12 +75,13 @@
     "factor_proxy_shares": {
       "COMMODITY": 0.2,
       "USD_DENOMINATED": 0.8,
-      "DIRECTION_LONG": 0.7,
+      "DIRECTION_LONG": 0.8,
       "EQUITY_BETA": 0.4,
       "DURATION_RATES": 0.3,
-      "DIRECTION_SHORT": 0.3
+      "DIRECTION_SHORT": 0.2
     },
     "flags": [
+      "DIRECTION_CONCENTRATION",
       "CURRENCY_CONCENTRATION"
     ],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
