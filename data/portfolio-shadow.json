@@ -8,16 +8,16 @@
       "asset_class": {
         "counts": {
           "ETF_COMMODITY": 2,
-          "BTP": 2,
           "EQUITY": 2,
+          "BTP": 2,
           "ETF_EQUITY": 2,
           "ETF_BOND_GOV": 1,
           "CRYPTO": 1
         },
         "shares": {
           "ETF_COMMODITY": 0.2,
-          "BTP": 0.2,
           "EQUITY": 0.2,
+          "BTP": 0.2,
           "ETF_EQUITY": 0.2,
           "ETF_BOND_GOV": 0.1,
           "CRYPTO": 0.1
@@ -28,8 +28,8 @@
       "cluster": {
         "counts": {
           "COMMODITIES": 2,
-          "ITALY_RATES": 2,
           "DEFENSIVES": 2,
+          "ITALY_RATES": 2,
           "ENERGY": 1,
           "GLOBAL_EQUITY": 1,
           "US_RATES": 1,
@@ -37,8 +37,8 @@
         },
         "shares": {
           "COMMODITIES": 0.2,
-          "ITALY_RATES": 0.2,
           "DEFENSIVES": 0.2,
+          "ITALY_RATES": 0.2,
           "ENERGY": 0.1,
           "GLOBAL_EQUITY": 0.1,
           "US_RATES": 0.1,
@@ -49,15 +49,15 @@
       },
       "direction": {
         "counts": {
-          "LONG": 8,
-          "SHORT": 2
+          "LONG": 7,
+          "SHORT": 3
         },
         "shares": {
-          "LONG": 0.8,
-          "SHORT": 0.2
+          "LONG": 0.7,
+          "SHORT": 0.3
         },
         "top": "LONG",
-        "top_share": 0.8
+        "top_share": 0.7
       },
       "currency": {
         "counts": {
@@ -75,13 +75,12 @@
     "factor_proxy_shares": {
       "COMMODITY": 0.2,
       "USD_DENOMINATED": 0.8,
-      "DIRECTION_LONG": 0.8,
+      "DIRECTION_LONG": 0.7,
+      "EQUITY_BETA": 0.4,
       "DURATION_RATES": 0.3,
-      "DIRECTION_SHORT": 0.2,
-      "EQUITY_BETA": 0.4
+      "DIRECTION_SHORT": 0.3
     },
     "flags": [
-      "DIRECTION_CONCENTRATION",
       "CURRENCY_CONCENTRATION"
     ],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
