@@ -9,16 +9,16 @@
         "counts": {
           "ETF_COMMODITY": 2,
           "EQUITY": 2,
-          "BTP": 2,
           "ETF_EQUITY": 2,
+          "BTP": 2,
           "ETF_BOND_GOV": 1,
           "CRYPTO": 1
         },
         "shares": {
           "ETF_COMMODITY": 0.2,
           "EQUITY": 0.2,
-          "BTP": 0.2,
           "ETF_EQUITY": 0.2,
+          "BTP": 0.2,
           "ETF_BOND_GOV": 0.1,
           "CRYPTO": 0.1
         },
@@ -29,8 +29,8 @@
         "counts": {
           "COMMODITIES": 2,
           "DEFENSIVES": 2,
-          "ITALY_RATES": 2,
           "ENERGY": 1,
+          "ITALY_RATES": 2,
           "GLOBAL_EQUITY": 1,
           "US_RATES": 1,
           "CRYPTO": 1
@@ -38,8 +38,8 @@
         "shares": {
           "COMMODITIES": 0.2,
           "DEFENSIVES": 0.2,
-          "ITALY_RATES": 0.2,
           "ENERGY": 0.1,
+          "ITALY_RATES": 0.2,
           "GLOBAL_EQUITY": 0.1,
           "US_RATES": 0.1,
           "CRYPTO": 0.1
