@@ -29,19 +29,17 @@
         "counts": {
           "ITALY_RATES": 2,
           "ENERGY": 2,
-          "DEFENSIVES": 1,
+          "DEFENSIVES": 2,
           "US_RATES": 1,
           "COMMODITIES": 2,
-          "GLOBAL_EQUITY": 1,
           "FX": 1
         },
         "shares": {
           "ITALY_RATES": 0.2,
           "ENERGY": 0.2,
-          "DEFENSIVES": 0.1,
+          "DEFENSIVES": 0.2,
           "US_RATES": 0.1,
           "COMMODITIES": 0.2,
-          "GLOBAL_EQUITY": 0.1,
           "FX": 0.1
         },
         "top": "ITALY_RATES",

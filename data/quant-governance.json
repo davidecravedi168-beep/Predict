@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-08T14:48:47.672697+00:00",
-  "source_updated_at": "2026-09-08T14:48:29+00:00",
+  "generated_at": "2026-09-08T15:00:57.820192+00:00",
+  "source_updated_at": "2026-09-08T15:00:37+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -594,10 +594,9 @@
       "counts": {
         "ITALY_RATES": 2,
         "ENERGY": 2,
-        "DEFENSIVES": 1,
+        "DEFENSIVES": 2,
         "US_RATES": 1,
         "COMMODITIES": 2,
-        "GLOBAL_EQUITY": 1,
         "FX": 1
       },
       "top": "ITALY_RATES",
