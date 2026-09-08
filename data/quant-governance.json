@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-08T17:33:11.391327+00:00",
-  "source_updated_at": "2026-09-08T17:32:49+00:00",
+  "generated_at": "2026-09-08T17:44:39.564072+00:00",
+  "source_updated_at": "2026-09-08T17:44:17+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -594,8 +594,8 @@
       "counts": {
         "ITALY_RATES": 2,
         "DEFENSIVES": 2,
-        "COMMODITIES": 2,
         "US_RATES": 1,
+        "COMMODITIES": 2,
         "ENERGY": 2
       },
       "top": "ITALY_RATES",
@@ -605,8 +605,8 @@
       "counts": {
         "BTP": 2,
         "EQUITY": 2,
-        "ETF_COMMODITY": 2,
         "ETF_BOND_GOV": 1,
+        "ETF_COMMODITY": 2,
         "ETF_EQUITY": 2
       },
       "top": "BTP",
