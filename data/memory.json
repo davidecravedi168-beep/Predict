@@ -655,7 +655,7 @@
       "outcome": "PENDING",
       "episode_key": "AWK|LONG|10|BREAKOUT",
       "episode_id": "EP|2026-08-25|AWK|LONG|10|BREAKOUT",
-      "observations": 244,
+      "observations": 245,
       "state": "ACTIVE",
       "last_seen": "2026-09-08",
       "latest_confidence_pct": 72.72,
@@ -1287,10 +1287,10 @@
       "outcome": "PENDING",
       "episode_key": "IITB.MI|SHORT|10|BREAKOUT",
       "episode_id": "EP|2026-08-25|IITB.MI|SHORT|10|BREAKOUT",
-      "observations": 292,
+      "observations": 293,
       "state": "ACTIVE",
-      "last_seen": "2026-09-07",
-      "latest_confidence_pct": 71.84,
+      "last_seen": "2026-09-08",
+      "latest_confidence_pct": 72.15,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
     },
@@ -3689,7 +3689,7 @@
       "outcome": "PENDING",
       "episode_key": "EUES.MI|LONG|40|BREAKOUT",
       "episode_id": "EP|2026-08-28|EUES.MI|LONG|40|BREAKOUT",
-      "observations": 403,
+      "observations": 404,
       "state": "ACTIVE",
       "last_seen": "2026-09-08",
       "latest_confidence_pct": 74.9,
@@ -6102,7 +6102,7 @@
       "episode_id": "EP|2026-08-31|XOP|LONG|5|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "XOP|LONG|5|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 216,
+      "observations": 217,
       "first_seen": "2026-08-31",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -6423,7 +6423,7 @@
       "episode_id": "EP|2026-08-31|IEF|SHORT|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "IEF|SHORT|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 363,
+      "observations": 364,
       "first_seen": "2026-08-31",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -6687,7 +6687,7 @@
       "episode_id": "EP|2026-09-01|DBC|LONG|5|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "DBC|LONG|5|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 312,
+      "observations": 313,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -6963,7 +6963,7 @@
       "episode_id": "EP|2026-09-01|USO|LONG|5|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "USO|LONG|5|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 316,
+      "observations": 317,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -7776,7 +7776,7 @@
       "episode_id": "EP|2026-09-01|WTRG|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "WTRG|LONG|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 361,
+      "observations": 362,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -8382,7 +8382,8 @@
           "conviction": 69.28,
           "weight": 1.0,
           "as_of": "2026-09-03",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "RSI_MOMENTUM",
@@ -8391,7 +8392,8 @@
           "conviction": 50.86,
           "weight": 1.0,
           "as_of": "2026-09-03",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "BREAKOUT_63D",
@@ -8400,7 +8402,8 @@
           "conviction": 100.0,
           "weight": 1.0,
           "as_of": "2026-09-03",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "MEAN_REVERSION_20D",
@@ -8409,17 +8412,30 @@
           "conviction": 50.2,
           "weight": 1.0,
           "as_of": "2026-09-03",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "HIT"
         }
       ],
       "external_model_votes": [],
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING",
+      "outcome": "MISS",
       "latest_confidence_pct": 69.1,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.1-math-risk-layer"
+      "latest_model_version": "8.6.1-math-risk-layer",
+      "gross_return_pct": -3.339,
+      "estimated_round_trip_cost_bps": 35.0,
+      "return_pct": -3.689,
+      "underlying_return_pct": -3.339,
+      "exit": 78421.25,
+      "resolved": "2026-09-08",
+      "mfe_pct": 0.3735,
+      "mae_pct": -3.5349,
+      "stop_touched": false,
+      "target1_touched": false,
+      "target2_touched": false,
+      "path_order": "NOT_AMBIGUOUS_AT_DAILY_RESOLUTION"
     },
     {
       "id": "EP|2026-09-04|SPY|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
@@ -8616,7 +8632,7 @@
       "episode_id": "EP|2026-09-04|ACWI|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "ACWI|LONG|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 117,
+      "observations": 118,
       "first_seen": "2026-09-04",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -8901,7 +8917,7 @@
       "episode_id": "EP|2026-09-06|BT27.MI|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "BT27.MI|LONG|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 121,
+      "observations": 122,
       "first_seen": "2026-09-06",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -9084,21 +9100,27 @@
   "stats": {
     "total": 39,
     "independent_episodes": 39,
-    "active": 31,
+    "active": 30,
     "superseded_or_excluded": 55,
     "legacy_resolved_excluded": 11,
-    "resolved": 3,
+    "resolved": 4,
     "hits": 1,
-    "misses": 2,
-    "hit_rate": 0.3333,
-    "recent_50_hit_rate": 0.3333,
+    "misses": 3,
+    "hit_rate": 0.25,
+    "recent_50_hit_rate": 0.25,
     "brier": null,
     "brier_n": 0,
     "high_confidence_misses": 0,
     "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
-    "learning_resolved": 3,
+    "learning_resolved": 4,
     "external_predictions_resolved": 0,
     "by_asset_class": {
+      "CRYPTO": {
+        "resolved": 1,
+        "hits": 0,
+        "hit_rate": 0.0,
+        "avg_return_pct": -3.689
+      },
       "EQUITY": {
         "resolved": 2,
         "hits": 0,
@@ -9118,6 +9140,12 @@
         "hits": 1,
         "hit_rate": 0.3333,
         "avg_return_pct": -0.7402
+      },
+      "5": {
+        "resolved": 1,
+        "hits": 0,
+        "hit_rate": 0.0,
+        "avg_return_pct": -3.689
       }
     },
     "by_asset_class_horizon": {
@@ -9132,14 +9160,20 @@
         "hits": 0,
         "hit_rate": 0.0,
         "avg_return_pct": -1.4737
+      },
+      "CRYPTO|5": {
+        "resolved": 1,
+        "hits": 0,
+        "hit_rate": 0.0,
+        "avg_return_pct": -3.689
       }
     }
   },
   "model_stats": {
     "TREND_Z": {
-      "resolved": 3,
+      "resolved": 4,
       "hits": 1,
-      "hit_rate": 0.3333
+      "hit_rate": 0.25
     },
     "RELATIVE_Z": {
       "resolved": 2,
@@ -9147,19 +9181,19 @@
       "hit_rate": 0.5
     },
     "RSI_MOMENTUM": {
-      "resolved": 3,
+      "resolved": 4,
       "hits": 1,
-      "hit_rate": 0.3333
+      "hit_rate": 0.25
     },
     "BREAKOUT_63D": {
-      "resolved": 3,
+      "resolved": 4,
       "hits": 1,
-      "hit_rate": 0.3333
+      "hit_rate": 0.25
     },
     "MEAN_REVERSION_20D": {
-      "resolved": 3,
-      "hits": 2,
-      "hit_rate": 0.6667
+      "resolved": 4,
+      "hits": 3,
+      "hit_rate": 0.75
     },
     "VOLUME_CONFIRM": {
       "resolved": 3,
@@ -9227,6 +9261,26 @@
       "resolved": 2,
       "hits": 0,
       "hit_rate": 0.0
+    },
+    "TREND_Z|CRYPTO": {
+      "resolved": 1,
+      "hits": 0,
+      "hit_rate": 0.0
+    },
+    "RSI_MOMENTUM|CRYPTO": {
+      "resolved": 1,
+      "hits": 0,
+      "hit_rate": 0.0
+    },
+    "BREAKOUT_63D|CRYPTO": {
+      "resolved": 1,
+      "hits": 0,
+      "hit_rate": 0.0
+    },
+    "MEAN_REVERSION_20D|CRYPTO": {
+      "resolved": 1,
+      "hits": 1,
+      "hit_rate": 1.0
     }
   },
   "external_model_stats": {},
