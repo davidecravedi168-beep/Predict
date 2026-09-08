@@ -655,10 +655,10 @@
       "outcome": "PENDING",
       "episode_key": "AWK|LONG|10|BREAKOUT",
       "episode_id": "EP|2026-08-25|AWK|LONG|10|BREAKOUT",
-      "observations": 268,
+      "observations": 269,
       "state": "ACTIVE",
       "last_seen": "2026-09-08",
-      "latest_confidence_pct": 72.72,
+      "latest_confidence_pct": 73.24,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
     },
@@ -1287,10 +1287,10 @@
       "outcome": "PENDING",
       "episode_key": "IITB.MI|SHORT|10|BREAKOUT",
       "episode_id": "EP|2026-08-25|IITB.MI|SHORT|10|BREAKOUT",
-      "observations": 307,
+      "observations": 308,
       "state": "ACTIVE",
       "last_seen": "2026-09-08",
-      "latest_confidence_pct": 71.54,
+      "latest_confidence_pct": 70.18,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
     },
@@ -5957,7 +5957,8 @@
           "conviction": 15.05,
           "weight": 1.0,
           "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "RSI_MOMENTUM",
@@ -5966,7 +5967,8 @@
           "conviction": 8.41,
           "weight": 1.0,
           "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "BREAKOUT_63D",
@@ -5975,7 +5977,8 @@
           "conviction": 94.49,
           "weight": 1.0,
           "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "MEAN_REVERSION_20D",
@@ -5984,7 +5987,8 @@
           "conviction": 0.83,
           "weight": 1.0,
           "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "HIT"
         },
         {
           "model_id": "VOLUME_CONFIRM",
@@ -5993,17 +5997,30 @@
           "conviction": 18.58,
           "weight": 1.0,
           "as_of": "2026-08-28",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         }
       ],
       "external_model_votes": [],
       "learning_adjustment": 0.0,
       "risk_regime": "NEUTRAL",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING",
+      "outcome": "MISS",
       "latest_confidence_pct": 71.88,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.1-math-risk-layer"
+      "latest_model_version": "8.6.1-math-risk-layer",
+      "gross_return_pct": -0.7144,
+      "estimated_round_trip_cost_bps": 10.0,
+      "return_pct": -0.8144,
+      "underlying_return_pct": -0.7144,
+      "exit": 57.674999,
+      "resolved": "2026-09-08",
+      "mfe_pct": 0.8779,
+      "mae_pct": -1.6526,
+      "stop_touched": true,
+      "target1_touched": false,
+      "target2_touched": false,
+      "path_order": "NOT_AMBIGUOUS_AT_DAILY_RESOLUTION"
     },
     {
       "id": "EP|2026-08-31|IITA.MI|SHORT|10|BREAKOUT|8.6.1-math-risk-layer",
@@ -6141,7 +6158,8 @@
           "conviction": 30.96,
           "weight": 1.0,
           "as_of": "2026-08-31",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "HIT"
         },
         {
           "model_id": "RELATIVE_Z",
@@ -6150,7 +6168,8 @@
           "conviction": 31.56,
           "weight": 1.0,
           "as_of": "2026-08-31",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "HIT"
         },
         {
           "model_id": "RSI_MOMENTUM",
@@ -6159,7 +6178,8 @@
           "conviction": 58.13,
           "weight": 1.0,
           "as_of": "2026-08-31",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "HIT"
         },
         {
           "model_id": "BREAKOUT_63D",
@@ -6168,7 +6188,8 @@
           "conviction": 100.0,
           "weight": 1.0,
           "as_of": "2026-08-31",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "HIT"
         },
         {
           "model_id": "MEAN_REVERSION_20D",
@@ -6177,7 +6198,8 @@
           "conviction": 32.78,
           "weight": 1.0,
           "as_of": "2026-08-31",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "VOLUME_CONFIRM",
@@ -6186,17 +6208,30 @@
           "conviction": 45.86,
           "weight": 1.0,
           "as_of": "2026-08-31",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "HIT"
         }
       ],
       "external_model_votes": [],
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING",
+      "outcome": "HIT",
       "latest_confidence_pct": 71.75,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.1-math-risk-layer"
+      "latest_model_version": "8.6.1-math-risk-layer",
+      "gross_return_pct": 2.8324,
+      "estimated_round_trip_cost_bps": 10.0,
+      "return_pct": 2.7324,
+      "underlying_return_pct": 2.8324,
+      "exit": 195.597504,
+      "resolved": "2026-09-08",
+      "mfe_pct": 2.9231,
+      "mae_pct": -1.0567,
+      "stop_touched": false,
+      "target1_touched": false,
+      "target2_touched": false,
+      "path_order": "NOT_AMBIGUOUS_AT_DAILY_RESOLUTION"
     },
     {
       "id": "EP|2026-08-31|XLE|LONG|3|BREAKOUT|8.6.1-math-risk-layer",
@@ -6423,7 +6458,7 @@
       "episode_id": "EP|2026-08-31|IEF|SHORT|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "IEF|SHORT|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 387,
+      "observations": 388,
       "first_seen": "2026-08-31",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -6497,7 +6532,7 @@
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING",
-      "latest_confidence_pct": 71.08,
+      "latest_confidence_pct": 71.89,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
     },
@@ -6687,7 +6722,7 @@
       "episode_id": "EP|2026-09-01|DBC|LONG|5|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "DBC|LONG|5|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 336,
+      "observations": 337,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -6770,7 +6805,7 @@
       "risk_regime": "NEUTRAL",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING",
-      "latest_confidence_pct": 73.13,
+      "latest_confidence_pct": 70.56,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
     },
@@ -6962,7 +6997,7 @@
       "id": "EP|2026-09-01|USO|LONG|5|BREAKOUT|8.6.1-math-risk-layer",
       "episode_id": "EP|2026-09-01|USO|LONG|5|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "USO|LONG|5|BREAKOUT",
-      "state": "ACTIVE",
+      "state": "SUPERSEDED",
       "observations": 340,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-08",
@@ -7054,10 +7089,12 @@
       "learning_adjustment": 0.0,
       "risk_regime": "NEUTRAL",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING",
+      "outcome": "SUPERSEDED",
       "latest_confidence_pct": 72.11,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.1-math-risk-layer"
+      "latest_model_version": "8.6.1-math-risk-layer",
+      "superseded_on": "2026-09-08",
+      "resolution_state": "SUPERSEDED_BY_NEW_ACTIVE_THESIS"
     },
     {
       "id": "EP|2026-09-01|AGG|SHORT|10|BREAKOUT|8.6.1-math-risk-layer",
@@ -7776,7 +7813,7 @@
       "episode_id": "EP|2026-09-01|WTRG|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "WTRG|LONG|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 385,
+      "observations": 386,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -7868,7 +7905,7 @@
       "risk_regime": "NEUTRAL",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING",
-      "latest_confidence_pct": 72.59,
+      "latest_confidence_pct": 74.06,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
     },
@@ -7916,7 +7953,8 @@
           "conviction": 23.04,
           "weight": 1.0,
           "as_of": "2026-09-02",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "RELATIVE_Z",
@@ -7925,7 +7963,8 @@
           "conviction": 58.67,
           "weight": 1.0,
           "as_of": "2026-09-02",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "RSI_MOMENTUM",
@@ -7934,7 +7973,8 @@
           "conviction": 28.04,
           "weight": 1.0,
           "as_of": "2026-09-02",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "BREAKOUT_63D",
@@ -7943,7 +7983,8 @@
           "conviction": 86.04,
           "weight": 1.0,
           "as_of": "2026-09-02",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "MEAN_REVERSION_20D",
@@ -7952,7 +7993,8 @@
           "conviction": 15.14,
           "weight": 1.0,
           "as_of": "2026-09-02",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "HIT"
         },
         {
           "model_id": "VOLUME_CONFIRM",
@@ -7961,26 +8003,39 @@
           "conviction": 53.67,
           "weight": 1.0,
           "as_of": "2026-09-02",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         }
       ],
       "external_model_votes": [],
       "learning_adjustment": 0.0,
       "risk_regime": "NEUTRAL",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING",
+      "outcome": "MISS",
       "latest_confidence_pct": 71.63,
       "latest_learning_adjustment": 0.0,
-      "latest_model_version": "8.6.1-math-risk-layer"
+      "latest_model_version": "8.6.1-math-risk-layer",
+      "gross_return_pct": -3.5219,
+      "estimated_round_trip_cost_bps": 10.0,
+      "return_pct": -3.6219,
+      "underlying_return_pct": -3.5219,
+      "exit": 167.649994,
+      "resolved": "2026-09-08",
+      "mfe_pct": 0.2244,
+      "mae_pct": -3.8327,
+      "stop_touched": true,
+      "target1_touched": false,
+      "target2_touched": false,
+      "path_order": "NOT_AMBIGUOUS_AT_DAILY_RESOLUTION"
     },
     {
       "id": "EP|2026-09-02|OIH|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_id": "EP|2026-09-02|OIH|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "OIH|LONG|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 70,
+      "observations": 71,
       "first_seen": "2026-09-02",
-      "last_seen": "2026-09-04",
+      "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
       "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
       "date": "2026-09-02",
@@ -8070,7 +8125,7 @@
       "risk_regime": "NEUTRAL",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING",
-      "latest_confidence_pct": 73.31,
+      "latest_confidence_pct": 73.75,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
     },
@@ -8162,9 +8217,9 @@
       "episode_id": "EP|2026-09-03|XLE|LONG|3|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "XLE|LONG|3|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 64,
+      "observations": 65,
       "first_seen": "2026-09-03",
-      "last_seen": "2026-09-04",
+      "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
       "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
       "date": "2026-09-03",
@@ -8254,7 +8309,7 @@
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING",
-      "latest_confidence_pct": 70.96,
+      "latest_confidence_pct": 74.36,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
     },
@@ -8917,7 +8972,7 @@
       "episode_id": "EP|2026-09-06|BT27.MI|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "BT27.MI|LONG|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 144,
+      "observations": 145,
       "first_seen": "2026-09-06",
       "last_seen": "2026-09-08",
       "model_version": "8.6.1-math-risk-layer",
@@ -9000,7 +9055,7 @@
       "risk_regime": "NEUTRAL",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING",
-      "latest_confidence_pct": 71.78,
+      "latest_confidence_pct": 74.49,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
     },
@@ -9178,24 +9233,122 @@
       "latest_confidence_pct": 69.56,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
+    },
+    {
+      "id": "EP|2026-09-08|USO|LONG|20|BREAKOUT|8.6.1-math-risk-layer",
+      "episode_id": "EP|2026-09-08|USO|LONG|20|BREAKOUT|8.6.1-math-risk-layer",
+      "episode_key": "USO|LONG|20|BREAKOUT",
+      "state": "ACTIVE",
+      "observations": 1,
+      "first_seen": "2026-09-08",
+      "last_seen": "2026-09-08",
+      "model_version": "8.6.1-math-risk-layer",
+      "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
+      "date": "2026-09-08",
+      "ticker": "USO",
+      "sector": "COMMODITIES",
+      "asset_class": "ETF_COMMODITY",
+      "cluster": "COMMODITIES",
+      "role": "DIVERSIFIER",
+      "direction": "LONG",
+      "horizon": 20,
+      "horizon_state": "EMPIRICAL_STABLE_OVERRIDE",
+      "horizon_setup_family": "BREAKOUT",
+      "horizon_policy_version": "AH-1.0",
+      "confidence_pct": 68.79,
+      "forecast_probability": null,
+      "probability_state": {
+        "state": "INSUFFICIENT_CALIBRATION_SAMPLE",
+        "n": 0,
+        "required": 30
+      },
+      "entry": 145.169998,
+      "entry_source": "YFINANCE_15M_OBSERVED",
+      "risk_pct": 4.07,
+      "stop": 139.263211,
+      "target1": 153.4395,
+      "target2": 158.16493,
+      "data_quality_score": 100,
+      "model_completeness_score": 60,
+      "model_votes": [
+        {
+          "model_id": "TREND_Z",
+          "direction": "LONG",
+          "score": 68.95,
+          "conviction": 37.9,
+          "weight": 1.0,
+          "as_of": "2026-09-08",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RELATIVE_Z",
+          "direction": "LONG",
+          "score": 61.35,
+          "conviction": 22.71,
+          "weight": 1.0,
+          "as_of": "2026-09-08",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "RSI_MOMENTUM",
+          "direction": "LONG",
+          "score": 77.98,
+          "conviction": 55.97,
+          "weight": 1.0,
+          "as_of": "2026-09-08",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "BREAKOUT_63D",
+          "direction": "LONG",
+          "score": 100.0,
+          "conviction": 100.0,
+          "weight": 1.0,
+          "as_of": "2026-09-08",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "MEAN_REVERSION_20D",
+          "direction": "SHORT",
+          "score": 34.66,
+          "conviction": 30.68,
+          "weight": 1.0,
+          "as_of": "2026-09-08",
+          "origin": "INTERNAL_SUBMODEL"
+        },
+        {
+          "model_id": "VOLUME_CONFIRM",
+          "direction": "LONG",
+          "score": 67.25,
+          "conviction": 34.5,
+          "weight": 1.0,
+          "as_of": "2026-09-08",
+          "origin": "INTERNAL_SUBMODEL"
+        }
+      ],
+      "external_model_votes": [],
+      "learning_adjustment": 0.0,
+      "risk_regime": "NEUTRAL",
+      "rates_regime": "RATES_STABLE",
+      "outcome": "PENDING"
     }
   ],
   "stats": {
-    "total": 40,
-    "independent_episodes": 40,
-    "active": 31,
-    "superseded_or_excluded": 55,
+    "total": 41,
+    "independent_episodes": 41,
+    "active": 28,
+    "superseded_or_excluded": 56,
     "legacy_resolved_excluded": 11,
-    "resolved": 4,
-    "hits": 1,
-    "misses": 3,
-    "hit_rate": 0.25,
-    "recent_50_hit_rate": 0.25,
+    "resolved": 7,
+    "hits": 2,
+    "misses": 5,
+    "hit_rate": 0.2857,
+    "recent_50_hit_rate": 0.2857,
     "brier": null,
     "brier_n": 0,
-    "high_confidence_misses": 0,
+    "high_confidence_misses": 1,
     "learning_lineage": "ALPHA_V86_EPISODE_LEDGER_1",
-    "learning_resolved": 4,
+    "learning_resolved": 7,
     "external_predictions_resolved": 0,
     "by_asset_class": {
       "CRYPTO": {
@@ -9211,32 +9364,38 @@
         "avg_return_pct": -1.4737
       },
       "ETF_EQUITY": {
-        "resolved": 1,
-        "hits": 1,
-        "hit_rate": 1.0,
-        "avg_return_pct": 0.727
+        "resolved": 4,
+        "hits": 2,
+        "hit_rate": 0.5,
+        "avg_return_pct": -0.2442
       }
     },
     "by_horizon": {
       "3": {
+        "resolved": 4,
+        "hits": 1,
+        "hit_rate": 0.25,
+        "avg_return_pct": -1.4606
+      },
+      "5": {
         "resolved": 3,
         "hits": 1,
         "hit_rate": 0.3333,
-        "avg_return_pct": -0.7402
-      },
-      "5": {
-        "resolved": 1,
-        "hits": 0,
-        "hit_rate": 0.0,
-        "avg_return_pct": -3.689
+        "avg_return_pct": -0.5903
       }
     },
     "by_asset_class_horizon": {
-      "ETF_EQUITY|3": {
-        "resolved": 1,
+      "ETF_EQUITY|5": {
+        "resolved": 2,
         "hits": 1,
-        "hit_rate": 1.0,
-        "avg_return_pct": 0.727
+        "hit_rate": 0.5,
+        "avg_return_pct": 0.959
+      },
+      "ETF_EQUITY|3": {
+        "resolved": 2,
+        "hits": 1,
+        "hit_rate": 0.5,
+        "avg_return_pct": -1.4475
       },
       "EQUITY|3": {
         "resolved": 2,
@@ -9254,66 +9413,66 @@
   },
   "model_stats": {
     "TREND_Z": {
-      "resolved": 4,
-      "hits": 1,
-      "hit_rate": 0.25
-    },
-    "RELATIVE_Z": {
-      "resolved": 2,
-      "hits": 1,
-      "hit_rate": 0.5
+      "resolved": 7,
+      "hits": 2,
+      "hit_rate": 0.2857
     },
     "RSI_MOMENTUM": {
-      "resolved": 4,
-      "hits": 1,
-      "hit_rate": 0.25
+      "resolved": 7,
+      "hits": 2,
+      "hit_rate": 0.2857
     },
     "BREAKOUT_63D": {
-      "resolved": 4,
-      "hits": 1,
-      "hit_rate": 0.25
+      "resolved": 7,
+      "hits": 2,
+      "hit_rate": 0.2857
     },
     "MEAN_REVERSION_20D": {
-      "resolved": 4,
-      "hits": 3,
-      "hit_rate": 0.75
+      "resolved": 7,
+      "hits": 5,
+      "hit_rate": 0.7143
     },
     "VOLUME_CONFIRM": {
-      "resolved": 3,
-      "hits": 1,
+      "resolved": 6,
+      "hits": 2,
       "hit_rate": 0.3333
+    },
+    "RELATIVE_Z": {
+      "resolved": 4,
+      "hits": 2,
+      "hit_rate": 0.5
     }
   },
   "model_stats_by_asset_class": {
     "TREND_Z|ETF_EQUITY": {
-      "resolved": 1,
-      "hits": 1,
-      "hit_rate": 1.0
-    },
-    "RELATIVE_Z|ETF_EQUITY": {
-      "resolved": 1,
-      "hits": 1,
-      "hit_rate": 1.0
+      "resolved": 4,
+      "hits": 2,
+      "hit_rate": 0.5
     },
     "RSI_MOMENTUM|ETF_EQUITY": {
-      "resolved": 1,
-      "hits": 1,
-      "hit_rate": 1.0
+      "resolved": 4,
+      "hits": 2,
+      "hit_rate": 0.5
     },
     "BREAKOUT_63D|ETF_EQUITY": {
-      "resolved": 1,
-      "hits": 1,
-      "hit_rate": 1.0
+      "resolved": 4,
+      "hits": 2,
+      "hit_rate": 0.5
     },
     "MEAN_REVERSION_20D|ETF_EQUITY": {
-      "resolved": 1,
-      "hits": 0,
-      "hit_rate": 0.0
+      "resolved": 4,
+      "hits": 2,
+      "hit_rate": 0.5
     },
     "VOLUME_CONFIRM|ETF_EQUITY": {
-      "resolved": 1,
-      "hits": 1,
-      "hit_rate": 1.0
+      "resolved": 4,
+      "hits": 2,
+      "hit_rate": 0.5
+    },
+    "RELATIVE_Z|ETF_EQUITY": {
+      "resolved": 3,
+      "hits": 2,
+      "hit_rate": 0.6667
     },
     "TREND_Z|EQUITY": {
       "resolved": 2,
