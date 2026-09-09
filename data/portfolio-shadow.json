@@ -29,8 +29,8 @@
           "EURO_CREDIT": 1,
           "DEFENSIVES": 2,
           "ENERGY": 2,
-          "BROAD_BONDS": 1,
           "US_RATES": 1,
+          "BROAD_BONDS": 1,
           "ITALY_RATES": 2
         },
         "shares": {
@@ -38,8 +38,8 @@
           "EURO_CREDIT": 0.1,
           "DEFENSIVES": 0.2,
           "ENERGY": 0.2,
-          "BROAD_BONDS": 0.1,
           "US_RATES": 0.1,
+          "BROAD_BONDS": 0.1,
           "ITALY_RATES": 0.2
         },
         "top": "DEFENSIVES",
