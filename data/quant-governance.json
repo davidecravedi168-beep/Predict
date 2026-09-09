@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-09T15:50:19.804901+00:00",
-  "source_updated_at": "2026-09-09T15:50:00+00:00",
+  "generated_at": "2026-09-09T15:59:19.501342+00:00",
+  "source_updated_at": "2026-09-09T15:58:59+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -686,12 +686,12 @@
     "cluster_concentration": {
       "counts": {
         "CREDIT": 1,
+        "EURO_CREDIT": 1,
         "ENERGY": 2,
         "DEFENSIVES": 1,
         "ITALY_RATES": 2,
         "BROAD_BONDS": 2,
-        "REAL_ASSETS": 1,
-        "EURO_CREDIT": 1
+        "REAL_ASSETS": 1
       },
       "top": "ENERGY",
       "top_share": 0.2

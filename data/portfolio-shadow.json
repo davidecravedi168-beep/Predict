@@ -26,21 +26,21 @@
       "cluster": {
         "counts": {
           "CREDIT": 1,
+          "EURO_CREDIT": 1,
           "ENERGY": 2,
           "DEFENSIVES": 1,
           "ITALY_RATES": 2,
           "BROAD_BONDS": 2,
-          "REAL_ASSETS": 1,
-          "EURO_CREDIT": 1
+          "REAL_ASSETS": 1
         },
         "shares": {
           "CREDIT": 0.1,
+          "EURO_CREDIT": 0.1,
           "ENERGY": 0.2,
           "DEFENSIVES": 0.1,
           "ITALY_RATES": 0.2,
           "BROAD_BONDS": 0.2,
-          "REAL_ASSETS": 0.1,
-          "EURO_CREDIT": 0.1
+          "REAL_ASSETS": 0.1
         },
         "top": "ENERGY",
         "top_share": 0.2
@@ -74,8 +74,8 @@
       "DURATION_RATES": 0.6,
       "USD_DENOMINATED": 0.7,
       "DIRECTION_SHORT": 0.5,
-      "EQUITY_BETA": 0.4,
-      "DIRECTION_LONG": 0.5
+      "DIRECTION_LONG": 0.5,
+      "EQUITY_BETA": 0.4
     },
     "flags": [
       "DURATION_FACTOR_CONCENTRATION"
