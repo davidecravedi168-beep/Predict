@@ -7,71 +7,71 @@
     "exposures": {
       "asset_class": {
         "counts": {
-          "BTP": 2,
           "EQUITY": 2,
           "ETF_BOND_GOV": 1,
+          "BTP": 2,
           "ETF_EQUITY": 2,
           "ETF_COMMODITY": 1
         },
         "shares": {
-          "BTP": 0.25,
           "EQUITY": 0.25,
           "ETF_BOND_GOV": 0.125,
+          "BTP": 0.25,
           "ETF_EQUITY": 0.25,
           "ETF_COMMODITY": 0.125
         },
-        "top": "BTP",
+        "top": "EQUITY",
         "top_share": 0.25
       },
       "cluster": {
         "counts": {
-          "ITALY_RATES": 2,
           "DEFENSIVES": 2,
           "US_RATES": 1,
+          "ITALY_RATES": 2,
           "ENERGY": 2,
           "COMMODITIES": 1
         },
         "shares": {
-          "ITALY_RATES": 0.25,
           "DEFENSIVES": 0.25,
           "US_RATES": 0.125,
+          "ITALY_RATES": 0.25,
           "ENERGY": 0.25,
           "COMMODITIES": 0.125
         },
-        "top": "ITALY_RATES",
+        "top": "DEFENSIVES",
         "top_share": 0.25
       },
       "direction": {
         "counts": {
-          "SHORT": 3,
-          "LONG": 5
+          "LONG": 5,
+          "SHORT": 3
         },
         "shares": {
-          "SHORT": 0.375,
-          "LONG": 0.625
+          "LONG": 0.625,
+          "SHORT": 0.375
         },
         "top": "LONG",
         "top_share": 0.625
       },
       "currency": {
         "counts": {
-          "EUR": 2,
-          "USD": 6
+          "USD": 6,
+          "EUR": 2
         },
         "shares": {
-          "EUR": 0.25,
-          "USD": 0.75
+          "USD": 0.75,
+          "EUR": 0.25
         },
         "top": "USD",
         "top_share": 0.75
       }
     },
     "factor_proxy_shares": {
-      "DURATION_RATES": 0.375,
-      "DIRECTION_SHORT": 0.375,
       "EQUITY_BETA": 0.5,
       "USD_DENOMINATED": 0.75,
       "DIRECTION_LONG": 0.625,
+      "DURATION_RATES": 0.375,
+      "DIRECTION_SHORT": 0.375,
       "COMMODITY": 0.125
     },
     "flags": [],
