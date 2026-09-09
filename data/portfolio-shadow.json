@@ -11,14 +11,16 @@
           "ETF_EQUITY": 2,
           "EQUITY": 2,
           "ETF_BOND_GOV": 2,
-          "BTP": 2
+          "BTP": 1,
+          "ETF_COMMODITY": 1
         },
         "shares": {
           "ETF_BOND_CREDIT": 0.2,
           "ETF_EQUITY": 0.2,
           "EQUITY": 0.2,
           "ETF_BOND_GOV": 0.2,
-          "BTP": 0.2
+          "BTP": 0.1,
+          "ETF_COMMODITY": 0.1
         },
         "top": "ETF_BOND_CREDIT",
         "top_share": 0.2
@@ -28,57 +30,58 @@
           "CREDIT": 1,
           "EURO_CREDIT": 1,
           "ENERGY": 2,
-          "DEFENSIVES": 1,
+          "DEFENSIVES": 2,
           "BROAD_BONDS": 2,
-          "REAL_ASSETS": 1,
-          "ITALY_RATES": 2
+          "ITALY_RATES": 1,
+          "COMMODITIES": 1
         },
         "shares": {
           "CREDIT": 0.1,
           "EURO_CREDIT": 0.1,
           "ENERGY": 0.2,
-          "DEFENSIVES": 0.1,
+          "DEFENSIVES": 0.2,
           "BROAD_BONDS": 0.2,
-          "REAL_ASSETS": 0.1,
-          "ITALY_RATES": 0.2
+          "ITALY_RATES": 0.1,
+          "COMMODITIES": 0.1
         },
         "top": "ENERGY",
         "top_share": 0.2
       },
       "direction": {
         "counts": {
-          "SHORT": 6,
-          "LONG": 4
+          "SHORT": 4,
+          "LONG": 6
         },
         "shares": {
-          "SHORT": 0.6,
-          "LONG": 0.4
+          "SHORT": 0.4,
+          "LONG": 0.6
         },
-        "top": "SHORT",
+        "top": "LONG",
         "top_share": 0.6
       },
       "currency": {
         "counts": {
-          "USD": 7,
-          "EUR": 3
+          "USD": 8,
+          "EUR": 2
         },
         "shares": {
-          "USD": 0.7,
-          "EUR": 0.3
+          "USD": 0.8,
+          "EUR": 0.2
         },
         "top": "USD",
-        "top_share": 0.7
+        "top_share": 0.8
       }
     },
     "factor_proxy_shares": {
-      "DURATION_RATES": 0.6,
-      "USD_DENOMINATED": 0.7,
-      "DIRECTION_SHORT": 0.6,
-      "DIRECTION_LONG": 0.4,
-      "EQUITY_BETA": 0.4
+      "DURATION_RATES": 0.5,
+      "USD_DENOMINATED": 0.8,
+      "DIRECTION_SHORT": 0.4,
+      "DIRECTION_LONG": 0.6,
+      "EQUITY_BETA": 0.4,
+      "COMMODITY": 0.1
     },
     "flags": [
-      "DURATION_FACTOR_CONCENTRATION"
+      "CURRENCY_CONCENTRATION"
     ],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
   },
