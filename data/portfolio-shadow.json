@@ -9,16 +9,16 @@
         "counts": {
           "EQUITY": 2,
           "ETF_BOND_GOV": 1,
-          "ETF_EQUITY": 2,
           "BTP": 2,
+          "ETF_EQUITY": 2,
           "CRYPTO": 1,
           "ETF_COMMODITY": 1
         },
         "shares": {
           "EQUITY": 0.2222,
           "ETF_BOND_GOV": 0.1111,
-          "ETF_EQUITY": 0.2222,
           "BTP": 0.2222,
+          "ETF_EQUITY": 0.2222,
           "CRYPTO": 0.1111,
           "ETF_COMMODITY": 0.1111
         },
@@ -29,16 +29,16 @@
         "counts": {
           "DEFENSIVES": 2,
           "US_RATES": 1,
-          "ENERGY": 2,
           "ITALY_RATES": 2,
+          "ENERGY": 2,
           "CRYPTO": 1,
           "COMMODITIES": 1
         },
         "shares": {
           "DEFENSIVES": 0.2222,
           "US_RATES": 0.1111,
-          "ENERGY": 0.2222,
           "ITALY_RATES": 0.2222,
+          "ENERGY": 0.2222,
           "CRYPTO": 0.1111,
           "COMMODITIES": 0.1111
         },
@@ -47,15 +47,15 @@
       },
       "direction": {
         "counts": {
-          "LONG": 6,
-          "SHORT": 3
+          "LONG": 7,
+          "SHORT": 2
         },
         "shares": {
-          "LONG": 0.6667,
-          "SHORT": 0.3333
+          "LONG": 0.7778,
+          "SHORT": 0.2222
         },
         "top": "LONG",
-        "top_share": 0.6667
+        "top_share": 0.7778
       },
       "currency": {
         "counts": {
@@ -73,12 +73,13 @@
     "factor_proxy_shares": {
       "EQUITY_BETA": 0.4444,
       "USD_DENOMINATED": 0.7778,
-      "DIRECTION_LONG": 0.6667,
+      "DIRECTION_LONG": 0.7778,
       "DURATION_RATES": 0.3333,
-      "DIRECTION_SHORT": 0.3333,
+      "DIRECTION_SHORT": 0.2222,
       "COMMODITY": 0.1111
     },
     "flags": [
+      "DIRECTION_CONCENTRATION",
       "CURRENCY_CONCENTRATION"
     ],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
@@ -86,9 +87,9 @@
   "champion_shadow": {
     "state": "NO_SHADOW_SAMPLE",
     "champion": {
-      "n": 15,
-      "hit_rate": 0.4667,
-      "avg_return_pct": -0.1321,
+      "n": 16,
+      "hit_rate": 0.5,
+      "avg_return_pct": -0.0984,
       "brier": null,
       "brier_n": 0
     },

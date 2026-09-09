@@ -1,44 +1,44 @@
 {
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
-  "eligible_forward_resolved": 15,
+  "eligible_forward_resolved": 16,
   "submodel_attribution": [],
   "friction_stress": {
     "state": "INSUFFICIENT_FORWARD_SAMPLE",
-    "baseline_n": 15,
-    "baseline_avg_net_return_pct": -0.1321,
+    "baseline_n": 16,
+    "baseline_avg_net_return_pct": -0.0984,
     "tiers": [
       {
         "extra_friction_bps": 5,
-        "n": 15,
-        "positive_rate": 0.4667,
-        "avg_return_pct": -0.1821,
-        "median_return_pct": -0.0848,
+        "n": 16,
+        "positive_rate": 0.5,
+        "avg_return_pct": -0.1484,
+        "median_return_pct": -0.0319,
         "positive_survival_ratio": 1.0
       },
       {
         "extra_friction_bps": 10,
-        "n": 15,
-        "positive_rate": 0.4,
-        "avg_return_pct": -0.2321,
-        "median_return_pct": -0.1348,
-        "positive_survival_ratio": 0.8571
+        "n": 16,
+        "positive_rate": 0.4375,
+        "avg_return_pct": -0.1984,
+        "median_return_pct": -0.0819,
+        "positive_survival_ratio": 0.875
       },
       {
         "extra_friction_bps": 20,
-        "n": 15,
-        "positive_rate": 0.4,
-        "avg_return_pct": -0.3321,
-        "median_return_pct": -0.2348,
-        "positive_survival_ratio": 0.8571
+        "n": 16,
+        "positive_rate": 0.4375,
+        "avg_return_pct": -0.2984,
+        "median_return_pct": -0.182,
+        "positive_survival_ratio": 0.875
       },
       {
         "extra_friction_bps": 35,
-        "n": 15,
-        "positive_rate": 0.4,
-        "avg_return_pct": -0.4821,
-        "median_return_pct": -0.3848,
-        "positive_survival_ratio": 0.8571
+        "n": 16,
+        "positive_rate": 0.4375,
+        "avg_return_pct": -0.4484,
+        "median_return_pct": -0.3319,
+        "positive_survival_ratio": 0.875
       }
     ],
     "method": "Incremental friction is subtracted from already cost-adjusted forward return_pct; no spread/slippage observations are fabricated."
