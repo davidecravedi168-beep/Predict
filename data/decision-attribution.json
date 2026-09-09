@@ -1,44 +1,44 @@
 {
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
-  "eligible_forward_resolved": 19,
+  "eligible_forward_resolved": 20,
   "submodel_attribution": [],
   "friction_stress": {
-    "state": "INSUFFICIENT_FORWARD_SAMPLE",
-    "baseline_n": 19,
-    "baseline_avg_net_return_pct": 0.2485,
+    "state": "ROBUST_TO_35BPS",
+    "baseline_n": 20,
+    "baseline_avg_net_return_pct": 0.3733,
     "tiers": [
       {
         "extra_friction_bps": 5,
-        "n": 19,
-        "positive_rate": 0.5789,
-        "avg_return_pct": 0.1985,
-        "median_return_pct": 0.358,
+        "n": 20,
+        "positive_rate": 0.6,
+        "avg_return_pct": 0.3233,
+        "median_return_pct": 0.5175,
         "positive_survival_ratio": 1.0
       },
       {
         "extra_friction_bps": 10,
-        "n": 19,
-        "positive_rate": 0.5263,
-        "avg_return_pct": 0.1485,
-        "median_return_pct": 0.308,
-        "positive_survival_ratio": 0.9091
+        "n": 20,
+        "positive_rate": 0.55,
+        "avg_return_pct": 0.2733,
+        "median_return_pct": 0.4675,
+        "positive_survival_ratio": 0.9167
       },
       {
         "extra_friction_bps": 20,
-        "n": 19,
-        "positive_rate": 0.5263,
-        "avg_return_pct": 0.0485,
-        "median_return_pct": 0.208,
-        "positive_survival_ratio": 0.9091
+        "n": 20,
+        "positive_rate": 0.55,
+        "avg_return_pct": 0.1733,
+        "median_return_pct": 0.3675,
+        "positive_survival_ratio": 0.9167
       },
       {
         "extra_friction_bps": 35,
-        "n": 19,
-        "positive_rate": 0.5263,
-        "avg_return_pct": -0.1015,
-        "median_return_pct": 0.058,
-        "positive_survival_ratio": 0.9091
+        "n": 20,
+        "positive_rate": 0.55,
+        "avg_return_pct": 0.0233,
+        "median_return_pct": 0.2175,
+        "positive_survival_ratio": 0.9167
       }
     ],
     "method": "Incremental friction is subtracted from already cost-adjusted forward return_pct; no spread/slippage observations are fabricated."
