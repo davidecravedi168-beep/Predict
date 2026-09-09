@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-09T01:58:56.027027+00:00",
-  "source_updated_at": "2026-09-09T01:58:35+00:00",
+  "generated_at": "2026-09-09T02:20:39.193822+00:00",
+  "source_updated_at": "2026-09-09T02:20:20+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -578,7 +578,7 @@
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
-    "freshness_minutes": 0.4,
+    "freshness_minutes": 0.3,
     "availability_ratio": 0.9773,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
@@ -597,8 +597,8 @@
         "US_RATES": 1,
         "ENERGY": 2,
         "ITALY_RATES": 2,
-        "CRYPTO": 1,
-        "COMMODITIES": 1
+        "COMMODITIES": 1,
+        "CRYPTO": 1
       },
       "top": "DEFENSIVES",
       "top_share": 0.2
@@ -610,8 +610,8 @@
         "ETF_BOND_GOV": 1,
         "ETF_EQUITY": 2,
         "BTP": 2,
-        "CRYPTO": 1,
-        "ETF_COMMODITY": 1
+        "ETF_COMMODITY": 1,
+        "CRYPTO": 1
       },
       "top": "EQUITY",
       "top_share": 0.2
