@@ -29,20 +29,18 @@
         "counts": {
           "ENERGY": 2,
           "US_RATES": 1,
-          "DEFENSIVES": 1,
+          "DEFENSIVES": 2,
           "ITALY_RATES": 2,
           "CRYPTO": 1,
-          "US_SECTORS": 1,
           "INFLATION_LINKED": 1,
           "COMMODITIES": 1
         },
         "shares": {
           "ENERGY": 0.2,
           "US_RATES": 0.1,
-          "DEFENSIVES": 0.1,
+          "DEFENSIVES": 0.2,
           "ITALY_RATES": 0.2,
           "CRYPTO": 0.1,
-          "US_SECTORS": 0.1,
           "INFLATION_LINKED": 0.1,
           "COMMODITIES": 0.1
         },
