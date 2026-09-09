@@ -10,8 +10,8 @@
           "ETF_BOND_CREDIT": 1,
           "EQUITY": 2,
           "ETF_BOND_GOV": 1,
-          "ETF_EQUITY": 2,
           "BTP": 2,
+          "ETF_EQUITY": 2,
           "CRYPTO": 1,
           "ETF_COMMODITY": 1
         },
@@ -19,8 +19,8 @@
           "ETF_BOND_CREDIT": 0.1,
           "EQUITY": 0.2,
           "ETF_BOND_GOV": 0.1,
-          "ETF_EQUITY": 0.2,
           "BTP": 0.2,
+          "ETF_EQUITY": 0.2,
           "CRYPTO": 0.1,
           "ETF_COMMODITY": 0.1
         },
@@ -32,8 +32,8 @@
           "EURO_CREDIT": 1,
           "DEFENSIVES": 2,
           "US_RATES": 1,
-          "ENERGY": 2,
           "ITALY_RATES": 2,
+          "ENERGY": 2,
           "CRYPTO": 1,
           "COMMODITIES": 1
         },
@@ -41,8 +41,8 @@
           "EURO_CREDIT": 0.1,
           "DEFENSIVES": 0.2,
           "US_RATES": 0.1,
-          "ENERGY": 0.2,
           "ITALY_RATES": 0.2,
+          "ENERGY": 0.2,
           "CRYPTO": 0.1,
           "COMMODITIES": 0.1
         },
@@ -88,9 +88,9 @@
   "champion_shadow": {
     "state": "NO_SHADOW_SAMPLE",
     "champion": {
-      "n": 13,
-      "hit_rate": 0.4615,
-      "avg_return_pct": -0.2404,
+      "n": 15,
+      "hit_rate": 0.4667,
+      "avg_return_pct": -0.1321,
       "brier": null,
       "brier_n": 0
     },

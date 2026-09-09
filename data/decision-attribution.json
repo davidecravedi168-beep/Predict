@@ -1,44 +1,44 @@
 {
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
-  "eligible_forward_resolved": 13,
+  "eligible_forward_resolved": 15,
   "submodel_attribution": [],
   "friction_stress": {
     "state": "INSUFFICIENT_FORWARD_SAMPLE",
-    "baseline_n": 13,
-    "baseline_avg_net_return_pct": -0.2404,
+    "baseline_n": 15,
+    "baseline_avg_net_return_pct": -0.1321,
     "tiers": [
       {
         "extra_friction_bps": 5,
-        "n": 13,
-        "positive_rate": 0.4615,
-        "avg_return_pct": -0.2904,
-        "median_return_pct": -0.5811,
+        "n": 15,
+        "positive_rate": 0.4667,
+        "avg_return_pct": -0.1821,
+        "median_return_pct": -0.0848,
         "positive_survival_ratio": 1.0
       },
       {
         "extra_friction_bps": 10,
-        "n": 13,
-        "positive_rate": 0.3846,
-        "avg_return_pct": -0.3404,
-        "median_return_pct": -0.6311,
-        "positive_survival_ratio": 0.8333
+        "n": 15,
+        "positive_rate": 0.4,
+        "avg_return_pct": -0.2321,
+        "median_return_pct": -0.1348,
+        "positive_survival_ratio": 0.8571
       },
       {
         "extra_friction_bps": 20,
-        "n": 13,
-        "positive_rate": 0.3846,
-        "avg_return_pct": -0.4404,
-        "median_return_pct": -0.7311,
-        "positive_survival_ratio": 0.8333
+        "n": 15,
+        "positive_rate": 0.4,
+        "avg_return_pct": -0.3321,
+        "median_return_pct": -0.2348,
+        "positive_survival_ratio": 0.8571
       },
       {
         "extra_friction_bps": 35,
-        "n": 13,
-        "positive_rate": 0.3846,
-        "avg_return_pct": -0.5904,
-        "median_return_pct": -0.8811,
-        "positive_survival_ratio": 0.8333
+        "n": 15,
+        "positive_rate": 0.4,
+        "avg_return_pct": -0.4821,
+        "median_return_pct": -0.3848,
+        "positive_survival_ratio": 0.8571
       }
     ],
     "method": "Incremental friction is subtracted from already cost-adjusted forward return_pct; no spread/slippage observations are fabricated."
