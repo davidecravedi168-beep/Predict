@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-09T11:34:25.497973+00:00",
-  "source_updated_at": "2026-09-09T11:34:04+00:00",
+  "generated_at": "2026-09-09T11:55:46.970727+00:00",
+  "source_updated_at": "2026-09-09T11:47:01+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -654,7 +654,7 @@
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
-    "freshness_minutes": 0.4,
+    "freshness_minutes": 8.8,
     "availability_ratio": 0.9773,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
@@ -692,11 +692,11 @@
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 6,
-        "SHORT": 3
+        "LONG": 7,
+        "SHORT": 2
       },
       "top": "LONG",
-      "top_share": 0.6667
+      "top_share": 0.7778
     }
   },
   "legacy_backtest": {
