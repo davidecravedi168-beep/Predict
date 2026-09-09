@@ -29,7 +29,8 @@
           "EURO_CREDIT": 1,
           "ENERGY": 2,
           "DEFENSIVES": 1,
-          "BROAD_BONDS": 2,
+          "BROAD_BONDS": 1,
+          "US_RATES": 1,
           "REAL_ASSETS": 1,
           "ITALY_RATES": 2
         },
@@ -38,7 +39,8 @@
           "EURO_CREDIT": 0.1,
           "ENERGY": 0.2,
           "DEFENSIVES": 0.1,
-          "BROAD_BONDS": 0.2,
+          "BROAD_BONDS": 0.1,
+          "US_RATES": 0.1,
           "REAL_ASSETS": 0.1,
           "ITALY_RATES": 0.2
         },
