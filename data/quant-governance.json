@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-09T16:50:33.262321+00:00",
-  "source_updated_at": "2026-09-09T16:50:11+00:00",
+  "generated_at": "2026-09-09T17:00:06.870907+00:00",
+  "source_updated_at": "2026-09-09T16:59:44+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -688,8 +688,9 @@
         "CREDIT": 1,
         "EURO_CREDIT": 1,
         "ENERGY": 2,
-        "DEFENSIVES": 2,
+        "DEFENSIVES": 1,
         "BROAD_BONDS": 2,
+        "REAL_ASSETS": 1,
         "ITALY_RATES": 1,
         "COMMODITIES": 1
       },
@@ -710,11 +711,11 @@
     },
     "direction_concentration": {
       "counts": {
-        "SHORT": 4,
-        "LONG": 6
+        "SHORT": 5,
+        "LONG": 5
       },
-      "top": "LONG",
-      "top_share": 0.6
+      "top": "SHORT",
+      "top_share": 0.5
     }
   },
   "legacy_backtest": {
