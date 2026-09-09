@@ -1,44 +1,44 @@
 {
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
-  "eligible_forward_resolved": 16,
+  "eligible_forward_resolved": 19,
   "submodel_attribution": [],
   "friction_stress": {
     "state": "INSUFFICIENT_FORWARD_SAMPLE",
-    "baseline_n": 16,
-    "baseline_avg_net_return_pct": -0.0984,
+    "baseline_n": 19,
+    "baseline_avg_net_return_pct": 0.2485,
     "tiers": [
       {
         "extra_friction_bps": 5,
-        "n": 16,
-        "positive_rate": 0.5,
-        "avg_return_pct": -0.1484,
-        "median_return_pct": -0.0319,
+        "n": 19,
+        "positive_rate": 0.5789,
+        "avg_return_pct": 0.1985,
+        "median_return_pct": 0.358,
         "positive_survival_ratio": 1.0
       },
       {
         "extra_friction_bps": 10,
-        "n": 16,
-        "positive_rate": 0.4375,
-        "avg_return_pct": -0.1984,
-        "median_return_pct": -0.0819,
-        "positive_survival_ratio": 0.875
+        "n": 19,
+        "positive_rate": 0.5263,
+        "avg_return_pct": 0.1485,
+        "median_return_pct": 0.308,
+        "positive_survival_ratio": 0.9091
       },
       {
         "extra_friction_bps": 20,
-        "n": 16,
-        "positive_rate": 0.4375,
-        "avg_return_pct": -0.2984,
-        "median_return_pct": -0.182,
-        "positive_survival_ratio": 0.875
+        "n": 19,
+        "positive_rate": 0.5263,
+        "avg_return_pct": 0.0485,
+        "median_return_pct": 0.208,
+        "positive_survival_ratio": 0.9091
       },
       {
         "extra_friction_bps": 35,
-        "n": 16,
-        "positive_rate": 0.4375,
-        "avg_return_pct": -0.4484,
-        "median_return_pct": -0.3319,
-        "positive_survival_ratio": 0.875
+        "n": 19,
+        "positive_rate": 0.5263,
+        "avg_return_pct": -0.1015,
+        "median_return_pct": 0.058,
+        "positive_survival_ratio": 0.9091
       }
     ],
     "method": "Incremental friction is subtracted from already cost-adjusted forward return_pct; no spread/slippage observations are fabricated."
