@@ -8,17 +8,17 @@
       "asset_class": {
         "counts": {
           "BTP": 2,
-          "CRYPTO": 1,
           "EQUITY": 2,
           "ETF_BOND_GOV": 1,
+          "CRYPTO": 1,
           "ETF_EQUITY": 2,
           "ETF_COMMODITY": 1
         },
         "shares": {
           "BTP": 0.2222,
-          "CRYPTO": 0.1111,
           "EQUITY": 0.2222,
           "ETF_BOND_GOV": 0.1111,
+          "CRYPTO": 0.1111,
           "ETF_EQUITY": 0.2222,
           "ETF_COMMODITY": 0.1111
         },
@@ -28,17 +28,17 @@
       "cluster": {
         "counts": {
           "ITALY_RATES": 2,
-          "CRYPTO": 1,
           "DEFENSIVES": 2,
           "US_RATES": 1,
+          "CRYPTO": 1,
           "ENERGY": 2,
           "COMMODITIES": 1
         },
         "shares": {
           "ITALY_RATES": 0.2222,
-          "CRYPTO": 0.1111,
           "DEFENSIVES": 0.2222,
           "US_RATES": 0.1111,
+          "CRYPTO": 0.1111,
           "ENERGY": 0.2222,
           "COMMODITIES": 0.1111
         },
@@ -73,9 +73,9 @@
     "factor_proxy_shares": {
       "DURATION_RATES": 0.3333,
       "DIRECTION_SHORT": 0.2222,
+      "EQUITY_BETA": 0.4444,
       "USD_DENOMINATED": 0.7778,
       "DIRECTION_LONG": 0.7778,
-      "EQUITY_BETA": 0.4444,
       "COMMODITY": 0.1111
     },
     "flags": [
