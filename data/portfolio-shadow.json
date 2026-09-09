@@ -10,16 +10,16 @@
           "EQUITY": 2,
           "ETF_BOND_GOV": 1,
           "BTP": 2,
-          "ETF_EQUITY": 2,
           "CRYPTO": 1,
+          "ETF_EQUITY": 2,
           "ETF_COMMODITY": 1
         },
         "shares": {
           "EQUITY": 0.2222,
           "ETF_BOND_GOV": 0.1111,
           "BTP": 0.2222,
-          "ETF_EQUITY": 0.2222,
           "CRYPTO": 0.1111,
+          "ETF_EQUITY": 0.2222,
           "ETF_COMMODITY": 0.1111
         },
         "top": "EQUITY",
@@ -30,16 +30,16 @@
           "DEFENSIVES": 2,
           "US_RATES": 1,
           "ITALY_RATES": 2,
-          "ENERGY": 2,
           "CRYPTO": 1,
+          "ENERGY": 2,
           "COMMODITIES": 1
         },
         "shares": {
           "DEFENSIVES": 0.2222,
           "US_RATES": 0.1111,
           "ITALY_RATES": 0.2222,
-          "ENERGY": 0.2222,
           "CRYPTO": 0.1111,
+          "ENERGY": 0.2222,
           "COMMODITIES": 0.1111
         },
         "top": "DEFENSIVES",
