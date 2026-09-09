@@ -7,75 +7,75 @@
     "exposures": {
       "asset_class": {
         "counts": {
-          "EQUITY": 2,
-          "ETF_BOND_GOV": 1,
           "BTP": 2,
           "CRYPTO": 1,
+          "EQUITY": 2,
+          "ETF_BOND_GOV": 1,
           "ETF_EQUITY": 2,
           "ETF_COMMODITY": 1
         },
         "shares": {
-          "EQUITY": 0.2222,
-          "ETF_BOND_GOV": 0.1111,
           "BTP": 0.2222,
           "CRYPTO": 0.1111,
+          "EQUITY": 0.2222,
+          "ETF_BOND_GOV": 0.1111,
           "ETF_EQUITY": 0.2222,
           "ETF_COMMODITY": 0.1111
         },
-        "top": "EQUITY",
+        "top": "BTP",
         "top_share": 0.2222
       },
       "cluster": {
         "counts": {
-          "DEFENSIVES": 2,
-          "US_RATES": 1,
           "ITALY_RATES": 2,
           "CRYPTO": 1,
+          "DEFENSIVES": 2,
+          "US_RATES": 1,
           "ENERGY": 2,
           "COMMODITIES": 1
         },
         "shares": {
-          "DEFENSIVES": 0.2222,
-          "US_RATES": 0.1111,
           "ITALY_RATES": 0.2222,
           "CRYPTO": 0.1111,
+          "DEFENSIVES": 0.2222,
+          "US_RATES": 0.1111,
           "ENERGY": 0.2222,
           "COMMODITIES": 0.1111
         },
-        "top": "DEFENSIVES",
+        "top": "ITALY_RATES",
         "top_share": 0.2222
       },
       "direction": {
         "counts": {
-          "LONG": 7,
-          "SHORT": 2
+          "SHORT": 2,
+          "LONG": 7
         },
         "shares": {
-          "LONG": 0.7778,
-          "SHORT": 0.2222
+          "SHORT": 0.2222,
+          "LONG": 0.7778
         },
         "top": "LONG",
         "top_share": 0.7778
       },
       "currency": {
         "counts": {
-          "USD": 7,
-          "EUR": 2
+          "EUR": 2,
+          "USD": 7
         },
         "shares": {
-          "USD": 0.7778,
-          "EUR": 0.2222
+          "EUR": 0.2222,
+          "USD": 0.7778
         },
         "top": "USD",
         "top_share": 0.7778
       }
     },
     "factor_proxy_shares": {
-      "EQUITY_BETA": 0.4444,
-      "USD_DENOMINATED": 0.7778,
-      "DIRECTION_LONG": 0.7778,
       "DURATION_RATES": 0.3333,
       "DIRECTION_SHORT": 0.2222,
+      "USD_DENOMINATED": 0.7778,
+      "DIRECTION_LONG": 0.7778,
+      "EQUITY_BETA": 0.4444,
       "COMMODITY": 0.1111
     },
     "flags": [
