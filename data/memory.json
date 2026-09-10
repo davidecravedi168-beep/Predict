@@ -3440,7 +3440,8 @@
           "conviction": 18.88,
           "weight": 1.0,
           "as_of": "2026-08-26",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "RELATIVE_Z",
@@ -3449,7 +3450,8 @@
           "conviction": 14.8,
           "weight": 1.0,
           "as_of": "2026-08-26",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "RSI_MOMENTUM",
@@ -3458,7 +3460,8 @@
           "conviction": 20.44,
           "weight": 1.0,
           "as_of": "2026-08-26",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "BREAKOUT_63D",
@@ -3467,7 +3470,8 @@
           "conviction": 93.49,
           "weight": 1.0,
           "as_of": "2026-08-26",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         },
         {
           "model_id": "MEAN_REVERSION_20D",
@@ -3476,7 +3480,8 @@
           "conviction": 0.22,
           "weight": 1.0,
           "as_of": "2026-08-26",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "HIT"
         },
         {
           "model_id": "VOLUME_CONFIRM",
@@ -3485,18 +3490,31 @@
           "conviction": 31.67,
           "weight": 1.0,
           "as_of": "2026-08-26",
-          "origin": "INTERNAL_SUBMODEL"
+          "origin": "INTERNAL_SUBMODEL",
+          "outcome": "MISS"
         }
       ],
       "external_model_votes": [],
       "learning_adjustment": 0.0,
       "risk_regime": "RISK_ON",
       "rates_regime": "RATES_STABLE",
-      "outcome": "PENDING",
+      "outcome": "MISS",
       "episode_key": "ISP.MI|LONG|10|BREAKOUT",
       "episode_id": "EP|2026-08-26|ISP.MI|LONG|10|BREAKOUT",
       "observations": 1,
-      "state": "ACTIVE"
+      "state": "ACTIVE",
+      "gross_return_pct": -2.9681,
+      "estimated_round_trip_cost_bps": 12.0,
+      "return_pct": -3.0881,
+      "underlying_return_pct": -2.9681,
+      "exit": 6.669,
+      "resolved": "2026-09-10",
+      "mfe_pct": 0.0,
+      "mae_pct": -5.0924,
+      "stop_touched": true,
+      "target1_touched": false,
+      "target2_touched": false,
+      "path_order": "NOT_AMBIGUOUS_AT_DAILY_RESOLUTION"
     },
     {
       "id": "2026-08-26|IITA.MI|SHORT|20|8.4.0-adaptive-horizon-governed",
@@ -3757,7 +3775,7 @@
       "outcome": "PENDING",
       "episode_key": "EUES.MI|LONG|40|BREAKOUT",
       "episode_id": "EP|2026-08-28|EUES.MI|LONG|40|BREAKOUT",
-      "observations": 480,
+      "observations": 481,
       "state": "ACTIVE",
       "last_seen": "2026-09-10",
       "latest_confidence_pct": 79.16,
@@ -6526,7 +6544,7 @@
       "episode_id": "EP|2026-08-31|IEF|SHORT|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "IEF|SHORT|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 544,
+      "observations": 545,
       "first_seen": "2026-08-31",
       "last_seen": "2026-09-10",
       "model_version": "8.6.1-math-risk-layer",
@@ -6707,7 +6725,7 @@
       "episode_id": "EP|2026-09-01|LQD|SHORT|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "LQD|SHORT|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 263,
+      "observations": 264,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-10",
       "model_version": "8.6.1-math-risk-layer",
@@ -7186,7 +7204,7 @@
       "episode_id": "EP|2026-09-01|AGG|SHORT|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "AGG|SHORT|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 83,
+      "observations": 84,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-10",
       "model_version": "8.6.1-math-risk-layer",
@@ -7388,7 +7406,7 @@
       "episode_id": "EP|2026-09-01|IGF|SHORT|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "IGF|SHORT|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 143,
+      "observations": 144,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-10",
       "model_version": "8.6.1-math-risk-layer",
@@ -7898,7 +7916,7 @@
       "episode_id": "EP|2026-09-01|WTRG|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "WTRG|LONG|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 552,
+      "observations": 553,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-10",
       "model_version": "8.6.1-math-risk-layer",
@@ -9093,7 +9111,7 @@
       "episode_id": "EP|2026-09-06|BT27.MI|LONG|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "BT27.MI|LONG|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 244,
+      "observations": 245,
       "first_seen": "2026-09-06",
       "last_seen": "2026-09-10",
       "model_version": "8.6.1-math-risk-layer",
@@ -9463,7 +9481,7 @@
       "episode_id": "EP|2026-09-08|COP|LONG|3|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "COP|LONG|3|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 65,
+      "observations": 66,
       "first_seen": "2026-09-08",
       "last_seen": "2026-09-10",
       "model_version": "8.6.1-math-risk-layer",
@@ -9941,7 +9959,7 @@
       "episode_id": "EP|2026-09-09|BTP10.MI|SHORT|10|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "BTP10.MI|SHORT|10|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 34,
+      "observations": 35,
       "first_seen": "2026-09-09",
       "last_seen": "2026-09-10",
       "model_version": "8.6.1-math-risk-layer",
@@ -10024,7 +10042,7 @@
       "risk_regime": "NEUTRAL",
       "rates_regime": "RATES_STABLE",
       "outcome": "PENDING",
-      "latest_confidence_pct": 72.29,
+      "latest_confidence_pct": 72.31,
       "latest_learning_adjustment": 0.0,
       "latest_model_version": "8.6.1-math-risk-layer"
     },
@@ -10502,7 +10520,7 @@
       "episode_id": "EP|2026-09-09|XLE|LONG|3|BREAKOUT|8.6.1-math-risk-layer",
       "episode_key": "XLE|LONG|3|BREAKOUT",
       "state": "ACTIVE",
-      "observations": 76,
+      "observations": 77,
       "first_seen": "2026-09-09",
       "last_seen": "2026-09-10",
       "model_version": "8.6.1-math-risk-layer",
@@ -10705,7 +10723,7 @@
     "independent_episodes": 54,
     "active": 36,
     "superseded_or_excluded": 58,
-    "legacy_resolved_excluded": 15,
+    "legacy_resolved_excluded": 16,
     "resolved": 10,
     "hits": 5,
     "misses": 5,
