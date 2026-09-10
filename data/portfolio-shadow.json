@@ -8,16 +8,16 @@
       "asset_class": {
         "counts": {
           "ETF_BOND_CREDIT": 2,
-          "BTP": 2,
           "ETF_EQUITY": 2,
           "EQUITY": 2,
+          "BTP": 2,
           "ETF_BOND_GOV": 2
         },
         "shares": {
           "ETF_BOND_CREDIT": 0.2,
-          "BTP": 0.2,
           "ETF_EQUITY": 0.2,
           "EQUITY": 0.2,
+          "BTP": 0.2,
           "ETF_BOND_GOV": 0.2
         },
         "top": "ETF_BOND_CREDIT",
@@ -27,9 +27,9 @@
         "counts": {
           "EURO_CREDIT": 1,
           "CREDIT": 1,
-          "ITALY_RATES": 2,
           "ENERGY": 2,
           "DEFENSIVES": 1,
+          "ITALY_RATES": 2,
           "BROAD_BONDS": 1,
           "US_RATES": 1,
           "REAL_ASSETS": 1
@@ -37,14 +37,14 @@
         "shares": {
           "EURO_CREDIT": 0.1,
           "CREDIT": 0.1,
-          "ITALY_RATES": 0.2,
           "ENERGY": 0.2,
           "DEFENSIVES": 0.1,
+          "ITALY_RATES": 0.2,
           "BROAD_BONDS": 0.1,
           "US_RATES": 0.1,
           "REAL_ASSETS": 0.1
         },
-        "top": "ITALY_RATES",
+        "top": "ENERGY",
         "top_share": 0.2
       },
       "direction": {
