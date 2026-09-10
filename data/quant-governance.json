@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-10T18:22:14.135307+00:00",
-  "source_updated_at": "2026-09-10T18:21:52+00:00",
+  "generated_at": "2026-09-10T18:37:01.991328+00:00",
+  "source_updated_at": "2026-09-10T18:36:38+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -707,8 +707,9 @@
       "counts": {
         "EURO_CREDIT": 1,
         "DEFENSIVES": 2,
-        "ENERGY": 2,
-        "EM_DEBT": 1
+        "ENERGY": 1,
+        "EM_DEBT": 1,
+        "US_BROAD": 1
       },
       "top": "DEFENSIVES",
       "top_share": 0.3333
@@ -724,11 +725,11 @@
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 5,
-        "SHORT": 1
+        "LONG": 4,
+        "SHORT": 2
       },
       "top": "LONG",
-      "top_share": 0.8333
+      "top_share": 0.6667
     }
   },
   "legacy_backtest": {
@@ -746,7 +747,6 @@
     "BRIER_SAMPLE_NOT_CALIBRATION_READY",
     "LEGACY_BACKTEST_EXPECTANCY_NON_POSITIVE",
     "LEGACY_BACKTEST_HIT_RATE_BELOW_52_PERCENT",
-    "SIGNAL_DIRECTION_CONCENTRATION_ABOVE_80_PERCENT",
     "SEGMENT_LEDGER_RESOLVED_COUNT_DIFFERS_FROM_SUMMARY",
     "FORWARD_SEGMENT_DRIFT_WATCH"
   ],
