@@ -25,21 +25,21 @@
       },
       "cluster": {
         "counts": {
+          "EURO_CREDIT": 1,
           "CREDIT": 1,
           "ENERGY": 2,
           "DEFENSIVES": 1,
           "ITALY_RATES": 2,
-          "EURO_CREDIT": 1,
           "BROAD_BONDS": 1,
           "US_RATES": 1,
           "REAL_ASSETS": 1
         },
         "shares": {
+          "EURO_CREDIT": 0.1,
           "CREDIT": 0.1,
           "ENERGY": 0.2,
           "DEFENSIVES": 0.1,
           "ITALY_RATES": 0.2,
-          "EURO_CREDIT": 0.1,
           "BROAD_BONDS": 0.1,
           "US_RATES": 0.1,
           "REAL_ASSETS": 0.1
@@ -49,24 +49,24 @@
       },
       "direction": {
         "counts": {
-          "SHORT": 5,
-          "LONG": 5
+          "LONG": 5,
+          "SHORT": 5
         },
         "shares": {
-          "SHORT": 0.5,
-          "LONG": 0.5
+          "LONG": 0.5,
+          "SHORT": 0.5
         },
-        "top": "SHORT",
+        "top": "LONG",
         "top_share": 0.5
       },
       "currency": {
         "counts": {
-          "USD": 7,
-          "EUR": 3
+          "EUR": 3,
+          "USD": 7
         },
         "shares": {
-          "USD": 0.7,
-          "EUR": 0.3
+          "EUR": 0.3,
+          "USD": 0.7
         },
         "top": "USD",
         "top_share": 0.7
@@ -74,10 +74,10 @@
     },
     "factor_proxy_shares": {
       "DURATION_RATES": 0.6,
+      "DIRECTION_LONG": 0.5,
       "USD_DENOMINATED": 0.7,
       "DIRECTION_SHORT": 0.5,
-      "EQUITY_BETA": 0.4,
-      "DIRECTION_LONG": 0.5
+      "EQUITY_BETA": 0.4
     },
     "flags": [
       "DURATION_FACTOR_CONCENTRATION"
