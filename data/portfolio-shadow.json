@@ -27,7 +27,7 @@
           "ITALY_RATES": 2,
           "DEFENSIVES": 2,
           "ENERGY": 1,
-          "CREDIT": 1,
+          "EM_DEBT": 1,
           "US_BROAD": 1
         },
         "shares": {
@@ -35,7 +35,7 @@
           "ITALY_RATES": 0.25,
           "DEFENSIVES": 0.25,
           "ENERGY": 0.125,
-          "CREDIT": 0.125,
+          "EM_DEBT": 0.125,
           "US_BROAD": 0.125
         },
         "top": "ITALY_RATES",

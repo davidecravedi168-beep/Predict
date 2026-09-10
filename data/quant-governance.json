@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-10T13:47:26.873838+00:00",
-  "source_updated_at": "2026-09-10T13:47:04+00:00",
+  "generated_at": "2026-09-10T13:57:58.734076+00:00",
+  "source_updated_at": "2026-09-10T13:57:36+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -709,7 +709,7 @@
         "ITALY_RATES": 2,
         "DEFENSIVES": 2,
         "ENERGY": 1,
-        "CREDIT": 1,
+        "EM_DEBT": 1,
         "US_BROAD": 1
       },
       "top": "ITALY_RATES",
