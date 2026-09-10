@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-10T05:58:09.600139+00:00",
-  "source_updated_at": "2026-09-10T05:57:49+00:00",
+  "generated_at": "2026-09-10T06:26:18.583624+00:00",
+  "source_updated_at": "2026-09-10T06:26:00+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -672,12 +672,11 @@
   },
   "data_quality": {
     "freshness_minutes": 0.3,
-    "availability_ratio": 0.9659,
+    "availability_ratio": 0.9773,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
     "unavailable_tickers": [
       "STM.MI",
-      "SLB",
       "CTRA"
     ]
   },
