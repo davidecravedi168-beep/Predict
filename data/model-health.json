@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-10T19:56:52.286573+00:00",
-  "source_updated_at": "2026-09-10T19:56:31+00:00",
+  "generated_at": "2026-09-10T20:18:43.040639+00:00",
+  "source_updated_at": "2026-09-10T20:18:25+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "operational": true,
   "forward": {
@@ -31,9 +31,8 @@
     }
   },
   "data": {
-    "availability_ratio": 0.9659,
+    "availability_ratio": 0.9773,
     "unavailable_tickers": [
-      "SPY",
       "STM.MI",
       "CTRA"
     ],
