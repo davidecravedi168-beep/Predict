@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-10T19:00:27.777020+00:00",
-  "source_updated_at": "2026-09-10T19:00:07+00:00",
+  "generated_at": "2026-09-10T19:17:00.574632+00:00",
+  "source_updated_at": "2026-09-10T19:16:40+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -692,13 +692,12 @@
   },
   "data_quality": {
     "freshness_minutes": 0.3,
-    "availability_ratio": 0.9659,
+    "availability_ratio": 0.9773,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
     "unavailable_tickers": [
       "STM.MI",
-      "CTRA",
-      "SUSE.MI"
+      "CTRA"
     ]
   },
   "signal_book": {
@@ -707,11 +706,12 @@
     "cluster_concentration": {
       "counts": {
         "EURO_CREDIT": 1,
-        "DEFENSIVES": 2,
+        "DEFENSIVES": 1,
         "ENERGY": 2,
-        "EM_DEBT": 1
+        "EM_DEBT": 1,
+        "US_BROAD": 1
       },
-      "top": "DEFENSIVES",
+      "top": "ENERGY",
       "top_share": 0.3333
     },
     "asset_class_concentration": {
@@ -725,11 +725,11 @@
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 5,
-        "SHORT": 1
+        "LONG": 4,
+        "SHORT": 2
       },
       "top": "LONG",
-      "top_share": 0.8333
+      "top_share": 0.6667
     }
   },
   "legacy_backtest": {
@@ -747,7 +747,6 @@
     "BRIER_SAMPLE_NOT_CALIBRATION_READY",
     "LEGACY_BACKTEST_EXPECTANCY_NON_POSITIVE",
     "LEGACY_BACKTEST_HIT_RATE_BELOW_52_PERCENT",
-    "SIGNAL_DIRECTION_CONCENTRATION_ABOVE_80_PERCENT",
     "SEGMENT_LEDGER_RESOLVED_COUNT_DIFFERS_FROM_SUMMARY",
     "FORWARD_SEGMENT_DRIFT_WATCH"
   ],

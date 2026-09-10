@@ -22,30 +22,32 @@
       "cluster": {
         "counts": {
           "EURO_CREDIT": 1,
-          "DEFENSIVES": 2,
+          "DEFENSIVES": 1,
           "ENERGY": 2,
-          "EM_DEBT": 1
+          "EM_DEBT": 1,
+          "US_BROAD": 1
         },
         "shares": {
           "EURO_CREDIT": 0.1667,
-          "DEFENSIVES": 0.3333,
+          "DEFENSIVES": 0.1667,
           "ENERGY": 0.3333,
-          "EM_DEBT": 0.1667
+          "EM_DEBT": 0.1667,
+          "US_BROAD": 0.1667
         },
-        "top": "DEFENSIVES",
+        "top": "ENERGY",
         "top_share": 0.3333
       },
       "direction": {
         "counts": {
-          "LONG": 5,
-          "SHORT": 1
+          "LONG": 4,
+          "SHORT": 2
         },
         "shares": {
-          "LONG": 0.8333,
-          "SHORT": 0.1667
+          "LONG": 0.6667,
+          "SHORT": 0.3333
         },
         "top": "LONG",
-        "top_share": 0.8333
+        "top_share": 0.6667
       },
       "currency": {
         "counts": {
@@ -62,13 +64,12 @@
     },
     "factor_proxy_shares": {
       "DURATION_RATES": 0.3333,
-      "DIRECTION_LONG": 0.8333,
+      "DIRECTION_LONG": 0.6667,
       "EQUITY_BETA": 0.6667,
       "USD_DENOMINATED": 0.8333,
-      "DIRECTION_SHORT": 0.1667
+      "DIRECTION_SHORT": 0.3333
     },
     "flags": [
-      "DIRECTION_CONCENTRATION",
       "CURRENCY_CONCENTRATION",
       "EQUITY_BETA_CONCENTRATION"
     ],
