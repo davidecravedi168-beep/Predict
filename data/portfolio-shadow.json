@@ -28,7 +28,7 @@
           "DEFENSIVES": 1,
           "ENERGY": 2,
           "EM_DEBT": 1,
-          "US_BROAD": 1
+          "REAL_ASSETS": 1
         },
         "shares": {
           "EURO_CREDIT": 0.125,
@@ -36,7 +36,7 @@
           "DEFENSIVES": 0.125,
           "ENERGY": 0.25,
           "EM_DEBT": 0.125,
-          "US_BROAD": 0.125
+          "REAL_ASSETS": 0.125
         },
         "top": "ITALY_RATES",
         "top_share": 0.25
