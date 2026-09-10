@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
   "portfolio_risk": {
-    "status": "HEALTHY",
+    "status": "ATTENTION",
     "signal_count": 7,
     "exposures": {
       "asset_class": {
@@ -26,32 +26,30 @@
           "EURO_CREDIT": 1,
           "ITALY_RATES": 1,
           "DEFENSIVES": 2,
-          "ENERGY": 1,
-          "EM_DEBT": 1,
-          "US_BROAD": 1
+          "ENERGY": 2,
+          "EM_DEBT": 1
         },
         "shares": {
           "EURO_CREDIT": 0.1429,
           "ITALY_RATES": 0.1429,
           "DEFENSIVES": 0.2857,
-          "ENERGY": 0.1429,
-          "EM_DEBT": 0.1429,
-          "US_BROAD": 0.1429
+          "ENERGY": 0.2857,
+          "EM_DEBT": 0.1429
         },
         "top": "DEFENSIVES",
         "top_share": 0.2857
       },
       "direction": {
         "counts": {
-          "LONG": 5,
-          "SHORT": 2
+          "LONG": 6,
+          "SHORT": 1
         },
         "shares": {
-          "LONG": 0.7143,
-          "SHORT": 0.2857
+          "LONG": 0.8571,
+          "SHORT": 0.1429
         },
         "top": "LONG",
-        "top_share": 0.7143
+        "top_share": 0.8571
       },
       "currency": {
         "counts": {
@@ -68,12 +66,14 @@
     },
     "factor_proxy_shares": {
       "DURATION_RATES": 0.4286,
-      "DIRECTION_LONG": 0.7143,
+      "DIRECTION_LONG": 0.8571,
       "EQUITY_BETA": 0.5714,
       "USD_DENOMINATED": 0.7143,
-      "DIRECTION_SHORT": 0.2857
+      "DIRECTION_SHORT": 0.1429
     },
-    "flags": [],
+    "flags": [
+      "DIRECTION_CONCENTRATION"
+    ],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
   },
   "champion_shadow": {
