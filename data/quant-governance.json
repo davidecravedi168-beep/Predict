@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-10T04:48:31.281847+00:00",
-  "source_updated_at": "2026-09-10T04:48:12+00:00",
+  "generated_at": "2026-09-10T04:58:46.271950+00:00",
+  "source_updated_at": "2026-09-10T04:58:24+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -671,7 +671,7 @@
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
-    "freshness_minutes": 0.3,
+    "freshness_minutes": 0.4,
     "availability_ratio": 0.9773,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
@@ -681,7 +681,7 @@
     ]
   },
   "signal_book": {
-    "signals": 9,
+    "signals": 10,
     "watchlist": 27,
     "cluster_concentration": {
       "counts": {
@@ -691,10 +691,11 @@
         "DEFENSIVES": 1,
         "BROAD_BONDS": 1,
         "US_RATES": 1,
-        "REAL_ASSETS": 1
+        "REAL_ASSETS": 1,
+        "CRYPTO": 1
       },
       "top": "ITALY_RATES",
-      "top_share": 0.2222
+      "top_share": 0.2
     },
     "asset_class_concentration": {
       "counts": {
@@ -702,18 +703,19 @@
         "ETF_BOND_CREDIT": 1,
         "ETF_EQUITY": 2,
         "EQUITY": 2,
-        "ETF_BOND_GOV": 2
+        "ETF_BOND_GOV": 2,
+        "CRYPTO": 1
       },
       "top": "BTP",
-      "top_share": 0.2222
+      "top_share": 0.2
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 4,
+        "LONG": 5,
         "SHORT": 5
       },
-      "top": "SHORT",
-      "top_share": 0.5556
+      "top": "LONG",
+      "top_share": 0.5
     }
   },
   "legacy_backtest": {
