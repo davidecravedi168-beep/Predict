@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-10T06:51:17.858526+00:00",
-  "source_updated_at": "2026-09-10T06:50:59+00:00",
+  "generated_at": "2026-09-10T07:02:40.393688+00:00",
+  "source_updated_at": "2026-09-10T07:02:18+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "operational": true,
   "forward": {
@@ -31,11 +31,10 @@
     }
   },
   "data": {
-    "availability_ratio": 0.9659,
+    "availability_ratio": 0.9773,
     "unavailable_tickers": [
       "STM.MI",
-      "CTRA",
-      "JPY=X"
+      "CTRA"
     ],
     "signals": 9,
     "watchlist": 27
