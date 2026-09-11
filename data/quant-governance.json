@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-11T17:56:56.097732+00:00",
-  "source_updated_at": "2026-09-11T17:56:32+00:00",
+  "generated_at": "2026-09-11T18:23:07.424521+00:00",
+  "source_updated_at": "2026-09-11T18:22:45+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -706,12 +706,12 @@
     "cluster_concentration": {
       "counts": {
         "CRYPTO": 1,
-        "MANAGED_FUTURES": 1,
         "ENERGY": 2,
+        "MANAGED_FUTURES": 1,
         "EURO_CREDIT": 1,
         "ITALY_RATES": 1,
-        "ITALY_EQUITY": 1,
-        "EM_DEBT": 1
+        "EM_DEBT": 1,
+        "ITALY_EQUITY": 1
       },
       "top": "ENERGY",
       "top_share": 0.25
