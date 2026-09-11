@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-11T07:20:57.741244+00:00",
-  "source_updated_at": "2026-09-11T07:20:35+00:00",
+  "generated_at": "2026-09-11T07:34:56.226514+00:00",
+  "source_updated_at": "2026-09-11T07:34:32+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "operational": true,
   "forward": {
@@ -36,7 +36,7 @@
       "STM.MI",
       "CTRA"
     ],
-    "signals": 8,
+    "signals": 7,
     "watchlist": 27
   },
   "flags": [
