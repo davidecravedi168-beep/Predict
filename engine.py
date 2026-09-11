@@ -20,6 +20,7 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 from edge_core import EDGE_CORE_VERSION, assert_public_snapshot, cost_adjusted_return_pct, estimated_round_trip_cost_bps
+from alpha_ml_runtime import predict as alpha_ml_predict
 
 MODEL_VERSION = "8.6.1-math-risk-layer"
 # Migration compatibility baseline: 8.6.0-episode-ledger-cost-aware
@@ -63,6 +64,22 @@ GROUPS = {
     "GLOBAL_EQUITY_ETF": {
         "asset_class": "ETF_EQUITY", "cluster": "GLOBAL_EQUITY", "benchmark": "SPY", "role": "CORE",
         "tickers": ["ACWI", "VT", "VGK", "EEM"],
+    },
+    "US_FACTOR_ETF": {
+        "asset_class": "ETF_EQUITY", "cluster": "FACTOR", "benchmark": "SPY", "role": "CORE",
+        "tickers": ["MTUM", "QUAL", "SPLV"],
+    },
+    "SEMICONDUCTOR_ETF": {
+        "asset_class": "ETF_EQUITY", "cluster": "SEMICONDUCTORS", "benchmark": "QQQ", "role": "CORE",
+        "tickers": ["SOXX", "SMH"],
+    },
+    "GOLD_MINERS_ETF": {
+        "asset_class": "ETF_EQUITY", "cluster": "GOLD_MINERS", "benchmark": "GLD", "role": "DIVERSIFIER",
+        "tickers": ["GDX"],
+    },
+    "MANAGED_FUTURES_ETF": {
+        "asset_class": "ETF_EQUITY", "cluster": "MANAGED_FUTURES", "benchmark": None, "role": "DIVERSIFIER",
+        "tickers": ["DBMF"],
     },
     "US_SECTOR_ETF": {
         "asset_class": "ETF_EQUITY", "cluster": "US_SECTORS", "benchmark": "SPY", "role": "CORE",
@@ -1392,6 +1409,25 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
     reward2_pct = abs(target2 - price) / price * 100 if target2 is not None else None
     math_metrics = mathematical_trade_metrics(direction, vol, ret20, horizon, risk_pct, reward1_pct, reward2_pct)
 
+    # Guarded adaptive ML overlay. It is inactive until a time-ordered holdout
+    # candidate passes the promotion gates in alpha-ml-model-v10.json.
+    ml_eval = alpha_ml_predict({
+        "confidence_pct": final_conf,
+        "direction": direction,
+        "model_votes": votes,
+        "risk_pct": risk_pct,
+        "horizon": horizon,
+        "risk_regime": risk_regime,
+        "rates_regime": rates_regime,
+        "asset_class": asset_class,
+    })
+    ml_adj = safe_num(ml_eval.get("confidence_adjustment"), 0.0)
+    if ml_adj:
+        final_conf = clip(final_conf + ml_adj, 50, 92)
+        # Any active ML adjustment must flow through the same empirical
+        # calibration layer; ML probability is never silently substituted for it.
+        forecast_p, prob_meta = empirical_probability(mem, asset_class, direction, horizon, final_conf)
+
     if vol_z is None:
         risk_level = "DATI PARZIALI"
     elif vol_z >= 2.0:
@@ -1438,6 +1474,10 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
         reasons.append("Probabilità non pubblicata: campione di calibrazione insufficiente")
     if external_adj < 0:
         reasons.append("Feed di modelli esterni con track record sufficiente e stesso orizzonte discordi: penalità prudenziale")
+    if ml_eval.get("state") == "ACTIVE" and ml_adj < 0:
+        reasons.append(f"ML V10: penalità forward-validata {ml_adj:.1f} pt")
+    elif ml_eval.get("state") == "ACTIVE" and ml_adj > 0:
+        reasons.append(f"ML V10 maturo: conferma forward-validata +{ml_adj:.1f} pt")
     hstate = horizon_meta.get("state")
     if hstate == "EMPIRICAL_STABLE_OVERRIDE":
         reasons.append(f"Orizzonte {horizon} sedute: override empirico stabile su storico pre-forecast")
@@ -1521,6 +1561,11 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
         "macro_regime_adjustment": macro_adj,
         "learning_adjustment": round(learn_adj, 3),
         "learning_state": learn_meta,
+        "ml_state": ml_eval.get("state"),
+        "ml_stage": ml_eval.get("stage"),
+        "ml_probability": ml_eval.get("probability"),
+        "ml_confidence_adjustment": ml_adj,
+        "ml_version": ml_eval.get("version"),
         "instrument_reference": INSTRUMENT_REFERENCES.get(ticker),
         "reasons": reasons,
         "provenance": {
@@ -1540,6 +1585,7 @@ def score_asset(ticker, data, mem, regimes, external_votes_by_ticker):
             "yield_to_maturity_pct": "MISSING_REQUIRES_OFFICIAL_BOND_OR_ISSUER_FEED",
             "macro_regime_adjustment": "MODEL_DERIVED_FROM_OBSERVED_MARKET_CONTEXT" if macro_adj != 0 else "NO_ADJUSTMENT",
             "learning_adjustment": "RESOLVED_MEMORY_ONLY" if learn_adj != 0 else "NO_ADJUSTMENT",
+            "ml_probability": "TIME_ORDERED_FORWARD_VALIDATED_LOGISTIC_MODEL" if ml_eval.get("state") == "ACTIVE" else "MISSING_NO_PROMOTED_ML_MODEL",
             "math_confidence_adjustment": "MODEL_DERIVED_PENALTY_ONLY_RSI_VOLATILITY_EXTENSION",
             "math_metrics": "MODEL_DERIVED_GAUSSIAN_TERMINAL_PROXY_AND_BREAK_EVEN_ARITHMETIC",
             "external_model_votes": "DECLARED_TIMESTAMPED_EXTERNAL_FEED_SHADOW_ONLY" if ext_votes else "MISSING_NOT_CONNECTED_OR_NO_VALID_SIGNAL",
