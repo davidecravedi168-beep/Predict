@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-11T18:47:00.937971+00:00",
-  "source_updated_at": "2026-09-11T18:46:39+00:00",
+  "generated_at": "2026-09-11T18:56:51.652429+00:00",
+  "source_updated_at": "2026-09-11T18:56:29+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "operational": true,
   "forward": {
@@ -31,8 +31,9 @@
     }
   },
   "data": {
-    "availability_ratio": 0.9789,
+    "availability_ratio": 0.9684,
     "unavailable_tickers": [
+      "USMV",
       "STM.MI",
       "CTRA"
     ],
