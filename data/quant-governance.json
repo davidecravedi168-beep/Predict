@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-11T11:33:17.867949+00:00",
-  "source_updated_at": "2026-09-11T11:32:58+00:00",
+  "generated_at": "2026-09-11T11:45:12.472711+00:00",
+  "source_updated_at": "2026-09-11T11:44:52+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -708,8 +708,8 @@
         "DEFENSIVES": 2,
         "ENERGY": 1,
         "US_BROAD": 1,
-        "ITALY_RATES": 2,
-        "EM_DEBT": 1
+        "EM_DEBT": 1,
+        "ITALY_RATES": 2
       },
       "top": "DEFENSIVES",
       "top_share": 0.2857
@@ -718,8 +718,8 @@
       "counts": {
         "EQUITY": 2,
         "ETF_EQUITY": 2,
-        "BTP": 2,
-        "ETF_BOND_CREDIT": 1
+        "ETF_BOND_CREDIT": 1,
+        "BTP": 2
       },
       "top": "EQUITY",
       "top_share": 0.2857

@@ -9,14 +9,14 @@
         "counts": {
           "EQUITY": 2,
           "ETF_EQUITY": 2,
-          "BTP": 2,
-          "ETF_BOND_CREDIT": 1
+          "ETF_BOND_CREDIT": 1,
+          "BTP": 2
         },
         "shares": {
           "EQUITY": 0.2857,
           "ETF_EQUITY": 0.2857,
-          "BTP": 0.2857,
-          "ETF_BOND_CREDIT": 0.1429
+          "ETF_BOND_CREDIT": 0.1429,
+          "BTP": 0.2857
         },
         "top": "EQUITY",
         "top_share": 0.2857
@@ -26,15 +26,15 @@
           "DEFENSIVES": 2,
           "ENERGY": 1,
           "US_BROAD": 1,
-          "ITALY_RATES": 2,
-          "EM_DEBT": 1
+          "EM_DEBT": 1,
+          "ITALY_RATES": 2
         },
         "shares": {
           "DEFENSIVES": 0.2857,
           "ENERGY": 0.1429,
           "US_BROAD": 0.1429,
-          "ITALY_RATES": 0.2857,
-          "EM_DEBT": 0.1429
+          "EM_DEBT": 0.1429,
+          "ITALY_RATES": 0.2857
         },
         "top": "DEFENSIVES",
         "top_share": 0.2857
