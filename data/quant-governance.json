@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-11T13:47:56.489075+00:00",
-  "source_updated_at": "2026-09-11T13:47:36+00:00",
+  "generated_at": "2026-09-11T13:58:06.245807+00:00",
+  "source_updated_at": "2026-09-11T13:57:41+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -14,8 +14,8 @@
   },
   "forward": {
     "maturity": "EARLY_FORWARD",
-    "independent_episodes": 58,
-    "active": 38,
+    "independent_episodes": 60,
+    "active": 40,
     "resolved": 11,
     "hit_rate": 0.4545,
     "brier": null,
@@ -691,8 +691,8 @@
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
-    "freshness_minutes": 0.3,
-    "availability_ratio": 0.9773,
+    "freshness_minutes": 0.4,
+    "availability_ratio": 0.9789,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
     "unavailable_tickers": [
@@ -705,9 +705,10 @@
     "watchlist": 27,
     "cluster_concentration": {
       "counts": {
-        "CRYPTO": 1,
         "ENERGY": 2,
-        "ITALY_RATES": 2,
+        "CRYPTO": 1,
+        "MANAGED_FUTURES": 1,
+        "ITALY_RATES": 1,
         "DEFENSIVES": 1
       },
       "top": "ENERGY",
@@ -715,12 +716,12 @@
     },
     "asset_class_concentration": {
       "counts": {
+        "ETF_EQUITY": 2,
         "CRYPTO": 1,
-        "ETF_EQUITY": 1,
         "EQUITY": 2,
-        "BTP": 2
+        "BTP": 1
       },
-      "top": "EQUITY",
+      "top": "ETF_EQUITY",
       "top_share": 0.3333
     },
     "direction_concentration": {
@@ -734,9 +735,9 @@
   },
   "legacy_backtest": {
     "state": "AVAILABLE",
-    "signals": 337,
-    "hit_rate": 0.4777,
-    "avg_return_pct_after_costs": -0.0562
+    "signals": 364,
+    "hit_rate": 0.4643,
+    "avg_return_pct_after_costs": -0.2947
   },
   "calibration": {
     "empirical_probabilities_published": 0,

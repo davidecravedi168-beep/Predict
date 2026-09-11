@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-11T13:47:56.416194+00:00",
-  "source_updated_at": "2026-09-11T13:47:36+00:00",
+  "generated_at": "2026-09-11T13:58:06.172799+00:00",
+  "source_updated_at": "2026-09-11T13:57:41+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "operational": true,
   "forward": {
     "maturity": "EARLY",
-    "independent_episodes": 58,
-    "active": 38,
+    "independent_episodes": 60,
+    "active": 40,
     "resolved": 11,
     "hits": 5,
     "misses": 6,
@@ -19,19 +19,19 @@
   },
   "backtest": {
     "state": "AVAILABLE",
-    "signals": 337,
-    "hit_rate_pct": 47.77,
-    "avg_return_pct_after_costs": -0.0562,
-    "gross_avg_return_pct": 0.0594,
+    "signals": 364,
+    "hit_rate_pct": 46.43,
+    "avg_return_pct_after_costs": -0.2947,
+    "gross_avg_return_pct": -0.1794,
     "best_supported_horizon": {
       "days": 20,
       "n": 60,
-      "hit_rate": 0.6333,
-      "avg_return_pct": 0.2898
+      "hit_rate": 0.65,
+      "avg_return_pct": 0.0993
     }
   },
   "data": {
-    "availability_ratio": 0.9773,
+    "availability_ratio": 0.9789,
     "unavailable_tickers": [
       "STM.MI",
       "CTRA"

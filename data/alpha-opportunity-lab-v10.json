@@ -1,0 +1,228 @@
+{
+  "schema": "ALPHA-OPPORTUNITY-LAB-V10",
+  "generated_at": "2026-09-11T13:58:06.724293+00:00",
+  "resolved_forward_n": 11,
+  "stress_extra_bps": 20,
+  "segments": {
+    "asset_class": [
+      {
+        "segment": "ETF_EQUITY",
+        "n": 5,
+        "hit_rate": 0.6,
+        "avg_return_pct": 0.1126,
+        "avg_return_plus20bps_pct": -0.0874,
+        "max_drawdown_plus20bps_pct": 3.8219,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "EQUITY",
+        "n": 3,
+        "hit_rate": 0.0,
+        "avg_return_pct": -0.9944,
+        "avg_return_plus20bps_pct": -1.1944,
+        "max_drawdown_plus20bps_pct": 3.5832,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "ETF_COMMODITY",
+        "n": 1,
+        "hit_rate": 1.0,
+        "avg_return_pct": 3.9935,
+        "avg_return_plus20bps_pct": 3.7935,
+        "max_drawdown_plus20bps_pct": 0.0,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "FX",
+        "n": 1,
+        "hit_rate": 1.0,
+        "avg_return_pct": 2.7438,
+        "avg_return_plus20bps_pct": 2.5438,
+        "max_drawdown_plus20bps_pct": 0.0,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "CRYPTO",
+        "n": 1,
+        "hit_rate": 0.0,
+        "avg_return_pct": -3.689,
+        "avg_return_plus20bps_pct": -3.889,
+        "max_drawdown_plus20bps_pct": 3.889,
+        "state": "INSUFFICIENT"
+      }
+    ],
+    "horizon": [
+      {
+        "segment": "3d",
+        "n": 6,
+        "hit_rate": 0.3333,
+        "avg_return_pct": -0.7231,
+        "avg_return_plus20bps_pct": -0.9231,
+        "max_drawdown_plus20bps_pct": 7.1694,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "5d",
+        "n": 5,
+        "hit_rate": 0.6,
+        "avg_return_pct": 0.9933,
+        "avg_return_plus20bps_pct": 0.7933,
+        "max_drawdown_plus20bps_pct": 3.889,
+        "state": "INSUFFICIENT"
+      }
+    ],
+    "risk_regime": [
+      {
+        "segment": "NEUTRAL",
+        "n": 7,
+        "hit_rate": 0.2857,
+        "avg_return_pct": -0.0975,
+        "avg_return_plus20bps_pct": -0.2975,
+        "max_drawdown_plus20bps_pct": 4.3903,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "RISK_ON",
+        "n": 4,
+        "hit_rate": 0.75,
+        "avg_return_pct": 0.3276,
+        "avg_return_plus20bps_pct": 0.1275,
+        "max_drawdown_plus20bps_pct": 3.889,
+        "state": "INSUFFICIENT"
+      }
+    ],
+    "rates_regime": [
+      {
+        "segment": "RATES_STABLE",
+        "n": 11,
+        "hit_rate": 0.4545,
+        "avg_return_pct": 0.0571,
+        "avg_return_plus20bps_pct": -0.1429,
+        "max_drawdown_plus20bps_pct": 7.7109,
+        "state": "OBSERVE"
+      }
+    ],
+    "setup_family": [
+      {
+        "segment": "BREAKOUT",
+        "n": 11,
+        "hit_rate": 0.4545,
+        "avg_return_pct": 0.0571,
+        "avg_return_plus20bps_pct": -0.1429,
+        "max_drawdown_plus20bps_pct": 7.7109,
+        "state": "OBSERVE"
+      }
+    ],
+    "cluster": [
+      {
+        "segment": "ENERGY",
+        "n": 6,
+        "hit_rate": 0.5,
+        "avg_return_pct": 0.336,
+        "avg_return_plus20bps_pct": 0.136,
+        "max_drawdown_plus20bps_pct": 3.3475,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "US_SECTORS",
+        "n": 2,
+        "hit_rate": 0.0,
+        "avg_return_pct": -2.2182,
+        "avg_return_plus20bps_pct": -2.4182,
+        "max_drawdown_plus20bps_pct": 4.8363,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "COMMODITIES",
+        "n": 1,
+        "hit_rate": 1.0,
+        "avg_return_pct": 3.9935,
+        "avg_return_plus20bps_pct": 3.7935,
+        "max_drawdown_plus20bps_pct": 0.0,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "FX",
+        "n": 1,
+        "hit_rate": 1.0,
+        "avg_return_pct": 2.7438,
+        "avg_return_plus20bps_pct": 2.5438,
+        "max_drawdown_plus20bps_pct": 0.0,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "CRYPTO",
+        "n": 1,
+        "hit_rate": 0.0,
+        "avg_return_pct": -3.689,
+        "avg_return_plus20bps_pct": -3.889,
+        "max_drawdown_plus20bps_pct": 3.889,
+        "state": "INSUFFICIENT"
+      }
+    ]
+  },
+  "submodels": [
+    {
+      "model_id": "TREND_Z",
+      "n": 11,
+      "hit_rate": 0.4545,
+      "avg_return_pct": 0.0571,
+      "avg_return_plus20bps_pct": -0.1429,
+      "max_drawdown_plus20bps_pct": 7.7109,
+      "state": "OBSERVE"
+    },
+    {
+      "model_id": "RSI_MOMENTUM",
+      "n": 11,
+      "hit_rate": 0.4545,
+      "avg_return_pct": 0.0571,
+      "avg_return_plus20bps_pct": -0.1429,
+      "max_drawdown_plus20bps_pct": 7.7109,
+      "state": "OBSERVE"
+    },
+    {
+      "model_id": "BREAKOUT_63D",
+      "n": 11,
+      "hit_rate": 0.4545,
+      "avg_return_pct": 0.0571,
+      "avg_return_plus20bps_pct": -0.1429,
+      "max_drawdown_plus20bps_pct": 7.7109,
+      "state": "OBSERVE"
+    },
+    {
+      "model_id": "MEAN_REVERSION_20D",
+      "n": 11,
+      "hit_rate": 0.4545,
+      "avg_return_pct": -0.3171,
+      "avg_return_plus20bps_pct": -0.5171,
+      "max_drawdown_plus20bps_pct": 6.251,
+      "state": "OBSERVE"
+    },
+    {
+      "model_id": "VOLUME_CONFIRM",
+      "n": 9,
+      "hit_rate": 0.4444,
+      "avg_return_pct": 0.1748,
+      "avg_return_plus20bps_pct": -0.0252,
+      "max_drawdown_plus20bps_pct": 3.8219,
+      "state": "INSUFFICIENT"
+    },
+    {
+      "model_id": "RELATIVE_Z",
+      "n": 6,
+      "hit_rate": 0.5,
+      "avg_return_pct": 0.1351,
+      "avg_return_plus20bps_pct": -0.0649,
+      "max_drawdown_plus20bps_pct": 4.553,
+      "state": "INSUFFICIENT"
+    }
+  ],
+  "policy": {
+    "shadow_only": true,
+    "auto_promote": false,
+    "minimum_n_promising": 10,
+    "minimum_n_strong": 20,
+    "profit_guarantee": false,
+    "note": "Ranks forward evidence after an extra 20 bps friction stress. Association is not proof of future profitability."
+  }
+}

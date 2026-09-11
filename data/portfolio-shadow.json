@@ -2,36 +2,38 @@
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
   "portfolio_risk": {
-    "status": "HEALTHY",
+    "status": "ATTENTION",
     "signal_count": 6,
     "exposures": {
       "asset_class": {
         "counts": {
+          "ETF_EQUITY": 2,
           "CRYPTO": 1,
-          "ETF_EQUITY": 1,
           "EQUITY": 2,
-          "BTP": 2
+          "BTP": 1
         },
         "shares": {
+          "ETF_EQUITY": 0.3333,
           "CRYPTO": 0.1667,
-          "ETF_EQUITY": 0.1667,
           "EQUITY": 0.3333,
-          "BTP": 0.3333
+          "BTP": 0.1667
         },
-        "top": "EQUITY",
+        "top": "ETF_EQUITY",
         "top_share": 0.3333
       },
       "cluster": {
         "counts": {
-          "CRYPTO": 1,
           "ENERGY": 2,
-          "ITALY_RATES": 2,
+          "CRYPTO": 1,
+          "MANAGED_FUTURES": 1,
+          "ITALY_RATES": 1,
           "DEFENSIVES": 1
         },
         "shares": {
-          "CRYPTO": 0.1667,
           "ENERGY": 0.3333,
-          "ITALY_RATES": 0.3333,
+          "CRYPTO": 0.1667,
+          "MANAGED_FUTURES": 0.1667,
+          "ITALY_RATES": 0.1667,
           "DEFENSIVES": 0.1667
         },
         "top": "ENERGY",
@@ -51,25 +53,28 @@
       },
       "currency": {
         "counts": {
-          "USD": 4,
-          "EUR": 2
+          "USD": 5,
+          "EUR": 1
         },
         "shares": {
-          "USD": 0.6667,
-          "EUR": 0.3333
+          "USD": 0.8333,
+          "EUR": 0.1667
         },
         "top": "USD",
-        "top_share": 0.6667
+        "top_share": 0.8333
       }
     },
     "factor_proxy_shares": {
-      "USD_DENOMINATED": 0.6667,
+      "EQUITY_BETA": 0.6667,
+      "USD_DENOMINATED": 0.8333,
       "DIRECTION_LONG": 0.6667,
-      "EQUITY_BETA": 0.5,
-      "DURATION_RATES": 0.3333,
+      "DURATION_RATES": 0.1667,
       "DIRECTION_SHORT": 0.3333
     },
-    "flags": [],
+    "flags": [
+      "CURRENCY_CONCENTRATION",
+      "EQUITY_BETA_CONCENTRATION"
+    ],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
   },
   "champion_shadow": {
