@@ -29,8 +29,8 @@
           "ENERGY": 2,
           "MANAGED_FUTURES": 1,
           "EURO_CREDIT": 1,
-          "ITALY_RATES": 1,
           "EM_DEBT": 1,
+          "ITALY_RATES": 1,
           "ITALY_EQUITY": 1
         },
         "shares": {
@@ -38,8 +38,8 @@
           "ENERGY": 0.25,
           "MANAGED_FUTURES": 0.125,
           "EURO_CREDIT": 0.125,
-          "ITALY_RATES": 0.125,
           "EM_DEBT": 0.125,
+          "ITALY_RATES": 0.125,
           "ITALY_EQUITY": 0.125
         },
         "top": "ENERGY",
