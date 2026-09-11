@@ -38,6 +38,15 @@ jobs:
         run: python scripts/build_decision_attribution.py
       - name: Build execution cost robustness receipt
         run: python scripts/build_execution_robustness.py
+      - name: Alpha ML V10 self-tests
+        run: |
+          python scripts/build_alpha_ml_v10.py --self-test
+          python scripts/build_opportunity_lab_v10.py --self-test
+          python -m py_compile alpha_ml_runtime.py engine.py scripts/build_alpha_ml_v10.py scripts/build_opportunity_lab_v10.py
+      - name: Build guarded Alpha ML candidate
+        run: python scripts/build_alpha_ml_v10.py
+      - name: Build cost-stressed opportunity lab
+        run: python scripts/build_opportunity_lab_v10.py
       - name: Governance regression tests
         run: |
           python -m unittest discover -s tests -p 'test_quant_governance.py' -v
@@ -56,6 +65,8 @@ jobs:
           p=json.loads(Path('data/portfolio-shadow.json').read_text())
           a=json.loads(Path('data/decision-attribution.json').read_text())
           x=json.loads(Path('data/execution-robustness.json').read_text())
+          ml=json.loads(Path('data/alpha-ml-training-v10.json').read_text())
+          lab=json.loads(Path('data/alpha-opportunity-lab-v10.json').read_text())
           resolved=int((d.get('memory') or {}).get('resolved') or 0)
           if resolved < 30 and any(x.get('forecast_probability') is not None for x in d.get('signals') or []): raise SystemExit('Fail-closed breach: probability published too early')
           if h.get('status')=='BLOCKED' or g.get('status')=='BLOCKED': raise SystemExit('Governance BLOCKED')
@@ -65,6 +76,11 @@ jobs:
           if a.get('policy',{}).get('capital_mode') != 'PAPER_RESEARCH_ONLY': raise SystemExit('Attribution capital mode invalid')
           if x.get('policy',{}).get('real_money_promotion_allowed') is not False: raise SystemExit('Execution robustness must remain fail-closed')
           if x.get('status') not in ('COLD','FRAGILE','ROBUST'): raise SystemExit('Execution robustness status invalid')
+          if ml.get('status') not in ('COLD','SHADOW','PROMOTED'): raise SystemExit('Alpha ML status invalid')
+          if lab.get('policy',{}).get('auto_promote') is not False: raise SystemExit('Opportunity lab must stay shadow-only')
+          if Path('data/alpha-ml-model-v10.json').exists():
+              mm=json.loads(Path('data/alpha-ml-model-v10.json').read_text())
+              if mm.get('policy',{}).get('paper_research_only') is not True: raise SystemExit('ML model must remain paper/research only')
           print('Forward, portfolio, shadow, attribution and friction governance verified')
           PY
       - name: Sync canonical public root snapshot
@@ -75,7 +91,8 @@ jobs:
           set -euo pipefail
           git config user.name "alpha-engine-bot"
           git config user.email "alpha-engine-bot@users.noreply.github.com"
-          git add data/model-health.json data/quant-governance.json data/portfolio-shadow.json data/decision-attribution.json data/execution-robustness.json latest.json
+          git add data/model-health.json data/quant-governance.json data/portfolio-shadow.json data/decision-attribution.json data/execution-robustness.json data/alpha-ml-training-v10.json data/alpha-opportunity-lab-v10.json latest.json
+          if [ -f data/alpha-ml-model-v10.json ]; then git add data/alpha-ml-model-v10.json; fi
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "bot: publish Alpha governed diagnostics"
           for attempt in 1 2 3 4 5; do
