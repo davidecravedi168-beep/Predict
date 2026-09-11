@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-import argparse, json, math
+import argparse, json, math, sys
 from pathlib import Path
 from datetime import datetime, timezone
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from alpha_ml_runtime import FEATURE_NAMES, feature_map
 
 MEM=Path("data/memory.json")
