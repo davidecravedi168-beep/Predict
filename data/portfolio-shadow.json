@@ -27,16 +27,16 @@
         "counts": {
           "EURO_CREDIT": 1,
           "CRYPTO": 1,
-          "ENERGY": 2,
           "MANAGED_FUTURES": 1,
+          "ENERGY": 2,
           "DEFENSIVES": 1,
           "ITALY_RATES": 1
         },
         "shares": {
           "EURO_CREDIT": 0.1429,
           "CRYPTO": 0.1429,
-          "ENERGY": 0.2857,
           "MANAGED_FUTURES": 0.1429,
+          "ENERGY": 0.2857,
           "DEFENSIVES": 0.1429,
           "ITALY_RATES": 0.1429
         },
