@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-09-11T13:47:56.639599+00:00",
+  "model_version": "8.6.1-math-risk-layer",
+  "status": "FRAGILE",
+  "forward_sample": 22,
+  "baseline_avg_net_return_pct": 0.1974,
+  "stress": {
+    "10bps": {
+      "extra_friction_bps": 10,
+      "n": 22,
+      "positive_rate": 0.5,
+      "avg_return_pct": 0.0974,
+      "median_return_pct": 0.1394,
+      "positive_survival_ratio": 0.9167
+    },
+    "20bps": {
+      "extra_friction_bps": 20,
+      "n": 22,
+      "positive_rate": 0.5,
+      "avg_return_pct": -0.0026,
+      "median_return_pct": 0.0394,
+      "positive_survival_ratio": 0.9167
+    },
+    "35bps": {
+      "extra_friction_bps": 35,
+      "n": 22,
+      "positive_rate": 0.5,
+      "avg_return_pct": -0.1526,
+      "median_return_pct": -0.1105,
+      "positive_survival_ratio": 0.9167
+    }
+  },
+  "policy": {
+    "capital_mode": "PAPER_RESEARCH_ONLY",
+    "real_money_promotion_allowed": false,
+    "minimum_forward_n_for_robustness": 30,
+    "required_20bps_avg_return_gt_zero": true,
+    "auto_retune": false
+  },
+  "reasons": [
+    "FORWARD_SAMPLE_BELOW_30",
+    "EDGE_DOES_NOT_SURVIVE_20BPS_EXTRA_FRICTION",
+    "MODEL_HEALTH_CAUTION"
+  ],
+  "recommendation": "Keep paper-only and require cost-robust forward evidence before any promotion."
+}
