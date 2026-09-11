@@ -8,17 +8,17 @@
       "asset_class": {
         "counts": {
           "CRYPTO": 1,
-          "ETF_EQUITY": 2,
           "EQUITY": 2,
+          "ETF_EQUITY": 2,
           "BTP": 1
         },
         "shares": {
           "CRYPTO": 0.1667,
-          "ETF_EQUITY": 0.3333,
           "EQUITY": 0.3333,
+          "ETF_EQUITY": 0.3333,
           "BTP": 0.1667
         },
-        "top": "ETF_EQUITY",
+        "top": "EQUITY",
         "top_share": 0.3333
       },
       "cluster": {
