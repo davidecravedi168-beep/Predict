@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-11T07:34:56.712942+00:00",
-  "source_updated_at": "2026-09-11T07:34:32+00:00",
+  "generated_at": "2026-09-11T07:48:17.256409+00:00",
+  "source_updated_at": "2026-09-11T07:47:57+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -14,7 +14,7 @@
   },
   "forward": {
     "maturity": "EARLY_FORWARD",
-    "independent_episodes": 56,
+    "independent_episodes": 57,
     "active": 38,
     "resolved": 10,
     "hit_rate": 0.5,
@@ -691,7 +691,7 @@
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
-    "freshness_minutes": 0.4,
+    "freshness_minutes": 0.3,
     "availability_ratio": 0.9773,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
@@ -707,8 +707,8 @@
       "counts": {
         "DEFENSIVES": 2,
         "ENERGY": 1,
-        "ITALY_RATES": 2,
         "US_BROAD": 1,
+        "ITALY_RATES": 2,
         "EM_DEBT": 1
       },
       "top": "DEFENSIVES",
@@ -726,10 +726,10 @@
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 3,
-        "SHORT": 4
+        "LONG": 4,
+        "SHORT": 3
       },
-      "top": "SHORT",
+      "top": "LONG",
       "top_share": 0.5714
     }
   },
