@@ -7,14 +7,14 @@
     "exposures": {
       "asset_class": {
         "counts": {
-          "ETF_EQUITY": 2,
           "CRYPTO": 1,
+          "ETF_EQUITY": 2,
           "EQUITY": 2,
           "BTP": 1
         },
         "shares": {
-          "ETF_EQUITY": 0.3333,
           "CRYPTO": 0.1667,
+          "ETF_EQUITY": 0.3333,
           "EQUITY": 0.3333,
           "BTP": 0.1667
         },
@@ -23,15 +23,15 @@
       },
       "cluster": {
         "counts": {
-          "ENERGY": 2,
           "CRYPTO": 1,
+          "ENERGY": 2,
           "MANAGED_FUTURES": 1,
           "DEFENSIVES": 1,
           "ITALY_RATES": 1
         },
         "shares": {
-          "ENERGY": 0.3333,
           "CRYPTO": 0.1667,
+          "ENERGY": 0.3333,
           "MANAGED_FUTURES": 0.1667,
           "DEFENSIVES": 0.1667,
           "ITALY_RATES": 0.1667
@@ -65,9 +65,9 @@
       }
     },
     "factor_proxy_shares": {
-      "EQUITY_BETA": 0.6667,
       "USD_DENOMINATED": 0.8333,
       "DIRECTION_LONG": 0.6667,
+      "EQUITY_BETA": 0.6667,
       "DIRECTION_SHORT": 0.3333,
       "DURATION_RATES": 0.1667
     },
