@@ -10,15 +10,15 @@
           "EQUITY": 2,
           "CRYPTO": 1,
           "ETF_EQUITY": 2,
-          "ETF_BOND_CREDIT": 1,
-          "BTP": 2
+          "BTP": 2,
+          "ETF_BOND_CREDIT": 1
         },
         "shares": {
           "EQUITY": 0.25,
           "CRYPTO": 0.125,
           "ETF_EQUITY": 0.25,
-          "ETF_BOND_CREDIT": 0.125,
-          "BTP": 0.25
+          "BTP": 0.25,
+          "ETF_BOND_CREDIT": 0.125
         },
         "top": "EQUITY",
         "top_share": 0.25
@@ -28,17 +28,17 @@
           "DEFENSIVES": 2,
           "CRYPTO": 1,
           "ENERGY": 1,
+          "ITALY_RATES": 2,
           "US_BROAD": 1,
-          "EM_DEBT": 1,
-          "ITALY_RATES": 2
+          "EM_DEBT": 1
         },
         "shares": {
           "DEFENSIVES": 0.25,
           "CRYPTO": 0.125,
           "ENERGY": 0.125,
+          "ITALY_RATES": 0.25,
           "US_BROAD": 0.125,
-          "EM_DEBT": 0.125,
-          "ITALY_RATES": 0.25
+          "EM_DEBT": 0.125
         },
         "top": "DEFENSIVES",
         "top_share": 0.25
@@ -72,8 +72,8 @@
       "EQUITY_BETA": 0.5,
       "USD_DENOMINATED": 0.75,
       "DIRECTION_LONG": 0.625,
-      "DIRECTION_SHORT": 0.375,
-      "DURATION_RATES": 0.375
+      "DURATION_RATES": 0.375,
+      "DIRECTION_SHORT": 0.375
     },
     "flags": [],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
