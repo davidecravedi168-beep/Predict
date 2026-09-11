@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-11T21:43:25.695319+00:00",
-  "source_updated_at": "2026-09-11T21:43:04+00:00",
+  "generated_at": "2026-09-11T21:56:51.236905+00:00",
+  "source_updated_at": "2026-09-11T21:56:31+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "operational": true,
   "forward": {
@@ -31,13 +31,12 @@
     }
   },
   "data": {
-    "availability_ratio": 0.9684,
+    "availability_ratio": 0.9789,
     "unavailable_tickers": [
       "STM.MI",
-      "CTRA",
-      "EUES.MI"
+      "CTRA"
     ],
-    "signals": 7,
+    "signals": 8,
     "watchlist": 27
   },
   "flags": [
