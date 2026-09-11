@@ -25,15 +25,15 @@
         "counts": {
           "DEFENSIVES": 2,
           "ENERGY": 1,
-          "ITALY_RATES": 2,
           "US_BROAD": 1,
+          "ITALY_RATES": 2,
           "EM_DEBT": 1
         },
         "shares": {
           "DEFENSIVES": 0.2857,
           "ENERGY": 0.1429,
-          "ITALY_RATES": 0.2857,
           "US_BROAD": 0.1429,
+          "ITALY_RATES": 0.2857,
           "EM_DEBT": 0.1429
         },
         "top": "DEFENSIVES",
@@ -68,8 +68,8 @@
       "EQUITY_BETA": 0.5714,
       "USD_DENOMINATED": 0.7143,
       "DIRECTION_LONG": 0.5714,
-      "DURATION_RATES": 0.4286,
-      "DIRECTION_SHORT": 0.4286
+      "DIRECTION_SHORT": 0.4286,
+      "DURATION_RATES": 0.4286
     },
     "flags": [],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
