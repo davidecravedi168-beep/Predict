@@ -26,15 +26,15 @@
           "ENERGY": 2,
           "CRYPTO": 1,
           "MANAGED_FUTURES": 1,
-          "ITALY_RATES": 1,
-          "DEFENSIVES": 1
+          "DEFENSIVES": 1,
+          "ITALY_RATES": 1
         },
         "shares": {
           "ENERGY": 0.3333,
           "CRYPTO": 0.1667,
           "MANAGED_FUTURES": 0.1667,
-          "ITALY_RATES": 0.1667,
-          "DEFENSIVES": 0.1667
+          "DEFENSIVES": 0.1667,
+          "ITALY_RATES": 0.1667
         },
         "top": "ENERGY",
         "top_share": 0.3333
@@ -68,8 +68,8 @@
       "EQUITY_BETA": 0.6667,
       "USD_DENOMINATED": 0.8333,
       "DIRECTION_LONG": 0.6667,
-      "DURATION_RATES": 0.1667,
-      "DIRECTION_SHORT": 0.3333
+      "DIRECTION_SHORT": 0.3333,
+      "DURATION_RATES": 0.1667
     },
     "flags": [
       "CURRENCY_CONCENTRATION",
