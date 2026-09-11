@@ -1,0 +1,51 @@
+name: Alpha ML V10 Tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'alpha_ml_runtime.py'
+      - 'engine.py'
+      - 'scripts/build_alpha_ml_v10.py'
+      - 'scripts/build_opportunity_lab_v10.py'
+      - '.github/workflows/alpha-model-health-sync.yml'
+      - '.github/workflows/alpha-ml-v10-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Syntax
+        run: python -m py_compile alpha_ml_runtime.py engine.py scripts/build_alpha_ml_v10.py scripts/build_opportunity_lab_v10.py
+      - name: ML self-tests
+        run: |
+          python scripts/build_alpha_ml_v10.py --self-test
+          python scripts/build_opportunity_lab_v10.py --self-test
+      - name: Build against current forward ledger
+        run: |
+          python scripts/build_alpha_ml_v10.py
+          python scripts/build_opportunity_lab_v10.py
+      - name: Fail-closed contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          t=json.loads(Path('data/alpha-ml-training-v10.json').read_text())
+          o=json.loads(Path('data/alpha-opportunity-lab-v10.json').read_text())
+          assert t['status'] in {'COLD','SHADOW','PROMOTED'}
+          assert o['policy']['auto_promote'] is False
+          if Path('data/alpha-ml-model-v10.json').exists():
+              m=json.loads(Path('data/alpha-ml-model-v10.json').read_text())
+              assert m['policy']['paper_research_only'] is True
+              assert m['stage'] in {'ACTIVE_GUARDED','MATURE'}
+          print('Alpha ML V10 fail-closed contract PASS')
+          PY
