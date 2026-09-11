@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-11T15:57:45.092338+00:00",
-  "source_updated_at": "2026-09-11T15:57:24+00:00",
+  "generated_at": "2026-09-11T16:21:25.677844+00:00",
+  "source_updated_at": "2026-09-11T16:21:04+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -14,8 +14,8 @@
   },
   "forward": {
     "maturity": "EARLY_FORWARD",
-    "independent_episodes": 60,
-    "active": 40,
+    "independent_episodes": 61,
+    "active": 41,
     "resolved": 11,
     "hit_rate": 0.4545,
     "brier": null,
@@ -709,8 +709,8 @@
         "MANAGED_FUTURES": 1,
         "ENERGY": 2,
         "EURO_CREDIT": 1,
-        "DEFENSIVES": 1,
         "ITALY_RATES": 1,
+        "ITALY_EQUITY": 1,
         "EM_DEBT": 1
       },
       "top": "ENERGY",
@@ -729,11 +729,11 @@
     },
     "direction_concentration": {
       "counts": {
-        "LONG": 5,
-        "SHORT": 3
+        "LONG": 6,
+        "SHORT": 2
       },
       "top": "LONG",
-      "top_share": 0.625
+      "top_share": 0.75
     }
   },
   "legacy_backtest": {
