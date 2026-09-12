@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-11T22:31:32.003947+00:00",
-  "source_updated_at": "2026-09-11T22:31:11+00:00",
+  "generated_at": "2026-09-12T00:35:04.357555+00:00",
+  "source_updated_at": "2026-09-12T00:34:42+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "operational": true,
   "forward": {
     "maturity": "EARLY",
-    "independent_episodes": 61,
+    "independent_episodes": 62,
     "active": 41,
     "resolved": 11,
     "hits": 5,
