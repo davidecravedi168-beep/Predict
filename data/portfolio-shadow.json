@@ -26,8 +26,8 @@
       "cluster": {
         "counts": {
           "ENERGY": 2,
-          "CRYPTO": 1,
           "MANAGED_FUTURES": 1,
+          "CRYPTO": 1,
           "EM_DEBT": 1,
           "ITALY_RATES": 1,
           "ITALY_EQUITY": 1,
@@ -35,8 +35,8 @@
         },
         "shares": {
           "ENERGY": 0.25,
-          "CRYPTO": 0.125,
           "MANAGED_FUTURES": 0.125,
+          "CRYPTO": 0.125,
           "EM_DEBT": 0.125,
           "ITALY_RATES": 0.125,
           "ITALY_EQUITY": 0.125,
