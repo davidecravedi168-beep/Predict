@@ -8,3 +8,4 @@ Portfolio-shadow validation trigger: 2026-09-03 — run full engine, QA, portfol
 Attribution-friction validation trigger: 2026-09-03 — run full engine, QA, serialized governance writers, decision attribution and friction stress publish cycle.
 Recovery heartbeat: 2026-09-03T10:02:00Z — recover stale Alpha pipeline after repeated QA pass 1 failures.
 Recovery heartbeat: 2026-09-06T22:08:36Z — resume the tested Alpha refresh pipeline for Monday cross-asset operation and publish a fresh health receipt.
+Recovery heartbeat: 2026-09-13T22:12:57Z — resume the tested Alpha refresh pipeline for Monday cross-asset operation and publish a fresh health receipt.
