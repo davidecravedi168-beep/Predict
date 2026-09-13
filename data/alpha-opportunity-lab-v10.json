@@ -1,7 +1,7 @@
 {
   "schema": "ALPHA-OPPORTUNITY-LAB-V10",
-  "generated_at": "2026-09-12T00:35:05.896028+00:00",
-  "resolved_forward_n": 11,
+  "generated_at": "2026-09-13T22:14:53.635224+00:00",
+  "resolved_forward_n": 13,
   "stress_extra_bps": 20,
   "segments": {
     "asset_class": [
@@ -24,6 +24,15 @@
         "state": "INSUFFICIENT"
       },
       {
+        "segment": "CRYPTO",
+        "n": 3,
+        "hit_rate": 0.3333,
+        "avg_return_pct": -2.0049,
+        "avg_return_plus20bps_pct": -2.2049,
+        "max_drawdown_plus20bps_pct": 6.6146,
+        "state": "INSUFFICIENT"
+      },
+      {
         "segment": "ETF_COMMODITY",
         "n": 1,
         "hit_rate": 1.0,
@@ -40,18 +49,18 @@
         "avg_return_plus20bps_pct": 2.5438,
         "max_drawdown_plus20bps_pct": 0.0,
         "state": "INSUFFICIENT"
-      },
-      {
-        "segment": "CRYPTO",
-        "n": 1,
-        "hit_rate": 0.0,
-        "avg_return_pct": -3.689,
-        "avg_return_plus20bps_pct": -3.889,
-        "max_drawdown_plus20bps_pct": 3.889,
-        "state": "INSUFFICIENT"
       }
     ],
     "horizon": [
+      {
+        "segment": "5d",
+        "n": 7,
+        "hit_rate": 0.5714,
+        "avg_return_pct": 0.3772,
+        "avg_return_plus20bps_pct": 0.1772,
+        "max_drawdown_plus20bps_pct": 4.0708,
+        "state": "INSUFFICIENT"
+      },
       {
         "segment": "3d",
         "n": 6,
@@ -60,25 +69,16 @@
         "avg_return_plus20bps_pct": -0.9231,
         "max_drawdown_plus20bps_pct": 7.1694,
         "state": "INSUFFICIENT"
-      },
-      {
-        "segment": "5d",
-        "n": 5,
-        "hit_rate": 0.6,
-        "avg_return_pct": 0.9933,
-        "avg_return_plus20bps_pct": 0.7933,
-        "max_drawdown_plus20bps_pct": 3.889,
-        "state": "INSUFFICIENT"
       }
     ],
     "risk_regime": [
       {
         "segment": "NEUTRAL",
-        "n": 7,
-        "hit_rate": 0.2857,
-        "avg_return_pct": -0.0975,
-        "avg_return_plus20bps_pct": -0.2975,
-        "max_drawdown_plus20bps_pct": 4.3903,
+        "n": 9,
+        "hit_rate": 0.3333,
+        "avg_return_pct": -0.3342,
+        "avg_return_plus20bps_pct": -0.5342,
+        "max_drawdown_plus20bps_pct": 4.8078,
         "state": "INSUFFICIENT"
       },
       {
@@ -94,10 +94,10 @@
     "rates_regime": [
       {
         "segment": "RATES_STABLE",
-        "n": 11,
-        "hit_rate": 0.4545,
-        "avg_return_pct": 0.0571,
-        "avg_return_plus20bps_pct": -0.1429,
+        "n": 13,
+        "hit_rate": 0.4615,
+        "avg_return_pct": -0.1306,
+        "avg_return_plus20bps_pct": -0.3306,
         "max_drawdown_plus20bps_pct": 7.7109,
         "state": "OBSERVE"
       }
@@ -105,10 +105,10 @@
     "setup_family": [
       {
         "segment": "BREAKOUT",
-        "n": 11,
-        "hit_rate": 0.4545,
-        "avg_return_pct": 0.0571,
-        "avg_return_plus20bps_pct": -0.1429,
+        "n": 13,
+        "hit_rate": 0.4615,
+        "avg_return_pct": -0.1306,
+        "avg_return_plus20bps_pct": -0.3306,
         "max_drawdown_plus20bps_pct": 7.7109,
         "state": "OBSERVE"
       }
@@ -121,6 +121,15 @@
         "avg_return_pct": 0.336,
         "avg_return_plus20bps_pct": 0.136,
         "max_drawdown_plus20bps_pct": 3.3475,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "CRYPTO",
+        "n": 3,
+        "hit_rate": 0.3333,
+        "avg_return_pct": -2.0049,
+        "avg_return_plus20bps_pct": -2.2049,
+        "max_drawdown_plus20bps_pct": 6.6146,
         "state": "INSUFFICIENT"
       },
       {
@@ -149,53 +158,44 @@
         "avg_return_plus20bps_pct": 2.5438,
         "max_drawdown_plus20bps_pct": 0.0,
         "state": "INSUFFICIENT"
-      },
-      {
-        "segment": "CRYPTO",
-        "n": 1,
-        "hit_rate": 0.0,
-        "avg_return_pct": -3.689,
-        "avg_return_plus20bps_pct": -3.889,
-        "max_drawdown_plus20bps_pct": 3.889,
-        "state": "INSUFFICIENT"
       }
     ]
   },
   "submodels": [
     {
       "model_id": "TREND_Z",
-      "n": 11,
-      "hit_rate": 0.4545,
-      "avg_return_pct": 0.0571,
-      "avg_return_plus20bps_pct": -0.1429,
+      "n": 13,
+      "hit_rate": 0.4615,
+      "avg_return_pct": -0.1306,
+      "avg_return_plus20bps_pct": -0.3306,
       "max_drawdown_plus20bps_pct": 7.7109,
       "state": "OBSERVE"
     },
     {
       "model_id": "RSI_MOMENTUM",
-      "n": 11,
-      "hit_rate": 0.4545,
-      "avg_return_pct": 0.0571,
-      "avg_return_plus20bps_pct": -0.1429,
+      "n": 13,
+      "hit_rate": 0.4615,
+      "avg_return_pct": -0.1306,
+      "avg_return_plus20bps_pct": -0.3306,
       "max_drawdown_plus20bps_pct": 7.7109,
       "state": "OBSERVE"
     },
     {
       "model_id": "BREAKOUT_63D",
-      "n": 11,
-      "hit_rate": 0.4545,
-      "avg_return_pct": 0.0571,
-      "avg_return_plus20bps_pct": -0.1429,
+      "n": 13,
+      "hit_rate": 0.4615,
+      "avg_return_pct": -0.1306,
+      "avg_return_plus20bps_pct": -0.3306,
       "max_drawdown_plus20bps_pct": 7.7109,
       "state": "OBSERVE"
     },
     {
       "model_id": "MEAN_REVERSION_20D",
-      "n": 11,
-      "hit_rate": 0.4545,
-      "avg_return_pct": -0.3171,
-      "avg_return_plus20bps_pct": -0.5171,
-      "max_drawdown_plus20bps_pct": 6.251,
+      "n": 13,
+      "hit_rate": 0.4615,
+      "avg_return_pct": -0.1971,
+      "avg_return_plus20bps_pct": -0.3971,
+      "max_drawdown_plus20bps_pct": 6.7551,
       "state": "OBSERVE"
     },
     {
@@ -209,10 +209,10 @@
     },
     {
       "model_id": "RELATIVE_Z",
-      "n": 6,
-      "hit_rate": 0.5,
-      "avg_return_pct": 0.1351,
-      "avg_return_plus20bps_pct": -0.0649,
+      "n": 7,
+      "hit_rate": 0.5714,
+      "avg_return_pct": 0.1397,
+      "avg_return_plus20bps_pct": -0.0603,
       "max_drawdown_plus20bps_pct": 4.553,
       "state": "INSUFFICIENT"
     }
