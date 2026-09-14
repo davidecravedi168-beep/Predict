@@ -7,50 +7,50 @@
     "exposures": {
       "asset_class": {
         "counts": {
-          "ETF_EQUITY": 2,
-          "CRYPTO": 1,
           "EQUITY": 2,
+          "CRYPTO": 1,
+          "ETF_EQUITY": 2,
           "ETF_BOND_CREDIT": 2
         },
         "shares": {
-          "ETF_EQUITY": 0.2857,
-          "CRYPTO": 0.1429,
           "EQUITY": 0.2857,
+          "CRYPTO": 0.1429,
+          "ETF_EQUITY": 0.2857,
           "ETF_BOND_CREDIT": 0.2857
         },
-        "top": "ETF_EQUITY",
+        "top": "EQUITY",
         "top_share": 0.2857
       },
       "cluster": {
         "counts": {
           "ENERGY": 2,
           "CRYPTO": 1,
-          "DEFENSIVES": 1,
-          "US_SECTORS": 1,
-          "EM_DEBT": 1,
-          "CREDIT": 1
+          "MANAGED_FUTURES": 1,
+          "US_MEGA_CAP": 1,
+          "CREDIT": 1,
+          "EM_DEBT": 1
         },
         "shares": {
           "ENERGY": 0.2857,
           "CRYPTO": 0.1429,
-          "DEFENSIVES": 0.1429,
-          "US_SECTORS": 0.1429,
-          "EM_DEBT": 0.1429,
-          "CREDIT": 0.1429
+          "MANAGED_FUTURES": 0.1429,
+          "US_MEGA_CAP": 0.1429,
+          "CREDIT": 0.1429,
+          "EM_DEBT": 0.1429
         },
         "top": "ENERGY",
         "top_share": 0.2857
       },
       "direction": {
         "counts": {
-          "LONG": 3,
-          "SHORT": 4
+          "LONG": 4,
+          "SHORT": 3
         },
         "shares": {
-          "LONG": 0.4286,
-          "SHORT": 0.5714
+          "LONG": 0.5714,
+          "SHORT": 0.4286
         },
-        "top": "SHORT",
+        "top": "LONG",
         "top_share": 0.5714
       },
       "currency": {
@@ -67,8 +67,8 @@
     "factor_proxy_shares": {
       "EQUITY_BETA": 0.5714,
       "USD_DENOMINATED": 1.0,
-      "DIRECTION_LONG": 0.4286,
-      "DIRECTION_SHORT": 0.5714,
+      "DIRECTION_LONG": 0.5714,
+      "DIRECTION_SHORT": 0.4286,
       "DURATION_RATES": 0.2857
     },
     "flags": [
