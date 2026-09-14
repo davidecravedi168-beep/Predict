@@ -28,7 +28,7 @@
           "ENERGY": 2,
           "MANAGED_FUTURES": 1,
           "EM_DEBT": 1,
-          "US_BROAD": 1
+          "US_SECTORS": 1
         },
         "shares": {
           "EURO_CREDIT": 0.1429,
@@ -36,7 +36,7 @@
           "ENERGY": 0.2857,
           "MANAGED_FUTURES": 0.1429,
           "EM_DEBT": 0.1429,
-          "US_BROAD": 0.1429
+          "US_SECTORS": 0.1429
         },
         "top": "ENERGY",
         "top_share": 0.2857
