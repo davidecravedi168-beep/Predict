@@ -1,7 +1,7 @@
 {
   "schema": "ALPHA-OPPORTUNITY-LAB-V10",
-  "generated_at": "2026-09-14T07:25:32.670129+00:00",
-  "resolved_forward_n": 13,
+  "generated_at": "2026-09-14T09:22:43.910217+00:00",
+  "resolved_forward_n": 14,
   "stress_extra_bps": 20,
   "segments": {
     "asset_class": [
@@ -49,6 +49,15 @@
         "avg_return_plus20bps_pct": 2.5438,
         "max_drawdown_plus20bps_pct": 0.0,
         "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "BTP",
+        "n": 1,
+        "hit_rate": 1.0,
+        "avg_return_pct": 1.3728,
+        "avg_return_plus20bps_pct": 1.1728,
+        "max_drawdown_plus20bps_pct": 0.0,
+        "state": "INSUFFICIENT"
       }
     ],
     "horizon": [
@@ -69,6 +78,15 @@
         "avg_return_plus20bps_pct": -0.9231,
         "max_drawdown_plus20bps_pct": 7.1694,
         "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "10d",
+        "n": 1,
+        "hit_rate": 1.0,
+        "avg_return_pct": 1.3728,
+        "avg_return_plus20bps_pct": 1.1728,
+        "max_drawdown_plus20bps_pct": 0.0,
+        "state": "INSUFFICIENT"
       }
     ],
     "risk_regime": [
@@ -83,10 +101,10 @@
       },
       {
         "segment": "RISK_ON",
-        "n": 4,
-        "hit_rate": 0.75,
-        "avg_return_pct": 0.3276,
-        "avg_return_plus20bps_pct": 0.1275,
+        "n": 5,
+        "hit_rate": 0.8,
+        "avg_return_pct": 0.5366,
+        "avg_return_plus20bps_pct": 0.3366,
         "max_drawdown_plus20bps_pct": 3.889,
         "state": "INSUFFICIENT"
       }
@@ -94,10 +112,10 @@
     "rates_regime": [
       {
         "segment": "RATES_STABLE",
-        "n": 13,
-        "hit_rate": 0.4615,
-        "avg_return_pct": -0.1306,
-        "avg_return_plus20bps_pct": -0.3306,
+        "n": 14,
+        "hit_rate": 0.5,
+        "avg_return_pct": -0.0232,
+        "avg_return_plus20bps_pct": -0.2232,
         "max_drawdown_plus20bps_pct": 7.7109,
         "state": "OBSERVE"
       }
@@ -105,10 +123,10 @@
     "setup_family": [
       {
         "segment": "BREAKOUT",
-        "n": 13,
-        "hit_rate": 0.4615,
-        "avg_return_pct": -0.1306,
-        "avg_return_plus20bps_pct": -0.3306,
+        "n": 14,
+        "hit_rate": 0.5,
+        "avg_return_pct": -0.0232,
+        "avg_return_plus20bps_pct": -0.2232,
         "max_drawdown_plus20bps_pct": 7.7109,
         "state": "OBSERVE"
       }
@@ -158,44 +176,53 @@
         "avg_return_plus20bps_pct": 2.5438,
         "max_drawdown_plus20bps_pct": 0.0,
         "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "ITALY_RATES",
+        "n": 1,
+        "hit_rate": 1.0,
+        "avg_return_pct": 1.3728,
+        "avg_return_plus20bps_pct": 1.1728,
+        "max_drawdown_plus20bps_pct": 0.0,
+        "state": "INSUFFICIENT"
       }
     ]
   },
   "submodels": [
     {
       "model_id": "TREND_Z",
-      "n": 13,
-      "hit_rate": 0.4615,
-      "avg_return_pct": -0.1306,
-      "avg_return_plus20bps_pct": -0.3306,
+      "n": 14,
+      "hit_rate": 0.5,
+      "avg_return_pct": -0.0232,
+      "avg_return_plus20bps_pct": -0.2232,
       "max_drawdown_plus20bps_pct": 7.7109,
       "state": "OBSERVE"
     },
     {
       "model_id": "RSI_MOMENTUM",
-      "n": 13,
-      "hit_rate": 0.4615,
-      "avg_return_pct": -0.1306,
-      "avg_return_plus20bps_pct": -0.3306,
+      "n": 14,
+      "hit_rate": 0.5,
+      "avg_return_pct": -0.0232,
+      "avg_return_plus20bps_pct": -0.2232,
       "max_drawdown_plus20bps_pct": 7.7109,
       "state": "OBSERVE"
     },
     {
       "model_id": "BREAKOUT_63D",
-      "n": 13,
-      "hit_rate": 0.4615,
-      "avg_return_pct": -0.1306,
-      "avg_return_plus20bps_pct": -0.3306,
+      "n": 14,
+      "hit_rate": 0.5,
+      "avg_return_pct": -0.0232,
+      "avg_return_plus20bps_pct": -0.2232,
       "max_drawdown_plus20bps_pct": 7.7109,
       "state": "OBSERVE"
     },
     {
       "model_id": "MEAN_REVERSION_20D",
-      "n": 13,
-      "hit_rate": 0.4615,
-      "avg_return_pct": -0.1971,
-      "avg_return_plus20bps_pct": -0.3971,
-      "max_drawdown_plus20bps_pct": 6.7551,
+      "n": 14,
+      "hit_rate": 0.4286,
+      "avg_return_pct": -0.3011,
+      "avg_return_plus20bps_pct": -0.5011,
+      "max_drawdown_plus20bps_pct": 8.6079,
       "state": "OBSERVE"
     },
     {
@@ -209,10 +236,10 @@
     },
     {
       "model_id": "RELATIVE_Z",
-      "n": 7,
-      "hit_rate": 0.5714,
-      "avg_return_pct": 0.1397,
-      "avg_return_plus20bps_pct": -0.0603,
+      "n": 8,
+      "hit_rate": 0.625,
+      "avg_return_pct": 0.2938,
+      "avg_return_plus20bps_pct": 0.0938,
       "max_drawdown_plus20bps_pct": 4.553,
       "state": "INSUFFICIENT"
     }
