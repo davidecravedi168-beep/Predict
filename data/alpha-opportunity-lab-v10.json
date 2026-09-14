@@ -1,26 +1,26 @@
 {
   "schema": "ALPHA-OPPORTUNITY-LAB-V10",
-  "generated_at": "2026-09-14T11:57:21.421708+00:00",
-  "resolved_forward_n": 14,
+  "generated_at": "2026-09-14T14:02:05.657784+00:00",
+  "resolved_forward_n": 18,
   "stress_extra_bps": 20,
   "segments": {
     "asset_class": [
       {
         "segment": "ETF_EQUITY",
-        "n": 5,
-        "hit_rate": 0.6,
-        "avg_return_pct": 0.1126,
-        "avg_return_plus20bps_pct": -0.0874,
+        "n": 7,
+        "hit_rate": 0.7143,
+        "avg_return_pct": 0.3434,
+        "avg_return_plus20bps_pct": 0.1434,
         "max_drawdown_plus20bps_pct": 3.8219,
         "state": "INSUFFICIENT"
       },
       {
         "segment": "EQUITY",
-        "n": 3,
+        "n": 4,
         "hit_rate": 0.0,
-        "avg_return_pct": -0.9944,
-        "avg_return_plus20bps_pct": -1.1944,
-        "max_drawdown_plus20bps_pct": 3.5832,
+        "avg_return_pct": -1.3617,
+        "avg_return_plus20bps_pct": -1.5617,
+        "max_drawdown_plus20bps_pct": 6.2466,
         "state": "INSUFFICIENT"
       },
       {
@@ -51,6 +51,15 @@
         "state": "INSUFFICIENT"
       },
       {
+        "segment": "ETF_BOND_GOV",
+        "n": 1,
+        "hit_rate": 1.0,
+        "avg_return_pct": 1.3914,
+        "avg_return_plus20bps_pct": 1.1914,
+        "max_drawdown_plus20bps_pct": 0.0,
+        "state": "INSUFFICIENT"
+      },
+      {
         "segment": "BTP",
         "n": 1,
         "hit_rate": 1.0,
@@ -72,39 +81,39 @@
       },
       {
         "segment": "3d",
-        "n": 6,
-        "hit_rate": 0.3333,
-        "avg_return_pct": -0.7231,
-        "avg_return_plus20bps_pct": -0.9231,
+        "n": 7,
+        "hit_rate": 0.4286,
+        "avg_return_pct": -0.575,
+        "avg_return_plus20bps_pct": -0.775,
         "max_drawdown_plus20bps_pct": 7.1694,
         "state": "INSUFFICIENT"
       },
       {
         "segment": "10d",
-        "n": 1,
-        "hit_rate": 1.0,
-        "avg_return_pct": 1.3728,
-        "avg_return_plus20bps_pct": 1.1728,
-        "max_drawdown_plus20bps_pct": 0.0,
+        "n": 4,
+        "hit_rate": 0.75,
+        "avg_return_pct": 0.457,
+        "avg_return_plus20bps_pct": 0.257,
+        "max_drawdown_plus20bps_pct": 2.6634,
         "state": "INSUFFICIENT"
       }
     ],
     "risk_regime": [
       {
         "segment": "NEUTRAL",
-        "n": 9,
-        "hit_rate": 0.3333,
-        "avg_return_pct": -0.3342,
-        "avg_return_plus20bps_pct": -0.5342,
+        "n": 10,
+        "hit_rate": 0.4,
+        "avg_return_pct": -0.2694,
+        "avg_return_plus20bps_pct": -0.4694,
         "max_drawdown_plus20bps_pct": 4.8078,
-        "state": "INSUFFICIENT"
+        "state": "OBSERVE"
       },
       {
         "segment": "RISK_ON",
-        "n": 5,
-        "hit_rate": 0.8,
-        "avg_return_pct": 0.5366,
-        "avg_return_plus20bps_pct": 0.3366,
+        "n": 8,
+        "hit_rate": 0.75,
+        "avg_return_pct": 0.3923,
+        "avg_return_plus20bps_pct": 0.1923,
         "max_drawdown_plus20bps_pct": 3.889,
         "state": "INSUFFICIENT"
       }
@@ -112,10 +121,10 @@
     "rates_regime": [
       {
         "segment": "RATES_STABLE",
-        "n": 14,
-        "hit_rate": 0.5,
-        "avg_return_pct": -0.0232,
-        "avg_return_plus20bps_pct": -0.2232,
+        "n": 18,
+        "hit_rate": 0.5556,
+        "avg_return_pct": 0.0247,
+        "avg_return_plus20bps_pct": -0.1753,
         "max_drawdown_plus20bps_pct": 7.7109,
         "state": "OBSERVE"
       }
@@ -123,10 +132,10 @@
     "setup_family": [
       {
         "segment": "BREAKOUT",
-        "n": 14,
-        "hit_rate": 0.5,
-        "avg_return_pct": -0.0232,
-        "avg_return_plus20bps_pct": -0.2232,
+        "n": 18,
+        "hit_rate": 0.5556,
+        "avg_return_pct": 0.0247,
+        "avg_return_plus20bps_pct": -0.1753,
         "max_drawdown_plus20bps_pct": 7.7109,
         "state": "OBSERVE"
       }
@@ -134,11 +143,20 @@
     "cluster": [
       {
         "segment": "ENERGY",
-        "n": 6,
-        "hit_rate": 0.5,
-        "avg_return_pct": 0.336,
-        "avg_return_plus20bps_pct": 0.136,
+        "n": 7,
+        "hit_rate": 0.5714,
+        "avg_return_pct": 0.3328,
+        "avg_return_plus20bps_pct": 0.1328,
         "max_drawdown_plus20bps_pct": 3.3475,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "US_SECTORS",
+        "n": 3,
+        "hit_rate": 0.3333,
+        "avg_return_pct": -0.9697,
+        "avg_return_plus20bps_pct": -1.1697,
+        "max_drawdown_plus20bps_pct": 4.8363,
         "state": "INSUFFICIENT"
       },
       {
@@ -148,15 +166,6 @@
         "avg_return_pct": -2.0049,
         "avg_return_plus20bps_pct": -2.2049,
         "max_drawdown_plus20bps_pct": 6.6146,
-        "state": "INSUFFICIENT"
-      },
-      {
-        "segment": "US_SECTORS",
-        "n": 2,
-        "hit_rate": 0.0,
-        "avg_return_pct": -2.2182,
-        "avg_return_plus20bps_pct": -2.4182,
-        "max_drawdown_plus20bps_pct": 4.8363,
         "state": "INSUFFICIENT"
       },
       {
@@ -178,6 +187,15 @@
         "state": "INSUFFICIENT"
       },
       {
+        "segment": "GLOBAL_RATES",
+        "n": 1,
+        "hit_rate": 1.0,
+        "avg_return_pct": 1.3914,
+        "avg_return_plus20bps_pct": 1.1914,
+        "max_drawdown_plus20bps_pct": 0.0,
+        "state": "INSUFFICIENT"
+      },
+      {
         "segment": "ITALY_RATES",
         "n": 1,
         "hit_rate": 1.0,
@@ -185,63 +203,72 @@
         "avg_return_plus20bps_pct": 1.1728,
         "max_drawdown_plus20bps_pct": 0.0,
         "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "US_MEGA_CAP",
+        "n": 1,
+        "hit_rate": 0.0,
+        "avg_return_pct": -2.4634,
+        "avg_return_plus20bps_pct": -2.6634,
+        "max_drawdown_plus20bps_pct": 2.6634,
+        "state": "INSUFFICIENT"
       }
     ]
   },
   "submodels": [
     {
       "model_id": "TREND_Z",
-      "n": 14,
-      "hit_rate": 0.5,
-      "avg_return_pct": -0.0232,
-      "avg_return_plus20bps_pct": -0.2232,
+      "n": 18,
+      "hit_rate": 0.5556,
+      "avg_return_pct": 0.0247,
+      "avg_return_plus20bps_pct": -0.1753,
       "max_drawdown_plus20bps_pct": 7.7109,
       "state": "OBSERVE"
     },
     {
       "model_id": "RSI_MOMENTUM",
-      "n": 14,
-      "hit_rate": 0.5,
-      "avg_return_pct": -0.0232,
-      "avg_return_plus20bps_pct": -0.2232,
+      "n": 18,
+      "hit_rate": 0.5556,
+      "avg_return_pct": 0.0247,
+      "avg_return_plus20bps_pct": -0.1753,
       "max_drawdown_plus20bps_pct": 7.7109,
       "state": "OBSERVE"
     },
     {
       "model_id": "BREAKOUT_63D",
-      "n": 14,
-      "hit_rate": 0.5,
-      "avg_return_pct": -0.0232,
-      "avg_return_plus20bps_pct": -0.2232,
+      "n": 18,
+      "hit_rate": 0.5556,
+      "avg_return_pct": 0.0247,
+      "avg_return_plus20bps_pct": -0.1753,
       "max_drawdown_plus20bps_pct": 7.7109,
       "state": "OBSERVE"
     },
     {
       "model_id": "MEAN_REVERSION_20D",
-      "n": 14,
-      "hit_rate": 0.4286,
-      "avg_return_pct": -0.3011,
-      "avg_return_plus20bps_pct": -0.5011,
-      "max_drawdown_plus20bps_pct": 8.6079,
+      "n": 18,
+      "hit_rate": 0.3889,
+      "avg_return_pct": -0.3224,
+      "avg_return_plus20bps_pct": -0.5224,
+      "max_drawdown_plus20bps_pct": 10.2832,
       "state": "OBSERVE"
     },
     {
       "model_id": "VOLUME_CONFIRM",
-      "n": 9,
-      "hit_rate": 0.4444,
-      "avg_return_pct": 0.1748,
-      "avg_return_plus20bps_pct": -0.0252,
-      "max_drawdown_plus20bps_pct": 3.8219,
-      "state": "INSUFFICIENT"
+      "n": 12,
+      "hit_rate": 0.5,
+      "avg_return_pct": 0.0792,
+      "avg_return_plus20bps_pct": -0.1208,
+      "max_drawdown_plus20bps_pct": 3.9943,
+      "state": "OBSERVE"
     },
     {
       "model_id": "RELATIVE_Z",
-      "n": 8,
-      "hit_rate": 0.625,
-      "avg_return_pct": 0.2938,
-      "avg_return_plus20bps_pct": 0.0938,
+      "n": 11,
+      "hit_rate": 0.6364,
+      "avg_return_pct": 0.1571,
+      "avg_return_plus20bps_pct": -0.0429,
       "max_drawdown_plus20bps_pct": 4.553,
-      "state": "INSUFFICIENT"
+      "state": "OBSERVE"
     }
   ],
   "policy": {

@@ -1,34 +1,34 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-14T11:57:20.815871+00:00",
+  "generated_at": "2026-09-14T14:02:05.106362+00:00",
   "model_version": "8.6.1-math-risk-layer",
-  "status": "FRAGILE",
-  "forward_sample": 25,
-  "baseline_avg_net_return_pct": 0.1356,
+  "status": "ROBUST",
+  "forward_sample": 31,
+  "baseline_avg_net_return_pct": 0.5509,
   "stress": {
     "10bps": {
       "extra_friction_bps": 10,
-      "n": 25,
-      "positive_rate": 0.52,
-      "avg_return_pct": 0.0356,
-      "median_return_pct": 0.0671,
-      "positive_survival_ratio": 0.9286
+      "n": 31,
+      "positive_rate": 0.5484,
+      "avg_return_pct": 0.4509,
+      "median_return_pct": 0.2135,
+      "positive_survival_ratio": 0.9444
     },
     "20bps": {
       "extra_friction_bps": 20,
-      "n": 25,
-      "positive_rate": 0.48,
-      "avg_return_pct": -0.0644,
-      "median_return_pct": -0.0329,
-      "positive_survival_ratio": 0.8571
+      "n": 31,
+      "positive_rate": 0.5161,
+      "avg_return_pct": 0.3509,
+      "median_return_pct": 0.1135,
+      "positive_survival_ratio": 0.8889
     },
     "35bps": {
       "extra_friction_bps": 35,
-      "n": 25,
-      "positive_rate": 0.48,
-      "avg_return_pct": -0.2144,
-      "median_return_pct": -0.1829,
-      "positive_survival_ratio": 0.8571
+      "n": 31,
+      "positive_rate": 0.4839,
+      "avg_return_pct": 0.2009,
+      "median_return_pct": -0.0365,
+      "positive_survival_ratio": 0.8333
     }
   },
   "policy": {
@@ -39,9 +39,7 @@
     "auto_retune": false
   },
   "reasons": [
-    "FORWARD_SAMPLE_BELOW_30",
-    "EDGE_DOES_NOT_SURVIVE_20BPS_EXTRA_FRICTION",
     "MODEL_HEALTH_CAUTION"
   ],
-  "recommendation": "Keep paper-only and require cost-robust forward evidence before any promotion."
+  "recommendation": "Cost robustness passed; still requires separate governance review before any promotion."
 }

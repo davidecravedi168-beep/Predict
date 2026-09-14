@@ -1,7 +1,7 @@
 {
   "schema": "ALPHA-ML-TRAINING-V10",
-  "generated_at": "2026-09-14T11:57:21.365657+00:00",
-  "settled_n": 14,
+  "generated_at": "2026-09-14T14:02:05.606795+00:00",
+  "settled_n": 18,
   "status": "COLD",
   "active_model": null,
   "reason": "MIN_60_INDEPENDENT_RESOLVED_EPISODES_FOR_TRAINING",

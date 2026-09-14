@@ -1,44 +1,44 @@
 {
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
-  "eligible_forward_resolved": 25,
+  "eligible_forward_resolved": 31,
   "submodel_attribution": [],
   "friction_stress": {
-    "state": "SENSITIVE",
-    "baseline_n": 25,
-    "baseline_avg_net_return_pct": 0.1356,
+    "state": "ROBUST_TO_35BPS",
+    "baseline_n": 31,
+    "baseline_avg_net_return_pct": 0.5509,
     "tiers": [
       {
         "extra_friction_bps": 5,
-        "n": 25,
-        "positive_rate": 0.56,
-        "avg_return_pct": 0.0856,
-        "median_return_pct": 0.1171,
+        "n": 31,
+        "positive_rate": 0.5806,
+        "avg_return_pct": 0.5009,
+        "median_return_pct": 0.2635,
         "positive_survival_ratio": 1.0
       },
       {
         "extra_friction_bps": 10,
-        "n": 25,
-        "positive_rate": 0.52,
-        "avg_return_pct": 0.0356,
-        "median_return_pct": 0.0671,
-        "positive_survival_ratio": 0.9286
+        "n": 31,
+        "positive_rate": 0.5484,
+        "avg_return_pct": 0.4509,
+        "median_return_pct": 0.2135,
+        "positive_survival_ratio": 0.9444
       },
       {
         "extra_friction_bps": 20,
-        "n": 25,
-        "positive_rate": 0.48,
-        "avg_return_pct": -0.0644,
-        "median_return_pct": -0.0329,
-        "positive_survival_ratio": 0.8571
+        "n": 31,
+        "positive_rate": 0.5161,
+        "avg_return_pct": 0.3509,
+        "median_return_pct": 0.1135,
+        "positive_survival_ratio": 0.8889
       },
       {
         "extra_friction_bps": 35,
-        "n": 25,
-        "positive_rate": 0.48,
-        "avg_return_pct": -0.2144,
-        "median_return_pct": -0.1829,
-        "positive_survival_ratio": 0.8571
+        "n": 31,
+        "positive_rate": 0.4839,
+        "avg_return_pct": 0.2009,
+        "median_return_pct": -0.0365,
+        "positive_survival_ratio": 0.8333
       }
     ],
     "method": "Incremental friction is subtracted from already cost-adjusted forward return_pct; no spread/slippage observations are fabricated."
