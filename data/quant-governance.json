@@ -1,6 +1,6 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-14T10:10:12.772180+00:00",
+  "generated_at": "2026-09-14T10:10:27.325143+00:00",
   "source_updated_at": "2026-09-14T10:09:52+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
@@ -721,7 +721,7 @@
     "policy": "Diagnostic only. Segment evidence must never auto-retune the main model; changes require separate out-of-sample validation."
   },
   "data_quality": {
-    "freshness_minutes": 0.3,
+    "freshness_minutes": 0.6,
     "availability_ratio": 0.9789,
     "average_model_completeness": 60.0,
     "minimum_model_completeness": 60.0,
