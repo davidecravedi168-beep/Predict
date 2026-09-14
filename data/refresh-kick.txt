@@ -14,3 +14,4 @@ Recovery heartbeat: 2026-09-14T01:17:06Z — recover stale Alpha pipeline during
 Recovery heartbeat: 2026-09-14T03:15:48Z — recover stale Alpha pipeline during Monday cross-asset operation and publish fresh data plus health receipt.
 Recovery heartbeat: 2026-09-14T04:17:32Z — recover stale Alpha pipeline during Monday cross-asset operation and publish fresh data plus health receipt.
 Recovery heartbeat: 2026-09-14T06:19:12Z — recover stale Alpha pipeline during Monday cross-asset operation and publish fresh data plus health receipt.
+Recovery heartbeat: 2026-09-14T07:22:02Z — recover stale Alpha pipeline during Monday market-data operation and publish fresh data plus health receipt.
