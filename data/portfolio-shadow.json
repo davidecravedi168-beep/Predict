@@ -85,9 +85,9 @@
   "champion_shadow": {
     "state": "NO_SHADOW_SAMPLE",
     "champion": {
-      "n": 31,
-      "hit_rate": 0.5806,
-      "avg_return_pct": 0.5509,
+      "n": 32,
+      "hit_rate": 0.5625,
+      "avg_return_pct": 0.5091,
       "brier": null,
       "brier_n": 0
     },

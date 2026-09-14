@@ -1,43 +1,43 @@
 {
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
-  "eligible_forward_resolved": 31,
+  "eligible_forward_resolved": 32,
   "submodel_attribution": [],
   "friction_stress": {
     "state": "ROBUST_TO_35BPS",
-    "baseline_n": 31,
-    "baseline_avg_net_return_pct": 0.5509,
+    "baseline_n": 32,
+    "baseline_avg_net_return_pct": 0.5091,
     "tiers": [
       {
         "extra_friction_bps": 5,
-        "n": 31,
-        "positive_rate": 0.5806,
-        "avg_return_pct": 0.5009,
-        "median_return_pct": 0.2635,
+        "n": 32,
+        "positive_rate": 0.5625,
+        "avg_return_pct": 0.4591,
+        "median_return_pct": 0.1903,
         "positive_survival_ratio": 1.0
       },
       {
         "extra_friction_bps": 10,
-        "n": 31,
-        "positive_rate": 0.5484,
-        "avg_return_pct": 0.4509,
-        "median_return_pct": 0.2135,
+        "n": 32,
+        "positive_rate": 0.5312,
+        "avg_return_pct": 0.4091,
+        "median_return_pct": 0.1403,
         "positive_survival_ratio": 0.9444
       },
       {
         "extra_friction_bps": 20,
-        "n": 31,
-        "positive_rate": 0.5161,
-        "avg_return_pct": 0.3509,
-        "median_return_pct": 0.1135,
+        "n": 32,
+        "positive_rate": 0.5,
+        "avg_return_pct": 0.3091,
+        "median_return_pct": 0.0403,
         "positive_survival_ratio": 0.8889
       },
       {
         "extra_friction_bps": 35,
-        "n": 31,
-        "positive_rate": 0.4839,
-        "avg_return_pct": 0.2009,
-        "median_return_pct": -0.0365,
+        "n": 32,
+        "positive_rate": 0.4688,
+        "avg_return_pct": 0.1591,
+        "median_return_pct": -0.1097,
         "positive_survival_ratio": 0.8333
       }
     ],

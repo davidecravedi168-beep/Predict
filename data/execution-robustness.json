@@ -1,33 +1,33 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-14T22:37:37.156640+00:00",
+  "generated_at": "2026-09-14T23:24:01.842569+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "ROBUST",
-  "forward_sample": 31,
-  "baseline_avg_net_return_pct": 0.5509,
+  "forward_sample": 32,
+  "baseline_avg_net_return_pct": 0.5091,
   "stress": {
     "10bps": {
       "extra_friction_bps": 10,
-      "n": 31,
-      "positive_rate": 0.5484,
-      "avg_return_pct": 0.4509,
-      "median_return_pct": 0.2135,
+      "n": 32,
+      "positive_rate": 0.5312,
+      "avg_return_pct": 0.4091,
+      "median_return_pct": 0.1403,
       "positive_survival_ratio": 0.9444
     },
     "20bps": {
       "extra_friction_bps": 20,
-      "n": 31,
-      "positive_rate": 0.5161,
-      "avg_return_pct": 0.3509,
-      "median_return_pct": 0.1135,
+      "n": 32,
+      "positive_rate": 0.5,
+      "avg_return_pct": 0.3091,
+      "median_return_pct": 0.0403,
       "positive_survival_ratio": 0.8889
     },
     "35bps": {
       "extra_friction_bps": 35,
-      "n": 31,
-      "positive_rate": 0.4839,
-      "avg_return_pct": 0.2009,
-      "median_return_pct": -0.0365,
+      "n": 32,
+      "positive_rate": 0.4688,
+      "avg_return_pct": 0.1591,
+      "median_return_pct": -0.1097,
       "positive_survival_ratio": 0.8333
     }
   },
