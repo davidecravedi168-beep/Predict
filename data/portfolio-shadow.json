@@ -22,20 +22,18 @@
       "cluster": {
         "counts": {
           "EURO_CREDIT": 1,
-          "ENERGY": 1,
-          "ITALY_EQUITY": 1,
+          "ENERGY": 2,
           "US_MEGA_CAP": 1,
           "US_BROAD": 1
         },
         "shares": {
           "EURO_CREDIT": 0.2,
-          "ENERGY": 0.2,
-          "ITALY_EQUITY": 0.2,
+          "ENERGY": 0.4,
           "US_MEGA_CAP": 0.2,
           "US_BROAD": 0.2
         },
-        "top": "EURO_CREDIT",
-        "top_share": 0.2
+        "top": "ENERGY",
+        "top_share": 0.4
       },
       "direction": {
         "counts": {
@@ -51,25 +49,26 @@
       },
       "currency": {
         "counts": {
-          "EUR": 2,
-          "USD": 3
+          "EUR": 1,
+          "USD": 4
         },
         "shares": {
-          "EUR": 0.4,
-          "USD": 0.6
+          "EUR": 0.2,
+          "USD": 0.8
         },
         "top": "USD",
-        "top_share": 0.6
+        "top_share": 0.8
       }
     },
     "factor_proxy_shares": {
       "DURATION_RATES": 0.2,
       "DIRECTION_LONG": 0.6,
       "EQUITY_BETA": 0.8,
-      "USD_DENOMINATED": 0.6,
+      "USD_DENOMINATED": 0.8,
       "DIRECTION_SHORT": 0.4
     },
     "flags": [
+      "CURRENCY_CONCENTRATION",
       "EQUITY_BETA_CONCENTRATION"
     ],
     "policy": "Exposure diagnostics use transparent proxy buckets. No covariance/correlation is fabricated without adequate synchronized return history."
