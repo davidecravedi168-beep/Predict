@@ -1,44 +1,44 @@
 {
   "schema_version": "1.0",
   "model_version": "8.6.1-math-risk-layer",
-  "eligible_forward_resolved": 32,
+  "eligible_forward_resolved": 36,
   "submodel_attribution": [],
   "friction_stress": {
     "state": "ROBUST_TO_35BPS",
-    "baseline_n": 32,
-    "baseline_avg_net_return_pct": 0.5091,
+    "baseline_n": 36,
+    "baseline_avg_net_return_pct": 0.4706,
     "tiers": [
       {
         "extra_friction_bps": 5,
-        "n": 32,
-        "positive_rate": 0.5625,
-        "avg_return_pct": 0.4591,
+        "n": 36,
+        "positive_rate": 0.5556,
+        "avg_return_pct": 0.4206,
         "median_return_pct": 0.1903,
         "positive_survival_ratio": 1.0
       },
       {
         "extra_friction_bps": 10,
-        "n": 32,
-        "positive_rate": 0.5312,
-        "avg_return_pct": 0.4091,
+        "n": 36,
+        "positive_rate": 0.5278,
+        "avg_return_pct": 0.3706,
         "median_return_pct": 0.1403,
-        "positive_survival_ratio": 0.9444
+        "positive_survival_ratio": 0.95
       },
       {
         "extra_friction_bps": 20,
-        "n": 32,
+        "n": 36,
         "positive_rate": 0.5,
-        "avg_return_pct": 0.3091,
+        "avg_return_pct": 0.2706,
         "median_return_pct": 0.0403,
-        "positive_survival_ratio": 0.8889
+        "positive_survival_ratio": 0.9
       },
       {
         "extra_friction_bps": 35,
-        "n": 32,
-        "positive_rate": 0.4688,
-        "avg_return_pct": 0.1591,
+        "n": 36,
+        "positive_rate": 0.4722,
+        "avg_return_pct": 0.1206,
         "median_return_pct": -0.1097,
-        "positive_survival_ratio": 0.8333
+        "positive_survival_ratio": 0.85
       }
     ],
     "method": "Incremental friction is subtracted from already cost-adjusted forward return_pct; no spread/slippage observations are fabricated."

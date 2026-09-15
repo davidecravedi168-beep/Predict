@@ -1,26 +1,26 @@
 {
   "schema": "ALPHA-OPPORTUNITY-LAB-V10",
-  "generated_at": "2026-09-15T12:14:44.320595+00:00",
-  "resolved_forward_n": 19,
+  "generated_at": "2026-09-15T17:07:55.629210+00:00",
+  "resolved_forward_n": 23,
   "stress_extra_bps": 20,
   "segments": {
     "asset_class": [
       {
         "segment": "ETF_EQUITY",
-        "n": 7,
-        "hit_rate": 0.7143,
-        "avg_return_pct": 0.3434,
-        "avg_return_plus20bps_pct": 0.1434,
+        "n": 8,
+        "hit_rate": 0.75,
+        "avg_return_pct": 0.4658,
+        "avg_return_plus20bps_pct": 0.2658,
         "max_drawdown_plus20bps_pct": 3.8219,
         "state": "INSUFFICIENT"
       },
       {
         "segment": "EQUITY",
-        "n": 4,
+        "n": 6,
         "hit_rate": 0.0,
-        "avg_return_pct": -1.3617,
-        "avg_return_plus20bps_pct": -1.5617,
-        "max_drawdown_plus20bps_pct": 6.2466,
+        "avg_return_pct": -1.3321,
+        "avg_return_plus20bps_pct": -1.5321,
+        "max_drawdown_plus20bps_pct": 9.1928,
         "state": "INSUFFICIENT"
       },
       {
@@ -30,6 +30,15 @@
         "avg_return_pct": -2.0049,
         "avg_return_plus20bps_pct": -2.2049,
         "max_drawdown_plus20bps_pct": 6.6146,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "ETF_BOND_GOV",
+        "n": 2,
+        "hit_rate": 1.0,
+        "avg_return_pct": 1.6328,
+        "avg_return_plus20bps_pct": 1.4329,
+        "max_drawdown_plus20bps_pct": 0.0,
         "state": "INSUFFICIENT"
       },
       {
@@ -51,15 +60,6 @@
         "state": "INSUFFICIENT"
       },
       {
-        "segment": "ETF_BOND_GOV",
-        "n": 1,
-        "hit_rate": 1.0,
-        "avg_return_pct": 1.3914,
-        "avg_return_plus20bps_pct": 1.1914,
-        "max_drawdown_plus20bps_pct": 0.0,
-        "state": "INSUFFICIENT"
-      },
-      {
         "segment": "BTP",
         "n": 1,
         "hit_rate": 1.0,
@@ -72,11 +72,20 @@
     "horizon": [
       {
         "segment": "5d",
-        "n": 8,
-        "hit_rate": 0.5,
-        "avg_return_pct": 0.232,
-        "avg_return_plus20bps_pct": 0.032,
+        "n": 9,
+        "hit_rate": 0.5556,
+        "avg_return_pct": 0.3532,
+        "avg_return_plus20bps_pct": 0.1532,
         "max_drawdown_plus20bps_pct": 5.0555,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "10d",
+        "n": 7,
+        "hit_rate": 0.5714,
+        "avg_return_pct": 0.1652,
+        "avg_return_plus20bps_pct": -0.0348,
+        "max_drawdown_plus20bps_pct": 4.4368,
         "state": "INSUFFICIENT"
       },
       {
@@ -87,66 +96,57 @@
         "avg_return_plus20bps_pct": -0.775,
         "max_drawdown_plus20bps_pct": 7.1694,
         "state": "INSUFFICIENT"
-      },
-      {
-        "segment": "10d",
-        "n": 4,
-        "hit_rate": 0.75,
-        "avg_return_pct": 0.457,
-        "avg_return_plus20bps_pct": 0.257,
-        "max_drawdown_plus20bps_pct": 2.6634,
-        "state": "INSUFFICIENT"
       }
     ],
     "risk_regime": [
       {
-        "segment": "NEUTRAL",
+        "segment": "RISK_ON",
         "n": 11,
-        "hit_rate": 0.3636,
-        "avg_return_pct": -0.3163,
-        "avg_return_plus20bps_pct": -0.5163,
-        "max_drawdown_plus20bps_pct": 5.7925,
-        "state": "OBSERVE"
+        "hit_rate": 0.6364,
+        "avg_return_pct": 0.2242,
+        "avg_return_plus20bps_pct": 0.0242,
+        "max_drawdown_plus20bps_pct": 5.1609,
+        "state": "PROMISING"
       },
       {
-        "segment": "RISK_ON",
-        "n": 8,
-        "hit_rate": 0.75,
-        "avg_return_pct": 0.3923,
-        "avg_return_plus20bps_pct": 0.1923,
-        "max_drawdown_plus20bps_pct": 3.889,
-        "state": "INSUFFICIENT"
+        "segment": "NEUTRAL",
+        "n": 12,
+        "hit_rate": 0.4167,
+        "avg_return_pct": -0.1797,
+        "avg_return_plus20bps_pct": -0.3797,
+        "max_drawdown_plus20bps_pct": 5.7925,
+        "state": "OBSERVE"
       }
     ],
     "rates_regime": [
       {
         "segment": "RATES_STABLE",
-        "n": 19,
-        "hit_rate": 0.5263,
-        "avg_return_pct": -0.0179,
-        "avg_return_plus20bps_pct": -0.2179,
-        "max_drawdown_plus20bps_pct": 7.7733,
+        "n": 23,
+        "hit_rate": 0.5217,
+        "avg_return_pct": 0.0135,
+        "avg_return_plus20bps_pct": -0.1865,
+        "max_drawdown_plus20bps_pct": 8.5992,
         "state": "OBSERVE"
       }
     ],
     "setup_family": [
       {
         "segment": "BREAKOUT",
-        "n": 19,
-        "hit_rate": 0.5263,
-        "avg_return_pct": -0.0179,
-        "avg_return_plus20bps_pct": -0.2179,
-        "max_drawdown_plus20bps_pct": 7.7733,
+        "n": 23,
+        "hit_rate": 0.5217,
+        "avg_return_pct": 0.0135,
+        "avg_return_plus20bps_pct": -0.1865,
+        "max_drawdown_plus20bps_pct": 8.5992,
         "state": "OBSERVE"
       }
     ],
     "cluster": [
       {
         "segment": "ENERGY",
-        "n": 7,
-        "hit_rate": 0.5714,
-        "avg_return_pct": 0.3328,
-        "avg_return_plus20bps_pct": 0.1328,
+        "n": 8,
+        "hit_rate": 0.625,
+        "avg_return_pct": 0.4566,
+        "avg_return_plus20bps_pct": 0.2566,
         "max_drawdown_plus20bps_pct": 3.3475,
         "state": "INSUFFICIENT"
       },
@@ -178,11 +178,29 @@
         "state": "INSUFFICIENT"
       },
       {
+        "segment": "NATURAL_GAS",
+        "n": 2,
+        "hit_rate": 0.0,
+        "avg_return_pct": -1.2731,
+        "avg_return_plus20bps_pct": -1.4731,
+        "max_drawdown_plus20bps_pct": 2.9462,
+        "state": "INSUFFICIENT"
+      },
+      {
         "segment": "COMMODITIES",
         "n": 1,
         "hit_rate": 1.0,
         "avg_return_pct": 3.9935,
         "avg_return_plus20bps_pct": 3.7935,
+        "max_drawdown_plus20bps_pct": 0.0,
+        "state": "INSUFFICIENT"
+      },
+      {
+        "segment": "US_RATES",
+        "n": 1,
+        "hit_rate": 1.0,
+        "avg_return_pct": 1.8743,
+        "avg_return_plus20bps_pct": 1.6743,
         "max_drawdown_plus20bps_pct": 0.0,
         "state": "INSUFFICIENT"
       },
@@ -218,56 +236,56 @@
   "submodels": [
     {
       "model_id": "TREND_Z",
-      "n": 19,
-      "hit_rate": 0.5263,
-      "avg_return_pct": -0.0179,
-      "avg_return_plus20bps_pct": -0.2179,
-      "max_drawdown_plus20bps_pct": 7.7733,
+      "n": 23,
+      "hit_rate": 0.5217,
+      "avg_return_pct": 0.0135,
+      "avg_return_plus20bps_pct": -0.1865,
+      "max_drawdown_plus20bps_pct": 8.5992,
       "state": "OBSERVE"
     },
     {
       "model_id": "RSI_MOMENTUM",
-      "n": 19,
-      "hit_rate": 0.5263,
-      "avg_return_pct": -0.0179,
-      "avg_return_plus20bps_pct": -0.2179,
-      "max_drawdown_plus20bps_pct": 7.7733,
+      "n": 23,
+      "hit_rate": 0.5217,
+      "avg_return_pct": 0.0135,
+      "avg_return_plus20bps_pct": -0.1865,
+      "max_drawdown_plus20bps_pct": 8.5992,
       "state": "OBSERVE"
     },
     {
       "model_id": "BREAKOUT_63D",
-      "n": 19,
-      "hit_rate": 0.5263,
-      "avg_return_pct": -0.0179,
-      "avg_return_plus20bps_pct": -0.2179,
-      "max_drawdown_plus20bps_pct": 7.7733,
+      "n": 23,
+      "hit_rate": 0.5217,
+      "avg_return_pct": 0.0135,
+      "avg_return_plus20bps_pct": -0.1865,
+      "max_drawdown_plus20bps_pct": 8.5992,
       "state": "OBSERVE"
     },
     {
       "model_id": "MEAN_REVERSION_20D",
-      "n": 19,
-      "hit_rate": 0.4211,
-      "avg_return_pct": -0.2726,
-      "avg_return_plus20bps_pct": -0.4726,
-      "max_drawdown_plus20bps_pct": 10.2832,
+      "n": 23,
+      "hit_rate": 0.4348,
+      "avg_return_pct": -0.2909,
+      "avg_return_plus20bps_pct": -0.4909,
+      "max_drawdown_plus20bps_pct": 11.2904,
       "state": "OBSERVE"
     },
     {
       "model_id": "VOLUME_CONFIRM",
-      "n": 12,
-      "hit_rate": 0.5,
-      "avg_return_pct": 0.0792,
-      "avg_return_plus20bps_pct": -0.1208,
-      "max_drawdown_plus20bps_pct": 3.9943,
+      "n": 15,
+      "hit_rate": 0.4667,
+      "avg_return_pct": -0.0182,
+      "avg_return_plus20bps_pct": -0.2182,
+      "max_drawdown_plus20bps_pct": 6.9405,
       "state": "OBSERVE"
     },
     {
       "model_id": "RELATIVE_Z",
-      "n": 11,
-      "hit_rate": 0.6364,
-      "avg_return_pct": 0.1571,
-      "avg_return_plus20bps_pct": -0.0429,
-      "max_drawdown_plus20bps_pct": 4.553,
+      "n": 13,
+      "hit_rate": 0.6154,
+      "avg_return_pct": 0.0703,
+      "avg_return_plus20bps_pct": -0.1297,
+      "max_drawdown_plus20bps_pct": 6.8898,
       "state": "OBSERVE"
     }
   ],
