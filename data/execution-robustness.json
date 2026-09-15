@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-14T23:24:01.842569+00:00",
+  "generated_at": "2026-09-15T01:52:14.230160+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "ROBUST",
   "forward_sample": 32,
