@@ -1,7 +1,7 @@
 {
   "schema_version": "2.2",
-  "generated_at": "2026-09-15T01:52:14.064299+00:00",
-  "source_updated_at": "2026-09-15T01:51:54+00:00",
+  "generated_at": "2026-09-15T06:48:54.833263+00:00",
+  "source_updated_at": "2026-09-15T06:48:37+00:00",
   "model_version": "8.6.1-math-risk-layer",
   "status": "CAUTION",
   "promotion_state": "RESEARCH_ONLY",
@@ -777,9 +777,9 @@
     "watchlist": 27,
     "cluster_concentration": {
       "counts": {
-        "CRYPTO": 1,
         "ENERGY": 2,
         "MANAGED_FUTURES": 1,
+        "CRYPTO": 1,
         "US_MEGA_CAP": 1,
         "ITALY_RATES": 1,
         "EM_DEBT": 1,
@@ -790,9 +790,9 @@
     },
     "asset_class_concentration": {
       "counts": {
-        "CRYPTO": 1,
         "EQUITY": 2,
         "ETF_EQUITY": 2,
+        "CRYPTO": 1,
         "BTP": 1,
         "ETF_BOND_CREDIT": 2
       },
